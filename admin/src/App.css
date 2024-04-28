@@ -1,0 +1,12 @@
+.admin-home {
+  display: flex;
+}
+
+.admin-outlet {
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.admin-sidebar {
+  margin-right: 15rem;
+}

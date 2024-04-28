@@ -1,0 +1,36 @@
+.styled-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #f2f2f2;
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid #ddd;
+}
+
+.styled-table th {
+  border-bottom: 1px solid black;
+}
+
+.styled-table th:first-child,
+.styled-table td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.styled-table th:last-child,
+.styled-table td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

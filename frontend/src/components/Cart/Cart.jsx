@@ -1,0 +1,270 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authContext.jsx";
+
+const Cart = () => {
+  const [quantity, setQuantity] = useState(1);
+  const [carts, setCarts] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [address, setAddress] = useState("");
+  const { validToken } = useAuth("");
+
+
+  const handleIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
+  const fetchCarts = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/v1/cart/fetch-user-cart", {
+        headers: {
+          Authorization: validToken,
+        },
+      });
+      setCarts(response?.data?.cart);
+      setUserId(response?.data?.cart[0]?.user?._id);
+    } catch (error) {
+      console.log('error while fetching carts:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCarts();
+  }, []);
+
+  const deleteCarts = async (cartId) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/v1/cart/delete-user-cart/${cartId}`, {
+        headers: {
+          Authorization: validToken,
+        },
+      });
+      fetchCarts();
+    } catch (error) {
+      console.log('error while deleting carts:', error.message);
+    }
+  };
+
+  const clearCarts = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/v1/cart/clear-user-cart/${userId}`, {
+        headers: {
+          Authorization: validToken,
+        },
+      });
+      fetchCarts();
+    } catch (error) {
+      console.log('error while clearing carts:', error.message);
+    }
+  };
+
+  const updateCarts = async (cartId) => {
+    try {
+      await axios.put(`http://localhost:8080/api/v1/cart/update-user-cart/${cartId}`, { quantity }, {
+        headers: {
+          Authorization: validToken,
+        },
+      });
+      fetchCarts();
+    } catch (error) {
+      console.log('error while clearing carts:', error.message);
+    }
+  };
+
+  const totalPrice = carts?.reduce((total, item) => {
+    return total + (item?.product?.salePrice * item?.quantity);
+  }, 0);
+
+
+  const createOrder = async () => {
+    try {
+      const orderData = {
+        products: carts?.map((cart) => ({
+          product: cart?.product?._id,
+          quantity: cart?.quantity,
+          color: cart?.color?._id,
+          size: cart?.size?._id,
+        })),
+        totalPrice,
+        status: "Pending",
+        paymentMethod: "Cash on Delivery",
+        country,
+        state,
+        city,
+        zipCode,
+        mobile,
+        address,
+      };
+
+      const response = await axios.post("http://localhost:8080/api/v1/order/create-order", orderData, {
+        headers: {
+          Authorization: validToken,
+        },
+      });
+
+      if (response.data.success) {
+        setCountry("");
+        setState("");
+        setCity("");
+        setZipCode("");
+        setMobile("");
+        setAddress("");
+        clearCarts(userId);
+        alert("order successfull");
+      }
+    } catch (error) {
+      console.log('error while creating order:', error.message);
+    }
+  };
+
+
+  return (
+    <>
+      <div className="page-wrapper">
+        {/* Start of Main */}
+        <main className="main cart">
+          {/* Start of Breadcrumb */}
+          <nav className="breadcrumb-nav">
+            <div className="container">
+              <ul className="breadcrumb shop-breadcrumb bb-no">
+                <li className="active"><Link to="/cart">Cart</Link></li>
+              </ul>
+            </div>
+          </nav>
+          {/* End of Breadcrumb */}
+
+          {/* Start of PageContent */}
+          <div className="page-content">
+            <div className="container">
+              <div className="row gutter-lg mb-10">
+                <div className="col-lg-6 pr-lg-4 mb-6">
+                  <table className="shop-table cart-table">
+                    <thead>
+                      <tr>
+                        <th className="product-name"><span>Product</span></th>
+                        <th />
+                        <th className="product-price"><span style={{ marginRight: "4rem" }}>Price</span></th>
+                        <th className="product-quantity"><span style={{ marginRight: "4rem" }}>Quantity</span></th>
+                        <th className="product-subtotal"><span style={{ marginRight: "4rem" }}>Subtotal</span></th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {
+                        carts?.map((cart) => {
+                          return (
+                            <tr key={cart._id}>
+                              <td className="product-thumbnail">
+                                <div className="p-relative">
+                                  <Link to={`/product/single-product/${cart.product._id}`}>
+                                    <figure>
+                                      <img src={`/images/${cart.product.image}`} alt="product" width={300} height={338} />
+                                    </figure>
+                                  </Link>
+                                  <button type="submit" className="btn btn-close" onClick={() => deleteCarts(cart?._id)}><i className="fas fa-times" /></button>
+                                </div>
+                              </td>
+                              <td className="product-name">
+                                <Link to="product-default.html">
+                                  {cart?.product?.name}
+                                </Link>
+                              </td>
+                              <td className="product-price"><span className="amount">$ {cart?.product?.salePrice}</span></td>
+                              <td className="product-quantity">
+                                <div className="input-group">
+                                  <input className="quantity form-control" type="number" value={cart?.quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} />
+                                  <button className="quantity-plus w-icon-plus" onClick={() => { handleIncrement(); updateCarts(cart?._id) }} />
+                                  <button className="quantity-minus w-icon-minus" onClick={() => { handleDecrement(); updateCarts(cart?._id) }} />
+                                </div>
+                              </td>
+                              <td className="product-subtotal">
+                                <span className="amount">$ {(cart?.product?.salePrice) * (cart?.quantity)}</span>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
+
+                  <div className="cart-action mb-6">
+                    <Link to="/product" className="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i className="w-icon-long-arrow-left" />Continue Shopping</Link>
+                    <button type="submit" className="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart" style={{ marginRight: "3rem" }} onClick={() => clearCarts(userId)}>Clear Cart</button>
+                  </div>
+                </div>
+
+                <div className="col-lg-6 sticky-sidebar-wrapper">
+                  <div className="sticky-sidebar">
+                    <div className="cart-summary mb-4">
+                      <h3 className="cart-title text-uppercase">Cart Totals</h3>
+
+                      <div className="cart-subtotal d-flex align-items-center justify-content-between">
+                        <label className="ls-25">Subtotal</label>
+                        <span>$ {totalPrice}</span>
+                      </div>
+
+                      <hr className="divider" />
+
+                      <div className="shipping-calculator">
+                        <p className="shipping-destination lh-1"><strong>Shipping Address</strong></p>
+                        <form className="shipping-calculator-form">
+                          <div className="form-group">
+                            <input className="form-control form-control-md" type="text" name="country" value={country} placeholder="Enter Your Country" onChange={(e) => setCountry(e.target.value)} />
+                          </div>
+                          <div className="form-group">
+                            <input className="form-control form-control-md" type="text" name="state" value={state} placeholder="Enter Your  State" onChange={(e) => setState(e.target.value)} />
+                          </div>
+                          <div className="form-group">
+                            <input className="form-control form-control-md" type="text" name="city" value={city} placeholder="Enter Your  City" onChange={(e) => setCity(e.target.value)} />
+                          </div>
+                          <div className="form-group">
+                            <input className="form-control form-control-md" type="text" name="zipCode" value={zipCode} placeholder="Enter Your  ZIP Code" onChange={(e) => setZipCode(e.target.value)} />
+                          </div>
+                          <div className="form-group">
+                            <input className="form-control form-control-md" type="number" name="mobile" value={mobile} placeholder="Enter Your Mobile Number" onChange={(e) => setMobile(e.target.value)} />
+                          </div>
+                          <div className="form-group">
+                            <textarea className="form-control form-control-md" type="text" name="address" value={address} placeholder="Enter Your Address" onChange={(e) => setAddress(e.target.value)} />
+                          </div>
+                        </form>
+                      </div>
+
+                      <hr className="divider mb-6" />
+
+                      <div className="order-total d-flex justify-content-between align-items-center">
+                        <label>Total</label>
+                        <span className="ls-50">$ {totalPrice}</span>
+                      </div>
+
+                      <button className="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout" onClick={createOrder}>
+                        place order <i className="w-icon-long-arrow-right" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* End of PageContent */}
+        </main>
+        {/* End of Main */}
+      </div>
+    </>
+  );
+};
+
+export default Cart;
+
