@@ -51,7 +51,7 @@ export const createProduct = async (req, res) => {
     await product.save();
 
     // Delete uploaded files from the server
-    images.forEach((image) => {
+    images.map((image) => {
       fs.unlinkSync(image.image);
     });
 
@@ -66,7 +66,7 @@ export const createProduct = async (req, res) => {
 
 
 // controller for fetch all product -- Admin
-export const filterProducts = async (req, res) => {
+export const fetchAllProduct = async (req, res) => {
   try {
     let filter = {};
     let sort = {};
@@ -113,13 +113,13 @@ export const filterProducts = async (req, res) => {
     const skip = (page - 1) * limit;
 
     // Query products based on filter criteria, apply sorting, pagination, and populate related fields (category, items.color, items.size)
-    const products = await Product.find(filter).sort(sort).skip(skip).limit(limit).populate('category').populate('items.color').populate('items.size').exec();
+    const product = await Product.find(filter).sort(sort).skip(skip).limit(limit).populate('category').populate('items.color').populate('items.size').exec();
 
     // Get total count of products for pagination
     const totalCount = await Product.countDocuments(filter);
 
     // Return success response with fetched product
-    return res.status(200).json({ success: true, products, totalCount });
+    return res.status(200).json({ success: true, product, totalCount });
   } catch (error) {
     // Handle error if any
     console.log("Error while filtering products:", error.message);
@@ -153,7 +153,7 @@ export const fetchSingleProduct = async (req, res) => {
 };
 
 
-// controller for update product by ID
+// controller to update product by ID
 export const updateProduct = async (req, res) => {
   try {
     // Get the product ID from the request parameters
@@ -210,7 +210,7 @@ export const updateProduct = async (req, res) => {
     await product.save();
 
     // Delete uploaded files from the server
-    images.forEach((image) => {
+    images.map((image) => {
       fs.unlinkSync(image.image);
     });
 
@@ -224,7 +224,7 @@ export const updateProduct = async (req, res) => {
 };
 
 
-// controller for delete prodcut by ID -- Admin
+// controller to delete prodcut by ID -- Admin
 export const deleteProduct = async (req, res) => {
   try {
     // Get the product ID from the request parameters
