@@ -57,6 +57,7 @@ const Product = () => {
 
   return (
     <>
+      {/* Start Banner */}
       <div className="row category-banner-wrapper appear-animate pt-6 pb-8" style={{ marginLeft: "1rem", marginRight: "1rem" }}>
         <div className="col-md-6 mb-4">
           <div className="banner banner-fixed category-banner-2 br-xs">
@@ -65,9 +66,8 @@ const Product = () => {
             </figure>
             <div className="banner-content y-50 pt-1">
               <h5 className="banner-subtitle font-weight-bold text-uppercase">Trending Now</h5>
-              <h3 className="banner-title font-weight-bolder text-capitalize">Womens
-                Lifestyle<br />Collection</h3>
-              <a href="shop-banner-sidebar.html" className="btn btn-dark btn-link btn-underline btn-icon-right">Shop Now<i className="w-icon-long-arrow-right" /></a>
+              <h3 className="banner-title font-weight-bolder text-capitalize">Womens Lifestyle<br /> Collection</h3>
+              <Link to="/product" className="btn btn-dark btn-link btn-underline btn-icon-right">Shop Now<i className="w-icon-long-arrow-right" /></Link>
             </div>
           </div>
         </div>
@@ -87,22 +87,21 @@ const Product = () => {
           </div>
         </div>
       </div>
+      {/* End Banner */}
 
       <div className="container">
         <div className="shop-content row gutter-lg mb-10">
+          {/* Start Sidebar*/}
           <aside className="sidebar shop-sidebar sticky-sidebar-wrapper sidebar-fixed">
-            {/* Start of Sidebar Overlay */}
             <div className="sidebar-overlay" />
-            <a className="sidebar-close" href="#"><i className="close-icon" /></a>
-            {/* Start of Sidebar Content */}
+            <Link className="sidebar-close" to="#"><i className="close-icon" /></Link>
             <div className="sidebar-content scrollable">
-              {/* Start of Sticky Sidebar */}
               <div className="sticky-sidebar">
                 <div className="filter-actions">
                   <label>Filter :</label>
-                  <a href="#" className="btn btn-dark btn-link filter-clean">Clean All</a>
+                  <Link to="#" className="btn btn-dark btn-link filter-clean">Clean All</Link>
                 </div>
-                {/* Start of Collapsible widget */}
+
                 <div className="widget widget-collapsible">
                   <h3 className="widget-title"><span>All Categories</span></h3>
                   <ul className="widget-body filter-items search-ul">
@@ -117,8 +116,7 @@ const Product = () => {
                     }
                   </ul>
                 </div>
-                {/* End of Collapsible Widget */}
-                {/* Start of Collapsible Widget */}
+
                 <div className="widget widget-collapsible">
                   <h3 className="widget-title"><span>Size</span></h3>
                   <ul className="widget-body filter-items mt-1">
@@ -133,8 +131,7 @@ const Product = () => {
                     }
                   </ul>
                 </div>
-                {/* End of Collapsible Widget */}
-                {/* Start of Collapsible Widget */}
+
                 <div className="widget widget-collapsible">
                   <h3 className="widget-title"><span>Color</span></h3>
                   <ul className="widget-body filter-items mt-1">
@@ -149,27 +146,27 @@ const Product = () => {
                     }
                   </ul>
                 </div>
-                {/* End of Collapsible Widget */}
               </div>
-              {/* End of Sidebar Content */}
             </div>
-            {/* End of Sidebar Content */}
           </aside>
-          {/* End of Shop Sidebar */}
+          {/* End Sidebar */}
 
 
-          {/* Start of Shop Main Content */}
+          {/* Start Main Content */}
           <div className="main-content">
+            {/* Start Sorting */}
             <nav className="toolbox sticky-toolbox sticky-content fix-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div className="toolbox-left">
-                <a href="#" className="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
-                                  btn-icon-left d-block d-lg-none"><i className="w-icon-category" /><span>Filters</span></a>
+                <Link to="#" className="btn btn-primary btn-outline btn-rounded left-sidebar-toggle btn-icon-left d-block d-lg-none">
+                  <i className="w-icon-category" />
+                  <span>Filters</span>
+                </Link>
                 <div className="toolbox-item toolbox-sort select-box text-dark" style={{ display: "flex", gap: "1rem", justifyContent: "center", alignItems: "center" }}>
                   <label style={{ fontSize: "1.5rem", fontWeight: "600" }}>Sort By :</label>
                   <select name="orderby" className="form-control">
-                    <option value="default" selected="selected">Default sorting</option>
-                    <option value="price-low">Sort by price: low to high</option>
-                    <option value="price-high">Sort by price: high to low</option>
+                    <option value="default" selected="selected">Relevance</option>
+                    <option value="price-low">Price low to high</option>
+                    <option value="price-high">Price high to low</option>
                   </select>
                 </div>
               </div>
@@ -185,50 +182,51 @@ const Product = () => {
                 </div>
 
                 <div className="toolbox-item toolbox-layout" style={{ display: "flex", gap: "0.5rem", justifyContent: "center", alignItems: "center" }}>
-                  <a href="shop-banner-sidebar.html" className="icon-mode-grid btn-layout active" style={{ color: "#1b1b1b", fontSize: "1.8rem" }}>
+                  <Link to="/product" className="icon-mode-grid btn-layout active" style={{ color: "#1b1b1b", fontSize: "1.8rem" }}>
                     <i className="w-icon-grid" />
-                  </a>
-                  <a href="shop-list.html" className="icon-mode-list btn-layout" style={{ color: "#d6d4d4", fontSize: "1.8rem" }}>
+                  </Link>
+                  <Link to="/product" className="icon-mode-list btn-layout" style={{ color: "#d6d4d4", fontSize: "1.8rem" }}>
                     <i className="w-icon-list" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </nav>
+            {/* End Sorting */}
 
-            {/* Start of Product */}
+            {/* Start Product */}
             <div className="product-wrapper row" style={{ marginTop: "2rem" }}>
               {
                 products.map((product) => {
                   return (
-                    <div className="col-lg-4 col-md-4 col-sm-6" key={product._id}>
+                    <div className="col-lg-4 col-md-4 col-sm-6" key={product?._id}>
                       <div className="product text-center">
                         <figure className="product-media">
-                          <a href={`/product/single-product/${product._id}`}>
-                            <img src={`/images/${product.image}`} alt="Product" width={100} height={338} />
-                          </a>
+                          <Link to={`/product/single-product/${product?._id}`}>
+                            <img src={product?.items[0]?.image} alt="Product" width={100} height={338} />
+                          </Link>
                           <div className="product-action-horizontal">
-                            <a href="/cart" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
-                            <a href="/wishlist" className="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist" />
+                            <Link to="/product" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
+                            <Link to="/product" className="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist" />
                           </div>
                         </figure>
                         <div className="product-details">
                           <div className="product-cat">
-                            <a href="shop-banner-sidebar.html">{product.category.name}</a>
+                            <Link to="/product">{product?.category?.name}</Link>
                           </div>
                           <h3 className="product-name">
-                            <a href="product-default.html">{product.name}</a>
+                            <Link to="/product">{product?.name}</Link>
                           </h3>
                           <div className="ratings-container">
                             <div className="ratings-full">
                               <span className="ratings" style={{ width: '100%' }} />
                               <span className="tooltiptext tooltip-top" />
                             </div>
-                            <a href="product-default.html" className="rating-reviews">({product.rating} reviews)</a>
+                            <Link to="/product" className="rating-reviews">({product?.rating} reviews)</Link>
                           </div>
                           <div className="product-pa-wrapper">
                             <div className="product-price" style={{ display: "flex", gap: "1.5rem" }}>
-                              <span style={{ textDecoration: "line-through", color: "#aca9a9" }}>${product.salePrice} </span>
-                              <span> ${product.salePrice}</span>
+                              <span style={{ textDecoration: "line-through", color: "#aca9a9" }}>₹{product?.salePrice} </span>
+                              <span> ₹{product?.salePrice}</span>
                             </div>
                           </div>
                         </div>
@@ -238,32 +236,35 @@ const Product = () => {
                 })
               }
             </div>
+            {/* End Product */}
 
-            {/* End of Product */}
+            {/* Start Pagination */}
             <div className="toolbox toolbox-pagination justify-content-between" style={{ display: "flex" }}>
               <p className="showing-info mb-2 mb-sm-0">
-                Showing <span> 1-9 of 60 </span>Products
+                Showing <span> 1 - 9 of 60 </span>Products
               </p>
               <ul className="pagination">
                 <li className="prev disabled">
-                  <a href="#" aria-label="Previous" tabIndex={-1} aria-disabled="true">
+                  <Link to="#" aria-label="Previous" tabIndex={-1} aria-disabled="true">
                     <i className="w-icon-long-arrow-left" />Prev
-                  </a>
+                  </Link>
                 </li>
                 <li className="page-item active">
-                  <a className="page-link" href="#">1</a>
+                  <Link className="page-link" to="#">1</Link>
                 </li>
                 <li className="page-item">
-                  <a className="page-link" href="#">2</a>
+                  <Link className="page-link" to="#">2</Link>
                 </li>
                 <li className="next">
-                  <a href="#" aria-label="Next">
+                  <Link to="#" aria-label="Next">
                     Next<i className="w-icon-long-arrow-right" />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
+            {/* End Pagination */}
           </div>
+          {/* End Main Content */}
         </div>
       </div>
     </>

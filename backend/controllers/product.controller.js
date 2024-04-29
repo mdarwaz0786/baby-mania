@@ -2,7 +2,7 @@ import Product from "../models/product.model.js";
 import fs from "fs";
 import cloudinary from "../utils/cloudinary.js";
 
-// Controller to create product -- Admin
+// Controller to create product
 export const createProduct = async (req, res) => {
   try {
     // Destructure product details from request body
@@ -86,7 +86,7 @@ export const createProduct = async (req, res) => {
 };
 
 
-// controller for fetch all product -- Admin
+// controller for fetch all product
 export const fetchAllProduct = async (req, res) => {
   try {
     let filter = {};
@@ -140,11 +140,11 @@ export const fetchAllProduct = async (req, res) => {
     const totalCount = await Product.countDocuments(filter);
 
     // Return success response with fetched product
-    return res.status(200).json({ success: true, product, totalCount });
+    return res.status(200).json({ success: true, message: "Product fetched successfully", product, totalCount });
   } catch (error) {
     // Handle error if any
-    console.log("Error while filtering products:", error.message);
-    return res.status(500).json({ success: false, message: "Error while filtering products" });
+    console.log("Error while fetching product error from controller:", error.message);
+    return res.status(500).json({ success: false, message: "Error while fetching product" });
   };
 };
 
