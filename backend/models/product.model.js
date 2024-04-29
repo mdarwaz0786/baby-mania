@@ -55,6 +55,9 @@ const productSchema = new mongoose.Schema(
         image: {
           type: String
         },
+        cloudinary_id: {
+          type: String,
+        },
         color: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Color",

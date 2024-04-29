@@ -6,10 +6,10 @@ import { createProduct, deleteProduct, fetchAllProduct, fetchSingleProduct, upda
 const router = express.Router();
 
 // routes
-router.post("/create-product", upload.single("image"), createProduct);
+router.post("/create-product", upload.array("image", 6), createProduct);
 router.get("/all-product", fetchAllProduct);
 router.get("/single-product/:id", fetchSingleProduct);
-router.put("/update-product/:id", upload.single("image"), updateProduct);
+router.put("/update-product/:id", upload.array("image", 6), updateProduct);
 router.delete("/delete-product/:id", deleteProduct);
 
 
