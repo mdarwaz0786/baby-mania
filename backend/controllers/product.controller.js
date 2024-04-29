@@ -2,16 +2,35 @@ import Product from "../models/product.model.js";
 import fs from "fs";
 import cloudinary from "../utils/cloudinary.js";
 
-
-// controller to create product -- Admin
+// Controller to create product -- Admin
 export const createProduct = async (req, res) => {
   try {
     // Destructure product details from request body
-    const { category, name, rating, skuCode, mrpPrice, salePrice, availability, status, featuredProduct, latestProduct, bestSellingProduct, specialProduct, newProduct, smallInfo, description } = req.body;
+    const {
+      category,
+      name,
+      rating,
+      skuCode,
+      mrpPrice,
+      salePrice,
+      availability,
+      status,
+      featuredProduct,
+      latestProduct,
+      bestSellingProduct,
+      specialProduct,
+      newProduct,
+      smallInfo,
+      description,
+      color, // Array of colors corresponding to each image
+      size, // Array of sizes corresponding to each image
+    } = req.body;
 
     // Map uploaded files to an array of image objects
-    const images = req.files.map((file) => ({
+    const images = req.files.map((file, index) => ({
       image: file.path,
+      color: color[index], // Associate color with each image
+      size: size[index], // Associate size with each image
     }));
 
     // Upload all images to Cloudinary
@@ -19,8 +38,10 @@ export const createProduct = async (req, res) => {
     const results = await Promise.all(uploadPromises);
 
     // Extract secure URLs and public IDs from Cloudinary response
-    const imageUrls = results.map((result) => result.secure_url);
-    const publicIds = results.map((result) => result.public_id);
+    const productImages = results.map((result) => ({
+      image: result.secure_url,
+      cloudinary_id: result.public_id,
+    }));
 
     // Create product object with image URLs, Cloudinary IDs, and other details
     const product = new Product({
@@ -39,11 +60,11 @@ export const createProduct = async (req, res) => {
       newProduct,
       smallInfo,
       description,
-      items: images.map((image, index) => ({
-        image: imageUrls[index],
-        cloudinary_id: publicIds[index],
-        color: req.body.color,
-        size: req.body.size,
+      items: productImages.map((image, index) => ({
+        image: image.image,
+        cloudinary_id: image.cloudinary_id,
+        color: color[index],
+        size: size[index],
       })),
     });
 
@@ -51,7 +72,7 @@ export const createProduct = async (req, res) => {
     await product.save();
 
     // Delete uploaded files from the server
-    images.map((image) => {
+    images.forEach((image) => {
       fs.unlinkSync(image.image);
     });
 

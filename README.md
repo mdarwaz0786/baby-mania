@@ -12,3 +12,5 @@ userId Arbaz = 661f8d95f332179c575168a5
 Token ShahRukh = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFmOTJmMGYzMzIxNzljNTc1MTY4YjAiLCJuYW1lIjoic2hhaHJ1a2giLCJlbWFpbCI6InNoYWhydWtoQGdtYWlsLmNvbSIsIm1vYmlsZSI6IjAxMjM0NTY3ODkiLCJwYXNzd29yZCI6InNoYWhydWtoQDEyMyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM3NzgyMzgsImV4cCI6MTcxNTA3NDIzOH0.Q_Dhb3yJYC_7KPGCyuzFXFMToZiop6Acme6gk7ac-yQ
 
 userId ShahRukh = 661f92f0f332179c575168b0
+
+Kloska focuses on curating outfits with materials that are not just rich-looking but also provide the utmost comfort to the one who wears them.

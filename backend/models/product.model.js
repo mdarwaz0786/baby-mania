@@ -58,14 +58,14 @@ const productSchema = new mongoose.Schema(
         cloudinary_id: {
           type: String,
         },
-        color: {
+        color: [{
           type: mongoose.Schema.Types.ObjectId,
           ref: "Color",
-        },
-        size: {
+        }],
+        size: [{
           type: mongoose.Schema.Types.ObjectId,
           ref: "Size",
-        },
+        }],
       },
     ],
   },

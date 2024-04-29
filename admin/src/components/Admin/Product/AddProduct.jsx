@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 const AddProduct = () => {
   const [category, setCategory] = useState([]);
+  const [color, setColor] = useState([]);
+  const [size, setSize] = useState([]);
   const [name, setName] = useState("");
   const [rating, setRating] = useState();
   const [skuCode, setSkuCode] = useState("");
@@ -18,15 +20,16 @@ const AddProduct = () => {
   const [newProduct, setNewProduct] = useState("");
   const [smallInfo, setSmallInfo] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
-  const [thumbImage1, setThumbImage1] = useState("");
-  const [thumbImage2, setThumbImage2] = useState("");
-  const [color, setColor] = useState([]);
-  const [size, setSize] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
-
+  const [image1, setImage1] = useState(null);
+  const [selectedColor1, setSelectedColor1] = useState("");
+  const [selectedSize1, setSelectedSize1] = useState("");
+  const [image2, setImage2] = useState(null);
+  const [selectedColor2, setSelectedColor2] = useState("");
+  const [selectedSize2, setSelectedSize2] = useState("");
+  const [image3, setImage3] = useState(null);
+  const [selectedColor3, setSelectedColor3] = useState("");
+  const [selectedSize3, setSelectedSize3] = useState("");
 
   useEffect(() => {
     const fetchAllColor = async () => {
@@ -86,11 +89,15 @@ const AddProduct = () => {
       formData.append('newProduct', newProduct);
       formData.append('smallInfo', smallInfo);
       formData.append('description', description);
-      formData.append('image', image);
-      formData.append('thumbImage1', thumbImage1);
-      formData.append('thumbImage2', thumbImage2);
-      formData.append('color', selectedColor);
-      formData.append('size', selectedSize);
+      formData.append('image', image1);
+      formData.append('color', selectedColor1);
+      formData.append('size', selectedSize1);
+      formData.append('image', image2);
+      formData.append('color', selectedColor2);
+      formData.append('size', selectedSize2);
+      formData.append('image', image3);
+      formData.append('color', selectedColor3);
+      formData.append('size', selectedSize3);
 
       const response = await axios.post("http://localhost:8080/api/v1/product/create-product", formData, {
         headers: {
@@ -99,34 +106,16 @@ const AddProduct = () => {
       });
 
       if (response?.data?.success) {
-        setCategory([]);
-        setName("");
-        setRating();
-        setSkuCode("");
-        setMrpPrice();
-        setSalePrice();
-        setAvailability();
-        setStatus("");
-        setFeaturedProduct("");
-        setLatestProduct("");
-        setBestSellingProduct("");
-        setSpecialProduct("");
-        setNewProduct("");
-        setSmallInfo("");
-        setDescription("");
-        setImage("");
-        setThumbImage1("");
-        setThumbImage2("");
-        setColor([]);
-        setSize([]);
         alert("product added");
       } else {
         console.log(response?.data?.message);
       }
     } catch (error) {
-      console.log("error while adding product:", error.message);
+      console.log("error while creating product error from frontend:", error.message);
     }
   };
+
+
 
   return (
     <div className="container" style={{ marginTop: "2rem", marginBottom: "5rem" }}>
@@ -257,29 +246,16 @@ const AddProduct = () => {
             </div>
           </div>
 
-
+          {/* image 1 */}
           <div className="row g-5">
             <div className="col mb-5">
               <label htmlFor="image" className="form-label">Image</label>
-              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage(e.target.files[0])} />
+              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage1(e.target.files[0])} />
             </div>
 
-            <div className="col mb-5">
-              <label htmlFor="thumbImage1" className="form-label">Thumbnail Image 1</label>
-              <input type="file" className="form-control" aria-label="Thumbnail Image 1" name="thumbImage1" id="thumbImage1" onChange={(e) => setThumbImage1(e.target.files[0])} />
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="thumbImage2" className="form-label">Thumbnail Image 2</label>
-              <input type="file" className="form-control" aria-label="Thumbnail Image 2" name="thumbImage2" id="thumbImage2" onChange={(e) => setThumbImage2(e.target.files[0])} />
-            </div>
-          </div>
-
-
-          <div className="row g-5">
             <div className="col mb-5">
               <label htmlFor="color" className="form-label">Color</label>
-              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}>
+              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor1} onChange={(e) => setSelectedColor1(e.target.value)}>
                 <option value="" disabled>-- Select Category --</option>
                 {
                   color?.map((color) => (
@@ -291,7 +267,71 @@ const AddProduct = () => {
 
             <div className="col mb-5">
               <label htmlFor="size" className="form-label">Size</label>
-              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)}>
+              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize1} onChange={(e) => setSelectedSize1(e.target.value)}>
+                <option value="" disabled>-- Select Category --</option>
+                {
+                  size?.map((size) => (
+                    <option key={size?._id} value={size?._id}>{size?.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+          </div>
+
+          {/* image 2 */}
+          <div className="row g-5">
+            <div className="col mb-5">
+              <label htmlFor="image" className="form-label">Image</label>
+              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage2(e.target.files[0])} />
+            </div>
+
+            <div className="col mb-5">
+              <label htmlFor="color" className="form-label">Color</label>
+              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor2} onChange={(e) => setSelectedColor2(e.target.value)}>
+                <option value="" disabled>-- Select Category --</option>
+                {
+                  color?.map((color) => (
+                    <option key={color?._id} value={color?._id}>{color?.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            <div className="col mb-5">
+              <label htmlFor="size" className="form-label">Size</label>
+              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize2} onChange={(e) => setSelectedSize2(e.target.value)}>
+                <option value="" disabled>-- Select Category --</option>
+                {
+                  size?.map((size) => (
+                    <option key={size?._id} value={size?._id}>{size?.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+          </div>
+
+          {/* image 3 */}
+          <div className="row g-5">
+            <div className="col mb-5">
+              <label htmlFor="image" className="form-label">Image</label>
+              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage3(e.target.files[0])} />
+            </div>
+
+            <div className="col mb-5">
+              <label htmlFor="color" className="form-label">Color</label>
+              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor3} onChange={(e) => setSelectedColor3(e.target.value)}>
+                <option value="" disabled>-- Select Category --</option>
+                {
+                  color?.map((color) => (
+                    <option key={color?._id} value={color?._id}>{color?.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            <div className="col mb-5">
+              <label htmlFor="size" className="form-label">Size</label>
+              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize3} onChange={(e) => setSelectedSize3(e.target.value)}>
                 <option value="" disabled>-- Select Category --</option>
                 {
                   size?.map((size) => (
