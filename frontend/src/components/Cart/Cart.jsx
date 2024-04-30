@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext.jsx";
 
 const Cart = () => {
-  const [quantity, setQuantity] = useState(1);
   const [carts, setCarts] = useState([]);
   const [userId, setUserId] = useState("");
   const [country, setCountry] = useState("");
@@ -16,16 +15,6 @@ const Cart = () => {
   const [address, setAddress] = useState("");
   const { validToken } = useAuth("");
 
-
-  const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
 
   const fetchCarts = async () => {
     try {
@@ -71,16 +60,19 @@ const Cart = () => {
     }
   };
 
-  const updateCarts = async (cartId) => {
+  const updateCartQuantity = async (cartId, newQuantity) => {
     try {
-      await axios.put(`http://localhost:8080/api/v1/cart/update-user-cart/${cartId}`, { quantity }, {
+      if (newQuantity < 1) {
+        newQuantity = 1;
+      }
+      await axios.put(`http://localhost:8080/api/v1/cart/update-user-cart/${cartId}`, { quantity: newQuantity }, {
         headers: {
           Authorization: validToken,
         },
       });
       fetchCarts();
     } catch (error) {
-      console.log('error while clearing carts:', error.message);
+      console.log('error while updating cart quantity:', error.message);
     }
   };
 
@@ -171,7 +163,7 @@ const Cart = () => {
                                 <div className="p-relative">
                                   <Link to={`/product/single-product/${cart.product._id}`}>
                                     <figure>
-                                      <img src={`/images/${cart.product.image}`} alt="product" width={300} height={338} />
+                                      <img src={cart?.product?.items[0]?.image} alt="product" width={300} height={338} />
                                     </figure>
                                   </Link>
                                   <button type="submit" className="btn btn-close" onClick={() => deleteCarts(cart?._id)}><i className="fas fa-times" /></button>
@@ -182,16 +174,16 @@ const Cart = () => {
                                   {cart?.product?.name}
                                 </Link>
                               </td>
-                              <td className="product-price"><span className="amount">$ {cart?.product?.salePrice}</span></td>
+                              <td className="product-price"><span className="amount">₹{cart?.product?.salePrice}</span></td>
                               <td className="product-quantity">
                                 <div className="input-group">
-                                  <input className="quantity form-control" type="number" value={cart?.quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} />
-                                  <button className="quantity-plus w-icon-plus" onClick={() => { handleIncrement(); updateCarts(cart?._id) }} />
-                                  <button className="quantity-minus w-icon-minus" onClick={() => { handleDecrement(); updateCarts(cart?._id) }} />
+                                  <input className="quantity form-control" type="number" value={cart.quantity} readOnly />
+                                  <button className="quantity-plus w-icon-plus" onClick={() => updateCartQuantity(cart?._id, cart?.quantity + 1)}></button>
+                                  <button className="quantity-minus w-icon-minus" onClick={() => updateCartQuantity(cart?._id, cart?.quantity - 1)}></button>
                                 </div>
                               </td>
                               <td className="product-subtotal">
-                                <span className="amount">$ {(cart?.product?.salePrice) * (cart?.quantity)}</span>
+                                <span className="amount">₹{(cart?.product?.salePrice) * (cart?.quantity)}</span>
                               </td>
                             </tr>
                           )
@@ -213,7 +205,7 @@ const Cart = () => {
 
                       <div className="cart-subtotal d-flex align-items-center justify-content-between">
                         <label className="ls-25">Subtotal</label>
-                        <span>$ {totalPrice}</span>
+                        <span>₹{totalPrice}</span>
                       </div>
 
                       <hr className="divider" />
@@ -246,7 +238,7 @@ const Cart = () => {
 
                       <div className="order-total d-flex justify-content-between align-items-center">
                         <label>Total</label>
-                        <span className="ls-50">$ {totalPrice}</span>
+                        <span className="ls-50">₹{totalPrice}</span>
                       </div>
 
                       <button className="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout" onClick={createOrder}>

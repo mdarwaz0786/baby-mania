@@ -67,6 +67,7 @@ const SingleProduct = () => {
         },
       });
       alert("item added to cart");
+
     } catch (error) {
       console.log('error while creating cart:', error.message);
     }
@@ -95,16 +96,18 @@ const SingleProduct = () => {
 
                         <div className="product-thumbs-wrap swiper-container">
                           <div className="product-thumbs swiper-wrapper row cols-4 gutter-sm">
-                            {products?.items?.map((item, index) => (
-                              <div className="product-thumb swiper-slide" key={index} onClick={() => handleImageClick(item?.image)}>
-                                <img
-                                  src={item?.image}
-                                  alt="Sub Image"
-                                  width={800}
-                                  height={900}
-                                />
-                              </div>
-                            ))}
+                            {
+                              products?.items?.map((item, index) => (
+                                <div className="product-thumb swiper-slide" key={index} onClick={() => handleImageClick(item?.image)}>
+                                  <img
+                                    src={item?.image}
+                                    alt="Sub Image"
+                                    width={800}
+                                    height={900}
+                                  />
+                                </div>
+                              ))
+                            }
                           </div>
                         </div>
                       </div>
@@ -125,7 +128,7 @@ const SingleProduct = () => {
 
                     <hr className="product-divider" />
 
-                    <div className="product-price"><ins className="new-price">$ {products?.salePrice}</ins></div>
+                    <div className="product-price"><ins className="new-price">₹ {products?.salePrice}</ins></div>
 
                     <div className="ratings-container">
                       <div className="ratings-full">

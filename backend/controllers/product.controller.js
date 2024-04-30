@@ -99,12 +99,12 @@ export const fetchAllProduct = async (req, res) => {
 
     // Handle color filter
     if (req.query.color) {
-      filter['items.color'] = req.query.color;
+      filter['items.color'] = { $in: req.query.color };
     };
 
     // Handle size filter
     if (req.query.size) {
-      filter['items.size'] = req.query.size;
+      filter['items.size'] = { $in: req.query.size };
     };
 
     // Handle search query
@@ -112,10 +112,6 @@ export const fetchAllProduct = async (req, res) => {
       filter.name = { $regex: new RegExp(req.query.search, 'i') };
     };
 
-    // Handle search query
-    if (req.query.search) {
-      filter.name = { $regex: new RegExp(req.query.search, 'i') };
-    };
 
     // Handle sorting
     if (req.query.sort === 'price-high-to-low') {

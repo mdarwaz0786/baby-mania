@@ -10,13 +10,54 @@ const Product = () => {
   const [categories, setCategories] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
+  const [totalProduct, setTotalProduct] = useState();
+  const [filters, setFilters] = useState({
+    category: '',
+    color: '',
+    size: '',
+    search: '',
+    sort: 'relevance',
+    page: 1,
+    limit: 3,
+  });
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: prevFilters[name].includes(value)
+        ? prevFilters[name].filter((item) => item !== value) // Remove if already checked
+        : [...prevFilters[name], value] // Add if not checked
+    }));
+  };
+
+  const handlePageChange = (page) => {
+    setFilters((prevFilters) => ({ ...prevFilters, page }));
+  };
+
+  const handlePageLimitChange = (e) => {
+    const newLimit = parseInt(e.target.value);
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      limit: newLimit
+    }));
+  };
+
+  const handleSortChange = (e) => {
+    const newSort = e.target.value;
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      sort: newSort
+    }));
+  };
 
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/product/all-product');
-        setProducts(response.data.product);
+        const response = await axios.get('http://localhost:8080/api/v1/product/all-product', { params: filters });
+        setProducts(response?.data?.product);
+        setTotalProduct(response?.data?.totalCount)
       } catch (error) {
         console.error('error while fetching products:', error.message);
       }
@@ -25,7 +66,7 @@ const Product = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/v1/category/all-category');
-        setCategories(response.data.category);
+        setCategories(response?.data?.category);
       } catch (error) {
         console.error('error while fetching categories:', error.message);
       }
@@ -34,7 +75,7 @@ const Product = () => {
     const fetchSizes = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/v1/size/all-size');
-        setSizes(response.data.size);
+        setSizes(response?.data?.size);
       } catch (error) {
         console.error('error while fetching sizes:', error.message);
       }
@@ -43,7 +84,7 @@ const Product = () => {
     const fetchColors = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/v1/color/all-color');
-        setColors(response.data.color);
+        setColors(response?.data?.color);
       } catch (error) {
         console.error('error while fetching colors:', error.message);
       }
@@ -53,7 +94,7 @@ const Product = () => {
     fetchCategories();
     fetchSizes();
     fetchColors();
-  }, []);
+  }, [filters]);
 
   return (
     <>
@@ -99,7 +140,7 @@ const Product = () => {
               <div className="sticky-sidebar">
                 <div className="filter-actions">
                   <label>Filter :</label>
-                  <Link to="#" className="btn btn-dark btn-link filter-clean">Clean All</Link>
+                  <Link to="#" className="btn btn-dark btn-link filter-clean" onClick={() => window.location.reload()}>Clean All</Link>
                 </div>
 
                 <div className="widget widget-collapsible">
@@ -109,7 +150,10 @@ const Product = () => {
                       categories.map((category) => {
                         return (
                           <>
-                            <li key={category._id}><Link to={`/product/${category._id}`}>{category.name}</Link></li>
+                            <li key={category?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
+                              <input type="checkbox" name="category" value={category?._id} onChange={handleFilterChange} checked={filters.category.includes(category._id)} />
+                              <label>{category?.name}</label>
+                            </li>
                           </>
                         )
                       })
@@ -121,10 +165,13 @@ const Product = () => {
                   <h3 className="widget-title"><span>Size</span></h3>
                   <ul className="widget-body filter-items mt-1">
                     {
-                      sizes.map((size) => {
+                      sizes?.map((size) => {
                         return (
                           <>
-                            <li key={size._id}><Link to={`/product/${size._id}`}>{size.name}</Link></li>
+                            <li key={size?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
+                              <input type="checkbox" name="size" value={size?._id} onChange={handleFilterChange} checked={filters.size.includes(size?._id)} />
+                              <label>{size?.name}</label>
+                            </li>
                           </>
                         )
                       })
@@ -139,7 +186,10 @@ const Product = () => {
                       colors.map((color) => {
                         return (
                           <>
-                            <li key={color._id}><Link to={`/product/${color._id}`}>{color.name}</Link></li>
+                            <li key={color?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
+                              <input type="checkbox" name="color" value={color?._id} onChange={handleFilterChange} checked={filters.color.includes(color?._id)} />
+                              <label>{color?.name}</label>
+                            </li>
                           </>
                         )
                       })
@@ -163,21 +213,22 @@ const Product = () => {
                 </Link>
                 <div className="toolbox-item toolbox-sort select-box text-dark" style={{ display: "flex", gap: "1rem", justifyContent: "center", alignItems: "center" }}>
                   <label style={{ fontSize: "1.5rem", fontWeight: "600" }}>Sort By :</label>
-                  <select name="orderby" className="form-control">
-                    <option value="default" selected="selected">Relevance</option>
-                    <option value="price-low">Price low to high</option>
-                    <option value="price-high">Price high to low</option>
+                  <select name="orderby" className="form-control" value={filters.sort} onChange={handleSortChange}>
+                    <option value="relevance">Relevance</option>
+                    <option value="latest">Latest</option>
+                    <option value="price-low-to-high">Price low to high</option>
+                    <option value="price-high-to-low">Price high to low</option>
                   </select>
                 </div>
               </div>
 
               <div className="toolbox-right" style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="toolbox-item toolbox-show select-box">
-                  <select name="count" className="form-control">
-                    <option value={9} selected="selected">Show 9</option>
+                  <select name="count" className="form-control" value={filters.limit} onChange={handlePageLimitChange}>
+                    <option value={3} selected="selected">Show 3</option>
+                    <option value={6}>Show 6</option>
+                    <option value={9}>Show 9</option>
                     <option value={12}>Show 12</option>
-                    <option value={24}>Show 24</option>
-                    <option value={36}>Show 36</option>
                   </select>
                 </div>
 
@@ -239,29 +290,29 @@ const Product = () => {
             {/* End Product */}
 
             {/* Start Pagination */}
-            <div className="toolbox toolbox-pagination justify-content-between" style={{ display: "flex" }}>
-              <p className="showing-info mb-2 mb-sm-0">
-                Showing <span> 1 - 9 of 60 </span>Products
+            <nav className="toolbox toolbox-pagination justify-content-between">
+              <p className="showing-info">
+                Showing <span>{((filters.page - 1) * filters.limit) + 1}</span> - <span>{((filters.page - 1) * filters.limit) + products?.length}</span>out of <span>{totalProduct}</span> Products
               </p>
+
               <ul className="pagination">
-                <li className="prev disabled">
-                  <Link to="#" aria-label="Previous" tabIndex={-1} aria-disabled="true">
+                <li className={`prev ${filters.page === 1 ? 'disabled' : ''}`}>
+                  <Link to="#" onClick={() => handlePageChange(filters.page - 1)} aria-label="Previous">
                     <i className="w-icon-long-arrow-left" />Prev
                   </Link>
                 </li>
+
                 <li className="page-item active">
-                  <Link className="page-link" to="#">1</Link>
+                  <Link className="page-link" to="#">{filters.page}</Link>
                 </li>
-                <li className="page-item">
-                  <Link className="page-link" to="#">2</Link>
-                </li>
+
                 <li className="next">
-                  <Link to="#" aria-label="Next">
+                  <Link to="#" onClick={() => handlePageChange(filters.page + 1)} aria-label="Next">
                     Next<i className="w-icon-long-arrow-right" />
                   </Link>
                 </li>
               </ul>
-            </div>
+            </nav>
             {/* End Pagination */}
           </div>
           {/* End Main Content */}

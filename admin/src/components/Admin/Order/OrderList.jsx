@@ -58,18 +58,18 @@ const OrderList = () => {
 
                 <tbody>
                   {
-                    orders.map((order) => {
+                    orders?.map((order) => {
                       return (
                         <>
-                          <tr key={order._id}>
+                          <tr key={order?._id}>
                             <td><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></td>
-                            <td><Link to="/order-list" className="text-reset">{order.products[0].product.skuCode}</Link></td>
-                            <td>{order.createdAt}</td>
-                            <td><Link to="/order-list" className="text-reset">{order.user.name}</Link></td>
+                            <td><Link to="/order-list" className="text-reset">{order?.products[0]?.product?.skuCode}</Link></td>
+                            <td>{order?.createdAt}</td>
+                            <td><Link to="/order-list" className="text-reset">{order?.user?.name}</Link></td>
                             <td><div className="d-flex fs-6"><div className="badge badge-sa-success">No</div></div></td>
-                            <td><div className="d-flex fs-6"><div className="badge badge-sa-danger">{order.status}</div></div></td>
-                            <td>{order.products[0].quantity}</td>
-                            <td><div className="sa-price"><span className="sa-price__symbol">$</span><span className="sa-price__integer">{order.totalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
+                            <td><div className="d-flex fs-6"><div className="badge badge-sa-danger">{order?.status}</div></div></td>
+                            <td>{order?.products?.reduce((total, product) => total + product?.quantity, 0)}</td>
+                            <td><div className="sa-price"><span className="sa-price__symbol">$</span><span className="sa-price__integer">{order?.totalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
 
                             <td>
                               <div className="dropdown">
@@ -79,8 +79,7 @@ const OrderList = () => {
                                   </svg>
                                 </button>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
-                                  <li><Link className="dropdown-item" to="#">Edit</Link></li>
-                                  <li><Link className="dropdown-item" to={`/order-detail/${order._id}`}>View</Link></li>
+                                  <li><Link className="dropdown-item" to={`/order-detail/${order?._id}`}>View</Link></li>
                                   <li><hr className="dropdown-divider" /></li>
                                   <li><Link className="dropdown-item text-danger" to="#">Delete</Link></li>
                                 </ul>

@@ -79,16 +79,19 @@ const OrderDetail = () => {
                                 <>
                                   <tr>
                                     <td className="min-w-20x">
-                                      <div className="d-flex align-items-center"><img src={`/image/${product?.product?.image}`} className="me-4" width={40} height={40} alt /><Link to="/order-list" className="text-reset">{product?.product?.name}</Link></div>
+                                      <div className="d-flex align-items-center">
+                                        <img src={product?.product?.items[0]?.image} alt="ProductImage" style={{ width: "5rem", height: "5rem", marginRight: "1rem" }} />
+                                        <Link to="/order-list" className="text-reset">{product?.product?.name}</Link>
+                                      </div>
                                       <p className="text-reset" style={{ marginTop: "0.5rem", marginBottom: "0.1rem" }}>Color: {product?.color?.name}</p>
                                       <p className="text-reset" style={{ marginBottom: "0rem" }}>Size: {product?.size?.name}</p>
                                     </td>
                                     <td className="text-end">
-                                      <div className="sa-price"><span className="sa-price__symbol">$</span><span className="sa-price__integer">{product?.product?.salePrice}</span><span className="sa-price__decimal">.00</span></div>
+                                      <div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{product?.product?.salePrice}</span><span className="sa-price__decimal">.00</span></div>
                                     </td>
                                     <td className="text-end">{product?.quantity}</td>
                                     <td className="text-end">
-                                      <div className="sa-price"><span className="sa-price__symbol">$</span><span className="sa-price__integer">{(product?.product?.salePrice) * (product?.quantity)}</span><span className="sa-price__decimal">.00</span></div>
+                                      <div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{(product?.product?.salePrice) * (product?.quantity)}</span><span className="sa-price__decimal">.00</span></div>
                                     </td>
                                   </tr>
                                 </>
@@ -102,7 +105,7 @@ const OrderDetail = () => {
                           <tr>
                             <td colSpan={3}>Total</td>
                             <td className="text-end">
-                              <div className="sa-price"><span className="sa-price__symbol">$</span><span className="sa-price__integer">{orders?.totalPrice}</span><span className="sa-price__decimal">.00</span></div>
+                              <div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{orders?.totalPrice}</span><span className="sa-price__decimal">.00</span></div>
                             </td>
                           </tr>
                         </tbody>
@@ -119,7 +122,7 @@ const OrderDetail = () => {
                       <tbody className="sa-table__group">
                         <tr>
                           <td>Order Total</td>
-                          <td className="text-end"><div className="sa-price"><span className="sa-price__symbol">$</span><span className="sa-price__integer">{orders?.totalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
+                          <td className="text-end"><div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{orders?.totalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
                         </tr>
                       </tbody>
                     </table>

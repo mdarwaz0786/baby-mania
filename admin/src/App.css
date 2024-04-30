@@ -10,3 +10,18 @@
 .admin-sidebar {
   margin-right: 15rem;
 }
+
+@media only screen and (max-width: 768px) {
+  .admin-home {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    margin-right: 0;
+  }
+
+  .admin-outlet {
+    width: 100%;
+    margin-top: 3rem;
+  }
+}

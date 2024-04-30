@@ -9,7 +9,7 @@ const BottomHeader = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/v1/category/all-category');
-        setCategories(response.data.category);
+        setCategories(response?.data?.category);
       } catch (error) {
         console.error('error while fetching categories:', error.message);
       }
@@ -37,8 +37,8 @@ const BottomHeader = () => {
                         categories.map((category) => {
                           return (
                             <>
-                              <li key={category._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
-                                <Link to={`/product/${category._id}`}>{category.name}</Link>
+                              <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
+                                <Link to="/product">{category?.name}</Link>
                               </li>
                             </>
                           )
