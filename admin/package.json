@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
+    "baby": "file:..",
     "bootstrap": "^5.3.3",
     "node-sass": "^9.0.0",
     "prop-types": "^15.8.1",

@@ -9,7 +9,8 @@
     "admin": "npm run dev --prefix ./admin",
     "backend": "nodemon ./backend/server.js",
     "server": "node ./backend/server.js",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run admin\""
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run admin\"",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix admin && npm run build --prefix admin"
   },
   "keywords": [
     "e-commerce",
