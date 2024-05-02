@@ -101,6 +101,16 @@ const Cart = () => {
         address,
       };
 
+      if (!orderData.products || orderData.products.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      if (!country || !state || !city || !zipCode || !mobile || !address) {
+        alert('Please enter all address detail.');
+        return;
+      }
+
       const response = await axios.post("http://localhost:8080/api/v1/order/create-order", orderData, {
         headers: {
           Authorization: validToken,
@@ -214,22 +224,22 @@ const Cart = () => {
                         <p className="shipping-destination lh-1"><strong>Shipping Address</strong></p>
                         <form className="shipping-calculator-form">
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="country" value={country} placeholder="Enter Your Country" onChange={(e) => setCountry(e.target.value)} />
+                            <input className="form-control form-control-md" type="text" name="country" value={country} placeholder="Enter Your Country" onChange={(e) => setCountry(e.target.value)} required />
                           </div>
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="state" value={state} placeholder="Enter Your  State" onChange={(e) => setState(e.target.value)} />
+                            <input className="form-control form-control-md" type="text" name="state" value={state} placeholder="Enter Your  State" onChange={(e) => setState(e.target.value)} required />
                           </div>
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="city" value={city} placeholder="Enter Your  City" onChange={(e) => setCity(e.target.value)} />
+                            <input className="form-control form-control-md" type="text" name="city" value={city} placeholder="Enter Your  City" onChange={(e) => setCity(e.target.value)} required />
                           </div>
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="zipCode" value={zipCode} placeholder="Enter Your  ZIP Code" onChange={(e) => setZipCode(e.target.value)} />
+                            <input className="form-control form-control-md" type="text" name="zipCode" value={zipCode} placeholder="Enter Your  ZIP Code" onChange={(e) => setZipCode(e.target.value)} required />
                           </div>
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="number" name="mobile" value={mobile} placeholder="Enter Your Mobile Number" onChange={(e) => setMobile(e.target.value)} />
+                            <input className="form-control form-control-md" type="number" name="mobile" value={mobile} placeholder="Enter Your Mobile Number" onChange={(e) => setMobile(e.target.value)} required />
                           </div>
                           <div className="form-group">
-                            <textarea className="form-control form-control-md" type="text" name="address" value={address} placeholder="Enter Your Address" onChange={(e) => setAddress(e.target.value)} />
+                            <textarea className="form-control form-control-md" type="text" name="address" value={address} placeholder="Enter Your Address" onChange={(e) => setAddress(e.target.value)} required />
                           </div>
                         </form>
                       </div>

@@ -24,4 +24,8 @@
     width: 100%;
     margin-top: 3rem;
   }
+
+  .custom-table {
+    margin-left: -0.7rem;
+  }
 }

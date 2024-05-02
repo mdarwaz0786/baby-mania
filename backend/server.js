@@ -10,6 +10,7 @@ import userRoute from "./routes/user.route.js";
 import cartRoute from "./routes/cart.route.js";
 import categoryRoute from "./routes/category.route.js";
 import orderRoute from "./routes/order.route.js";
+import allDataRoute from "./routes/allData.route.js";
 
 // config
 dotenv.config();
@@ -40,6 +41,8 @@ server.use("/api/v1/user", userRoute);
 server.use("/api/v1/cart", cartRoute);
 // order route
 server.use("/api/v1/order", orderRoute);
+// all data route
+server.use("/api/v1/data", allDataRoute);
 
 // environment variable
 const port = process.env.PORT || 8080;

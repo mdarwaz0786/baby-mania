@@ -66,6 +66,7 @@ const SingleProduct = () => {
           Authorization: validToken,
         },
       });
+
       alert("item added to cart");
 
     } catch (error) {

@@ -16,6 +16,7 @@ import EditCategory from "./components/Admin/Category/EditCategory.jsx";
 import ProductList from "./components/Admin/Product/ProductList.jsx";
 import AddProduct from "./components/Admin/Product/AddProduct.jsx";
 import EditProduct from "./components/Admin/Product/EditProduct.jsx";
+import CustomerList from "./components/Admin/Customer/CustomerList.jsx";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="product-list" element={<ProductList />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
+          <Route path="customer-list" element={<CustomerList />} />
         </Route>
       </Routes>
     </>
