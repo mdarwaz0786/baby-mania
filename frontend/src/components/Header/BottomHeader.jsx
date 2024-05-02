@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const BottomHeader = () => {
   const [categories, setCategories] = useState([]);
 
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -70,12 +71,82 @@ const BottomHeader = () => {
               </div>
 
               <div className="header-right">
-                <Link to="/track-order" className="d-xl-show"><i className="w-icon-map-marker mr-1" />Track Order</Link>
+                <Link to="#" className="d-xl-show"><i className="w-icon-map-marker mr-1" />Track Order</Link>
               </div>
             </div>
           </div>
         </div>
       </header>
+
+      <div className="mobile-menu-wrapper">
+        <div className="mobile-menu-overlay" />
+        <Link className="mobile-menu-close"><i className="close-icon" onClick={() => { document.body.classList.remove('menu-active'); window.location.reload() }} /></Link>
+        <div className="mobile-menu-container scrollable">
+          <form action="#" method="get" className="input-wrapper">
+            <input type="text" className="form-control" name="search" autoComplete="off" placeholder="Search" required />
+            <button className="btn btn-search" type="submit">
+              <i className="w-icon-search" />
+            </button>
+          </form>
+          {/* End of Search Form */}
+
+
+          <div className="tab">
+            <ul className="nav nav-tabs" role="tablist">
+              <li className="nav-item">
+                <a href="#main-menu" className="nav-link active">Main Menu</a>
+              </li>
+
+              <li className="nav-item">
+                <a href="#categories" className="nav-link">Categories</a>
+              </li>
+            </ul>
+          </div>
+
+
+          <div className="tab-content">
+            <div className="tab-pane active" id="main-menu">
+              <ul className="mobile-menu">
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+
+                <li>
+                  <Link to="/product">Shop</Link>
+                </li>
+
+                <li>
+                  <Link to="/contact-us">Contact Us</Link>
+                </li>
+
+                <li>
+                  <Link to="/about-us">About Us</Link>
+                </li>
+                <li>
+                  <Link to="/wishlist">Wishlist</Link>
+                </li>
+              </ul>
+            </div>
+
+
+            <div className="tab-pane" id="categories">
+              <ul className="mobile-menu">
+                {
+                  categories.map((category) => {
+                    return (
+                      <>
+                        <li key={category?._id} style={{ textDecoration: "none", listStyle: "none" }}>
+                          <Link to="/product">{category?.name}</Link>
+                        </li>
+                      </>
+                    )
+                  })
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

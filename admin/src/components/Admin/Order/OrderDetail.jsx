@@ -34,16 +34,8 @@ const OrderDetail = () => {
             <div className="py-5">
               <div className="row g-4 align-items-center">
                 <div className="col">
-                  <nav className="mb-2" aria-label="breadcrumb">
-                    <ol className="breadcrumb breadcrumb-sa-simple">
-                      <li className="breadcrumb-item"><Link to="/">Dashboard</Link></li>
-                      <li className="breadcrumb-item"><Link to="/order-list">Orders</Link></li>
-                      <li className="breadcrumb-item active" aria-current="page">Order #{orders?._id}</li>
-                    </ol>
-                  </nav>
                   <h1 className="h3 m-0">Order #{orders?._id}</h1>
                 </div>
-                <div className="col-auto d-flex"><Link to="/order-list" className="btn btn-secondary me-3">Delete</Link><Link to="/order-list" className="btn btn-primary">Edit</Link></div>
               </div>
             </div>
 
@@ -53,14 +45,14 @@ const OrderDetail = () => {
                 <div className="sa-page-meta__list">
                   <div className="sa-page-meta__item">{orders?.createdAt}</div>
                   <div className="sa-page-meta__item">{totalQuantity}</div>
-                  <div className="sa-page-meta__item">Total ${orders?.totalPrice}</div>
+                  <div className="sa-page-meta__item">Total ₹{orders?.totalPrice}</div>
                   <div className="sa-page-meta__item d-flex align-items-center fs-6"><span className="badge badge-sa-success me-2">{orders?.paymentMethod}</span></div>
                 </div>
               </div>
             </div>
 
 
-            <div className="sa-entity-layout" data-sa-container-query="{&quot;920&quot;:&quot;sa-entity-layout--size--md&quot;}">
+            <div className="sa-entity-layout">
               <div className="sa-entity-layout__body">
                 <div className="sa-entity-layout__main">
                   <div className="card mt-5">

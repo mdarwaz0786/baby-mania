@@ -24,24 +24,11 @@ const OrderList = () => {
       <div id="top" className="sa-app__body">
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
           <div className="container">
-            <div className="py-5">
-              <div className="row g-4 align-items-center">
-                <div className="col">
-                  <nav className="mb-2" aria-label="breadcrumb">
-                    <ol className="breadcrumb breadcrumb-sa-simple">
-                      <li className="breadcrumb-item"><Link to="/">Dashboard</Link></li>
-                      <li className="breadcrumb-item active" aria-current="page">Orders</li>
-                    </ol>
-                  </nav>
-                  <h1 className="h3 m-0">Orders</h1>
-                </div>
-                <div className="col-auto d-flex"><Link to="/order-list" className="btn btn-primary">New order</Link></div>
-              </div>
-            </div>
+            <h4 className="text-center mt-3 mb-3">Orders</h4>
 
-            <div className="card">
+            <div className="container">
               <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" /></div>
-              <table className="table table-bordered table-striped" data-order="[[ 1, &quot;desc&quot; ]]" data-sa-search-input="#table-search">
+              <table className="table table-bordered table-striped" data-sa-search-input="#table-search">
                 <thead>
                   <tr>
                     <th className="w-min" data-orderable="false"><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></th>
@@ -100,7 +87,7 @@ const OrderList = () => {
 
       <div className="sa-example__body">
         <nav aria-label="Page navigation example">
-          <ul className="pagination pagination-sm mb-0">
+          <ul className="pagination pagination-sm">
             <li className="page-item disabled"><a className="page-link" tabIndex={-1} aria-disabled="true">Previous</a></li>
             <li className="page-item"><a className="page-link" href="#">1</a></li>
             <li className="page-item active" aria-current="page"><a className="page-link" href="#">2</a></li>

@@ -10,11 +10,6 @@ import CartPage from "./pages/CartPage/CartPage.jsx";
 import WishlistPage from "./pages/WishlistPage/WishlistPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import Logout from "./components/Login/Logout.jsx";
-import MyAccount from "./MyAccount.jsx";
-import AdminPage from "./pages/AdminPage/AdminPage.jsx";
-import Dashboard from "./components/Admin/Dashboard.jsx";
-import AllOrder from "./components/Admin/Order/AllOrder.jsx";
-import ConfirmOrder from "./components/Admin/Order/ConfirmOrder.jsx";
 
 const App = () => {
   return (
@@ -28,15 +23,9 @@ const App = () => {
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/my-account" element={<MyAccount />} />
         <Route path="/product" element={<ProductPage />}>
           <Route path="" element={<Product />} />
           <Route path="single-product/:productId" element={<SingleProduct />} />
-        </Route>
-        <Route path="/admin" element={<AdminPage />} >
-          <Route path="" element={<Dashboard />} />
-          <Route path="all-order" element={<AllOrder />} />
-          <Route path="confirm-order" element={<ConfirmOrder />} />
         </Route>
       </Routes>
     </>

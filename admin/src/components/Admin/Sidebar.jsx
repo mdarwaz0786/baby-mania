@@ -17,37 +17,42 @@ const Sidebar = () => {
         <div className="sa-app__sidebar">
           <div className="sa-sidebar">
             <div className="sa-sidebar__header">
-              <a className="sa-sidebar__logo" href="#">
+              <Link className="sa-sidebar__logo" to="#">
                 <div className="sa-sidebar-logo">
                   <svg xmlns="http://www.w3.org/2000/svg" width="120px" height="20px" onClick={() => setMobile(!mobile)}>
-                    <path d="M118.5,20h-1.1c-0.6,0-1.2-0.4-1.4-1l-1.5-4h-6.1l-1.5,4c-0.2,0.6-0.8,1-1.4,1h-1.1c-1,0-1.8-1-1.4-2l1.1-3l1.5-4l3.6-10c0.2-0.6,0.8-1,1.4-1h1.6c0.6,0,1.2,0.4,1.4,1l3.6,10l1.5,4l1.1,3C120.3,19,119.5,20,118.5,20z M111.5,6.6l-1.6,4.4h3.2L111.5,6.6z M99.5,20h-1.4c-0.4,0-0.7-0.2-0.9-0.5L94,14l-2,3.5v1c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5v-17C88,0.7,88.7,0,89.5,0h1C91.3,0,92,0.7,92,1.5v8L94,6l3.2-5.5C97.4,0.2,97.7,0,98.1,0h1.4c1.2,0,1.9,1.3,1.3,2.3L96.3,10l4.5,7.8C101.4,18.8,100.7,20,99.5,20z M80.3,11.8L80,12.3v6.2c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5v-6.2l-0.3-0.5l-5.5-9.5c-0.6-1,0.2-2.3,1.3-2.3h1.4c0.4,0,0.7,0.2,0.9,0.5L76,4.3l2,3.5l2-3.5l2.2-3.8C82.4,0.2,82.7,0,83.1,0h1.4c1.2,0,1.9,1.3,1.3,2.3L80.3,11.8z M60,20c-5.5,0-10-4.5-10-10S54.5,0,60,0s10,4.5,10,10S65.5,20,60,20z M60,4c-3.3,0-6,2.7-6,6s2.7,6,6,6s6-2.7,6-6S63.3,4,60,4z M47.8,17.8c0.6,1-0.2,2.3-1.3,2.3h-2L41,14h-4v4.5c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5v-17C33,0.7,33.7,0,34.5,0H41c0.3,0,0.7,0,1,0.1c3.4,0.5,6,3.4,6,6.9c0,2.4-1.2,4.5-3.1,5.8L47.8,17.8z M42,4.2C41.7,4.1,41.3,4,41,4h-3c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h3c0.3,0,0.7-0.1,1-0.2c0.3-0.1,0.6-0.3,0.9-0.5C43.6,8.8,44,7.9,44,7C44,5.7,43.2,4.6,42,4.2z M29.5,4H25v14.5c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5V4h-4.5C15.7,4,15,3.3,15,2.5v-1C15,0.7,15.7,0,16.5,0h13C30.3,0,31,0.7,31,1.5v1C31,3.3,30.3,4,29.5,4z M6.5,20c-2.8,0-5.5-1.7-6.4-4c-0.4-1,0.3-2,1.3-2h1c0.5,0,0.9,0.3,1.2,0.7c0.2,0.3,0.4,0.6,0.8,0.8C4.9,15.8,5.8,16,6.5,16c1.5,0,2.8-0.9,2.8-2c0-0.7-0.5-1.3-1.2-1.6C7.4,12,7,11,7.4,10.3l0.4-0.9c0.4-0.7,1.2-1,1.8-0.6c0.6,0.3,1.2,0.7,1.6,1.2c1,1.1,1.7,2.5,1.7,4C13,17.3,10.1,20,6.5,20z M11.6,6h-1c-0.5,0-0.9-0.3-1.2-0.7C9.2,4.9,8.9,4.7,8.6,4.5C8.1,4.2,7.2,4,6.5,4C5,4,3.7,4.9,3.7,6c0,0.7,0.5,1.3,1.2,1.6C5.6,8,6,9,5.6,9.7l-0.4,0.9c-0.4,0.7-1.2,1-1.8,0.6c-0.6-0.3-1.2-0.7-1.6-1.2C0.6,8.9,0,7.5,0,6c0-3.3,2.9-6,6.5-6c2.8,0,5.5,1.7,6.4,4C13.3,4.9,12.6,6,11.6,6z">
-                    </path>
+                    <path d="M118.5,20h-1.1c-0.6,0-1.2-0.4-1.4-1l-1.5-4h-6.1l-1.5,4c-0.2,0.6-0.8,1-1.4,1h-1.1c-1,0-1.8-1-1.4-2l1.1-3l1.5-4l3.6-10c0.2-0.6,0.8-1,1.4-1h1.6c0.6,0,1.2,0.4,1.4,1l3.6,10l1.5,4l1.1,3C120.3,19,119.5,20,118.5,20z M111.5,6.6l-1.6,4.4h3.2L111.5,6.6z M99.5,20h-1.4c-0.4,0-0.7-0.2-0.9-0.5L94,14l-2,3.5v1c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5v-17C88,0.7,88.7,0,89.5,0h1C91.3,0,92,0.7,92,1.5v8L94,6l3.2-5.5C97.4,0.2,97.7,0,98.1,0h1.4c1.2,0,1.9,1.3,1.3,2.3L96.3,10l4.5,7.8C101.4,18.8,100.7,20,99.5,20z M80.3,11.8L80,12.3v6.2c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5v-6.2l-0.3-0.5l-5.5-9.5c-0.6-1,0.2-2.3,1.3-2.3h1.4c0.4,0,0.7,0.2,0.9,0.5L76,4.3l2,3.5l2-3.5l2.2-3.8C82.4,0.2,82.7,0,83.1,0h1.4c1.2,0,1.9,1.3,1.3,2.3L80.3,11.8z M60,20c-5.5,0-10-4.5-10-10S54.5,0,60,0s10,4.5,10,10S65.5,20,60,20z M60,4c-3.3,0-6,2.7-6,6s2.7,6,6,6s6-2.7,6-6S63.3,4,60,4z M47.8,17.8c0.6,1-0.2,2.3-1.3,2.3h-2L41,14h-4v4.5c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5v-17C33,0.7,33.7,0,34.5,0H41c0.3,0,0.7,0,1,0.1c3.4,0.5,6,3.4,6,6.9c0,2.4-1.2,4.5-3.1,5.8L47.8,17.8z M42,4.2C41.7,4.1,41.3,4,41,4h-3c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h3c0.3,0,0.7-0.1,1-0.2c0.3-0.1,0.6-0.3,0.9-0.5C43.6,8.8,44,7.9,44,7C44,5.7,43.2,4.6,42,4.2z M29.5,4H25v14.5c0,0.8-0.7,1.5-1.5,1.5h-1c-0.8,0-1.5-0.7-1.5-1.5V4h-4.5C15.7,4,15,3.3,15,2.5v-1C15,0.7,15.7,0,16.5,0h13C30.3,0,31,0.7,31,1.5v1C31,3.3,30.3,4,29.5,4z M6.5,20c-2.8,0-5.5-1.7-6.4-4c-0.4-1,0.3-2,1.3-2h1c0.5,0,0.9,0.3,1.2,0.7c0.2,0.3,0.4,0.6,0.8,0.8C4.9,15.8,5.8,16,6.5,16c1.5,0,2.8-0.9,2.8-2c0-0.7-0.5-1.3-1.2-1.6C7.4,12,7,11,7.4,10.3l0.4-0.9c0.4-0.7,1.2-1,1.8-0.6c0.6,0.3,1.2,0.7,1.6,1.2c1,1.1,1.7,2.5,1.7,4C13,17.3,10.1,20,6.5,20z M11.6,6h-1c-0.5,0-0.9-0.3-1.2-0.7C9.2,4.9,8.9,4.7,8.6,4.5C8.1,4.2,7.2,4,6.5,4C5,4,3.7,4.9,3.7,6c0,0.7,0.5,1.3,1.2,1.6C5.6,8,6,9,5.6,9.7l-0.4,0.9c-0.4,0.7-1.2,1-1.8,0.6c-0.6-0.3-1.2-0.7-1.6-1.2C0.6,8.9,0,7.5,0,6c0-3.3,2.9-6,6.5-6c2.8,0,5.5,1.7,6.4,4C13.3,4.9,12.6,6,11.6,6z"></path>
                   </svg>
                   <div className="sa-sidebar-logo__caption">Admin</div>
                 </div>
-              </a>
+              </Link>
             </div>
 
             <div className="sa-sidebar__body" data-simplebar>
               <ul className="sa-nav sa-nav--sidebar" data-sa-collapse>
                 <li className="sa-nav__section">
-                  <div className="sa-nav__section-title"><span>Application</span></div>
                   <ul className="sa-nav__menu sa-nav__menu--root">
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="index.html" className="sa-nav__link"><span className="sa-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M8,13.1c-4.4,0-8,3.4-8-3C0,5.6,3.6,2,8,2s8,3.6,8,8.1C16,16.5,12.4,13.1,8,13.1zM8,4c-3.3,0-6,2.7-6,6c0,4,2.4,0.9,5,0.2C7,9.9,7.1,9.5,7.4,9.2l3-2.3c0.4-0.3,1-0.2,1.3,0.3c0.3,0.5,0.2,1.1-0.2,1.4l-2.2,1.7c2.5,0.9,4.8,3.6,4.8-0.2C14,6.7,11.3,4,8,4z">
-                      </path>
-                    </svg></span><span className="sa-nav__title">Dashboard</span></a>
+                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><Link to="/" className="sa-nav__link">
+                      <span className="sa-nav__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
+                          <path d="M8,13.1c-4.4,0-8,3.4-8-3C0,5.6,3.6,2,8,2s8,3.6,8,8.1C16,16.5,12.4,13.1,8,13.1zM8,4c-3.3,0-6,2.7-6,6c0,4,2.4,0.9,5,0.2C7,9.9,7.1,9.5,7.4,9.2l3-2.3c0.4-0.3,1-0.2,1.3,0.3c0.3,0.5,0.2,1.1-0.2,1.4l-2.2,1.7c2.5,0.9,4.8,3.6,4.8-0.2C14,6.7,11.3,4,8,4z"></path>
+                        </svg>
+                      </span>
+                      <span className="sa-nav__title">Dashboard</span></Link>
                     </li>
 
 
                     <li className={catalog ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setCatalog(!catalog)}>
-                      <a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8,6C4.7,6,2,4.7,2,3s2.7-3,6-3s6,1.3,6,3S11.3,6,8,6z M2,5L2,5L2,5C2,5,2,5,2,5z M8,8c3.3,0,6-1.3,6-3v3c0,1.7-2.7,3-6,3S2,9.7,2,8V5C2,6.7,4.7,8,8,8z M14,5L14,5C14,5,14,5,14,5L14,5z M2,10L2,10L2,10C2,10,2,10,2,10z M8,13c3.3,0,6-1.3,6-3v3c0,1.7-2.7,3-6,3s-6-1.3-6-3v-3C2,11.7,4.7,13,8,13z M14,10L14,10C14,10,14,10,14,10L14,10z"></path>
-                      </svg></span><span className="sa-nav__title">Catalog</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                        <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                        </path>
-                      </svg></span>
-                      </a>
+                      <Link to="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
+                          <path d="M8,6C4.7,6,2,4.7,2,3s2.7-3,6-3s6,1.3,6,3S11.3,6,8,6z M2,5L2,5L2,5C2,5,2,5,2,5z M8,8c3.3,0,6-1.3,6-3v3c0,1.7-2.7,3-6,3S2,9.7,2,8V5C2,6.7,4.7,8,8,8z M14,5L14,5C14,5,14,5,14,5L14,5z M2,10L2,10L2,10C2,10,2,10,2,10z M8,13c3.3,0,6-1.3,6-3v3c0,1.7-2.7,3-6,3s-6-1.3-6-3v-3C2,11.7,4.7,13,8,13z M14,10L14,10C14,10,14,10,14,10L14,10z"></path>
+                        </svg></span><span className="sa-nav__title">Catalog</span>
+                        <span className="sa-nav__arrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
+                            <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z"></path>
+                          </svg>
+                        </span>
+                      </Link>
+
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
                         <li className="sa-nav__menu-item"><Link to="/product-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product List</span></Link></li>
                         <li className="sa-nav__menu-item"><Link to="/add-product" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product Add</span></Link></li>
@@ -62,31 +67,47 @@ const Sidebar = () => {
 
 
                     <li className={customers ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setCustomers(!customers)}>
-                      <a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8,10c-3.3,0-6,2.7-6,6H0c0-3.2,1.9-6,4.7-7.3C3.7,7.8,3,6.5,3,5c0-2.8,2.2-5,5-5s5,2.2,5,5c0,1.5-0.7,2.8-1.7,3.7c2.8,1.3,4.7,4,4.7,7.3h-2C14,12.7,11.3,10,8,10z M8,2C6.3,2,5,3.3,5,5s1.3,3,3,3s3-1.3,3-3S9.7,2,8,2z">
-                        </path>
-                      </svg></span><span className="sa-nav__title">Customers</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                        <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                        </path>
-                      </svg></span>
-                      </a>
+                      <Link to="#" className="sa-nav__link" data-sa-collapse-trigger>
+                        <span className="sa-nav__icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8,10c-3.3,0-6,2.7-6,6H0c0-3.2,1.9-6,4.7-7.3C3.7,7.8,3,6.5,3,5c0-2.8,2.2-5,5-5s5,2.2,5,5c0,1.5-0.7,2.8-1.7,3.7c2.8,1.3,4.7,4,4.7,7.3h-2C14,12.7,11.3,10,8,10z M8,2C6.3,2,5,3.3,5,5s1.3,3,3,3s3-1.3,3-3S9.7,2,8,2z"></path>
+                          </svg>
+                        </span>
+
+                        <span className="sa-nav__title">Customers</span>
+
+                        <span className="sa-nav__arrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
+                            <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z"></path>
+                          </svg>
+                        </span>
+                      </Link>
+
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
                         <li className="sa-nav__menu-item"><a href="app-customers-list.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Customers List</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="app-customer.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Customer</span></a></li>
                       </ul>
                     </li>
 
 
-                    <li className={orders ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setOrders(!orders)}><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M14.2,10.3c-0.1,0.4-0.5,0.7-0.9,0.7H4.8c-0.5,0-0.9-0.3-1-0.8L2.2,4C2.1,3.4,1.6,3,1,3H0.4C0.2,3,0,2.8,0,2.6V1.4C0,1.2,0.2,1,0.4,1h1.4c1,0,1.9,0.7,2.1,1.7l1.5,6.1C5.5,8.9,5.7,9,5.8,9h6.5c0.1,0,0.2-0.1,0.3-0.2l1.1-3.4C13.8,5.2,13.7,5,13.5,5H7.4C7.2,5,7,4.8,7,4.6V3.4C7,3.2,7.2,3,7.4,3H15c0.6,0,1,0.4,1,1v1L14.2,10.3z M4.5,13C5.3,13,6,13.7,6,14.5C6,15.3,5.3,16,4.5,16S3,15.3,3,14.5C3,13.7,3.7,13,4.5,13z M11.5,13c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5S10,15.3,10,14.5C10,13.7,10.7,13,11.5,13z">
-                      </path>
-                    </svg></span><span className="sa-nav__title">Orders</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                      <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                      </path>
-                    </svg></span></a>
+                    <li className={orders ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setOrders(!orders)}>
+                      <Link to="#" className="sa-nav__link" data-sa-collapse-trigger>
+                        <span className="sa-nav__icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M14.2,10.3c-0.1,0.4-0.5,0.7-0.9,0.7H4.8c-0.5,0-0.9-0.3-1-0.8L2.2,4C2.1,3.4,1.6,3,1,3H0.4C0.2,3,0,2.8,0,2.6V1.4C0,1.2,0.2,1,0.4,1h1.4c1,0,1.9,0.7,2.1,1.7l1.5,6.1C5.5,8.9,5.7,9,5.8,9h6.5c0.1,0,0.2-0.1,0.3-0.2l1.1-3.4C13.8,5.2,13.7,5,13.5,5H7.4C7.2,5,7,4.8,7,4.6V3.4C7,3.2,7.2,3,7.4,3H15c0.6,0,1,0.4,1,1v1L14.2,10.3z M4.5,13C5.3,13,6,13.7,6,14.5C6,15.3,5.3,16,4.5,16S3,15.3,3,14.5C3,13.7,3.7,13,4.5,13z M11.5,13c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5S10,15.3,10,14.5C10,13.7,10.7,13,11.5,13z"></path>
+                          </svg>
+                        </span>
+
+                        <span className="sa-nav__title">Orders</span>
+
+                        <span className="sa-nav__arrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
+                            <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z"></path>
+                          </svg>
+                        </span>
+                      </Link>
+
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
                         <li className="sa-nav__menu-item"><Link to="/order-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Orders List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Order Details</span></Link></li>
                       </ul>
                     </li>
 
@@ -145,136 +166,6 @@ const Sidebar = () => {
                     </li>
                   </ul>
                 </li>
-
-
-                <li className="sa-nav__section">
-                  <div className="sa-nav__section-title"><span>Pages</span></div>
-                  <ul className="sa-nav__menu sa-nav__menu--root">
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open"><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><i className="fas fa-lock" /></span><span className="sa-nav__title">Authentication</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                      <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                      </path>
-                    </svg></span></a>
-                      <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><a href="auth-sign-in.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Sign In</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="auth-sign-up.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Sign Up</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="auth-forgot-password.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Forgot Password</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="auth-reset-password.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Reset Password</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="auth-email-confirmation.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Verify Account</span></a></li>
-                      </ul>
-                    </li>
-
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="page-invoice.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-file-alt" /></span><span className="sa-nav__title">Invoice</span></a></li>
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="page-pricing-table.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-dollar-sign" /></span><span className="sa-nav__title">Pricing Table</span></a></li>
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="page-faq.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-info-circle" /></span><span className="sa-nav__title">FAQ</span></a></li>
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="page-terms.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-check-square" /></span><span className="sa-nav__title">Terms
-                      And Conditions</span></a>
-                    </li>
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="page-help-center.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-question-circle" /></span><span className="sa-nav__title">Help Center</span></a></li>
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="page-404.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-bomb" /></span><span className="sa-nav__title">Not
-                      Found</span></a>
-                    </li>
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open"><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><i className="fas fa-bars" /></span><span className="sa-nav__title">Menu Level
-                      0</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                        <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                        </path>
-                      </svg></span></a>
-                      <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item" data-sa-collapse-item="sa-nav__menu-item--open"><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Menu Level 1</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                          <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                          </path>
-                        </svg></span></a>
-                          <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                            <li className="sa-nav__menu-item" data-sa-collapse-item="sa-nav__menu-item--open"><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__menu-item-padding" /><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Menu Level 2</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                              <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                              </path>
-                            </svg></span></a>
-                              <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                                <li className="sa-nav__menu-item"><a href="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__menu-item-padding" /><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Menu Level 3</span></a></li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-
-
-                <li className="sa-nav__section">
-                  <div className="sa-nav__section-title"><span>Framework</span></div>
-                  <ul className="sa-nav__menu sa-nav__menu--root">
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open"><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><i className="fas fa-compass" /></span><span className="sa-nav__title">Components</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                      <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                      </path>
-                    </svg></span></a>
-                      <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><a href="components-accordion.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Accordion</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-alerts.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Alerts</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-badge.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Badge</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-breadcrumb.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Breadcrumb</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-buttons.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Buttons</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-button-group.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Button group</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-cards.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Cards</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-carousel.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Carousel</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-collapse.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Collapse</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-dropdowns.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Dropdowns</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-list-group.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">List group</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-modal.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Modal</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-navs.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Navs</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-nouislider.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">NoUiSlider</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-offcanvas.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Offcanvas</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-pagination.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Pagination</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-placeholders.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Placeholders</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-popovers.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Popovers</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-progress.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Progress</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-scrollspy.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Scrollspy</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-spinners.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Spinners</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-symbols.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Symbols</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-tabs.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Tabs</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-toasts.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Toasts</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="components-tooltips.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Tooltips</span></a></li>
-                      </ul>
-                    </li>
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open"><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><i className="fas fa-toggle-on" /></span><span className="sa-nav__title">Forms</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                      <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                      </path>
-                    </svg></span></a>
-                      <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><a href="forms-text-box.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Text Box</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-text-area.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Text Area</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-select.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Select</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-checks-and-radios.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Checks And Radios</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-file.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">File</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-range.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Range</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-input-group.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Input Group</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-layout.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Layout</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-help-text.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Help Text</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-validation.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Validation</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-quill.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Quill</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-air-datepicker.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Air Datepicker</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="forms-select2.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Select2</span></a></li>
-                      </ul>
-                    </li>
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open"><a href="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><i className="fas fa-table" /></span><span className="sa-nav__title">Tables</span><span className="sa-nav__arrow"><svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                      <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
-                      </path>
-                    </svg></span></a>
-                      <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><a href="tables-basic-tables.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Basic Tables</span></a></li>
-                        <li className="sa-nav__menu-item"><a href="tables-datatables.html" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">DataTables</span></a></li>
-                      </ul>
-                    </li>
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="icons.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-tree" /></span><span className="sa-nav__title">Icons</span></a></li>
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><a href="charts.html" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-chart-pie" /></span><span className="sa-nav__title">Charts</span></a></li>
-                  </ul>
-                </li>
               </ul>
             </div>
           </div>
@@ -282,142 +173,15 @@ const Sidebar = () => {
           <div className="sa-app__sidebar-backdrop" data-sa-close-sidebar />
         </div>
 
-
         <div className="sa-app__content">
           <div className="sa-toolbar sa-toolbar--search-hidden sa-app__toolbar">
             <div className="sa-toolbar__body">
               <div className="sa-toolbar__item"><button className="sa-toolbar__button" type="button" aria-label="Menu" data-sa-toggle-sidebar><svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="currentColor">
                 <path d="M1,11V9h18v2H1z M1,3h18v2H1V3z M15,17H1v-2h14V17z" onClick={() => setMobile(!mobile)} />
               </svg></button></div>
-              <div className="sa-toolbar__item sa-toolbar__item--search">
-                <form className="sa-search sa-search--state--pending">
-                  <div className="sa-search__body"><label className="visually-hidden" htmlFor="input-search">Search
-                    for:</label>
-                    <div className="sa-search__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M16.243 14.828C16.243 14.828 16.047 15.308 15.701 15.654C15.34 16.015 14.828 16.242 14.828 16.242L10.321 11.736C9.247 12.522 7.933 13 6.5 13C2.91 13 0 10.09 0 6.5C0 2.91 2.91 0 6.5 0C10.09 0 13 2.91 13 6.5C13 7.933 12.522 9.247 11.736 10.321L16.243 14.828ZM6.5 2C4.015 2 2 4.015 2 6.5C2 8.985 4.015 11 6.5 11C8.985 11 11 8.985 11 6.5C11 4.015 8.985 2 6.5 2Z">
-                      </path>
-                    </svg></div><input type="text" id="input-search" className="sa-search__input" placeholder="Search for the truth" autoComplete="off" /><button className="sa-search__cancel d-sm-none" type="button" aria-label="Close search"><svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="currentColor">
-                      <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6 c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4 C11.2,9.8,11.2,10.4,10.8,10.8z">
-                      </path>
-                    </svg></button>
-                    <div className="sa-search__field" />
-                  </div>
-                  <div className="sa-search__dropdown">
-                    <div className="sa-search__dropdown-loader" />
-                    <div className="sa-search__dropdown-wrapper">
-                      <div className="sa-search__suggestions sa-suggestions" />
-                      <div className="sa-search__help sa-search__help--type--no-results">
-                        <div className="sa-search__help-title">No results for<span className="sa-search__query" />{""}</div>
-                        <div className="sa-search__help-subtitle">Make sure that all words are spelled
-                          correctly.</div>
-                      </div>
-                      <div className="sa-search__help sa-search__help--type--greeting">
-                        <div className="sa-search__help-title">Start typing to search for</div>
-                        <div className="sa-search__help-subtitle">Products, orders, customers, actions, etc.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="sa-search__backdrop" />
-                </form>
-              </div>
-              <div className="mx-auto" />
-              <div className="sa-toolbar__item d-sm-none"><button className="sa-toolbar__button" type="button" aria-label="Show search" data-sa-action="show-search"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M16.243 14.828C16.243 14.828 16.047 15.308 15.701 15.654C15.34 16.015 14.828 16.242 14.828 16.242L10.321 11.736C9.247 12.522 7.933 13 6.5 13C2.91 13 0 10.09 0 6.5C0 2.91 2.91 0 6.5 0C10.09 0 13 2.91 13 6.5C13 7.933 12.522 9.247 11.736 10.321L16.243 14.828ZM6.5 2C4.015 2 2 4.015 2 6.5C2 8.985 4.015 11 6.5 11C8.985 11 11 8.985 11 6.5C11 4.015 8.985 2 6.5 2Z">
-                </path>
-              </svg></button></div>
-              <div className="sa-toolbar__item dropdown"><button className="sa-toolbar__button" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" data-bs-reference="parent" data-bs-offset="0,1" aria-expanded="false"><img src="vendor/flag-icons/24/DE.png" className="sa-language-icon" alt /></button>
-                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton3">
-                  <li><a className="dropdown-item d-flex align-items-center" href="#"><img src="vendor/flag-icons/24/DE.png" className="sa-language-icon me-3" alt /><span className="ps-2">German</span></a></li>
-                  <li><a className="dropdown-item d-flex align-items-center" href="#"><img src="vendor/flag-icons/24/FR.png" className="sa-language-icon me-3" alt /><span className="ps-2">French</span></a></li>
-                  <li><a className="dropdown-item d-flex align-items-center" href="#"><img src="vendor/flag-icons/24/GB.png" className="sa-language-icon me-3" alt /><span className="ps-2">English</span></a></li>
-                  <li><a className="dropdown-item d-flex align-items-center" href="#"><img src="vendor/flag-icons/24/RU.png" className="sa-language-icon me-3" alt /><span className="ps-2">Russian</span></a></li>
-                  <li><a className="dropdown-item d-flex align-items-center" href="#"><img src="vendor/flag-icons/24/IT.png" className="sa-language-icon me-3" alt /><span className="ps-2">Italian</span></a></li>
-                </ul>
-              </div>
-              <div className="sa-toolbar__item dropdown"><button className="sa-toolbar__button" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" data-bs-reference="parent" data-bs-offset="0,1" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8,13c0,0-5.2,0-7,0c0-1-0.1-1.9,1-1.9C2,5,4,2,6,2c0-1.1,0-2,2-2c1.9,0,2,0.9,2,2c2,0,4,3,4,9c1,0,1,1,1,2C12.7,13,8,13,8,13z M6,14h4c0,1.1,0,2-2,2C6,16,6,15.1,6,14L6,14L6,14z">
-                </path>
-              </svg><span className="sa-toolbar__button-indicator">3</span></button>
-                <div className="dropdown-menu dropdown-menu-end py-0" aria-labelledby="dropdownMenuButton2">
-                  <div className="sa-notifications">
-                    <div className="sa-notifications__header">
-                      <div className="sa-notifications__header-title">Notifications</div><a className="sa-notifications__header-action" href="#">Mark All as Read</a>
-                    </div>
-                    <ul className="sa-notifications__list">
-                      <li className="sa-notifications__item"><a href="#" className="sa-notifications__item-button">
-                        <div className="sa-notifications__item-icon">
-                          <div className="sa-symbol sa-symbol--shape--rounded sa-symbol--style--primary">
-                            <div className="sa-symbol__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                              <path d="M14.5,15h-1c-0.8,0-1.5-0.7-1.5-1.5v-8C12,4.7,12.7,4,13.5,4h1C15.3,4,16,4.7,16,5.5v8C16,14.3,15.3,15,14.5,15z M8.5,15h-1C6.7,15,6,14.3,6,13.5v-11C6,1.7,6.7,1,7.5,1h1C9.3,1,10,1.7,10,2.5v11C10,14.3,9.3,15,8.5,15z M2.5,15h-1C0.7,15,0,14.3,0,13.5v-5C0,7.7,0.7,7,1.5,7h1C3.3,7,4,7.7,4,8.5v5C4,14.3,3.3,15,2.5,15z">
-                              </path>
-                            </svg></div>
-                          </div>
-                        </div>
-                        <div className="sa-notifications__item-body">
-                          <div className="sa-notifications__item-title sa-notifications__item-title--nowrap">
-                            New report has been received</div>
-                          <div className="sa-notifications__item-subtitle sa-notifications__item-subtitle--nowrap">
-                            24 hours ago</div>
-                        </div>
-                      </a></li>
-                      <li className="sa-notifications__item"><a href="#" className="sa-notifications__item-button">
-                        <div className="sa-notifications__item-icon">
-                          <div className="sa-symbol sa-symbol--shape--rounded sa-symbol--style--warning">
-                            <div className="sa-symbol__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                              <path d="M8,6C4.7,6,2,4.7,2,3s2.7-3,6-3s6,1.3,6,3S11.3,6,8,6z M2,5L2,5L2,5C2,5,2,5,2,5z M8,8c3.3,0,6-1.3,6-3v3c0,1.7-2.7,3-6,3S2,9.7,2,8V5C2,6.7,4.7,8,8,8z M14,5L14,5C14,5,14,5,14,5L14,5z M2,10L2,10L2,10C2,10,2,10,2,10z M8,13c3.3,0,6-1.3,6-3v3c0,1.7-2.7,3-6,3s-6-1.3-6-3v-3C2,11.7,4.7,13,8,13z M14,10L14,10C14,10,14,10,14,10L14,10z">
-                              </path>
-                            </svg></div>
-                          </div>
-                        </div>
-                        <div className="sa-notifications__item-body">
-                          <div className="sa-notifications__item-title sa-notifications__item-title--nowrap">
-                            Creating a backup in the process</div>
-                          <div className="sa-notifications__item-subtitle sa-notifications__item-subtitle--nowrap">
-                            Completed: 37% (23.05 MB)</div>
-                        </div>
-                      </a></li>
-                      <li className="sa-notifications__item"><a href="#" className="sa-notifications__item-button">
-                        <div className="sa-notifications__item-icon">
-                          <div className="sa-symbol sa-symbol--shape--rounded sa-symbol--style--primary">
-                            <div className="sa-symbol__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                              <path d="M14.2,10.3c-0.1,0.4-0.5,0.7-0.9,0.7H4.8c-0.5,0-0.9-0.3-1-0.8L2.2,4C2.1,3.4,1.6,3,1,3H0.4C0.2,3,0,2.8,0,2.6V1.4C0,1.2,0.2,1,0.4,1h1.4c1,0,1.9,0.7,2.1,1.7l1.5,6.1C5.5,8.9,5.7,9,5.8,9h6.5c0.1,0,0.2-0.1,0.3-0.2l1.1-3.4C13.8,5.2,13.7,5,13.5,5H7.4C7.2,5,7,4.8,7,4.6V3.4C7,3.2,7.2,3,7.4,3H15c0.6,0,1,0.4,1,1v1L14.2,10.3z M4.5,13C5.3,13,6,13.7,6,14.5C6,15.3,5.3,16,4.5,16S3,15.3,3,14.5C3,13.7,3.7,13,4.5,13z M11.5,13c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5S10,15.3,10,14.5C10,13.7,10.7,13,11.5,13z">
-                              </path>
-                            </svg></div>
-                          </div>
-                        </div>
-                        <div className="sa-notifications__item-body">
-                          <div className="sa-notifications__item-title sa-notifications__item-title--nowrap">
-                            Product added to cart</div>
-                          <div className="sa-notifications__item-subtitle sa-notifications__item-subtitle--nowrap">
-                            Drill Screwdriver Brandix ALX7054 200 Watts</div>
-                        </div>
-                      </a></li>
-                      <li className="sa-notifications__item"><a href="#" className="sa-notifications__item-button">
-                        <div className="sa-notifications__item-icon">
-                          <div className="sa-symbol sa-symbol--shape--rounded sa-symbol--style--info">
-                            <div className="sa-symbol__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                              <path d="M8,10c-3.3,0-6,2.7-6,6H0c0-3.2,1.9-6,4.7-7.3C3.7,7.8,3,6.5,3,5c0-2.8,2.2-5,5-5s5,2.2,5,5c0,1.5-0.7,2.8-1.7,3.7c2.8,1.3,4.7,4,4.7,7.3h-2C14,12.7,11.3,10,8,10z M8,2C6.3,2,5,3.3,5,5s1.3,3,3,3s3-1.3,3-3S9.7,2,8,2z">
-                              </path>
-                            </svg></div>
-                          </div>
-                        </div>
-                        <div className="sa-notifications__item-body">
-                          <div className="sa-notifications__item-title sa-notifications__item-title--nowrap">
-                            Customer Ryan Ford says</div>
-                          <div className="sa-notifications__item-subtitle sa-notifications__item-subtitle--nowrap">
-                            What is a screen dimension of Brandix Series B monitor?</div>
-                        </div>
-                      </a></li>
-                    </ul>
-                    <div className="sa-notifications__footer"><a className="sa-notifications__footer-action" href="#">See all 15 notifications</a></div>
-                  </div>
-                </div>
-              </div>
               <div className="dropdown sa-toolbar__item"><button className="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-offset="0,1" aria-expanded="false"><span className="sa-toolbar-user__avatar sa-symbol sa-symbol--shape--rounded"><img src={personImage} width={64} height={64} alt /></span><span className="sa-toolbar-user__info"><span className="sa-toolbar-user__title">Admin</span><span className="sa-toolbar-user__subtitle">admin@gmail.com</span></span></button>
                 <ul className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
                   <li><a className="dropdown-item" href="#">Profile</a></li>
-                  <li><a className="dropdown-item" href="app-inbox-list.html">Inbox</a></li>
                   <li><a className="dropdown-item" href="app-settings-toc.html">Settings</a></li>
                   <li>
                     <hr className="dropdown-divider" />

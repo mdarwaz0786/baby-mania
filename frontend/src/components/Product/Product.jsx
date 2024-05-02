@@ -21,6 +21,10 @@ const Product = () => {
     limit: 3,
   });
 
+  const handleLinkClick = () => {
+    document.body.classList.add('sidebar-active');
+  };
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
@@ -135,7 +139,7 @@ const Product = () => {
           {/* Start Sidebar*/}
           <aside className="sidebar shop-sidebar sticky-sidebar-wrapper sidebar-fixed">
             <div className="sidebar-overlay" />
-            <Link className="sidebar-close" to="#"><i className="close-icon" /></Link>
+            <Link className="sidebar-close" to="#" ><i className="close-icon" onClick={() => document.body.classList.remove('sidebar-active')} /></Link>
             <div className="sidebar-content scrollable">
               <div className="sticky-sidebar">
                 <div className="filter-actions">
@@ -207,7 +211,7 @@ const Product = () => {
             {/* Start Sorting */}
             <nav className="toolbox sticky-toolbox sticky-content fix-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div className="toolbox-left">
-                <Link to="#" className="btn btn-primary btn-outline btn-rounded left-sidebar-toggle btn-icon-left d-block d-lg-none">
+                <Link to="#" className="btn btn-primary btn-outline btn-rounded left-sidebar-toggle btn-icon-left d-block d-lg-none" onClick={handleLinkClick}>
                   <i className="w-icon-category" />
                   <span>Filters</span>
                 </Link>
