@@ -80,7 +80,7 @@ const BottomHeader = () => {
 
       <div className="mobile-menu-wrapper">
         <div className="mobile-menu-overlay" />
-        <Link className="mobile-menu-close"><i className="close-icon" onClick={() => { document.body.classList.remove('menu-active'); window.location.reload() }} /></Link>
+        <Link className="mobile-menu-close"><i className="close-icon" onClick={() => { document.body.classList.remove('menu-active') }} /></Link>
         <div className="mobile-menu-container scrollable">
           <form action="#" method="get" className="input-wrapper">
             <input type="text" className="form-control" name="search" autoComplete="off" placeholder="Search" required />
