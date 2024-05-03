@@ -54,7 +54,7 @@ server.use(express.static(path.join(__dirname, "frontend", "dist")), (req, res, 
 });
 
 // Route for serving frontend index.html
-server.get("*", (req, res) => {
+server.get("/", (req, res) => {
   // Check if the request URL matches "/admin"
   if (req.originalUrl.startsWith("/admin")) {
     // If it matches, redirect to the admin interface
