@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import image1 from "../../../public/assets/images/demos/demo1/categories/3-2.jpg";
-import image2 from "../../../public/assets/images/demos/demo1/categories/1-2.jpg";
+import image1 from "../../assets/3-2.jpg";
+import image2 from "../../assets/1-2.jpg";
 import { Link } from "react-router-dom";
 
 

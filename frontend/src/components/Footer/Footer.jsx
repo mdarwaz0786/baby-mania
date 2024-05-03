@@ -1,5 +1,5 @@
-import image from "../../../public/assets/images/payment.png";
-import logo from "../../../public/assets/images/logo_footer.png";
+import image from "../../assets/payment.png";
+import logo from "../../assets/logo_footer.png";
 
 
 const Footer = () => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import banner from "../../../public/assets/images/shop/banner3.jpg";
+import banner from "../../assets/banner3.jpg";
 import { useAuth } from "../../context/authContext.jsx";
 
 const SingleProduct = () => {

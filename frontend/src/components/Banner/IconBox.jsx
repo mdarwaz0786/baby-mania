@@ -1,21 +1,7 @@
 const IconBox = () => {
   return (
     <div className="container">
-      <div className="swiper-container appear-animate icon-box-wrapper br-sm mt-6 mb-6" data-swiper-options={{
-        slidesPerView: 1,
-        loop: false,
-        breakpoints: {
-          576: {
-            slidesPerView: 2
-          },
-          768: {
-            slidesPerView: 3
-          },
-          1200: {
-            slidesPerView: 4
-          }
-        }
-      }}>
+      <div className="swiper-container appear-animate icon-box-wrapper br-sm mt-6 mb-6">
         <div className="swiper-wrapper row cols-md-4 cols-sm-3 cols-1">
           <div className="swiper-slide icon-box icon-box-side icon-box-primary">
             <span className="icon-box-icon icon-shipping">

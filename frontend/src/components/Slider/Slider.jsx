@@ -1,8 +1,10 @@
+import image from "../../assets/4.jpg";
+
 const Slider = () => {
   return (
     <>
       <div className="container" style={{ marginTop: "3rem" }}>
-        <div className="banner banner-fashion appear-animate br-sm mb-9" style={{ backgroundImage: 'url(assets/images/demos/demo1/banners/4.jpg)', backgroundColor: '#383839' }}>
+        <div className="banner banner-fashion appear-animate br-sm mb-9" style={{ backgroundImage: `url(${image})`, backgroundColor: '#383839' }}>
           <div className="banner-content align-items-center">
             <div className="content-left d-flex align-items-center mb-3">
               <div className="banner-price-info font-weight-bolder text-secondary text-uppercase lh-1 ls-25">
