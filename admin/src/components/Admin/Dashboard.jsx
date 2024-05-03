@@ -45,9 +45,9 @@ const Dashboard = () => {
                       </button>
 
                       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                        <li><Link className="dropdown-item" to="/product-list">Product List</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/product-list">Product List</Link></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" to="add-product">Product Add</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/add-product">Product Add</Link></li>
                       </ul>
                     </div>
                   </div>
@@ -55,7 +55,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.product}</div>
-                  <Link to="/product-list" className="saw-indicator__caption">Go To Product</Link>
+                  <Link to="/admin/product-list" className="saw-indicator__caption">Go To Product</Link>
                 </div>
               </div>
             </div>
@@ -73,9 +73,9 @@ const Dashboard = () => {
                       </button>
 
                       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                        <li><Link className="dropdown-item" to="/category-list">Category List</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/category-list">Category List</Link></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" to="add-category">Category Add</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/add-category">Category Add</Link></li>
                       </ul>
                     </div>
                   </div>
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.category}</div>
-                  <Link to="/category-list" className="saw-indicator__caption">Go To Category</Link>
+                  <Link to="/admin/category-list" className="saw-indicator__caption">Go To Category</Link>
                 </div>
               </div>
             </div>
@@ -102,9 +102,9 @@ const Dashboard = () => {
                       </button>
 
                       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                        <li><Link className="dropdown-item" to="/color-list">Color List</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/color-list">Color List</Link></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" to="/add-color">Color Add</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/add-color">Color Add</Link></li>
                       </ul>
                     </div>
                   </div>
@@ -112,7 +112,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.color}</div>
-                  <Link to="/color-list" className="saw-indicator__caption">Go To Color</Link>
+                  <Link to="/admin/color-list" className="saw-indicator__caption">Go To Color</Link>
                 </div>
               </div>
             </div>
@@ -132,9 +132,9 @@ const Dashboard = () => {
                       </button>
 
                       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                        <li><Link className="dropdown-item" to="/size-list">Size List</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/size-list">Size List</Link></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" to="add-size">Size Add</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/add-size">Size Add</Link></li>
                       </ul>
                     </div>
                   </div>
@@ -161,7 +161,7 @@ const Dashboard = () => {
                       </button>
 
                       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                        <li><Link className="dropdown-item" to="/customer-list">Customer List</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/customer-list">Customer List</Link></li>
                       </ul>
                     </div>
                   </div>
@@ -169,7 +169,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.user}</div>
-                  <Link to="/customer-list" className="saw-indicator__caption">Go To Customer</Link>
+                  <Link to="/admin/customer-list" className="saw-indicator__caption">Go To Customer</Link>
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ const Dashboard = () => {
                       </button>
 
                       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                        <li><Link className="dropdown-item" to="/order-list">Order List</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/order-list">Order List</Link></li>
                       </ul>
                     </div>
                   </div>
@@ -195,7 +195,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.order}</div>
-                  <Link to="/order-list" className="saw-indicator__caption">Go To Order</Link>
+                  <Link to="/admin/order-list" className="saw-indicator__caption">Go To Order</Link>
                 </div>
               </div>
             </div>

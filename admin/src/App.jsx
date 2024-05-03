@@ -22,7 +22,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<AdminPage />}>
+        <Route path="/admin" element={<AdminPage />}>
           <Route path="" element={<Dashboard />} />
           <Route path="order-list" element={<OrderList />} />
           <Route path="order-detail/:id" element={<OrderDetail />} />

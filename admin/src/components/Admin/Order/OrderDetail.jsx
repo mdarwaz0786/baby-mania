@@ -58,7 +58,7 @@ const OrderDetail = () => {
                   <div className="card mt-5">
                     <div className="card-body px-5 py-4 d-flex align-items-center justify-content-between">
                       <h2 className="mb-0 fs-exact-18 me-4">Items</h2>
-                      <div className="text-muted fs-exact-14"><Link to="/order-list">Edit items</Link></div>
+                      <div className="text-muted fs-exact-14"><Link to="/admin/order-list">Edit items</Link></div>
                     </div>
 
 
@@ -73,7 +73,7 @@ const OrderDetail = () => {
                                     <td className="min-w-20x">
                                       <div className="d-flex align-items-center">
                                         <img src={product?.product?.items[0]?.image} alt="ProductImage" style={{ width: "5rem", height: "5rem", marginRight: "1rem" }} />
-                                        <Link to="/order-list" className="text-reset">{product?.product?.name}</Link>
+                                        <Link to="/admin/order-list" className="text-reset">{product?.product?.name}</Link>
                                       </div>
                                       <p className="text-reset" style={{ marginTop: "0.5rem", marginBottom: "0.1rem" }}>Color: {product?.color?.name}</p>
                                       <p className="text-reset" style={{ marginBottom: "0rem" }}>Size: {product?.size?.name}</p>
@@ -125,7 +125,7 @@ const OrderDetail = () => {
                 <div className="sa-entity-layout__sidebar">
                   <div className="card">
                     <div className="card-body d-flex align-items-center justify-content-between pb-0 pt-4">
-                      <h2 className="fs-exact-16 mb-0">Customer</h2><Link to="/order-list" className="fs-exact-14">Edit</Link>
+                      <h2 className="fs-exact-16 mb-0">Customer</h2><Link to="/admin/order-list" className="fs-exact-14">Edit</Link>
                     </div>
                     <div className="card-body d-flex align-items-center pt-4">
                       <div className="sa-symbol sa-symbol--shape--circle sa-symbol--size--lg"><img src={personImage} width={40} height={40} alt /></div>
@@ -138,11 +138,11 @@ const OrderDetail = () => {
 
                   <div className="card mt-5">
                     <div className="card-body d-flex align-items-center justify-content-between pb-0 pt-4">
-                      <h2 className="fs-exact-16 mb-0">Contact person</h2><Link to="/order-list" className="fs-exact-14">Edit</Link>
+                      <h2 className="fs-exact-16 mb-0">Contact person</h2><Link to="/admin/order-list" className="fs-exact-14">Edit</Link>
                     </div>
                     <div className="card-body pt-4 fs-exact-14">
                       <div>{orders?.user?.name}</div>
-                      <div className="mt-1"><a to="/order-list">{orders?.user?.email}</a></div>
+                      <div className="mt-1"><Link to="/admin/order-list">{orders?.user?.email}</Link></div>
                       <div className="text-muted mt-1">{orders?.user?.mobile}</div>
                     </div>
                   </div>
@@ -150,7 +150,7 @@ const OrderDetail = () => {
 
                   <div className="card mt-5">
                     <div className="card-body d-flex align-items-center justify-content-between pb-0 pt-4">
-                      <h2 className="fs-exact-16 mb-0">Shipping Address</h2><Link to="/order-list" className="fs-exact-14">Edit</Link>
+                      <h2 className="fs-exact-16 mb-0">Shipping Address</h2><Link to="/admin/order-list" className="fs-exact-14">Edit</Link>
                     </div>
                     <div className="card-body pt-4 fs-exact-14">
                       Country: {orders?.country}<br />
@@ -164,7 +164,7 @@ const OrderDetail = () => {
 
                   <div className="card mt-5">
                     <div className="card-body d-flex align-items-center justify-content-between pb-0 pt-4">
-                      <h2 className="fs-exact-16 mb-0">Billing Address</h2><Link to="/order-list" className="fs-exact-14">Edit</Link>
+                      <h2 className="fs-exact-16 mb-0">Billing Address</h2><Link to="/admin/order-list" className="fs-exact-14">Edit</Link>
                     </div>
                     <div className="card-body pt-4 fs-exact-14">
                       Country: {orders?.country}<br />

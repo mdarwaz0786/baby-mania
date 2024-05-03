@@ -56,14 +56,14 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="/product-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/add-product" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product Add</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/category-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Category List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/add-category" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Category Add</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/size-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Size List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/add-size" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Size Add</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/color-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Color List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/add-color" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Color Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/product-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-product" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/category-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Category List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-category" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Category Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/size-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Size List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-size" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Size Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/color-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Color List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-color" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Color Add</span></Link></li>
                       </ul>
                     </li>
 
@@ -85,7 +85,7 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="customer-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Customer List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/customer-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Customer List</span></Link></li>
                       </ul>
                     </li>
 
@@ -107,7 +107,7 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="/order-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Orders List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/order-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Orders List</span></Link></li>
                       </ul>
                     </li>
 
