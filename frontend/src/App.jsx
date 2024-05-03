@@ -10,10 +10,16 @@ import CartPage from "./pages/CartPage/CartPage.jsx";
 import WishlistPage from "./pages/WishlistPage/WishlistPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import Logout from "./components/Login/Logout.jsx";
+import TopHeader from "./components/Header/TopHeader.jsx";
+import MiddleHeader from "./components/Header/MiddleHeader.jsx";
+import BottomHeader from "./components/Header/BottomHeader.jsx";
 
 const App = () => {
   return (
     <>
+      <TopHeader />
+      <MiddleHeader />
+      <BottomHeader />
       <Routes>
         <Route path="/test" element={<Test />} />
         <Route path="/" element={<HomePage />} />
