@@ -42,7 +42,7 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/v1/product/single-product/${productId}`);
+        const response = await axios.get(`/api/v1/product/single-product/${productId}`);
         setProducts(response?.data?.product);
       } catch (error) {
         console.log('error while fetching products:', error.message);
@@ -61,7 +61,7 @@ const SingleProduct = () => {
         alert('Please select color and size.');
         return;
       }
-      await axios.post("http://localhost:8080/api/v1/cart/create-user-cart", { product, color, size, quantity }, {
+      await axios.post("/api/v1/cart/create-user-cart", { product, color, size, quantity }, {
         headers: {
           Authorization: validToken,
         },

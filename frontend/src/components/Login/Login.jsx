@@ -15,7 +15,7 @@ const Login = () => {
   const handleRegisteration = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/user/register-user", { name, email, password, mobile });
+      const response = await axios.post("/api/v1/user/register-user", { name, email, password, mobile });
       if (response.data.success) {
         storeToken(response.data.token);
         setMessage(response.data.message);
@@ -37,7 +37,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/user/login-user", { email, password });
+      const response = await axios.post("/api/v1/user/login-user", { email, password });
       if (response.data.success) {
         storeToken(response.data.token);
         setMessage(response.data.message);

@@ -9,7 +9,7 @@ const AddColor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/color/create-color", { name, status, colorCode });
+      const response = await axios.post("/api/v1/color/create-color", { name, status, colorCode });
       if (response?.data?.success) {
         setName("");
         setStatus("");

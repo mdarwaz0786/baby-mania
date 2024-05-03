@@ -11,7 +11,7 @@ const SizeList = () => {
   useEffect(() => {
     const fetchSizes = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/size/all-size");
+        const response = await axios.get("/api/v1/size/all-size");
         setSizes(response?.data?.size);
       } catch (error) {
         console.log('error while fetching sizes:', error.message);

@@ -8,7 +8,7 @@ const AddSize = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/size/create-size", { name, status });
+      const response = await axios.post("/api/v1/size/create-size", { name, status });
       if (response?.data?.success) {
         setName("");
         setStatus("");

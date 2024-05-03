@@ -20,7 +20,7 @@ const AddCategory = () => {
       formData.append('ourCategory', ourCategory);
       formData.append('image', image);
 
-      const response = await axios.post("http://localhost:8080/api/v1/category/create-category", formData, {
+      const response = await axios.post("/api/v1/category/create-category", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -34,7 +34,7 @@ const AddProduct = () => {
   useEffect(() => {
     const fetchAllColor = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/color/all-color");
+        const response = await axios.get("/api/v1/color/all-color");
         if (response?.data?.success) {
           setColor(response?.data?.color);
         }
@@ -45,7 +45,7 @@ const AddProduct = () => {
 
     const fetchAllSize = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/size/all-size");
+        const response = await axios.get("/api/v1/size/all-size");
         if (response?.data?.success) {
           setSize(response?.data?.size);
         }
@@ -56,7 +56,7 @@ const AddProduct = () => {
 
     const fetchAllCategory = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/category/all-category");
+        const response = await axios.get("/api/v1/category/all-category");
         if (response?.data?.success) {
           setCategory(response?.data?.category);
         }
@@ -99,7 +99,7 @@ const AddProduct = () => {
       formData.append('color', selectedColor3);
       formData.append('size', selectedSize3);
 
-      const response = await axios.post("http://localhost:8080/api/v1/product/create-product", formData, {
+      const response = await axios.post("/api/v1/product/create-product", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

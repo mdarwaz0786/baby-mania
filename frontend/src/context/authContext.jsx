@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   const loggedInUser = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get("http://localhost:8080/api/v1/user/logged-in-user", {
+      const response = await axios.get("/api/v1/user/logged-in-user", {
         headers: {
           Authorization: validToken,
         },

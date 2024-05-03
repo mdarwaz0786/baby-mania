@@ -59,7 +59,7 @@ const Product = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/product/all-product', { params: filters });
+        const response = await axios.get('/api/v1/product/all-product', { params: filters });
         setProducts(response?.data?.product);
         setTotalProduct(response?.data?.totalCount)
       } catch (error) {
@@ -69,7 +69,7 @@ const Product = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/category/all-category');
+        const response = await axios.get('/api/v1/category/all-category');
         setCategories(response?.data?.category);
       } catch (error) {
         console.error('error while fetching categories:', error.message);
@@ -78,7 +78,7 @@ const Product = () => {
 
     const fetchSizes = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/size/all-size');
+        const response = await axios.get('/api/v1/size/all-size');
         setSizes(response?.data?.size);
       } catch (error) {
         console.error('error while fetching sizes:', error.message);
@@ -87,7 +87,7 @@ const Product = () => {
 
     const fetchColors = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/color/all-color');
+        const response = await axios.get('/api/v1/color/all-color');
         setColors(response?.data?.color);
       } catch (error) {
         console.error('error while fetching colors:', error.message);

@@ -10,7 +10,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/data/all-data");
+        const response = await axios.get("/api/v1/data/all-data");
         setAllData(response?.data);
       } catch (error) {
         console.log('error while fetching all data:', error.message);

@@ -18,7 +18,7 @@ const Cart = () => {
 
   const fetchCarts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/v1/cart/fetch-user-cart", {
+      const response = await axios.get("/api/v1/cart/fetch-user-cart", {
         headers: {
           Authorization: validToken,
         },
@@ -36,7 +36,7 @@ const Cart = () => {
 
   const deleteCarts = async (cartId) => {
     try {
-      await axios.delete(`http://localhost:8080/api/v1/cart/delete-user-cart/${cartId}`, {
+      await axios.delete(`/api/v1/cart/delete-user-cart/${cartId}`, {
         headers: {
           Authorization: validToken,
         },
@@ -49,7 +49,7 @@ const Cart = () => {
 
   const clearCarts = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8080/api/v1/cart/clear-user-cart/${userId}`, {
+      await axios.delete(`/api/v1/cart/clear-user-cart/${userId}`, {
         headers: {
           Authorization: validToken,
         },
@@ -65,7 +65,7 @@ const Cart = () => {
       if (newQuantity < 1) {
         newQuantity = 1;
       }
-      await axios.put(`http://localhost:8080/api/v1/cart/update-user-cart/${cartId}`, { quantity: newQuantity }, {
+      await axios.put(`/api/v1/cart/update-user-cart/${cartId}`, { quantity: newQuantity }, {
         headers: {
           Authorization: validToken,
         },
@@ -111,7 +111,7 @@ const Cart = () => {
         return;
       }
 
-      const response = await axios.post("http://localhost:8080/api/v1/order/create-order", orderData, {
+      const response = await axios.post("/api/v1/order/create-order", orderData, {
         headers: {
           Authorization: validToken,
         },

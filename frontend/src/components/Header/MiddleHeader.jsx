@@ -10,7 +10,7 @@ const MiddleHeader = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/category/all-category');
+        const response = await axios.get('/api/v1/category/all-category');
         setCategories(response.data.category);
       } catch (error) {
         console.error('error while fetching categories:', error.message);

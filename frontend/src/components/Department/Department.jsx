@@ -8,7 +8,7 @@ const Department = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/product/all-product");
+        const response = await axios.get("/api/v1/product/all-product");
         setProducts(response?.data?.product);
       } catch (error) {
         console.error("Error fetching product: ", error.message);
