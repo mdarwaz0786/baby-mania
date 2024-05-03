@@ -14,6 +14,10 @@ const SingleProduct = () => {
   const { productId } = useParams();
   const { validToken } = useAuth();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleImageClick = (image) => {
     setSelectedImage(image);
   };

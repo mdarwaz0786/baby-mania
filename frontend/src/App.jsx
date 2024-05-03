@@ -16,6 +16,7 @@ import BottomHeader from "./components/Header/BottomHeader.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 
 const App = () => {
+
   return (
     <>
       <TopHeader />

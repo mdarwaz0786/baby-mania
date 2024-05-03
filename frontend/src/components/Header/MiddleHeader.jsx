@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import logo from "../../../public/assets/images/logo.png";
+import logo from "../../assets/logo_footer.png";
 import { Link } from "react-router-dom";
 
 

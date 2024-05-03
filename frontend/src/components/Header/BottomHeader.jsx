@@ -30,7 +30,7 @@ const BottomHeader = () => {
             <div className="inner-wrap">
               <div className="header-left">
                 <div className="dropdown has-border" data-visible="true">
-                  <Link to="/" className="category-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="Browse Categories">
+                  <Link to="#" className="category-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="Browse Categories">
                     <span> </span>
                     <i className="w-icon-category" />
                     <span style={{ marginLeft: "1.5rem" }}>Browse Categories</span>

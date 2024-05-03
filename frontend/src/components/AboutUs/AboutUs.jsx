@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import image from "../../assets/2.jpg";
 
 const AboutUs = () => {
   return (
@@ -70,7 +71,7 @@ const AboutUs = () => {
 
                 <div className="col-md-6 mb-8">
                   <figure className="br-lg">
-                    <img src="assets/images/pages/about_us/2.jpg" alt="Banner" width={610} height={500} style={{ backgroundColor: '#CECECC' }} />
+                    <img src={image} alt="Banner" width={610} height={500} style={{ backgroundColor: '#CECECC' }} />
                   </figure>
                 </div>
               </div>

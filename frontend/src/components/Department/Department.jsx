@@ -5,15 +5,16 @@ import axios from "axios";
 const Department = () => {
   const [products, setProducts] = useState([]);
 
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get("/api/v1/product/all-product");
+      setProducts(response?.data?.product);
+    } catch (error) {
+      console.error("Error fetching product: ", error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get("/api/v1/product/all-product");
-        setProducts(response?.data?.product);
-      } catch (error) {
-        console.error("Error fetching product: ", error.message);
-      }
-    };
     fetchProduct();
   }, []);
 
