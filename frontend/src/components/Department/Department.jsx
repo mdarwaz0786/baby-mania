@@ -18,6 +18,8 @@ const Department = () => {
     fetchProduct();
   }, []);
 
+  console.log(products);
+
   return (
     <>
       <div className="container">
