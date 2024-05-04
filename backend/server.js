@@ -48,32 +48,23 @@ server.use("/api/v1/order", orderRoute);
 server.use("/api/v1/data", allDataRoute);
 
 // Middleware for serving frontend static files
-server.use(express.static(path.join(__dirname, "frontend", "dist")), (req, res, next) => {
-  console.log("Serving static files from frontend/dist");
+server.use(express.static(path.join(__dirname, "/frontend/dist")), (req, res, next) => {
+  next();
+});
+
+// Middleware for serving admin static files
+server.use(express.static(path.join(__dirname, "/admin/dist")), (req, res, next) => {
   next();
 });
 
 // Route for serving frontend index.html
 server.get("/", (req, res) => {
-  // Check if the request URL matches "/admin"
-  if (req.originalUrl.startsWith("/admin")) {
-    // If it matches, redirect to the admin interface
-    res.sendFile(path.join(__dirname, "admin", "dist", "index.html"));
-  } else {
-    // Otherwise, serve the frontend interface
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-  }
-});
-
-// Middleware for serving admin static files
-server.use(express.static(path.join(__dirname, "admin", "dist")), (req, res, next) => {
-  console.log("Serving static files from admin/dist");
-  next();
+  res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
 });
 
 // Route for serving admin index.html
 server.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "admin", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
 });
 
 // environment variable

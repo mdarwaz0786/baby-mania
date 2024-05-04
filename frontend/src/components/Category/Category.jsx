@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -18,32 +17,18 @@ const Category = () => {
   }, []);
 
   return (
-    <>
-      <section className="category-section top-category bg-grey pt-10 pb-10 appear-animate">
-        <div className="container pb-2">
-          <div className="swiper">
-            <div className="swiper-container swiper-theme pg-show">
-              <h2 className="title justify-content-center pt-1 ls-normal mb-5">Our Category</h2>
-              <div className="swiper-wrapper cols-lg-6 cols-md-6 cols-sm-6 cols-6" style={{ display: "flex", justifyContent: "space-evenly", }}>
-                {
-                  categories?.filter((category) => category?.status === "Show").map((category) => (
-                    <div className="swiper-slide category category-classic category-absolute overlay-zoom br-xs" key={category?._id}>
-                      <Link to="/product" className="category-media">
-                        <img src={category?.image} alt="category-image" />
-                      </Link>
-                      <div className="category-content">
-                        <h4 className="category-name" style={{ color: "pink" }}>{category?.name}</h4>
-                        <Link to="/product" className="btn btn-primary btn-link btn-underline">Shop Now</Link>
-                      </div>
-                    </div>
-                  ))
-                }
-              </div>
+    <div className="row">
+      {categories.map((category) => (
+        <div className="col-md-3" key={category?._id}>
+          <div className="d-flex flex-column align-items-center">
+            <div className="rounded-circle overflow-hidden" style={{ width: '100px', height: '100px' }}>
+              <img src={category?.image} className="img-fluid" alt="category-image" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
             </div>
+            <div className="mt-2">{category?.name}</div>
           </div>
         </div>
-      </section>
-    </>
+      ))}
+    </div>
   );
 };
 

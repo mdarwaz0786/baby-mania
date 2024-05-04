@@ -44,7 +44,6 @@ const AddCategory = () => {
   };
 
 
-
   return (
     <div className="container" style={{ marginTop: "2rem" }}>
       <div className="card shadow p-5">

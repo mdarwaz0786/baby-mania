@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import image1 from "../../assets/3-2.jpg";
-import image2 from "../../assets/1-2.jpg";
 import { Link } from "react-router-dom";
+import bannerWomen from "../../assets/banner_women.png";
 
 
 const Product = () => {
@@ -103,34 +102,8 @@ const Product = () => {
   return (
     <>
       {/* Start Banner */}
-      <div className="row category-banner-wrapper appear-animate pt-6 pb-8" style={{ marginLeft: "1rem", marginRight: "1rem" }}>
-        <div className="col-md-6 mb-4">
-          <div className="banner banner-fixed category-banner-2 br-xs">
-            <figure>
-              <img src={image1} alt="Category Banner" width={610} height={200} style={{ backgroundColor: '#E5E5E5' }} />
-            </figure>
-            <div className="banner-content y-50 pt-1">
-              <h5 className="banner-subtitle font-weight-bold text-uppercase">Trending Now</h5>
-              <h3 className="banner-title font-weight-bolder text-capitalize">Womens Lifestyle<br /> Collection</h3>
-              <Link to="/product" className="btn btn-dark btn-link btn-underline btn-icon-right">Shop Now<i className="w-icon-long-arrow-right" /></Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-6 mb-4">
-          <div className="banner banner-fixed br-xs">
-            <figure>
-              <img src={image2} alt="Category Banner" width={610} height={160} style={{ backgroundColor: '#636363' }} />
-            </figure>
-            <div className="banner-content y-50 mt-0">
-              <h5 className="banner-subtitle font-weight-normal text-capitalize">New Arrivals</h5>
-              <h3 className="banner-title text-white text-uppercase">Accessories<br /><span className="font-weight-normal text-capitalize">Collection</span></h3>
-              <div className="banner-price-info text-white font-weight-normal text-capitalize">Only From
-                <span className="text-secondary font-weight-bolder">$90.00</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="container mt-5 mb-5">
+        <img src={bannerWomen} alt="banner-women" />
       </div>
       {/* End Banner */}
 
