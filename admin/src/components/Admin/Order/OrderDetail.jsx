@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import personImage from "/images/customers/user.png";
+import userIcon from "../../../assets/user.png";
 
 const OrderDetail = () => {
   const { id } = useParams();
@@ -121,20 +121,18 @@ const OrderDetail = () => {
                   </div>
                 </div>
 
-
                 <div className="sa-entity-layout__sidebar">
                   <div className="card">
                     <div className="card-body d-flex align-items-center justify-content-between pb-0 pt-4">
                       <h2 className="fs-exact-16 mb-0">Customer</h2><Link to="/admin/order-list" className="fs-exact-14">Edit</Link>
                     </div>
                     <div className="card-body d-flex align-items-center pt-4">
-                      <div className="sa-symbol sa-symbol--shape--circle sa-symbol--size--lg"><img src={personImage} width={40} height={40} alt /></div>
+                      <div className="sa-symbol sa-symbol--shape--circle sa-symbol--size--lg"><img src={userIcon} width={40} height={40} alt /></div>
                       <div className="ms-3 ps-2">
                         <div className="fs-exact-14 fw-medium">{orders?.user?.name}</div>
                       </div>
                     </div>
                   </div>
-
 
                   <div className="card mt-5">
                     <div className="card-body d-flex align-items-center justify-content-between pb-0 pt-4">

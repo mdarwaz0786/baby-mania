@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import personImage from "/images/customers/user.png";
+import userIcon from "../../assets/user.png";
 
 const Sidebar = () => {
   const [catalog, setCatalog] = useState(false);
@@ -210,7 +210,7 @@ const Sidebar = () => {
                 </button>
               </div>
 
-              <div className="dropdown sa-toolbar__item"><button className="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-offset="0,1" aria-expanded="false"><span className="sa-toolbar-user__avatar sa-symbol sa-symbol--shape--rounded"><img src={personImage} width={64} height={64} alt /></span><span className="sa-toolbar-user__info"><span className="sa-toolbar-user__title">Admin</span><span className="sa-toolbar-user__subtitle">admin@gmail.com</span></span></button>
+              <div className="dropdown sa-toolbar__item"><button className="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-offset="0,1" aria-expanded="false"><span className="sa-toolbar-user__avatar sa-symbol sa-symbol--shape--rounded"><img src={userIcon} width={64} height={64} alt /></span><span className="sa-toolbar-user__info"><span className="sa-toolbar-user__title">Admin</span><span className="sa-toolbar-user__subtitle">admin@gmail.com</span></span></button>
                 <ul className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
                   <li><Link className="dropdown-item" to="#">Profile</Link></li>
                   <li><Link className="dropdown-item" to="#">Setting</Link></li>

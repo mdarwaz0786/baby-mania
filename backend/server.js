@@ -48,30 +48,43 @@ server.use("/api/v1/order", orderRoute);
 server.use("/api/v1/data", allDataRoute);
 
 // Middleware for serving frontend static files
-server.use(express.static(path.join(__dirname, "/frontend/dist")), (req, res, next) => {
-  next();
-});
+server.use(express.static(path.join(__dirname, "/frontend/dist")), (req, res, next) => { next() });
 
 // Middleware for serving admin static files
-server.use(express.static(path.join(__dirname, "/admin/dist")), (req, res, next) => {
-  next();
-});
+server.use(express.static(path.join(__dirname, "/admin/dist")), (req, res, next) => { next() });
 
-// Route for serving frontend index.html
-server.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
-});
+// Routes for serving frontend index.html
+server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/product", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/product/single-product/:productId", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/contact-us", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/about-us", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/cart", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/wishlist", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/login", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/logout", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 
-// Route for serving admin index.html
-server.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
-});
+// Routes for serving admin index.html
+server.get("/admin", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/order-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/order-detail/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/size-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/add-size", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/edit-size/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/color-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/add-color", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/edit-color/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/category-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/add-category", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/edit-category/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/product-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/add-product", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/edit-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/customer-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 
 // environment variable
 const port = process.env.PORT || 8080;
 const mode = process.env.Node_Mode;
 
 // server listen
-server.listen(port, () => {
-  console.log(`server is successfully running in ${mode} on port number ${port}`);
-}); 
+server.listen(port, () => { console.log(`server is successfully running in ${mode} on port number ${port}`) }); 
