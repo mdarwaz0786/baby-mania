@@ -208,15 +208,6 @@ const Product = () => {
                     <option value={12}>Show 12</option>
                   </select>
                 </div>
-
-                <div className="toolbox-item toolbox-layout" style={{ display: "flex", gap: "0.5rem", justifyContent: "center", alignItems: "center" }}>
-                  <Link to="/product" className="icon-mode-grid btn-layout active" style={{ color: "#1b1b1b", fontSize: "1.8rem" }}>
-                    <i className="w-icon-grid" />
-                  </Link>
-                  <Link to="/product" className="icon-mode-list btn-layout" style={{ color: "#d6d4d4", fontSize: "1.8rem" }}>
-                    <i className="w-icon-list" />
-                  </Link>
-                </div>
               </div>
             </nav>
             {/* End Sorting */}
