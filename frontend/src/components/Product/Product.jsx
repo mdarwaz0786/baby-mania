@@ -117,7 +117,7 @@ const Product = () => {
               <div className="sticky-sidebar">
                 <div className="filter-actions">
                   <label>Filter :</label>
-                  <Link to="#" className="btn btn-dark btn-link filter-clean" onClick={() => window.location.reload()}>Clean All</Link>
+                  <Link to="/product" className="btn btn-dark btn-link filter-clean">Clean All</Link>
                 </div>
 
                 <div className="widget widget-collapsible">
