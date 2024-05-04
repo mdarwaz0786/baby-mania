@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
+import "../../App.css";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -17,18 +19,28 @@ const Category = () => {
   }, []);
 
   return (
-    <div className="row">
-      {categories.map((category) => (
-        <div className="col-md-3" key={category?._id}>
-          <div className="d-flex flex-column align-items-center">
-            <div className="rounded-circle overflow-hidden" style={{ width: '100px', height: '100px' }}>
-              <img src={category?.image} className="img-fluid" alt="category-image" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+    <>
+      <h4 className="text-center mt-5 mb-5">Our Category</h4>
+      <div className="row category-container">
+        {categories.map((category) => (
+          <div className="col-6 col-sm-4 col-md-2 category-item" key={category?._id}>
+            <div className="d-flex flex-column align-items-center">
+              <div className="rounded-circle overflow-hidden" style={{ width: '100px', height: '100px' }}>
+                <Link to="/product">
+                  <img
+                    src={category?.image}
+                    className="img-fluid"
+                    alt="category-image"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </Link>
+              </div>
+              <div className="mt-1" style={{ fontSize: "1.5rem", color: "black", fontWeight: "500" }}>{category?.name}</div>
             </div>
-            <div className="mt-2">{category?.name}</div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ const Product = () => {
     search: '',
     sort: 'relevance',
     page: 1,
-    limit: 3,
+    limit: 6,
   });
 
   const handleLinkClick = () => {
@@ -202,8 +202,8 @@ const Product = () => {
               <div className="toolbox-right" style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="toolbox-item toolbox-show select-box">
                   <select name="count" className="form-control" value={filters.limit} onChange={handlePageLimitChange}>
-                    <option value={3} selected="selected">Show 3</option>
-                    <option value={6}>Show 6</option>
+                    <option value={3}>Show 3</option>
+                    <option value={6} selected="selected">Show 6</option>
                     <option value={9}>Show 9</option>
                     <option value={12}>Show 12</option>
                   </select>
