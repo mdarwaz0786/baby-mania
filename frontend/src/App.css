@@ -1,26 +1,21 @@
-/* Media query for mobile screens (max-width 767px) */
 @media (max-width: 767px) {
 
-  /* Category container styles */
   .category-container {
     display: flex;
-    /* Make it a flexbox container */
+    flex-wrap: nowrap;
     overflow-x: auto;
-    /* Enable horizontal scrolling */
     scrollbar-width: none;
-    /* Hide scrollbar (optional) */
     -ms-overflow-style: none;
-    /* Hide scrollbar for IE/Edge (optional) */
     padding-bottom: 20px;
-    scroll-behavior: smooth;
-    /* Smooth scrolling */
   }
 
-  /* Category item styles */
   .category-item {
     flex: 0 0 auto;
-    /* Allow items to shrink and grow as needed */
     width: calc(100% / 3);
-    /* Set width to 33% of container */
+    margin-right: 10px;
+  }
+
+  .category-item:last-child {
+    margin-right: 0;
   }
 }
