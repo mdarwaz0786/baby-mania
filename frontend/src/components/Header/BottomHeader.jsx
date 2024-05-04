@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 const BottomHeader = () => {
   const [categories, setCategories] = useState([]);
 
@@ -126,12 +127,20 @@ const BottomHeader = () => {
                 <li>
                   <Link to="/about-us">About Us</Link>
                 </li>
+
                 <li>
                   <Link to="/wishlist">Wishlist</Link>
                 </li>
+                <li>
+                  <Link to="/login">Log in</Link>
+                </li>
+
+                <li>
+                  <Link to="/logout">Log Out </Link>
+                </li>
+
               </ul>
             </div>
-
 
             <div className="tab-pane" id="categories">
               <ul className="mobile-menu">
