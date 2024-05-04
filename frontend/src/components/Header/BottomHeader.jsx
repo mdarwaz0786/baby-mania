@@ -10,6 +10,13 @@ const BottomHeader = () => {
     document.body.classList.remove('menu-active');
   };
 
+  const handleMenuItemClick = () => {
+    const closeIcon = document.querySelector('.close-icon');
+    if (closeIcon) {
+      closeIcon.click();
+    }
+  };
+
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -112,33 +119,33 @@ const BottomHeader = () => {
           <div className="tab-content">
             <div className="tab-pane active" id="main-menu">
               <ul className="mobile-menu">
-                <li>
+                <li onClick={handleMenuItemClick}>
                   <Link to="/">Home</Link>
                 </li>
 
-                <li>
+                <li onClick={handleMenuItemClick}>
                   <Link to="/product">Shop</Link>
                 </li>
 
-                <li>
+                <li onClick={handleMenuItemClick}>
                   <Link to="/contact-us">Contact Us</Link>
                 </li>
 
-                <li>
+                <li onClick={handleMenuItemClick}>
                   <Link to="/about-us">About Us</Link>
                 </li>
 
-                <li>
+                <li onClick={handleMenuItemClick}>
                   <Link to="/wishlist">Wishlist</Link>
                 </li>
-                <li>
+
+                <li onClick={handleMenuItemClick}>
                   <Link to="/login">Log in</Link>
                 </li>
 
-                <li>
+                <li onClick={handleMenuItemClick}>
                   <Link to="/logout">Log Out </Link>
                 </li>
-
               </ul>
             </div>
 
@@ -148,7 +155,7 @@ const BottomHeader = () => {
                   categories.map((category) => {
                     return (
                       <>
-                        <li key={category?._id} style={{ textDecoration: "none", listStyle: "none" }}>
+                        <li key={category?._id} style={{ textDecoration: "none", listStyle: "none" }} onClick={handleMenuItemClick}>
                           <Link to="/product">{category?.name}</Link>
                         </li>
                       </>
