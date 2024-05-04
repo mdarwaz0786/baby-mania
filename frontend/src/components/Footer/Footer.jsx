@@ -23,7 +23,7 @@ const Footer = () => {
               <div className="col-xl-7 col-lg-6 col-md-9 mt-4 mt-lg-0 ">
                 <form action="#" method="get" className="input-wrapper input-wrapper-inline input-wrapper-rounded">
                   <input type="email" className="form-control mr-2 bg-white" name="email" id="email" placeholder="Your E-mail Address" />
-                  <button className="btn btn-dark btn-rounded" type="submit">Subscribe<i className="w-icon-long-arrow-right" /></button>
+                  <p className="btn btn-dark btn-rounded">Subscribe<i className="w-icon-long-arrow-right" /></p>
                 </form>
               </div>
             </div>
