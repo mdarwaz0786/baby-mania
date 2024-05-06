@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useEffect } from "react";
 
 const AddCategory = () => {
   const [name, setName] = useState("");
@@ -8,6 +9,10 @@ const AddCategory = () => {
   const [showHeader, setShowHeader] = useState("");
   const [shopByCategory, setShopByCategory] = useState("");
   const [ourCategory, setOurCategory] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
-
   var i = 1;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchOrders = async () => {

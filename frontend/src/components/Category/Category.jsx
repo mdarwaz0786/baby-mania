@@ -7,6 +7,10 @@ const Category = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get("/api/v1/category/all-category");

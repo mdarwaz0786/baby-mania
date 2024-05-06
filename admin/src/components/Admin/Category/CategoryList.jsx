@@ -9,6 +9,10 @@ const CategoryList = () => {
   var i = 1;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("/api/v1/category/all-category");

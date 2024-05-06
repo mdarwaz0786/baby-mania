@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/authContext.jsx";
@@ -32,6 +32,10 @@ const Login = () => {
       setMessage("error while registering user");
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
   const handleLogin = async (e) => {

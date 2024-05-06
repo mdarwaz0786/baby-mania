@@ -32,6 +32,10 @@ const AddProduct = () => {
   const [selectedSize3, setSelectedSize3] = useState("");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchAllColor = async () => {
       try {
         const response = await axios.get("/api/v1/color/all-color");

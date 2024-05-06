@@ -15,6 +15,10 @@ const Cart = () => {
   const [address, setAddress] = useState("");
   const { validToken } = useAuth("");
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
 
   const fetchCarts = async () => {
     try {

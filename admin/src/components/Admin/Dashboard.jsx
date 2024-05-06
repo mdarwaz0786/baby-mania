@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
   const [allData, setAllData] = useState();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchAllData = async () => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import userIcon from "../../assets/user.png";
+import { useEffect } from "react";
 
 const Sidebar = () => {
   const [catalog, setCatalog] = useState(false);
@@ -10,6 +11,10 @@ const Sidebar = () => {
   const [inbox, setInbox] = useState(false);
   const [setting, setSetting] = useState(false);
   const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -37,7 +42,7 @@ const Sidebar = () => {
                           <path d="M8,13.1c-4.4,0-8,3.4-8-3C0,5.6,3.6,2,8,2s8,3.6,8,8.1C16,16.5,12.4,13.1,8,13.1zM8,4c-3.3,0-6,2.7-6,6c0,4,2.4,0.9,5,0.2C7,9.9,7.1,9.5,7.4,9.2l3-2.3c0.4-0.3,1-0.2,1.3,0.3c0.3,0.5,0.2,1.1-0.2,1.4l-2.2,1.7c2.5,0.9,4.8,3.6,4.8-0.2C14,6.7,11.3,4,8,4z"></path>
                         </svg>
                       </span>
-                      <span className="sa-nav__title">Dashboard</span></Link>
+                      <span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Dashboard</span></Link>
                     </li>
 
                     <li className={catalog ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setCatalog(!catalog)}>
@@ -56,14 +61,14 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="/admin/product-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/admin/add-product" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Product Add</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/admin/category-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Category List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/admin/add-category" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Category Add</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/admin/size-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Size List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/admin/add-size" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Size Add</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/admin/color-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Color List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="/admin/add-color" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Color Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/product-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Product List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-product" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Product Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/category-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Category List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-category" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Category Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/size-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Size List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-size" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Size Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/color-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Color List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/add-color" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Color Add</span></Link></li>
                       </ul>
                     </li>
 
@@ -85,7 +90,7 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="/admin/customer-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Customer List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/customer-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Customer List</span></Link></li>
                       </ul>
                     </li>
 
@@ -107,7 +112,7 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="/admin/order-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Orders List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="/admin/order-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Orders List</span></Link></li>
                       </ul>
                     </li>
 
@@ -129,8 +134,8 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Coupon List</span></Link></li>
-                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Coupon Add</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Coupon List</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Coupon Add</span></Link></li>
                       </ul>
                     </li>
 
@@ -144,18 +149,18 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Conversation List</span></Link></li>                      </ul>
+                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Conversation List</span></Link></li>                      </ul>
                     </li>
 
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><Link to="#" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-comment" /></span><span className="sa-nav__title">Chat</span><span className="sa-nav__menu-item-badge badge badge-sa-pill badge-sa-theme">8</span></Link></li>
+                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><Link to="#" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-comment" /></span><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Chat</span><span className="sa-nav__menu-item-badge badge badge-sa-pill badge-sa-theme">8</span></Link></li>
 
                     <li className="sa-nav__menu-item sa-nav__menu-item--has-icon">
                       <Link to="#" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-hdd" /></span>
-                        <span className="sa-nav__title">File Manager</span>
+                        <span className="sa-nav__title" onClick={() => setMobile(!mobile)}>File Manager</span>
                       </Link>
                     </li>
 
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><Link to="#" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-calendar-alt" /></span><span className="sa-nav__title">Calendar</span></Link></li>
+                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><Link to="#" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-calendar-alt" /></span><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Calendar</span></Link></li>
 
                     <li className="sa-nav__menu-item sa-nav__menu-item--has-icon">
                       <Link to="#" className="sa-nav__link">
@@ -164,7 +169,7 @@ const Sidebar = () => {
                             <path d="M14.5,15h-1c-0.8,0-1.5-0.7-1.5-1.5v-8C12,4.7,12.7,4,13.5,4h1C15.3,4,16,4.7,16,5.5v8C16,14.3,15.3,15,14.5,15z M8.5,15h-1C6.7,15,6,14.3,6,13.5v-11C6,1.7,6.7,1,7.5,1h1C9.3,1,10,1.7,10,2.5v11C10,14.3,9.3,15,8.5,15z M2.5,15h-1C0.7,15,0,14.3,0,13.5v-5C0,7.7,0.7,7,1.5,7h1C3.3,7,4,7.7,4,8.5v5C4,14.3,3.3,15,2.5,15z"></path>
                           </svg>
                         </span>
-                        <span className="sa-nav__title">Analytics</span>
+                        <span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Analytics</span>
                       </Link>
                     </li>
 
@@ -186,7 +191,7 @@ const Sidebar = () => {
                       </Link>
 
                       <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title">Setting</span></Link></li>
+                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Setting</span></Link></li>
                       </ul>
                     </li>
                   </ul>

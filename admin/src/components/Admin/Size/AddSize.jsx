@@ -1,9 +1,14 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useEffect } from "react";
 
 const AddSize = () => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -9,6 +9,10 @@ const OrderDetail = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`/api/v1/order/single-order/${id}`);

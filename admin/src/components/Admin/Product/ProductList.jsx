@@ -10,6 +10,10 @@ const ProductList = () => {
   var i = 1;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/v1/product/all-product");

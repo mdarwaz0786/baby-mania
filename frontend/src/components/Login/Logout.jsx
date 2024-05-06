@@ -9,6 +9,10 @@ const Logout = () => {
     logOutUser();
   }, [logOutUser]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return <Navigate to="/login" />;
 };
 

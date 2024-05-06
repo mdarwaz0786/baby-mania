@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import bannerWomen from "../../assets/banner_women.png";
 
-
 const Product = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,6 +18,10 @@ const Product = () => {
     page: 1,
     limit: 6,
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleLinkClick = () => {
     document.body.classList.add('sidebar-active');
@@ -98,6 +101,7 @@ const Product = () => {
     fetchSizes();
     fetchColors();
   }, [filters]);
+
 
   return (
     <>

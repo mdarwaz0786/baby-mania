@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import image from "../../assets/2.jpg";
+import { useEffect } from 'react';
 
 const AboutUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <main className="main">

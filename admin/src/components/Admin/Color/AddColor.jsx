@@ -1,10 +1,15 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useEffect } from "react";
 
 const AddColor = () => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
   const [colorCode, setColorCode] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

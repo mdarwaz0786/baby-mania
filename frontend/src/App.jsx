@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Test from "./Test.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import ProductPage from './pages/ProductPage/ProductPage.jsx';
 import SingleProduct from "./components/Product/SingleProduct.jsx";
@@ -23,7 +22,6 @@ const App = () => {
       <MiddleHeader />
       <BottomHeader />
       <Routes>
-        <Route path="/test" element={<Test />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />

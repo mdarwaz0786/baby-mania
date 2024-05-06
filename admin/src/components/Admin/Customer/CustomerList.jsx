@@ -9,6 +9,10 @@ const CustomerList = () => {
   var i = 1;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get("/api/v1/user/all-user");
