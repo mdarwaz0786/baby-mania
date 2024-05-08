@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import banner from "../../assets/banner3.jpg";
 import { useAuth } from "../../context/authContext.jsx";
 
@@ -13,6 +13,8 @@ const SingleProduct = () => {
   const [mainImage, setMainImage] = useState('');
   const { productId } = useParams();
   const { validToken } = useAuth();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -72,7 +74,7 @@ const SingleProduct = () => {
       });
 
       alert("item added to cart");
-
+      navigate("/cart");
     } catch (error) {
       console.log('error while creating cart:', error.message);
     }

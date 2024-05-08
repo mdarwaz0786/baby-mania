@@ -120,13 +120,6 @@ const Cart = () => {
       });
 
       if (response.data.success) {
-        setCountry("");
-        setState("");
-        setCity("");
-        setZipCode("");
-        setMobile("");
-        setAddress("");
-        clearCarts(userId);
         alert("order successfull");
       }
     } catch (error) {
