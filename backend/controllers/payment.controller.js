@@ -34,8 +34,8 @@ export const createOrderWithStripe = async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: lineItems,
-      success_url: 'http://localhost:8080/success',
-      cancel_url: 'http://localhost:8080/cancel',
+      success_url: 'https://babymaniaa.onrender.com/success',
+      cancel_url: 'https://babymaniaa.onrender.com/cancel',
     });
 
     const price = carts.reduce((total, product) => {
