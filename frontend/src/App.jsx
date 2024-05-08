@@ -13,6 +13,9 @@ import TopHeader from "./components/Header/TopHeader.jsx";
 import MiddleHeader from "./components/Header/MiddleHeader.jsx";
 import BottomHeader from "./components/Header/BottomHeader.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import Test from "./Test.jsx";
+import Success from "./Success.jsx";
+import Cancel from "./Cancel.jsx";
 
 const App = () => {
 
@@ -22,6 +25,9 @@ const App = () => {
       <MiddleHeader />
       <BottomHeader />
       <Routes>
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+        <Route path="/test" element={<Test />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />

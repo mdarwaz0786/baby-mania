@@ -3,8 +3,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext.jsx";
+import { loadStripe } from '@stripe/stripe-js';
 
 const Cart = () => {
+  const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
   const [carts, setCarts] = useState([]);
   const [userId, setUserId] = useState("");
   const [country, setCountry] = useState("");
@@ -14,10 +16,6 @@ const Cart = () => {
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const { validToken } = useAuth("");
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
 
   const fetchCarts = async () => {
@@ -96,7 +94,7 @@ const Cart = () => {
         })),
         totalPrice,
         status: "Pending",
-        paymentMethod: "Cash on Delivery",
+        paymentMethod: paymentMethod,
         country,
         state,
         city,
@@ -136,6 +134,32 @@ const Cart = () => {
     }
   };
 
+
+  const checkout = async () => {
+    try {
+      const stripe = await loadStripe("pk_test_51PDjRhSJvD4HZxuEg9QMUB9HRiRBBKZjGTvupLKo3tgSzymkbx1kSQ8UFkFSdgP4vG1AkCzfqArEALFjXSRsohKr00oSCHeZMg");
+      const response = await axios.post("/api/v1/order/checkout", { carts, paymentMethod, country, state, city, zipCode, mobile, address }, {
+        headers: {
+          Authorization: validToken,
+        },
+      });
+      const sessionId = response?.data?.sessionId;
+      const result = stripe.redirectToCheckout({ sessionId });
+      if (result.error) {
+        console.log(result.error);
+      }
+    } catch (error) {
+      console.log('Error while creating order:', error.message);
+    }
+  };
+
+  const handleConfirmOrder = () => {
+    if (paymentMethod === "Cash on Delivery") {
+      createOrder();
+    } else if (paymentMethod === "Online Payment") {
+      checkout();
+    }
+  };
 
   return (
     <>
@@ -210,6 +234,38 @@ const Cart = () => {
                     <Link to="/product" className="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i className="w-icon-long-arrow-left" />Continue Shopping</Link>
                     <button type="submit" className="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart" style={{ marginRight: "3rem" }} onClick={() => clearCarts(userId)}>Clear Cart</button>
                   </div>
+
+
+                  <div className="card payment-methods mb-3">
+                    <div className="card-body">
+                      <h5 className="card-title mb-3">Select Payment Method:</h5>
+                      <div className="custom-control custom-radio mb-2">
+                        <input
+                          type="radio"
+                          id="cashOnDelivery"
+                          name="paymentMethod"
+                          value="Cash on Delivery"
+                          className="custom-control-input"
+                          checked={paymentMethod === "Cash on Delivery"}
+                          onChange={() => setPaymentMethod("Cash on Delivery")}
+                        />
+                        <label className="custom-control-label" htmlFor="cashOnDelivery">Cash on Delivery</label>
+                      </div>
+
+                      <div className="custom-control custom-radio">
+                        <input
+                          type="radio"
+                          id="onlinePayment"
+                          name="paymentMethod"
+                          value="Online Payment"
+                          className="custom-control-input"
+                          checked={paymentMethod === "Online Payment"}
+                          onChange={() => setPaymentMethod("Online Payment")}
+                        />
+                        <label className="custom-control-label" htmlFor="onlinePayment">Online Payment</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="col-lg-6 sticky-sidebar-wrapper">
@@ -255,7 +311,7 @@ const Cart = () => {
                         <span className="ls-50">₹{totalPrice}</span>
                       </div>
 
-                      <button className="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout" onClick={createOrder}>
+                      <button className="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout" onClick={handleConfirmOrder}>
                         place order <i className="w-icon-long-arrow-right" />
                       </button>
                     </div>

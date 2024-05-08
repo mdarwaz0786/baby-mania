@@ -1,5 +1,7 @@
 This project is build using MongoDB, Express, React.js, and Node.js.
 
+card = 4000 0035 6000 0008
+
 productId = 66151252d9602eb7b68253d2, 66151273d9602eb7b68253d4
 colorId = 6613c2e918266cb0d7b9008c, 6613c3ee18266cb0d7b9008e
 categoryId = 6613cc0518266cb0d7b90095, 6613cc3618266cb0d7b90097
