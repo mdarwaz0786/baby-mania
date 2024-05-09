@@ -6,23 +6,49 @@ import { Link } from "react-router-dom";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState({});
   var i = 1;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get("/api/v1/order/all-order");
+      setOrders(response?.data?.order);
+      const initialSelectedStatus = {};
+      response?.data?.order?.forEach((order) => {
+        initialSelectedStatus[order?._id] = order?.status;
+      });
+      setSelectedStatus(initialSelectedStatus);
+    } catch (error) {
+      console.log('error while fetching orders:', error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get("/api/v1/order/all-order");
-        setOrders(response?.data?.order);
-      } catch (error) {
-        console.log('error while fetching orders:', error.message);
-      }
-    };
     fetchOrders();
   }, []);
+
+  const handleStatusUpdate = async (orderId) => {
+    try {
+      await axios.put(`/api/v1/order/update-order/${orderId}`, { status: selectedStatus[orderId] });
+      fetchOrders();
+      alert("order status updated");
+    } catch (error) {
+      console.log('Error while updating order status:', error.message);
+    }
+  };
+
+  const handleDeleteOrder = async (orderId) => {
+    try {
+      await axios.delete(`/api/v1/order/delete-order/${orderId}`);
+      fetchOrders();
+    } catch (error) {
+      console.log('Error while deleting order:', error.message);
+    }
+  };
 
   return (
     <>
@@ -61,7 +87,21 @@ const OrderList = () => {
                             <td>{order?.createdAt}</td>
                             <td><Link to="/admin/order-list" className="text-reset">{order?.user?.name}</Link></td>
                             <td><div className="d-flex fs-6"><div className="badge badge-sa-success">{order?.paid}</div></div></td>
-                            <td><div className="d-flex fs-6"><div className="badge badge-sa-danger">{order?.status}</div></div></td>
+                            <td>
+                              <div className="d-flex fs-6">
+                                <div className="d-flex align-items-center">
+                                  <select className="form-select form-select-sm me-2" value={selectedStatus[order?._id] || ''} onChange={(e) => setSelectedStatus({ ...selectedStatus, [order?._id]: e.target.value })}>
+                                    <option selected>{order?.status}</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Processing">Processing</option>
+                                    <option value="Shipped">Shipped</option>
+                                    <option value="Delivered">Delivered</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                  </select>
+                                  <button className="btn btn-primary btn-sm" onClick={() => handleStatusUpdate(order?._id)}>Update</button>
+                                </div>
+                              </div>
+                            </td>
                             <td>{order?.products?.reduce((total, product) => total + product?.quantity, 0)}</td>
                             <td><div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{order?.totalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
 
@@ -75,7 +115,7 @@ const OrderList = () => {
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
                                   <li><Link className="dropdown-item" to={`/admin/order-detail/${order?._id}`}>View</Link></li>
                                   <li><hr className="dropdown-divider" /></li>
-                                  <li><Link className="dropdown-item text-danger" to="#">Delete</Link></li>
+                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => handleDeleteOrder(order?._id)}>Delete</Link></li>
                                 </ul>
                               </div>
                             </td>
@@ -90,7 +130,6 @@ const OrderList = () => {
           </div>
         </div>
       </div>
-
 
       <div className="sa-example__body">
         <nav aria-label="Page navigation example">

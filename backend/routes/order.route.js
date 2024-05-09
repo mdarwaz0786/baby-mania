@@ -15,9 +15,9 @@ router.get("/all-order", fetchAllOrder);
 router.get("/single-order/:id", fetchOrderById);
 
 // update an order by ID
-router.put("/update-order/:id", isLoggedIn, updateOrder);
+router.put("/update-order/:id", updateOrder);
 
 // delete an order by ID
-router.delete("/delete-order/:id", isLoggedIn, deleteOrder);
+router.delete("/delete-order/:id", deleteOrder);
 
 export default router;

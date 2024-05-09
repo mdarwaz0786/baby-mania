@@ -130,6 +130,16 @@ const Cart = () => {
 
   const checkout = async () => {
     try {
+      if (!carts || carts?.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      if (!country || !state || !city || !zipCode || !mobile || !address) {
+        alert('Please enter all address detail.');
+        return;
+      }
+
       const stripe = await loadStripe("pk_test_51PDjRhSJvD4HZxuEg9QMUB9HRiRBBKZjGTvupLKo3tgSzymkbx1kSQ8UFkFSdgP4vG1AkCzfqArEALFjXSRsohKr00oSCHeZMg");
       const response = await axios.post("/api/v1/order/checkout", { carts, paymentMethod, country, state, city, zipCode, mobile, address }, {
         headers: {
@@ -305,7 +315,7 @@ const Cart = () => {
                       </div>
 
                       <button className="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout" onClick={handleConfirmOrder}>
-                        place order <i className="w-icon-long-arrow-right" />
+                        {paymentMethod === "Online Payment" ? "Pay Now" : "Place Order"}  <i className="w-icon-long-arrow-right" />
                       </button>
                     </div>
                   </div>
