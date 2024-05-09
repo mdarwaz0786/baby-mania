@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import Test from "./Test.jsx";
 import Success from "./Success.jsx";
 import Cancel from "./Cancel.jsx";
+import CategoryProduct from "./components/Product/CategoryProduct.jsx";
 
 const App = () => {
 
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/product" element={<ProductPage />}>
           <Route path="" element={<Product />} />
           <Route path="single-product/:productId" element={<SingleProduct />} />
+          <Route path="category-product/:id" element={<CategoryProduct />} />
         </Route>
       </Routes>
       <Footer />

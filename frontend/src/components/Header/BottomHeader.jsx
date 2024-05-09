@@ -51,7 +51,7 @@ const BottomHeader = () => {
                           return (
                             <>
                               <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
-                                <Link to="/product">{category?.name}</Link>
+                                <Link to={`/product/category-product/${category?._id}`}>{category?.name}</Link>
                               </li>
                             </>
                           )
@@ -156,7 +156,7 @@ const BottomHeader = () => {
                     return (
                       <>
                         <li key={category?._id} style={{ textDecoration: "none", listStyle: "none" }} onClick={handleMenuItemClick}>
-                          <Link to="/product">{category?.name}</Link>
+                          <Link to={`/product/category-product/${category?._id}`}>{category?.name}</Link>
                         </li>
                       </>
                     )

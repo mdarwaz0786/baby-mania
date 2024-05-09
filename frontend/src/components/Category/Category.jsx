@@ -30,7 +30,7 @@ const Category = () => {
           <div className="col-6 col-sm-4 col-md-2 category-item" key={category?._id}>
             <div className="d-flex flex-column align-items-center">
               <div className="rounded-circle overflow-hidden" style={{ width: '100px', height: '100px' }}>
-                <Link to="/product">
+                <Link to={`/product/category-product/${category?._id}`}>
                   <img
                     src={category?.image}
                     className="img-fluid"
