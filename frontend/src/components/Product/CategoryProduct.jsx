@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import bannerWomen from "../../assets/banner_women.png";
+import bannerMen from "../../assets/banner_mens.png";
 
 const CategoryProduct = () => {
   const [products, setProducts] = useState([]);
@@ -131,7 +131,7 @@ const CategoryProduct = () => {
     <>
       {/* Start Banner */}
       <div className="container mt-5 mb-5">
-        <img src={bannerWomen} alt="banner-women" />
+        <Link to="/product"><img src={bannerMen} alt="banner-men" style={{ cursor: "pointer" }} /></Link>
       </div>
       {/* End Banner */}
 
