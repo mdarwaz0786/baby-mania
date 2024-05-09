@@ -6,10 +6,6 @@ const Department = () => {
   const [products, setProducts] = useState([]);
   const [activeTab, setActiveTab] = useState('tab1');
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const openTab = (tabId) => {
     setActiveTab(tabId);
   };

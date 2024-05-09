@@ -19,9 +19,6 @@ const Product = () => {
     limit: 6,
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleLinkClick = () => {
     document.body.classList.add('sidebar-active');

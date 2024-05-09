@@ -11,10 +11,6 @@ const OurProduct = () => {
     limit: 6,
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handlePageChange = (page) => {
     setFilters((prevFilters) => ({ ...prevFilters, page }));
   };
