@@ -31,7 +31,6 @@ const CategoryProduct = () => {
 
   const handleFilterChange = (e) => {
     const { name, value, checked } = e.target;
-
     // Update the filter state based on the filter name
     if (name === "category") {
       // Toggle category filter based on checkbox status
@@ -151,7 +150,7 @@ const CategoryProduct = () => {
               <div className="sticky-sidebar">
                 <div className="filter-actions">
                   <label>Filter :</label>
-                  <Link to="/product" className="btn btn-dark btn-link filter-clean">
+                  <Link to="#" className="btn btn-dark btn-link filter-clean">
                     Clean All
                   </Link>
                 </div>
@@ -310,23 +309,23 @@ const CategoryProduct = () => {
                         />
                       </Link>
                       <div className="product-action-horizontal">
-                        <Link to="/product" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
-                        <Link to="/product" className="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist" />
+                        <Link to="#" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
+                        <Link to="#" className="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist" />
                       </div>
                     </figure>
                     <div className="product-details">
                       <div className="product-cat">
-                        <Link to="/product">{product?.category?.name}</Link>
+                        <Link to="#">{product?.category?.name}</Link>
                       </div>
                       <h3 className="product-name">
-                        <Link to="/product">{product?.name}</Link>
+                        <Link to="#">{product?.name}</Link>
                       </h3>
                       <div className="ratings-container">
                         <div className="ratings-full">
                           <span className="ratings" style={{ width: "100%" }} />
                           <span className="tooltiptext tooltip-top" />
                         </div>
-                        <Link to="/product" className="rating-reviews">
+                        <Link to="#" className="rating-reviews">
                           ({product?.rating} reviews)
                         </Link>
                       </div>
