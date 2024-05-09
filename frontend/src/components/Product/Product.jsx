@@ -104,7 +104,7 @@ const Product = () => {
     <>
       {/* Start Banner */}
       <div className="container mt-5 mb-5">
-        <img src={bannerWomen} alt="banner-women" />
+        <Link to="/"><img src={bannerWomen} alt="banner-women" style={{ cursor: "pointer" }} /></Link>
       </div>
       {/* End Banner */}
 

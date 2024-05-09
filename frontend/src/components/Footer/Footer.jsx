@@ -35,7 +35,7 @@ const Footer = () => {
             <div className="row">
               <div className="col-lg-4 col-sm-6">
                 <div className="widget widget-about">
-                  <Link to="/" className="logo-footer"><img src={logo} alt="logo-footer" width={144} height={45} /></Link>
+                  <Link to="/" className="logo-footer" onClick={() => window.scrollTo(0, 0)}><img src={logo} alt="logo-footer" width={144} height={45} /></Link>
                   <div className="widget-body">
                     <p className="widget-about-title">Got Question? Call us 24/7</p>
                     <a href="tel:18005707777" className="widget-about-call">1-800-570-7777</a>
@@ -55,10 +55,10 @@ const Footer = () => {
                 <div className="widget">
                   <h3 className="widget-title">Company</h3>
                   <ul className="widget-body">
-                    <li><Link to="/about-us">About Us</Link></li>
+                    <li><Link to="/about-us" onClick={() => window.scrollTo(0, 0)}>About Us</Link></li>
                     <li><Link to="#">Team Member</Link></li>
                     <li><Link to="#">Career</Link></li>
-                    <li><Link to="/contact-us">Contact Us</Link></li>
+                    <li><Link to="/contact-us" onClick={() => window.scrollTo(0, 0)}>Contact Us</Link></li>
                     <li><Link to="#">Affilate</Link></li>
                     <li><Link to="#">Order History</Link></li>
                   </ul>
@@ -70,10 +70,10 @@ const Footer = () => {
                   <h4 className="widget-title">My Account</h4>
                   <ul className="widget-body">
                     <li><Link to="#">Track My Order</Link></li>
-                    <li><Link to="/cart">View Cart</Link></li>
-                    <li><Link to="/login">Sign In</Link></li>
+                    <li><Link to="/cart" onClick={() => window.scrollTo(0, 0)}>View Cart</Link></li>
+                    <li><Link to="/login" onClick={() => window.scrollTo(0, 0)}>Sign In</Link></li>
                     <li><Link to="#">Help</Link></li>
-                    <li><Link to="/wishlist">My Wishlist</Link></li>
+                    <li><Link to="/wishlist" onClick={() => window.scrollTo(0, 0)}>My Wishlist</Link></li>
                     <li><Link to="#">Privacy Policy</Link></li>
                   </ul>
                 </div>

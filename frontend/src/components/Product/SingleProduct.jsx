@@ -4,13 +4,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import banner from "../../assets/banner3.jpg";
 import { useAuth } from "../../context/authContext.jsx";
 
+
 const SingleProduct = () => {
   const [products, setProducts] = useState({});
+  const [allProducts, setAllProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
   const [mainImage, setMainImage] = useState('');
+  const [categoryId, setCategoryId] = useState();
   const { productId } = useParams();
   const { validToken } = useAuth();
 
@@ -50,12 +53,26 @@ const SingleProduct = () => {
       try {
         const response = await axios.get(`/api/v1/product/single-product/${productId}`);
         setProducts(response?.data?.product);
+        setCategoryId(response?.data?.product?.category?._id);
       } catch (error) {
         console.log('error while fetching products:', error.message);
       }
     };
+
     fetchProducts();
   }, [productId]);
+
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const response = await axios.get("/api/v1/product/all-product");
+        setAllProducts(response?.data?.product);
+      } catch (error) {
+        console.log('error while fetching products:', error.message);
+      }
+    };
+    fetchAllProducts();
+  }, []);
 
   const product = productId;
   const color = selectedColor;
@@ -121,8 +138,6 @@ const SingleProduct = () => {
                     </div>
                   )
                 }
-
-
                 <div className="col-md-6 mb-4 mb-md-6">
                   <div className="product-details" data-sticky-options="{'minWidth': 767}">
                     <h1 className="product-title">{products?.name}</h1>
@@ -237,7 +252,6 @@ const SingleProduct = () => {
               </div>
             </div>
 
-
             <aside className="sidebar product-sidebar sidebar-fixed right-sidebar sticky-sidebar-wrapper">
               <div className="sidebar-overlay" />
               <Link className="sidebar-close" to="#"><i className="close-icon" /></Link>
@@ -301,6 +315,41 @@ const SingleProduct = () => {
               </div>
             </aside>
             {/* End Sidebar */}
+          </div>
+
+          <h3 className="text-center mb-5 mt-10">Related Product</h3>
+
+          <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
+            {
+              allProducts?.filter((product) => product?.category?._id === categoryId).map((product) => (
+                <div className="product-wrap" key={product?._id}>
+                  <div className="product text-center">
+                    <figure className="product-media">
+                      <Link to={`/product/single-product/${product?._id}`} onClick={() => window.scrollTo(0, 0)}>
+                        <img src={product?.items[0]?.image} alt="Product" width={300} height={338} />
+                      </Link>
+                      <div className="product-action-vertical">
+                        <Link to="/" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
+                        <Link to="/" className="btn-product-icon btn-wishlist w-icon-heart" title="Add to wishlist" />
+                      </div>
+                    </figure>
+                    <div className="product-details">
+                      <h4 className="product-name"><Link to="/">{product?.name}</Link></h4>
+                      <div className="ratings-container">
+                        <div className="ratings-full">
+                          <span className="ratings" style={{ width: '60%' }} />
+                          <span className="tooltiptext tooltip-top" />
+                        </div>
+                        <Link to="/" className="rating-reviews">({product?.rating} Reviews)</Link>
+                      </div>
+                      <div className="product-price">
+                        <ins className="new-price">₹{product?.salePrice}</ins>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>
