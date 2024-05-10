@@ -161,7 +161,7 @@ const Product = () => {
                   <h3 className="widget-title"><span>Color</span></h3>
                   <ul className="widget-body filter-items mt-1">
                     {
-                      colors.map((color) => {
+                      colors?.filter((color) => color?.status === "Show").map((color) => {
                         return (
                           <>
                             <li key={color?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>

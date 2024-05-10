@@ -206,21 +206,23 @@ const CategoryProduct = () => {
                     <span>Color</span>
                   </h3>
                   <ul className="widget-body filter-items mt-1">
-                    {colors.map((color) => (
-                      <li
-                        key={color?._id}
-                        style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}
-                      >
-                        <input
-                          type="checkbox"
-                          name="color"
-                          value={color._id}
-                          onChange={handleFilterChange}
-                          checked={filters.color.includes(color._id)}
-                        />
-                        <label>{color?.name}</label>
-                      </li>
-                    ))}
+                    {
+                      colors?.filter((color) => color?.status === "Show").map((color) => (
+                        <li
+                          key={color?._id}
+                          style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}
+                        >
+                          <input
+                            type="checkbox"
+                            name="color"
+                            value={color._id}
+                            onChange={handleFilterChange}
+                            checked={filters.color.includes(color._id)}
+                          />
+                          <label>{color?.name}</label>
+                        </li>
+                      ))
+                    }
                   </ul>
                 </div>
               </div>

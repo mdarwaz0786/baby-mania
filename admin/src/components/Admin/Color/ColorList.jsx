@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import CheckBox from "./Checkbox";
 
 
 const SizeList = () => {
@@ -12,17 +13,36 @@ const SizeList = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fetchColors = async () => {
+    try {
+      const response = await axios.get("/api/v1/color/all-color");
+      setColors(response?.data?.color);
+    } catch (error) {
+      console.log('error while fetching colors:', error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchColors = async () => {
-      try {
-        const response = await axios.get("/api/v1/color/all-color");
-        setColors(response?.data?.color);
-      } catch (error) {
-        console.log('error while fetching colors:', error.message);
-      }
-    };
     fetchColors();
   }, []);
+
+  const deleteColor = async (id) => {
+    try {
+      axios.delete(`/api/v1/color/delete-color/${id}`);
+      fetchColors();
+    } catch (error) {
+      console.log('error while deleting color:', error.message);
+    }
+  };
+
+  const updateColorStatus = async (id, showStatus) => {
+    try {
+      await axios.put(`/api/v1/color/update-color/${id}`, { status: showStatus });
+      fetchColors();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -56,7 +76,7 @@ const SizeList = () => {
                             <td><Link to="#" className="text-reset">{color?.name}</Link></td>
                             <td><span style={{ backgroundColor: color?.colorCode, color: "transparent", borderRadius: "50%", display: "inline-block", width: "2rem", height: "2rem", textAlign: "center" }} />
                             </td>
-                            <td><div className="d-flex fs-6"><div className="badge badge-sa-danger">{color?.status}</div></div></td>
+                            <td><span className="d-flex fs-6"><span className="badge badge-sa-danger">{color?.status}</span><CheckBox updateColorStatus={updateColorStatus} id={color?._id} showStatus={color?.status} /></span></td>
 
                             <td>
                               <div className="dropdown">
@@ -67,9 +87,9 @@ const SizeList = () => {
                                 </button>
 
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
-                                  <li><Link className="dropdown-item" to="#">Edit</Link></li>
+                                  <li><Link className="dropdown-item" to={`/admin/edit-color/${color?._id}`}>Edit</Link></li>
                                   <li><hr className="dropdown-divider" /></li>
-                                  <li><Link className="dropdown-item text-danger" to="#">Delete</Link></li>
+                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteColor(color._id)}>Delete</Link></li>
                                 </ul>
                               </div>
                             </td>

@@ -152,7 +152,7 @@ const BottomHeader = () => {
             <div className="tab-pane" id="categories">
               <ul className="mobile-menu">
                 {
-                  categories.map((category) => {
+                  categories?.map((category) => {
                     return (
                       <>
                         <li key={category?._id} style={{ textDecoration: "none", listStyle: "none" }} onClick={handleMenuItemClick}>
