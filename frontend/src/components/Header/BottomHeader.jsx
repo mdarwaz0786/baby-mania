@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../../context/authContext.jsx";
 
 const BottomHeader = () => {
   const [categories, setCategories] = useState([]);
+  const { isLoggedIn, user } = useAuth();
 
   const handleMenuClose = () => {
     document.body.classList.remove('menu-active');
@@ -16,7 +17,6 @@ const BottomHeader = () => {
       closeIcon.click();
     }
   };
-
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -94,14 +94,6 @@ const BottomHeader = () => {
         <div className="mobile-menu-overlay" />
         <Link className="mobile-menu-close"><i className="close-icon" onClick={handleMenuClose} /></Link>
         <div className="mobile-menu-container scrollable">
-          <form action="#" method="get" className="input-wrapper">
-            <input type="text" className="form-control" name="search" autoComplete="off" placeholder="Search" required />
-            <button className="btn btn-search" type="submit">
-              <i className="w-icon-search" />
-            </button>
-          </form>
-          {/* End of Search Form */}
-
 
           <div className="tab">
             <ul className="nav nav-tabs" role="tablist">
@@ -139,13 +131,24 @@ const BottomHeader = () => {
                   <Link to="/wishlist">Wishlist</Link>
                 </li>
 
-                <li onClick={handleMenuItemClick}>
-                  <Link to="/login">Log in</Link>
-                </li>
-
-                <li onClick={handleMenuItemClick}>
-                  <Link to="/logout">Log Out </Link>
-                </li>
+                {
+                  isLoggedIn ?
+                    (
+                      <>
+                        <li onClick={handleMenuItemClick}>
+                          <Link to="#">{user?.name}</Link>
+                        </li>
+                        <li onClick={handleMenuItemClick}>
+                          <Link to="/logout">Log Out </Link>
+                        </li>
+                      </>
+                    ) :
+                    (
+                      <li onClick={handleMenuItemClick}>
+                        <Link to="/login">Log in</Link>
+                      </li>
+                    )
+                }
               </ul>
             </div>
 

@@ -17,6 +17,7 @@ import Test from "./Test.jsx";
 import Success from "./Success.jsx";
 import Cancel from "./Cancel.jsx";
 import CategoryProduct from "./components/Product/CategoryProduct.jsx";
+import SearchedProduct from "./components/Product/SearchedProduct.jsx";
 
 const App = () => {
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="" element={<Product />} />
           <Route path="single-product/:productId" element={<SingleProduct />} />
           <Route path="category-product/:id" element={<CategoryProduct />} />
+          <Route path="searched-product" element={<SearchedProduct />} />
         </Route>
       </Routes>
       <Footer />

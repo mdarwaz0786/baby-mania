@@ -1,49 +1,37 @@
-import { useEffect, useState } from "react";
+import "../../App.css";
+import { useState } from "react";
 import axios from "axios";
 import logo from "../../assets/header-logo.png";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const MiddleHeader = () => {
-  const [categories, setCategories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get('/api/v1/category/all-category');
-        setCategories(response.data.category);
-      } catch (error) {
-        console.error('error while fetching categories:', error.message);
-      }
-    };
-    fetchCategories();
-  }, []);
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`/api/v1/product/all-product?search=${searchQuery}`);
+      navigate("/product/searched-product", { state: { products: response.data.product } });
+    } catch (error) {
+      console.error('Error while searching:', error.message);
+    }
+  };
 
   return (
     <header className="header">
       <div className="header-middle">
         <div className="container">
           <div className="header-left mr-md-4">
-            <Link to="/" className="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle"></Link>
+            <Link to="/" className="mobile-menu-toggle w-icon-hamburger" aria-label="menu-toggle"></Link>
             <Link to="/" className="logo ml-lg-0"><img src={logo} alt="logo" width={144} height={45} /></Link>
-            <form method="get" action="#" className="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
-              <div className="select-box">
-                <select id="category" name="category">
-                  <option value="">All Categories</option>
-                  {
-                    categories.map((category) => {
-                      return (
-                        <>
-                          <option value={category.name} key={category._id}>{category.name}</option>
-                        </>
-                      )
-                    })
-                  }
-                </select>
-              </div>
-              <input type="text" className="form-control" name="search" id="search" placeholder="Search product" required />
-              <button className="btn btn-search" type="submit"><i className="w-icon-search" />
-              </button>
+            <form onSubmit={handleSearchSubmit} className="header-search hs-expanded hs-round d-md-flex input-wrapper">
+              <input style={{ borderLeft: "2px solid #336699", }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={handleSearchChange} required />
+              <button className="btn btn-search" type="submit"><i className="w-icon-search" /></button>
             </form>
           </div>
 

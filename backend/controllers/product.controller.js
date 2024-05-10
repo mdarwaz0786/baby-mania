@@ -112,7 +112,6 @@ export const fetchAllProduct = async (req, res) => {
       filter.name = { $regex: new RegExp(req.query.search, 'i') };
     };
 
-
     // Handle sorting
     if (req.query.sort === 'price-high-to-low') {
       sort = { salePrice: -1 }; // Sort by descending price

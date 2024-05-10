@@ -26,7 +26,7 @@ const Department = () => {
 
   return (
     <>
-      <h3 className='text-center mt-10 mb-4' style={{ paddingTop: "4rem" }}>Popular Department</h3>
+      <h3 className='text-center mt-5 mb-5' style={{ paddingTop: "2rem" }}>Popular Department</h3>
       <div className="container">
         <div className="nav nav-tabs justify-content-center mb-1" style={{ borderBottom: "none", paddingBottom: "1rem" }}>
           <li className="nav-item mr-2 mb-2">
