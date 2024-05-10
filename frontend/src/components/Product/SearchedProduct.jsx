@@ -1,9 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 import bannerWomen from "../../assets/banner_women.png";
+import { useEffect } from "react";
 
 const SearchedProduct = () => {
   const location = useLocation();
   const { products } = location.state || [];
+
+  useEffect(() => {
+    const handleScrollToBottom = () => {
+      window.scrollTo(0, window.innerHeight * 0.7);
+    };
+    handleScrollToBottom();
+  }, []);
 
   return (
     <>

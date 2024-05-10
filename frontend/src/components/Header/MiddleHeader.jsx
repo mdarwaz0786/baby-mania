@@ -31,7 +31,7 @@ const MiddleHeader = () => {
             <Link to="/" className="logo ml-lg-0"><img src={logo} alt="logo" width={144} height={45} /></Link>
             <form onSubmit={handleSearchSubmit} className="header-search hs-expanded hs-round d-md-flex input-wrapper">
               <input style={{ borderLeft: "2px solid #336699", }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={handleSearchChange} required />
-              <button className="btn btn-search" type="submit"><i className="w-icon-search" /></button>
+              <button className="btn btn-search" type="submit"><i className="w-icon-search" onClick={() => window.scrollTo(0, window.innerHeight * 0.7)} /></button>
             </form>
           </div>
 
