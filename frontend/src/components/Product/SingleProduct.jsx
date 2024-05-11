@@ -15,7 +15,7 @@ const SingleProduct = () => {
   const [mainImage, setMainImage] = useState('');
   const [categoryId, setCategoryId] = useState();
   const { productId } = useParams();
-  const { validToken, user } = useAuth();
+  const { validToken, isLoggedIn } = useAuth();
 
   const navigate = useNavigate();
 
@@ -85,7 +85,7 @@ const SingleProduct = () => {
         return;
       }
 
-      if (!user) {
+      if (!isLoggedIn) {
         alert('you are not logged in.');
         return;
       }

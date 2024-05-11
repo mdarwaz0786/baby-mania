@@ -12,6 +12,10 @@ const MiddleHeader = () => {
     if (window.innerWidth > 768) {
       window.scrollTo(0, window.innerHeight * 0.7);
     }
+
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, window.innerHeight * 0.01);
+    }
   };
 
   const handleSearchChange = (e) => {
