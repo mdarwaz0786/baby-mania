@@ -15,7 +15,7 @@ const SingleProduct = () => {
   const [mainImage, setMainImage] = useState('');
   const [categoryId, setCategoryId] = useState();
   const { productId } = useParams();
-  const { validToken } = useAuth();
+  const { validToken, user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -81,9 +81,15 @@ const SingleProduct = () => {
   const createCart = async () => {
     try {
       if (!selectedColor || !selectedSize) {
-        alert('Please select color and size.');
+        alert('select color and size.');
         return;
       }
+
+      if (!user) {
+        alert('you are not logged in.');
+        return;
+      }
+
       await axios.post("/api/v1/cart/create-user-cart", { product, color, size, quantity }, {
         headers: {
           Authorization: validToken,
