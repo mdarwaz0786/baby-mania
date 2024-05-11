@@ -44,7 +44,7 @@ const OrderList = () => {
     }
   };
 
-  const filteredOrders = orders.filter(order => {
+  const filteredOrders = orders.filter((order) => {
     if (filterStatus === null) return true; // Show all orders if no filter is applied
     return order.status === filterStatus;
   });
@@ -54,18 +54,18 @@ const OrderList = () => {
       <div id="top" className="sa-app__body">
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
           <div className="container">
-            <h4 className="text-center mt-5 mb-3">Orders</h4>
+            <h4 className="text-center mt-3 mb-3">Orders</h4>
 
             <div className="container">
               <div className="p-4">
                 <input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" />
-                <div>
-                  <button className="btn btn-primary mx-2" onClick={() => setFilterStatus("Pending")}>Pending</button>
-                  <button className="btn btn-primary mx-2" onClick={() => setFilterStatus("Processing")}>Processing</button>
-                  <button className="btn btn-primary mx-2" onClick={() => setFilterStatus("Shipped")}>Shipped</button>
-                  <button className="btn btn-primary mx-2" onClick={() => setFilterStatus("Delivered")}>Delivered</button>
-                  <button className="btn btn-primary mx-2" onClick={() => setFilterStatus("Cancelled")}>Cancelled</button>
-                  <button className="btn btn-secondary mx-2" onClick={() => setFilterStatus(null)}>Clear Filter</button>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: "1rem" }}>
+                  <button style={{ margin: '0 10px 10px 0' }} className="btn btn-primary" onClick={() => setFilterStatus("Pending")}>Pending</button>
+                  <button style={{ margin: '0 10px 10px 0' }} className="btn btn-primary" onClick={() => setFilterStatus("Processing")}>Processing</button>
+                  <button style={{ margin: '0 10px 10px 0' }} className="btn btn-primary" onClick={() => setFilterStatus("Shipped")}>Shipped</button>
+                  <button style={{ margin: '0 10px 10px 0' }} className="btn btn-primary" onClick={() => setFilterStatus("Delivered")}>Delivered</button>
+                  <button style={{ margin: '0 10px 10px 0' }} className="btn btn-primary" onClick={() => setFilterStatus("Cancelled")}>Cancelled</button>
+                  <button style={{ margin: '0 10px 10px 0' }} className="btn btn-secondary" onClick={() => setFilterStatus(null)}>Clear Filter</button>
                 </div>
               </div>
               <table className="table table-bordered table-striped" data-sa-search-input="#table-search">
@@ -134,6 +134,18 @@ const OrderList = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="sa-example__body">
+        <nav aria-label="Page navigation example">
+          <ul className="pagination pagination-sm">
+            <li className="page-item disabled"><a className="page-link" tabIndex={-1} aria-disabled="true">Previous</a></li>
+            <li className="page-item"><a className="page-link" href="#">1</a></li>
+            <li className="page-item active" aria-current="page"><a className="page-link" href="#">2</a></li>
+            <li className="page-item"><a className="page-link" href="#">3</a></li>
+            <li className="page-item"><a className="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
       </div>
     </>
   );
