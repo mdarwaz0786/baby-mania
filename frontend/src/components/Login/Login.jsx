@@ -24,6 +24,7 @@ const Login = () => {
         setMobile("");
         setPassword("");
         navigate('/');
+        window.location.reload();
       } else {
         setMessage(response.data.message);
       }
@@ -48,6 +49,7 @@ const Login = () => {
         setEmail("");
         setPassword("");
         navigate('/');
+        window.location.reload();
       } else {
         setMessage(response.data.message);
       }

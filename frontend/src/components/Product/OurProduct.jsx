@@ -8,7 +8,7 @@ const OurProduct = () => {
   const [filters, setFilters] = useState({
     sort: "relevance",
     page: 1,
-    limit: 6,
+    limit: 12,
   });
 
   const handlePageChange = (page) => {
