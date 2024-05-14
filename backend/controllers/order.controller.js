@@ -17,7 +17,7 @@ export const createOrder = async (req, res) => {
 // controller for fetching all orders
 export const fetchAllOrder = async (req, res) => {
   try {
-    const order = await Order.find().populate("user").populate("products.product").populate("products.color").populate("products.size").sort({ createdAt: -1 });;
+    const order = await Order.find().populate("user").populate("products.product").populate("products.color").populate("products.size").sort({ createdAt: -1 });
     return res.status(200).json({ success: true, message: "order fetched successfully", order });
   } catch (error) {
     console.log("error while fetching order:", error.message);

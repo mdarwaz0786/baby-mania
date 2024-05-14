@@ -7,6 +7,9 @@ export const createCategory = async (req, res) => {
   try {
     const { path } = req.file;
     const result = await cloudinary.uploader.upload(path);
+    const subcategories = req.body.subcategories.map((subcategory) => ({
+      name: subcategory.name,
+    }));
     const category = new Category(
       {
         name: req.body.name,
@@ -16,6 +19,7 @@ export const createCategory = async (req, res) => {
         showHeader: req.body.showHeader,
         shopByCategory: req.body.shopByCategory,
         ourCategory: req.body.ourCategory,
+        subcategories: subcategories,
       },
     );
     await category.save();
@@ -75,6 +79,7 @@ export const updateCategory = async (req, res) => {
       showHeader: req.body.showHeader || category.showHeader,
       shopByCategory: req.body.shopByCategory || category.shopByCategory,
       ourCategory: req.body.ourCategory || category.ourCategory,
+      subcategories: req.body.subcategories || category.subcategories,
     };
     category = await Category.findByIdAndUpdate(req.params.id, data, { new: true });
     if (!category) {

@@ -93,6 +93,7 @@ server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dis
 server.get("/product", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product/single-product/:productId", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product/category-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/product/sub-category-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product/searched-product", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/contact-us", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/about-us", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });

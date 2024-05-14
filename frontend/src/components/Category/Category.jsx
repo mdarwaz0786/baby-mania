@@ -23,9 +23,9 @@ const Category = () => {
       <h3 className="text-center mt-5 mb-5">Our Category</h3>
       <div className="row category-container">
         {categories.map((category) => (
-          <div className="col-6 col-sm-4 col-md-2 category-item" key={category?._id}>
+          <div className="col-lg-2 col-sm-4 col-md-2 category-item" key={category?._id}>
             <div className="d-flex flex-column align-items-center">
-              <div className="rounded-circle overflow-hidden" style={{ width: '100px', height: '100px' }}>
+              <div className="rounded-circle overflow-hidden category-item-img" style={{ width: '100px', height: '100px' }}>
                 <Link to={`/product/category-product/${category?._id}`}>
                   <img
                     src={category?.image}

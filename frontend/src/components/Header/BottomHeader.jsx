@@ -45,15 +45,30 @@ const BottomHeader = () => {
                   </Link>
 
                   <div className="dropdown-box">
-                    <ul className="vertical-menu category-menu">
+                    <ul className="menu vertical-menu category-menu">
                       {
-                        categories.map((category) => {
+                        categories?.map((category) => {
                           return (
-                            <>
-                              <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
-                                <Link to={`/product/category-product/${category?._id}`}>{category?.name}</Link>
-                              </li>
-                            </>
+                            <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
+                              <Link to={`/product/category-product/${category?._id}`}>{category?.name}</Link>
+                              {
+                                category?.subcategories && category?.subcategories?.length > 0 && (
+                                  <ul className="megamenu">
+                                    <li>
+                                      <ul>
+                                        {
+                                          category?.subcategories?.map((subcategory) => (
+                                            <li key={subcategory?._id}>
+                                              <Link to={`/product/sub-category-product/${subcategory?._id}`}>{subcategory?.name}</Link>
+                                            </li>
+                                          ))
+                                        }
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                )
+                              }
+                            </li>
                           )
                         })
                       }

@@ -1,4 +1,5 @@
 import Product from "../models/product.model.js";
+import Category from "../models/category.model.js";
 import fs from "fs";
 import cloudinary from "../utils/cloudinary.js";
 
@@ -8,6 +9,7 @@ export const createProduct = async (req, res) => {
     // Destructure product details from request body
     const {
       category,
+      subcategory,
       name,
       rating,
       skuCode,
@@ -46,6 +48,7 @@ export const createProduct = async (req, res) => {
     // Create product object with image URLs, Cloudinary IDs, and other details
     const product = new Product({
       category,
+      subcategory,
       name,
       rating,
       skuCode,
@@ -80,7 +83,7 @@ export const createProduct = async (req, res) => {
     return res.status(201).json({ success: true, message: "Product created successfully", product });
   } catch (error) {
     // Handle error if any
-    console.log("Error while creating product:", error.message);
+    console.log("Error while creating product error from controller:", error.message);
     return res.status(500).json({ success: false, message: "Error while creating product" });
   };
 };
@@ -95,6 +98,11 @@ export const fetchAllProduct = async (req, res) => {
     // Handle category filter
     if (req.query.category) {
       filter.category = req.query.category;
+    };
+
+    // Handle subcategory filter
+    if (req.query.subcategory) {
+      filter.subcategory = req.query.subcategory;
     };
 
     // Handle color filter
@@ -128,8 +136,8 @@ export const fetchAllProduct = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
-    // Query products based on filter criteria, apply sorting, pagination, and populate related fields (category, items.color, items.size)
-    const product = await Product.find(filter).sort(sort).skip(skip).limit(limit).populate('category').populate('items.color').populate('items.size').exec();
+    // Query products based on filter criteria, apply sorting, pagination, and populate related fields (category, subcategory, items.color, items.size)
+    const product = await Product.find(filter).sort(sort).skip(skip).limit(limit).populate('category').populate('subcategory').populate('items.color').populate('items.size').exec();
 
     // Get total count of products for pagination
     const totalCount = await Product.countDocuments(filter);
@@ -144,7 +152,6 @@ export const fetchAllProduct = async (req, res) => {
 };
 
 
-
 // Controller to fetch a single product by ID
 export const fetchSingleProduct = async (req, res) => {
   try {
@@ -152,7 +159,7 @@ export const fetchSingleProduct = async (req, res) => {
     const productId = req.params.id;
 
     // Find the product by ID and populate related fields (category, items.color, items.size)
-    const product = await Product.findById(productId).populate('category').populate('items.color').populate('items.size').exec();
+    const product = await Product.findById(productId).populate('category').populate('subcategory').populate('items.color').populate('items.size').exec();
 
     // Check if the product exists
     if (!product) {
@@ -163,7 +170,7 @@ export const fetchSingleProduct = async (req, res) => {
     return res.status(200).json({ success: true, message: "Single product fetched successfully", product });
   } catch (error) {
     // Handle error if any
-    console.error("Error while fetching single product:", error.message);
+    console.error("Error while fetching single product error from controller:", error.message);
     return res.status(500).json({ success: false, message: "Error while fetching single product" });
   };
 };
@@ -176,7 +183,7 @@ export const updateProduct = async (req, res) => {
     const productId = req.params.id;
 
     // Destructure updated product details from the request body
-    const { category, name, rating, skuCode, mrpPrice, salePrice, availability, status, featuredProduct, latestProduct, bestSellingProduct, specialProduct, newProduct, smallInfo, description } = req.body;
+    const { category, subcategory, name, rating, skuCode, mrpPrice, salePrice, availability, status, featuredProduct, latestProduct, bestSellingProduct, specialProduct, newProduct, smallInfo, description } = req.body;
 
     // Map uploaded files to an array of image objects
     const images = req.files.map((file) => ({
@@ -206,6 +213,7 @@ export const updateProduct = async (req, res) => {
 
     // Update product fields
     product.category = category;
+    product.subcategory = subcategory;
     product.name = name;
     product.rating = rating;
     product.skuCode = skuCode;
@@ -267,7 +275,7 @@ export const deleteProduct = async (req, res) => {
     return res.status(200).json({ success: true, message: "Product deleted successfully" });
   } catch (error) {
     // Handle error if any
-    console.log("Error while deleting product:", error.message);
+    console.log("Error while deleting product error from controller:", error.message);
     return res.status(500).json({ success: false, message: "Error while deleting product" });
   };
 };

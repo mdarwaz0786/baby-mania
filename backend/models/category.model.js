@@ -22,7 +22,14 @@ const categorySchema = new mongoose.Schema(
     },
     ourCategory: {
       type: String,
-    }
+    },
+    subcategories: [
+      {
+        name: {
+          type: String,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -40,3 +40,10 @@
     display: flex;
   }
 }
+
+
+@media (min-width: 768px) {
+  .category-item-img {
+    margin-top: 2rem;
+  }
+}

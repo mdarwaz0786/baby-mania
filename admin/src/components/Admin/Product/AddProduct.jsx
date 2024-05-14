@@ -21,6 +21,7 @@ const AddProduct = () => {
   const [smallInfo, setSmallInfo] = useState("");
   const [description, setDescription] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [image1, setImage1] = useState(null);
   const [selectedColor1, setSelectedColor1] = useState("");
   const [selectedSize1, setSelectedSize1] = useState("");
@@ -30,6 +31,9 @@ const AddProduct = () => {
   const [image3, setImage3] = useState(null);
   const [selectedColor3, setSelectedColor3] = useState("");
   const [selectedSize3, setSelectedSize3] = useState("");
+  const [image4, setImage4] = useState(null);
+  const [selectedColor4, setSelectedColor4] = useState("");
+  const [selectedSize4, setSelectedSize4] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -79,6 +83,7 @@ const AddProduct = () => {
     try {
       const formData = new FormData();
       formData.append('category', selectedCategory);
+      formData.append('subcategory', selectedSubCategory);
       formData.append('name', name);
       formData.append('rating', rating);
       formData.append('skuCode', skuCode);
@@ -102,6 +107,9 @@ const AddProduct = () => {
       formData.append('image', image3);
       formData.append('color', selectedColor3);
       formData.append('size', selectedSize3);
+      formData.append('image', image4);
+      formData.append('color', selectedColor4);
+      formData.append('size', selectedSize4);
 
       const response = await axios.post("/api/v1/product/create-product", formData, {
         headers: {
@@ -118,7 +126,6 @@ const AddProduct = () => {
       console.log("error while creating product error from frontend:", error.message);
     }
   };
-
 
 
   return (
@@ -140,6 +147,18 @@ const AddProduct = () => {
             </div>
 
             <div className="col mb-5">
+              <label htmlFor="subcategory" className="form-label">Sub Category</label>
+              <select className="form-select" aria-label="subcategory" name="subcategory" id="subcategory" value={selectedSubCategory} onChange={(e) => setSelectedSubCategory(e.target.value)}>
+                <option value="" disabled>-- Select SubCategory --</option>
+                {
+                  category?.find((category) => category?._id === selectedCategory)?.subcategories?.map((subcategory) => (
+                    <option key={subcategory?._id} value={subcategory?._id}>{subcategory?.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            <div className="col mb-5">
               <label htmlFor="name" className="form-label">Name</label>
               <input type="text" className="form-control" placeholder="Name" aria-label="Name" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
@@ -147,11 +166,6 @@ const AddProduct = () => {
             <div className="col mb-5">
               <label htmlFor="rating" className="form-label">Rating</label>
               <input type="number" className="form-control" placeholder="Rating" aria-label="Rating" name="rating" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="skuCode" className="form-label">SKU Code</label>
-              <input type="text" className="form-control" placeholder="SKU Code" aria-label="SKU Code" name="skuCode" id="skuCode" value={skuCode} onChange={(e) => setSkuCode(e.target.value)} />
             </div>
           </div>
 
@@ -170,6 +184,11 @@ const AddProduct = () => {
             <div className="col mb-5">
               <label htmlFor="availability" className="form-label">Availability</label>
               <input type="number" className="form-control" placeholder="Availability" aria-label="Availability" name="availability" id="availability" value={availability} onChange={(e) => setAvailability(e.target.value)} />
+            </div>
+
+            <div className="col mb-5">
+              <label htmlFor="skuCode" className="form-label">SKU Code</label>
+              <input type="text" className="form-control" placeholder="SKU Code" aria-label="SKU Code" name="skuCode" id="skuCode" value={skuCode} onChange={(e) => setSkuCode(e.target.value)} />
             </div>
           </div>
 
@@ -346,6 +365,38 @@ const AddProduct = () => {
             </div>
           </div>
 
+          {/* image 4 */}
+          <div className="row g-5">
+            <div className="col mb-5">
+              <label htmlFor="image" className="form-label">Image</label>
+              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage4(e.target.files[0])} />
+            </div>
+
+            <div className="col mb-5">
+              <label htmlFor="color" className="form-label">Color</label>
+              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor4} onChange={(e) => setSelectedColor4(e.target.value)}>
+                <option value="" disabled>-- Select Category --</option>
+                {
+                  color?.map((color) => (
+                    <option key={color?._id} value={color?._id}>{color?.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            <div className="col mb-5">
+              <label htmlFor="size" className="form-label">Size</label>
+              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize4} onChange={(e) => setSelectedSize4(e.target.value)}>
+                <option value="" disabled>-- Select Category --</option>
+                {
+                  size?.map((size) => (
+                    <option key={size?._id} value={size?._id}>{size?.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+          </div>
+
           <div className="text-center mt-4">
             <button type="submit" className="btn btn-primary">Submit</button>
           </div>
@@ -356,3 +407,4 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+

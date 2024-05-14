@@ -11,14 +11,13 @@ const Product = () => {
   const [totalProduct, setTotalProduct] = useState();
   const [filters, setFilters] = useState({
     category: '',
+    subcategory: '',
     color: '',
     size: '',
-    search: '',
     sort: 'relevance',
     page: 1,
     limit: 6,
   });
-
 
   const handleLinkClick = () => {
     document.body.classList.add('sidebar-active');
@@ -27,8 +26,7 @@ const Product = () => {
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: prevFilters[name].includes(value)
+      ...prevFilters, [name]: prevFilters[name].includes(value)
         ? prevFilters[name].filter((item) => item !== value) // Remove if already checked
         : [...prevFilters[name], value] // Add if not checked
     }));
@@ -40,18 +38,12 @@ const Product = () => {
 
   const handlePageLimitChange = (e) => {
     const newLimit = parseInt(e.target.value);
-    setFilters(prevFilters => ({
-      ...prevFilters,
-      limit: newLimit
-    }));
+    setFilters(prevFilters => ({ ...prevFilters, limit: newLimit }));
   };
 
   const handleSortChange = (e) => {
     const newSort = e.target.value;
-    setFilters(prevFilters => ({
-      ...prevFilters,
-      sort: newSort
-    }));
+    setFilters(prevFilters => ({ ...prevFilters, sort: newSort }));
   };
 
 
@@ -135,6 +127,22 @@ const Product = () => {
                           </>
                         )
                       })
+                    }
+                  </ul>
+                </div>
+
+                <div className="widget widget-collapsible">
+                  <h3 className="widget-title"><span>Sub Categories</span></h3>
+                  <ul className="widget-body filter-items search-ul">
+                    {
+                      categories.map((category) =>
+                        category?.subcategories?.map((subcategory) => (
+                          <li key={subcategory?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem", }} >
+                            <input type="checkbox" name="subcategory" value={subcategory?._id} onChange={handleFilterChange} checked={filters.subcategory.includes(subcategory._id)} />
+                            <label>{subcategory?.name}</label>
+                          </li>
+                        ))
+                      )
                     }
                   </ul>
                 </div>
@@ -292,4 +300,3 @@ const Product = () => {
 };
 
 export default Product;
-

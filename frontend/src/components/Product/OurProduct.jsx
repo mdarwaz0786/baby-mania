@@ -9,7 +9,7 @@ const OurProduct = () => {
   const [filters, setFilters] = useState({
     sort: "relevance",
     page: 1,
-    limit: 12,
+    limit: 10,
   });
 
   const handlePageChange = (page) => {

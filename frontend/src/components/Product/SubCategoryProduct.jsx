@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import bannerMen from "../../assets/banner_mens.png";
 
-const CategoryProduct = () => {
+const SubCategoryProduct = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sizes, setSizes] = useState([]);
@@ -12,8 +12,8 @@ const CategoryProduct = () => {
   const { id } = useParams();
 
   const [filters, setFilters] = useState({
-    category: id,
-    subcategory: "",
+    category: "",
+    subcategory: id,
     color: "",
     size: "",
     search: "",
@@ -33,19 +33,20 @@ const CategoryProduct = () => {
   const handleFilterChange = (e) => {
     const { name, value, checked } = e.target;
     // Update the filter state based on the filter name
-    if (name === "category") {
-      // Toggle category filter based on checkbox status
-      setFilters((prevFilters) => ({ ...prevFilters, category: checked ? value : "" }));
-    } else if (name === "size" || name === "color" || name === "subcategory") {
-      // If size, color or subcategory filter is checked, update the corresponding filter state
+    if (name === "subcategory") {
+      // Toggle subcategory filter based on checkbox status
+      setFilters((prevFilters) => ({ ...prevFilters, subcategory: checked ? value : "" }));
+    } else if (name === "size" || name === "color" || name === "category") {
+      // If size, color or category filter is checked, update the corresponding filter state
       if (checked) {
         setFilters((prevFilters) => ({ ...prevFilters, [name]: [...prevFilters[name], value] }));
       } else {
-        // If size, color or subcategory filter is unchecked, remove the value from the filter state
+        // If size, color or category filter is unchecked, remove the value from the filter state
         setFilters((prevFilters) => ({ ...prevFilters, [name]: prevFilters[name].filter((item) => item !== value) }));
       }
     }
   };
+
 
   const handlePageChange = (page) => {
     setFilters((prevFilters) => ({ ...prevFilters, page }));
@@ -65,7 +66,7 @@ const CategoryProduct = () => {
     const fetchProducts = async () => {
       try {
         // Check if a category is selected
-        if (filters.category) {
+        if (filters.subcategory) {
           const response = await axios.get("/api/v1/product/all-product", { params: filters });
           setProducts(response?.data?.product);
           setTotalProduct(response?.data?.totalCount);
@@ -144,21 +145,23 @@ const CategoryProduct = () => {
                     <span>All Categories</span>
                   </h3>
                   <ul className="widget-body filter-items search-ul">
-                    {categories.map((category) => (
-                      <li
-                        key={category?._id}
-                        style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}
-                      >
-                        <input
-                          type="checkbox"
-                          name="category"
-                          value={category._id}
-                          onChange={handleFilterChange}
-                          checked={filters.category === category._id}
-                        />
-                        <label>{category?.name}</label>
-                      </li>
-                    ))}
+                    {
+                      categories.map((category) => (
+                        <li
+                          key={category?._id}
+                          style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}
+                        >
+                          <input
+                            type="checkbox"
+                            name="category"
+                            value={category?._id}
+                            onChange={handleFilterChange}
+                            checked={filters.category.includes(category?._id)}
+                          />
+                          <label>{category?.name}</label>
+                        </li>
+                      ))
+                    }
                   </ul>
                 </div>
 
@@ -166,10 +169,10 @@ const CategoryProduct = () => {
                   <h3 className="widget-title"><span>Sub Categories</span></h3>
                   <ul className="widget-body filter-items search-ul">
                     {
-                      categories.map((category) =>
+                      categories?.map((category) =>
                         category?.subcategories?.map((subcategory) => (
                           <li key={subcategory?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem", }} >
-                            <input type="checkbox" name="subcategory" value={subcategory?._id} onChange={handleFilterChange} checked={filters.subcategory.includes(subcategory._id)} />
+                            <input type="checkbox" name="subcategory" value={subcategory?._id} onChange={handleFilterChange} checked={filters.subcategory === subcategory?._id} />
                             <label>{subcategory?.name}</label>
                           </li>
                         ))
@@ -383,4 +386,4 @@ const CategoryProduct = () => {
   );
 };
 
-export default CategoryProduct;
+export default SubCategoryProduct;

@@ -9,10 +9,27 @@ const AddCategory = () => {
   const [showHeader, setShowHeader] = useState("");
   const [shopByCategory, setShopByCategory] = useState("");
   const [ourCategory, setOurCategory] = useState("");
+  const [subcategories, setSubcategories] = useState([{ name: '' }]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleSubcategoryChange = (index, value) => {
+    const newSubcategories = [...subcategories];
+    newSubcategories[index].name = value;
+    setSubcategories(newSubcategories);
+  };
+
+  const handleAddSubcategory = () => {
+    setSubcategories([...subcategories, { name: '' }]);
+  };
+
+  const handleRemoveSubcategory = index => {
+    const newSubcategories = [...subcategories];
+    newSubcategories.splice(index, 1);
+    setSubcategories(newSubcategories);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,13 +41,15 @@ const AddCategory = () => {
       formData.append('shopByCategory', shopByCategory);
       formData.append('ourCategory', ourCategory);
       formData.append('image', image);
+      subcategories.forEach((subcategory, index) => {
+        formData.append(`subcategories[${index}][name]`, subcategory.name);
+      });
 
       const response = await axios.post("/api/v1/category/create-category", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      }
-      );
+      });
 
       if (response?.data?.success) {
         setName("");
@@ -39,15 +58,15 @@ const AddCategory = () => {
         setShowHeader("");
         setShopByCategory("");
         setOurCategory("");
-        alert("category added");
+        setSubcategories([{ name: '' }]);
+        alert("Category added");
       } else {
         console.log(response?.data?.message);
       }
     } catch (error) {
-      console.log("error while adding category:", error.message);
+      console.log("Error while adding category:", error.message);
     }
   };
-
 
   return (
     <div className="container" style={{ marginTop: "2rem" }}>
@@ -104,6 +123,27 @@ const AddCategory = () => {
                 <option value="Hide">Hide</option>
               </select>
             </div>
+          </div>
+
+          {
+            subcategories.map((subcategory, index) => (
+              <div className="row g-5" key={index}>
+                <div className="col mb-5">
+                  <label htmlFor={`subcategory-${index}`} className="form-label">Subcategory {index + 1}</label>
+                  <input type="text" className="form-control" placeholder={`Subcategory ${index + 1}`} aria-label={`Subcategory ${index + 1}`} value={subcategory.name} onChange={(e) => handleSubcategoryChange(index, e.target.value)} />
+                </div>
+                {
+                  index > 0 && (
+                    <div className="col mb-5 align-self-end">
+                      <button type="button" className="btn btn-danger" onClick={() => handleRemoveSubcategory(index)}>Remove Subcategory</button>
+                    </div>
+                  )
+                }
+              </div>
+            ))
+          }
+          <div className="text-center mt-1">
+            <button type="button" className="btn btn-secondary" onClick={handleAddSubcategory}>Add Subcategory</button>
           </div>
 
           <div className="text-center mt-4">
