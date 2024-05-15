@@ -1,51 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import bannerWomen from "../../assets/banner_women.png";
 
 const Product = () => {
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [totalProduct, setTotalProduct] = useState();
   const [filters, setFilters] = useState({
-    category: '',
-    subcategory: '',
-    color: '',
-    size: '',
+    category: [],
+    subcategory: [],
+    color: [],
+    size: [],
+    search: '',
     sort: 'relevance',
     page: 1,
     limit: 6,
   });
 
-  const handleLinkClick = () => {
-    document.body.classList.add('sidebar-active');
-  };
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
+  useEffect(() => {
+    const { categoryId, subcategoryId, search } = location.state || {};
     setFilters((prevFilters) => ({
-      ...prevFilters, [name]: prevFilters[name].includes(value)
-        ? prevFilters[name].filter((item) => item !== value) // Remove if already checked
-        : [...prevFilters[name], value] // Add if not checked
+      ...prevFilters,
+      category: categoryId ? [categoryId] : [],
+      subcategory: subcategoryId ? [subcategoryId] : [],
+      search: search || '',
+      sort: 'relevance',
+      page: 1,
+      limit: 6,
     }));
-  };
-
-  const handlePageChange = (page) => {
-    setFilters((prevFilters) => ({ ...prevFilters, page }));
-  };
-
-  const handlePageLimitChange = (e) => {
-    const newLimit = parseInt(e.target.value);
-    setFilters(prevFilters => ({ ...prevFilters, limit: newLimit }));
-  };
-
-  const handleSortChange = (e) => {
-    const newSort = e.target.value;
-    setFilters(prevFilters => ({ ...prevFilters, sort: newSort }));
-  };
-
+  }, [location.state]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -58,6 +46,60 @@ const Product = () => {
       }
     };
 
+    fetchProducts();
+  }, [filters]);
+
+  const handleLinkClick = () => {
+    document.body.classList.add('sidebar-active');
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value, checked } = e.target;
+
+    if (name === 'size' || name === 'color') {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: checked
+          ? [...prevFilters[name], value]
+          : prevFilters[name].filter((item) => item !== value),
+      }));
+    } else if (name === 'category') {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        category: checked
+          ? [...prevFilters.category, value]
+          : prevFilters.category.filter((item) => item !== value),
+      }));
+    } else if (name === 'subcategory') {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        subcategory: checked
+          ? [...prevFilters.subcategory, value]
+          : prevFilters.subcategory.filter((item) => item !== value),
+      }));
+    } else {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handlePageChange = (page) => {
+    setFilters((prevFilters) => ({ ...prevFilters, page }));
+  };
+
+  const handlePageLimitChange = (e) => {
+    const newLimit = parseInt(e.target.value);
+    setFilters((prevFilters) => ({ ...prevFilters, limit: newLimit }));
+  };
+
+  const handleSortChange = (e) => {
+    const newSort = e.target.value;
+    setFilters((prevFilters) => ({ ...prevFilters, sort: newSort }));
+  };
+
+  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get('/api/v1/category/all-category');
@@ -85,24 +127,20 @@ const Product = () => {
       }
     };
 
-    fetchProducts();
     fetchCategories();
     fetchSizes();
     fetchColors();
-  }, [filters]);
+  }, []);
 
 
   return (
     <>
-      {/* Start Banner */}
       <div className="container mt-5 mb-5">
         <Link to="/"><img src={bannerWomen} alt="banner-women" style={{ cursor: "pointer" }} /></Link>
       </div>
-      {/* End Banner */}
 
       <div className="container">
         <div className="shop-content row gutter-lg mb-10">
-          {/* Start Sidebar*/}
           <aside className="sidebar shop-sidebar sticky-sidebar-wrapper sidebar-fixed">
             <div className="sidebar-overlay" />
             <Link className="sidebar-close" to="#" ><i className="close-icon" onClick={() => document.body.classList.remove('sidebar-active')} /></Link>
@@ -185,12 +223,8 @@ const Product = () => {
               </div>
             </div>
           </aside>
-          {/* End Sidebar */}
 
-
-          {/* Start Main Content */}
           <div className="main-content">
-            {/* Start Sorting */}
             <nav className="toolbox sticky-toolbox sticky-content fix-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div className="toolbox-left">
                 <Link to="#" className="btn btn-primary btn-outline btn-rounded left-sidebar-toggle btn-icon-left d-block d-lg-none" onClick={handleLinkClick}>
@@ -212,16 +246,14 @@ const Product = () => {
                 <div className="toolbox-item toolbox-show select-box">
                   <select name="count" className="form-control" value={filters.limit} onChange={handlePageLimitChange}>
                     <option value={3}>Show 3</option>
-                    <option value={6} selected="selected">Show 6</option>
+                    <option value={6}>Show 6</option>
                     <option value={9}>Show 9</option>
                     <option value={12}>Show 12</option>
                   </select>
                 </div>
               </div>
             </nav>
-            {/* End Sorting */}
 
-            {/* Start Product */}
             <div className="product-wrapper row" style={{ marginTop: "2rem" }}>
               {
                 products.map((product) => {
@@ -264,9 +296,7 @@ const Product = () => {
                 })
               }
             </div>
-            {/* End Product */}
 
-            {/* Start Pagination */}
             <nav className="toolbox toolbox-pagination justify-content-between">
               <p className="showing-info">
                 Showing <span>{((filters.page - 1) * filters.limit) + 1}</span> - <span>{((filters.page - 1) * filters.limit) + products?.length}</span>out of <span>{totalProduct}</span> Products
@@ -290,9 +320,7 @@ const Product = () => {
                 </li>
               </ul>
             </nav>
-            {/* End Pagination */}
           </div>
-          {/* End Main Content */}
         </div>
       </div>
     </>

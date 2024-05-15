@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext.jsx";
 
 const BottomHeader = () => {
   const [categories, setCategories] = useState([]);
   const { isLoggedIn, user } = useAuth();
+  const navigate = useNavigate();
 
   const handleMenuClose = () => {
     document.body.classList.remove('menu-active');
@@ -44,13 +45,14 @@ const BottomHeader = () => {
                     <span style={{ marginLeft: "1.5rem" }}>Browse Categories</span>
                   </Link>
 
+
                   <div className="dropdown-box">
                     <ul className="menu vertical-menu category-menu">
                       {
                         categories?.map((category) => {
                           return (
                             <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
-                              <Link to={`/product/category-product/${category?._id}`}>{category?.name}</Link>
+                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { categoryId: category?._id } }) }}>{category?.name}</Link>
                               {
                                 category?.subcategories && category?.subcategories?.length > 0 && (
                                   <ul className="megamenu">
@@ -59,7 +61,7 @@ const BottomHeader = () => {
                                         {
                                           category?.subcategories?.map((subcategory) => (
                                             <li key={subcategory?._id}>
-                                              <Link to={`/product/sub-category-product/${subcategory?._id}`}>{subcategory?.name}</Link>
+                                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { subcategoryId: subcategory?._id } }) }}>{subcategory?.name}</Link>
                                             </li>
                                           ))
                                         }

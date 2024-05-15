@@ -1,6 +1,5 @@
 import "../../App.css";
 import { useState } from "react";
-import axios from "axios";
 import logo from "../../assets/header-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -8,28 +7,13 @@ const MiddleHeader = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    if (window.innerWidth > 768) {
-      window.scrollTo(0, window.innerHeight * 0.7);
-    }
-
-    if (window.innerWidth < 768) {
-      window.scrollTo(0, window.innerHeight * 0.01);
-    }
-  };
-
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.get(`/api/v1/product/all-product?search=${searchQuery}`);
-      navigate("/product/searched-product", { state: { products: response.data.product } });
-    } catch (error) {
-      console.error('Error while searching:', error.message);
-    }
+    navigate("/product", { state: { search: searchQuery } });
   };
 
   return (
@@ -40,8 +24,8 @@ const MiddleHeader = () => {
             <Link to="/" className="mobile-menu-toggle w-icon-hamburger" aria-label="menu-toggle"></Link>
             <Link to="/" className="logo ml-lg-0"><img src={logo} alt="logo" width={144} height={45} /></Link>
             <form onSubmit={handleSearchSubmit} className="header-search hs-expanded hs-round d-md-flex input-wrapper">
-              <input style={{ borderLeft: "2px solid #336699", }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={handleSearchChange} required />
-              <button className="btn btn-search" type="submit"><i className="w-icon-search" onClick={handleClick} /></button>
+              <input style={{ borderLeft: "2px solid #336699" }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={handleSearchChange} required />
+              <button className="btn btn-search" type="submit"><i className="w-icon-search" /></button>
             </form>
           </div>
 

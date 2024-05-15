@@ -16,7 +16,6 @@ const SubCategoryProduct = () => {
     subcategory: id,
     color: "",
     size: "",
-    search: "",
     sort: "relevance",
     page: 1,
     limit: 6,
@@ -65,7 +64,6 @@ const SubCategoryProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // Check if a category is selected
         if (filters.subcategory) {
           const response = await axios.get("/api/v1/product/all-product", { params: filters });
           setProducts(response?.data?.product);
