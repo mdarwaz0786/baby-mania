@@ -43,7 +43,7 @@ const OurProduct = () => {
                 <div className="product text-center">
                   <figure className="product-media">
                     <Link to={`/product/single-product/${product?._id}`}>
-                      <img src={product?.items[0]?.image} alt="Product" width={300} height={338} />
+                      <img className="product-image" src={product?.items[0]?.image} alt="Product" />
                     </Link>
                     <div className="product-action-vertical">
                       <Link to="/" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />

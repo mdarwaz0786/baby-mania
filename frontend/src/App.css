@@ -41,9 +41,13 @@
   }
 }
 
-
 @media (min-width: 768px) {
   .category-item-img {
     margin-top: 2rem;
   }
+}
+
+img.product-image {
+  width: 297px !important;
+  height: 355px !important;
 }

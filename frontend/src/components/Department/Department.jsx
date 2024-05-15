@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../../App.css";
 
 const Department = () => {
   const [products, setProducts] = useState([]);
@@ -51,7 +52,7 @@ const Department = () => {
                     <div className="product text-center">
                       <figure className="product-media">
                         <Link to={`/product/single-product/${product?._id}`}>
-                          <img src={product?.items[0]?.image} alt="Product" width={300} height={338} />
+                          <img className='product-image' src={product?.items[0]?.image} alt="Product" />
                         </Link>
 
                         <div className="product-action-vertical">
@@ -92,7 +93,7 @@ const Department = () => {
                     <div className="product text-center">
                       <figure className="product-media">
                         <Link to={`/product/single-product/${product?._id}`}>
-                          <img src={product?.items[0]?.image} alt="Product" width={300} height={338} />
+                          <img className='product-image' src={product?.items[0]?.image} alt="Product" />
                         </Link>
 
                         <div className="product-action-vertical">
@@ -133,7 +134,7 @@ const Department = () => {
                     <div className="product text-center">
                       <figure className="product-media">
                         <Link to={`/product/single-product/${product?._id}`}>
-                          <img src={product?.items[0]?.image} alt="Product" width={300} height={338} />
+                          <img className='product-image' src={product?.items[0]?.image} alt="Product" />
                         </Link>
 
                         <div className="product-action-vertical">
