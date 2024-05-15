@@ -16,6 +16,12 @@ const MiddleHeader = () => {
     navigate("/product", { state: { search: searchQuery } });
   };
 
+  const handleScroll = () => {
+    if (window.innerWidth > 768) {
+      window.scrollTo(0, window.innerHeight * 0.75);
+    }
+  };
+
   return (
     <header className="header">
       <div className="header-middle">
@@ -25,7 +31,7 @@ const MiddleHeader = () => {
             <Link to="/" className="logo ml-lg-0"><img src={logo} alt="logo" width={144} height={45} /></Link>
             <form onSubmit={handleSearchSubmit} className="header-search hs-expanded hs-round d-md-flex input-wrapper">
               <input style={{ borderLeft: "2px solid #336699" }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={handleSearchChange} required />
-              <button className="btn btn-search" type="submit"><i className="w-icon-search" /></button>
+              <button className="btn btn-search" type="submit"><i className="w-icon-search" onClick={handleScroll} /></button>
             </form>
           </div>
 

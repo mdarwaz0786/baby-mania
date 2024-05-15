@@ -8,6 +8,12 @@ const BottomHeader = () => {
   const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
 
+  const handleScroll = () => {
+    if (window.innerWidth > 768) {
+      window.scrollTo(0, window.innerHeight * 0.75);
+    }
+  };
+
   const handleMenuClose = () => {
     document.body.classList.remove('menu-active');
   };
@@ -52,7 +58,7 @@ const BottomHeader = () => {
                         categories?.map((category) => {
                           return (
                             <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
-                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { categoryId: category?._id } }) }}>{category?.name}</Link>
+                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { categoryId: category?._id } }); handleScroll() }}>{category?.name}</Link>
                               {
                                 category?.subcategories && category?.subcategories?.length > 0 && (
                                   <ul className="megamenu">
@@ -61,7 +67,7 @@ const BottomHeader = () => {
                                         {
                                           category?.subcategories?.map((subcategory) => (
                                             <li key={subcategory?._id}>
-                                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { subcategoryId: subcategory?._id } }) }}>{subcategory?.name}</Link>
+                                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { subcategoryId: subcategory?._id } }); handleScroll() }}>{subcategory?.name}</Link>
                                             </li>
                                           ))
                                         }

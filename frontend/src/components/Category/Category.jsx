@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../../App.css";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -18,6 +19,12 @@ const Category = () => {
     fetchCategory();
   }, []);
 
+  const handleScroll = () => {
+    if (window.innerWidth > 768) {
+      window.scrollTo(0, window.innerHeight * 0.75);
+    }
+  };
+
   return (
     <>
       <h3 className="text-center mt-5 mb-5">Our Category</h3>
@@ -26,7 +33,7 @@ const Category = () => {
           <div className="col-lg-2 col-sm-4 col-md-2 category-item" key={category?._id}>
             <div className="d-flex flex-column align-items-center">
               <div className="rounded-circle overflow-hidden category-item-img" style={{ width: '100px', height: '100px' }}>
-                <Link to={`/product/category-product/${category?._id}`}>
+                <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { categoryId: category?._id } }); handleScroll() }}>
                   <img
                     src={category?.image}
                     className="img-fluid"
