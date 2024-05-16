@@ -23,30 +23,49 @@ const Product = () => {
     limit: 6,
   });
 
-  useEffect(() => {
-    const { categoryId, subcategoryId, search } = location.state || {};
+  const cleanAll = () => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      category: categoryId ? [categoryId] : [],
-      subcategory: subcategoryId ? [subcategoryId] : [],
-      search: search || '',
+      category: [],
+      subcategory: [],
+      color: [],
+      size: [],
+      search: '',
       sort: 'relevance',
       page: 1,
       limit: 6,
     }));
-  }, [location.state]);
+  }
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('/api/v1/product/all-product', { params: filters });
+      setProducts(response?.data?.product);
+      setTotalProduct(response?.data?.totalCount)
+    } catch (error) {
+      console.error('error while fetching products:', error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('/api/v1/product/all-product', { params: filters });
-        setProducts(response?.data?.product);
-        setTotalProduct(response?.data?.totalCount)
-      } catch (error) {
-        console.error('error while fetching products:', error.message);
-      }
-    };
+    const { search } = location.state || [];
 
+    if (location.state?.search) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        category: [],
+        subcategory: [],
+        color: [],
+        size: [],
+        search: search || '',
+        sort: 'relevance',
+        page: 1,
+        limit: 6,
+      }));
+    }
+  }, [location.state, location.state?.search]);
+
+  useEffect(() => {
     fetchProducts();
   }, [filters]);
 
@@ -86,8 +105,11 @@ const Product = () => {
     }
   };
 
-  const handlePageChange = (page) => {
-    setFilters((prevFilters) => ({ ...prevFilters, page }));
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || (newPage > filters.page && products.length === 0)) {
+      return;
+    }
+    setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
   };
 
   const handlePageLimitChange = (e) => {
@@ -149,7 +171,7 @@ const Product = () => {
               <div className="sticky-sidebar">
                 <div className="filter-actions">
                   <label>Filter :</label>
-                  <Link to="/product" className="btn btn-dark btn-link filter-clean">Clean All</Link>
+                  <Link to="#" className="btn btn-dark btn-link filter-clean" onClick={cleanAll}>Clean All</Link>
                 </div>
 
                 <div className="widget widget-collapsible">
@@ -296,6 +318,7 @@ const Product = () => {
                   )
                 })
               }
+              {products.length === 0 && <h5 className="text-center">No Data</h5>}
             </div>
 
             <nav className="toolbox toolbox-pagination justify-content-between">
@@ -314,7 +337,7 @@ const Product = () => {
                   <Link className="page-link" to="#">{filters.page}</Link>
                 </li>
 
-                <li className="next">
+                <li className={`next ${products.length === 0 ? 'disabled' : ''}`}>
                   <Link to="#" onClick={() => handlePageChange(filters.page + 1)} aria-label="Next">
                     Next<i className="w-icon-long-arrow-right" />
                   </Link>

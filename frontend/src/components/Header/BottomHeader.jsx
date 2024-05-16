@@ -58,7 +58,7 @@ const BottomHeader = () => {
                         categories?.map((category) => {
                           return (
                             <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
-                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { categoryId: category?._id } }); handleScroll() }}>{category?.name}</Link>
+                              <Link to={`/product/${category?.name}`} onClick={(e) => { e.preventDefault(); navigate(`/product/${category?.name}`, { state: { categoryId: category?._id } }); handleScroll() }}>{category?.name}</Link>
                               {
                                 category?.subcategories && category?.subcategories?.length > 0 && (
                                   <ul className="megamenu">
@@ -67,7 +67,7 @@ const BottomHeader = () => {
                                         {
                                           category?.subcategories?.map((subcategory) => (
                                             <li key={subcategory?._id}>
-                                              <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { subcategoryId: subcategory?._id } }); handleScroll() }}>{subcategory?.name}</Link>
+                                              <Link to={`/product/${subcategory?.name}`} onClick={(e) => { e.preventDefault(); navigate(`/product/${subcategory?.name}`, { state: { subcategoryId: subcategory?._id } }); handleScroll() }}>{subcategory?.name}</Link>
                                             </li>
                                           ))
                                         }

@@ -91,6 +91,7 @@ server.get("/success", (req, res) => { res.sendFile(path.join(__dirname, "/front
 server.get("/cancel", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/product/:category", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product/single-product/:productId", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product/category-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product/sub-category-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });

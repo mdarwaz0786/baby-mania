@@ -33,7 +33,7 @@ const Category = () => {
           <div className="col-lg-2 col-sm-4 col-md-2 category-item" key={category?._id}>
             <div className="d-flex flex-column align-items-center">
               <div className="rounded-circle overflow-hidden category-item-img" style={{ width: '100px', height: '100px' }}>
-                <Link to="/product" onClick={(e) => { e.preventDefault(); navigate('/product', { state: { categoryId: category?._id } }); handleScroll() }}>
+                <Link to={`/product/${category?.name}`} onClick={(e) => { e.preventDefault(); navigate(`/product/${category?.name}`, { state: { categoryId: category?._id } }); handleScroll() }}>
                   <img
                     src={category?.image}
                     className="img-fluid"

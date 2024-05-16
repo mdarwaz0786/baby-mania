@@ -39,9 +39,9 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/product" element={<ProductPage />}>
-          <Route path="" element={<Product />} />
+          <Route index element={<Product />} />
           <Route path="single-product/:productId" element={<SingleProduct />} />
-          <Route path="category-product/:id" element={<CategoryProduct />} />
+          <Route path=":category" element={<CategoryProduct />} />
           <Route path="sub-category-product/:id" element={<SubCategoryProduct />} />
           <Route path="searched-product" element={<SearchedProduct />} />
         </Route>
