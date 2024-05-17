@@ -12,8 +12,11 @@ const OurProduct = () => {
     limit: 10,
   });
 
-  const handlePageChange = (page) => {
-    setFilters((prevFilters) => ({ ...prevFilters, page }));
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || (newPage > filters.page && products.length === 0)) {
+      return;
+    }
+    setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
   };
 
   useEffect(() => {
@@ -34,7 +37,7 @@ const OurProduct = () => {
 
   return (
     <>
-      <h3 className="text-center mb-5 mt-10">Our Product</h3>
+      <h3 className="text-center mb-5 mt-10">Our Products</h3>
       <div className="container">
         <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
           {
@@ -43,11 +46,11 @@ const OurProduct = () => {
                 <div className="product text-center">
                   <figure className="product-media">
                     <Link to={`/product/single-product/${product?._id}`}>
-                      <img className="product-image" src={product?.items[0]?.image} alt="Product" />
+                      <img className="product-image" src={product?.items[0]?.image} alt="product-image" />
                     </Link>
                     <div className="product-action-vertical">
-                      <Link to="/" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
-                      <Link to="/" className="btn-product-icon btn-wishlist w-icon-heart" title="Add to wishlist" />
+                      <Link to="#" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
+                      <Link to="#" className="btn-product-icon btn-wishlist w-icon-heart" title="Add to wishlist" />
                     </div>
                   </figure>
                   <div className="product-details">
@@ -67,28 +70,33 @@ const OurProduct = () => {
               </div>
             ))
           }
+          {products.length === 0 && <h5 className="text-center">No Data</h5>}
         </div>
 
         <nav className="toolbox toolbox-pagination justify-content-between">
           <p className="showing-info">
             Showing <span>{((filters.page - 1) * filters.limit) + 1}</span> - <span>{((filters.page - 1) * filters.limit) + products?.length}</span>out of <span>{totalProduct}</span> Products
           </p>
+
           <ul className="pagination">
             <li className={`prev ${filters.page === 1 ? 'disabled' : ''}`}>
               <Link to="#" onClick={() => handlePageChange(filters.page - 1)} aria-label="Previous">
                 <i className="w-icon-long-arrow-left" />Prev
               </Link>
             </li>
+
             <li className="page-item active">
               <Link className="page-link" to="#">{filters.page}</Link>
             </li>
-            <li className="next">
+
+            <li className={`next ${products.length === 0 ? 'disabled' : ''}`}>
               <Link to="#" onClick={() => handlePageChange(filters.page + 1)} aria-label="Next">
                 Next<i className="w-icon-long-arrow-right" />
               </Link>
             </li>
           </ul>
         </nav>
+
       </div>
     </>
   );

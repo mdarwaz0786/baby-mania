@@ -33,16 +33,6 @@ const CategoryProduct = () => {
     }));
   }
 
-  useEffect(() => {
-    const { categoryId, subcategoryId } = location.state || {};
-
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      category: categoryId ? [categoryId] : [],
-      subcategory: subcategoryId ? [subcategoryId] : [],
-    }));
-  }, [location.state]);
-
   const fetchProducts = async () => {
     try {
       const response = await axios.get('/api/v1/product/all-product', { params: filters });
@@ -52,6 +42,18 @@ const CategoryProduct = () => {
       console.error('error while fetching products:', error.message);
     }
   };
+
+  useEffect(() => {
+    const { categoryId, subcategoryId } = location.state || {};
+
+    if (categoryId || subcategoryId) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        category: categoryId ? [categoryId] : [],
+        subcategory: subcategoryId ? [subcategoryId] : [],
+      }));
+    }
+  }, [location.state]);
 
   useEffect(() => {
     if (filters.category.length > 0 || filters.subcategory.length > 0) {
@@ -148,7 +150,7 @@ const CategoryProduct = () => {
   return (
     <>
       <div className="container mt-5 mb-5">
-        <Link to="/"><img src={bannerMen} alt="banner-women" style={{ cursor: "pointer" }} /></Link>
+        <Link to="/product"><img src={bannerMen} alt="banner-women" style={{ cursor: "pointer" }} /></Link>
       </div>
 
       <h4 className="text-center mt-5 mb-5">{category}</h4>
