@@ -18,7 +18,6 @@ import Success from "./Success.jsx";
 import Cancel from "./Cancel.jsx";
 import CategoryProduct from "./components/Product/CategoryProduct.jsx";
 import SearchedProduct from "./components/Product/SearchedProduct.jsx";
-import SubCategoryProduct from "./components/Product/SubCategoryProduct.jsx";
 
 const App = () => {
 
@@ -28,10 +27,10 @@ const App = () => {
       <MiddleHeader />
       <BottomHeader />
       <Routes>
-        <Route path="/success" element={<Success />} />
-        <Route path="/cancel" element={<Cancel />} />
         <Route path="/test" element={<Test />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/cart" element={<CartPage />} />
@@ -40,10 +39,9 @@ const App = () => {
         <Route path="/logout" element={<Logout />} />
         <Route path="/product" element={<ProductPage />}>
           <Route index element={<Product />} />
-          <Route path="single-product/:productId" element={<SingleProduct />} />
-          <Route path=":category" element={<CategoryProduct />} />
-          <Route path="sub-category-product/:id" element={<SubCategoryProduct />} />
-          <Route path="searched-product" element={<SearchedProduct />} />
+          <Route path="shop/:category" element={<CategoryProduct />} />
+          <Route path="single-product/:id" element={<SingleProduct />} />
+          <Route path="search" element={<SearchedProduct />} />
         </Route>
       </Routes>
       <Footer />

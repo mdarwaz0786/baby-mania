@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useParams } from "react-router-dom";
 import "../../App.css";
-import bannerWomen from "../../assets/banner_women.png";
+import bannerMen from "../../assets/banner_mens.png";
 
 const CategoryProduct = () => {
   const location = useLocation();
@@ -30,27 +30,18 @@ const CategoryProduct = () => {
       subcategory: [],
       color: [],
       size: [],
-      search: '',
-      sort: 'relevance',
-      page: 1,
-      limit: 6,
     }));
   }
 
   useEffect(() => {
-    const { categoryId, subcategoryId } = location.state || [];
+    const { categoryId, subcategoryId } = location.state || {};
 
     setFilters((prevFilters) => ({
       ...prevFilters,
       category: categoryId ? [categoryId] : [],
       subcategory: subcategoryId ? [subcategoryId] : [],
-      color: [],
-      size: [],
-      sort: 'relevance',
-      page: 1,
-      limit: 6,
     }));
-  }, [location.state, location.state?.categoryId, location.state?.subcategoryId]);
+  }, [location.state]);
 
   const fetchProducts = async () => {
     try {
@@ -157,7 +148,7 @@ const CategoryProduct = () => {
   return (
     <>
       <div className="container mt-5 mb-5">
-        <Link to="/"><img src={bannerWomen} alt="banner-women" style={{ cursor: "pointer" }} /></Link>
+        <Link to="/"><img src={bannerMen} alt="banner-women" style={{ cursor: "pointer" }} /></Link>
       </div>
 
       <h4 className="text-center mt-5 mb-5">{category}</h4>

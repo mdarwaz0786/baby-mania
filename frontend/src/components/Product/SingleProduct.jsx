@@ -14,7 +14,7 @@ const SingleProduct = () => {
   const [selectedImage, setSelectedImage] = useState('');
   const [mainImage, setMainImage] = useState('');
   const [categoryId, setCategoryId] = useState();
-  const { productId } = useParams();
+  const { id } = useParams();
   const { validToken, isLoggedIn } = useAuth();
 
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`/api/v1/product/single-product/${productId}`);
+        const response = await axios.get(`/api/v1/product/single-product/${id}`);
         setProducts(response?.data?.product);
         setCategoryId(response?.data?.product?.category?._id);
       } catch (error) {
@@ -60,7 +60,7 @@ const SingleProduct = () => {
     };
 
     fetchProducts();
-  }, [productId]);
+  }, [id]);
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -74,7 +74,7 @@ const SingleProduct = () => {
     fetchAllProducts();
   }, []);
 
-  const product = productId;
+  const product = id;
   const color = selectedColor;
   const size = selectedSize;
 
@@ -119,7 +119,7 @@ const SingleProduct = () => {
                         <div className="swiper-container product-single-swiper swiper-theme nav-inner">
                           <div className="swiper-wrapper row cols-1 gutter-no">
                             <div className="swiper-slide">
-                              <img src={selectedImage || mainImage || products?.items[0]?.image} width={500} height={700} alt="Main product" />
+                              <img src={selectedImage || mainImage || products?.items[0]?.image} alt="Main-Image" />
                             </div>
                           </div>
                         </div>
@@ -131,9 +131,7 @@ const SingleProduct = () => {
                                 <div className="product-thumb swiper-slide" key={index} onClick={() => handleImageClick(item?.image)}>
                                   <img
                                     src={item?.image}
-                                    alt="Sub Image"
-                                    width={800}
-                                    height={900}
+                                    alt="Sub-Image"
                                   />
                                 </div>
                               ))
@@ -303,7 +301,7 @@ const SingleProduct = () => {
                   <div className="widget widget-banner mb-9">
                     <div className="banner banner-fixed br-sm">
                       <figure>
-                        <Link to="/product"> <img src={banner} alt="Banner" width={266} height={220} style={{ backgroundColor: '#1D2D44' }} /></Link>
+                        <Link to="/product"> <img src={banner} alt="Banner" style={{ backgroundColor: '#1D2D44' }} /></Link>
                       </figure>
 
                       <div className="banner-content">
@@ -332,21 +330,21 @@ const SingleProduct = () => {
                   <div className="product text-center">
                     <figure className="product-media">
                       <Link to={`/product/single-product/${product?._id}`} onClick={() => window.scrollTo(0, 0)}>
-                        <img src={product?.items[0]?.image} alt="Product" width={300} height={338} />
+                        <img src={product?.items[0]?.image} alt="Product" />
                       </Link>
                       <div className="product-action-vertical">
-                        <Link to="/" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
-                        <Link to="/" className="btn-product-icon btn-wishlist w-icon-heart" title="Add to wishlist" />
+                        <Link to="#" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
+                        <Link to="#" className="btn-product-icon btn-wishlist w-icon-heart" title="Add to wishlist" />
                       </div>
                     </figure>
                     <div className="product-details">
-                      <h4 className="product-name"><Link to="/">{product?.name}</Link></h4>
+                      <h4 className="product-name"><Link to="#">{product?.name}</Link></h4>
                       <div className="ratings-container">
                         <div className="ratings-full">
                           <span className="ratings" style={{ width: '60%' }} />
                           <span className="tooltiptext tooltip-top" />
                         </div>
-                        <Link to="/" className="rating-reviews">({product?.rating} Reviews)</Link>
+                        <Link to="#" className="rating-reviews">({product?.rating} Reviews)</Link>
                       </div>
                       <div className="product-price">
                         <ins className="new-price">₹{product?.salePrice}</ins>

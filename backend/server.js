@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
-import Stripe from 'stripe';
 import connectDatabase from "./database/connectDatabase.js";
 import testRoute from "./routes/test.route.js";
 import colorRoute from "./routes/color.route.js";
@@ -29,34 +28,6 @@ const server = express();
 // middleware
 server.use(express.json());
 server.use(cors());
-
-const stripe = new Stripe(process.env.SECRET_STRIPE_KEY);
-
-server.post("/checkout", async (req, res) => {
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: req.body.items.map((item) => {
-        return {
-          price_data: {
-            currency: "inr",
-            product_data: {
-              name: item.name,
-            },
-            unit_amount: (item.price) * 100,
-          },
-          quantity: item.quantity,
-        };
-      }),
-      success_url: "http://localhost:8080/success",
-      cancel_url: "http://localhost:8080/cancel",
-    });
-    res.json({ id: session.id });
-  } catch (error) {
-    console.log(error);
-  };
-});
 
 // test route
 server.use("/api/v1", testRoute);
@@ -87,15 +58,13 @@ server.use(express.static(path.join(__dirname, "/admin/dist")), (req, res, next)
 
 // Routes for serving frontend index.html
 server.get("/test", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/success", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/cancel", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
-server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/product", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
-server.get("/product/:category", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
-server.get("/product/single-product/:productId", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
-server.get("/product/category-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
-server.get("/product/sub-category-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
-server.get("/product/searched-product", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/product/shop/:category", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/product/single-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
+server.get("/product/search", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/contact-us", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/about-us", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });
 server.get("/cart", (req, res) => { res.sendFile(path.join(__dirname, "/frontend/dist", "index.html")) });

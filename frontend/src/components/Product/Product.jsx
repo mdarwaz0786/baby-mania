@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../App.css";
 import bannerWomen from "../../assets/banner_women.png";
 
 const Product = () => {
-  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sizes, setSizes] = useState([]);
@@ -17,7 +16,6 @@ const Product = () => {
     subcategory: [],
     color: [],
     size: [],
-    search: '',
     sort: 'relevance',
     page: 1,
     limit: 6,
@@ -30,10 +28,6 @@ const Product = () => {
       subcategory: [],
       color: [],
       size: [],
-      search: '',
-      sort: 'relevance',
-      page: 1,
-      limit: 6,
     }));
   }
 
@@ -46,24 +40,6 @@ const Product = () => {
       console.error('error while fetching products:', error.message);
     }
   };
-
-  useEffect(() => {
-    const { search } = location.state || [];
-
-    if (location.state?.search) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        category: [],
-        subcategory: [],
-        color: [],
-        size: [],
-        search: search || '',
-        sort: 'relevance',
-        page: 1,
-        limit: 6,
-      }));
-    }
-  }, [location.state, location.state?.search]);
 
   useEffect(() => {
     fetchProducts();
@@ -161,6 +137,8 @@ const Product = () => {
       <div className="container mt-5 mb-5">
         <Link to="/"><img src={bannerWomen} alt="banner-women" style={{ cursor: "pointer" }} /></Link>
       </div>
+
+      <h4 className="text-center">All Products</h4>
 
       <div className="container">
         <div className="shop-content row gutter-lg mb-10">

@@ -1,19 +1,17 @@
 import "../../App.css";
 import { useState } from "react";
 import logo from "../../assets/header-logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const MiddleHeader = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const navigate = useNavigate();
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    navigate("/product", { state: { search: searchQuery } });
+    setSearchParams({ q: searchQuery });
+    navigate(`/product/search?q=${encodeURIComponent(searchQuery)}`, { state: { q: searchQuery } });
   };
 
   const handleScroll = () => {
@@ -30,7 +28,7 @@ const MiddleHeader = () => {
             <Link to="/" className="mobile-menu-toggle w-icon-hamburger" aria-label="menu-toggle"></Link>
             <Link to="/" className="logo ml-lg-0"><img src={logo} alt="logo" width={144} height={45} /></Link>
             <form onSubmit={handleSearchSubmit} className="header-search hs-expanded hs-round d-md-flex input-wrapper">
-              <input style={{ borderLeft: "2px solid #336699" }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={handleSearchChange} required />
+              <input style={{ borderLeft: "2px solid #336699" }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} required />
               <button className="btn btn-search" type="submit"><i className="w-icon-search" onClick={handleScroll} /></button>
             </form>
           </div>
