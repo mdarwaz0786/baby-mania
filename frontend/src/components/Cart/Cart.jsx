@@ -120,6 +120,13 @@ const Cart = () => {
       });
 
       if (response.data.success) {
+        clearCarts(userId);
+        setAddress("");
+        setCity("");
+        setCountry("");
+        setMobile("");
+        setZipCode("");
+        setState("");
         alert("order successfull");
       }
     } catch (error) {
@@ -150,6 +157,16 @@ const Cart = () => {
       const result = stripe.redirectToCheckout({ sessionId });
       if (result.error) {
         console.log(result.error);
+      }
+
+      if (response.data.success) {
+        clearCarts(userId);
+        setAddress("");
+        setCity("");
+        setCountry("");
+        setMobile("");
+        setZipCode("");
+        setState("");
       }
     } catch (error) {
       console.log('Error while creating order:', error.message);

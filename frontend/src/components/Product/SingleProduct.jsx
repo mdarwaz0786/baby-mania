@@ -4,7 +4,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import banner from "../../assets/banner3.jpg";
 import { useAuth } from "../../context/authContext.jsx";
 
-
 const SingleProduct = () => {
   const [products, setProducts] = useState({});
   const [allProducts, setAllProducts] = useState([]);
@@ -49,17 +48,17 @@ const SingleProduct = () => {
 
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProduct = async () => {
       try {
         const response = await axios.get(`/api/v1/product/single-product/${id}`);
         setProducts(response?.data?.product);
         setCategoryId(response?.data?.product?.category?._id);
       } catch (error) {
-        console.log('error while fetching products:', error.message);
+        console.log('error while fetching single products:', error.message);
       }
     };
 
-    fetchProducts();
+    fetchProduct();
   }, [id]);
 
   useEffect(() => {
@@ -68,11 +67,20 @@ const SingleProduct = () => {
         const response = await axios.get("/api/v1/product/all-product");
         setAllProducts(response?.data?.product);
       } catch (error) {
-        console.log('error while fetching products:', error.message);
+        console.log('error while fetching all products:', error.message);
       }
     };
     fetchAllProducts();
   }, []);
+
+  const getRelatedProducts = (categoryId) => {
+    return allProducts.filter((product) => product?.category?._id === categoryId);
+  };
+
+  const relatedProducts = getRelatedProducts(categoryId);
+
+  console.log("relatedProducts", relatedProducts);
+  console.log("categoryId", categoryId);
 
   const product = id;
   const color = selectedColor;
@@ -325,7 +333,7 @@ const SingleProduct = () => {
 
           <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
             {
-              allProducts?.filter((product) => product?.category?._id === categoryId).map((product) => (
+              relatedProducts?.map((product) => (
                 <div className="product-wrap" key={product?._id}>
                   <div className="product text-center">
                     <figure className="product-media">

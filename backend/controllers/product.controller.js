@@ -1,5 +1,4 @@
 import Product from "../models/product.model.js";
-import Category from "../models/category.model.js";
 import fs from "fs";
 import cloudinary from "../utils/cloudinary.js";
 
@@ -126,7 +125,7 @@ export const fetchAllProduct = async (req, res) => {
     } else if (req.query.sort === 'price-low-to-high') {
       sort = { salePrice: 1 }; // Sort by ascending price
     } else if (req.query.sort === 'latest') {
-      sort = { createdAt: -1 }; // Sort by latest products
+      sort = { createdAt: -1 }; // Sort by latest product
     } else {
       sort = { relevance: -1 }; // Default sorting is relevance
     };

@@ -59,9 +59,9 @@ export const createOrderWithStripe = async (req, res) => {
 
     await order.save();
 
-    return res.status(200).json({ sessionId: session.id });
+    return res.status(200).json({ success: true, message: "Checkout session created successfully", sessionId: session.id });
   } catch (error) {
-    console.log("Error while creating checkout session:", error.message);
+    console.log("Error while creating checkout session error from controller:", error.message);
     return res.status(500).json({ success: false, message: 'Failed to create checkout session' });
   };
 };
