@@ -25,11 +25,11 @@ const SearchedProduct = () => {
 
   const handleScroll = () => {
     if (window.innerWidth > 768) {
-      window.scrollTo(0, window.innerHeight * 0.75);
+      window.scrollTo(0, window.innerHeight * 0.79);
     }
 
     if (window.innerWidth < 768) {
-      window.scrollTo(0, window.innerHeight * 0.35);
+      window.scrollTo(0, window.innerHeight * 0.39);
     }
   };
 

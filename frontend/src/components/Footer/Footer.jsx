@@ -125,7 +125,7 @@ const Footer = () => {
 
             <div className="footer-right">
               <span className="payment-label mr-lg-8">We are using safe payment for</span>
-              <figure className="payment"><img src={image} alt="payment" width={300} height={400} /></figure>
+              <figure className="payment"><img src={image} alt="payment" width={288} height={90} /></figure>
             </div>
           </div>
         </div>

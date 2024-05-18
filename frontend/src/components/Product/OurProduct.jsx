@@ -44,7 +44,6 @@ const OurProduct = () => {
     fetchProducts();
   }, [filters]);
 
-
   return (
     <>
       <span ref={productRef}></span>

@@ -17,7 +17,6 @@ const Cart = () => {
   const [address, setAddress] = useState("");
   const { validToken } = useAuth("");
 
-
   const fetchCarts = async () => {
     try {
       const response = await axios.get("/api/v1/cart/fetch-user-cart", {
@@ -184,9 +183,7 @@ const Cart = () => {
   return (
     <>
       <div className="page-wrapper">
-        {/* Start of Main */}
         <main className="main cart">
-          {/* Start of Breadcrumb */}
           <nav className="breadcrumb-nav">
             <div className="container">
               <ul className="breadcrumb shop-breadcrumb bb-no">
@@ -194,9 +191,7 @@ const Cart = () => {
               </ul>
             </div>
           </nav>
-          {/* End of Breadcrumb */}
 
-          {/* Start of PageContent */}
           <div className="page-content">
             <div className="container">
               <div className="row gutter-lg mb-10">
@@ -340,9 +335,7 @@ const Cart = () => {
               </div>
             </div>
           </div>
-          {/* End of PageContent */}
         </main>
-        {/* End of Main */}
       </div>
     </>
   );
