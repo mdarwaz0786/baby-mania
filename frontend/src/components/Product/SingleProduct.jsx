@@ -27,6 +27,14 @@ const SingleProduct = () => {
     window.scrollTo(scrollOptions);
   }, []);
 
+  function smoothScrollToTop() {
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    };
+    window.scrollTo(scrollOptions);
+  }
+
   const handleImageClick = (image) => {
     setSelectedImage(image);
   };
@@ -344,7 +352,7 @@ const SingleProduct = () => {
                 <div className="product-wrap" key={product?._id}>
                   <div className="product text-center">
                     <figure className="product-media">
-                      <Link to={`/product/single-product/${product?._id}`} onClick={() => window.scrollTo(0, 0)}>
+                      <Link to={`/product/single-product/${product?._id}`} onClick={smoothScrollToTop}>
                         <img className="product-image" src={product?.items[0]?.image} alt="Product" />
                       </Link>
                       <div className="product-action-vertical">
