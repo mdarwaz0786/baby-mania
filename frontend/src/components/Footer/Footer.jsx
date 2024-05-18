@@ -2,8 +2,17 @@ import image from "../../assets/payment.png";
 import logo from "../../assets/header-logo.png";
 import { Link } from 'react-router-dom';
 
-
 const Footer = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    if (email.trim() === '') {
+      alert('Please enter your email address');
+    } else {
+      alert('Submitted successfully');
+    }
+  };
+
   return (
     <>
       <footer className="footer appear-animate">
@@ -21,9 +30,23 @@ const Footer = () => {
               </div>
 
               <div className="col-xl-7 col-lg-6 col-md-9 mt-4 mt-lg-0 ">
-                <form action="#" method="get" className="input-wrapper input-wrapper-inline input-wrapper-rounded">
-                  <input type="email" className="form-control mr-2 bg-white" name="email" id="email" placeholder="Your E-mail Address" required />
-                  <submit type="submit" className="btn btn-dark btn-rounded" onClick={() => alert("Submitted successfully")} >Subscribe<i className="w-icon-long-arrow-right" /></submit>
+                <form
+                  action="#"
+                  method="get"
+                  className="input-wrapper input-wrapper-inline input-wrapper-rounded"
+                  onSubmit={handleSubmit}
+                >
+                  <input
+                    type="email"
+                    className="form-control mr-2 bg-white"
+                    name="email"
+                    id="email"
+                    placeholder="Your E-mail Address"
+                    required
+                  />
+                  <button type="submit" className="btn btn-dark btn-rounded">
+                    Subscribe<i className="w-icon-long-arrow-right" />
+                  </button>
                 </form>
               </div>
             </div>
@@ -102,7 +125,7 @@ const Footer = () => {
 
             <div className="footer-right">
               <span className="payment-label mr-lg-8">We are using safe payment for</span>
-              <figure className="payment"><img src={image} alt="payment" /></figure>
+              <figure className="payment"><img src={image} alt="payment" width={300} height={400} /></figure>
             </div>
           </div>
         </div>

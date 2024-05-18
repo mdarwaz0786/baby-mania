@@ -1,7 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (formData.username === '' || formData.email === '' || formData.message === '') {
+      alert('Please fill in all fields');
+    } else {
+      alert('Submitted successfully');
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -119,23 +140,48 @@ const ContactUs = () => {
 
                 <div className="col-lg-6 mb-8">
                   <h4 className="title mb-3">Send Us a Message</h4>
-                  <form className="form contact-us-form" action="#" method="post">
+                  <form className="form contact-us-form" onSubmit={handleSubmit}>
                     <div className="form-group">
                       <label htmlFor="username">Your Name</label>
-                      <input type="text" id="username" name="username" className="form-control" required />
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        className="form-control"
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="email_1">Your Email</label>
-                      <input type="email" id="email_1" name="email_1" className="form-control" required />
+                      <label htmlFor="email">Your Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="form-control"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="message">Your Message</label>
-                      <textarea id="message" name="message" cols={30} rows={5} className="form-control" defaultValue={""} required />
+                      <textarea
+                        id="message"
+                        name="message"
+                        cols="30"
+                        rows="5"
+                        className="form-control"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                      ></textarea>
                     </div>
 
-                    <button type="submit" className="btn btn-dark btn-rounded" onClick={() => alert("Submitted successfully")}>Send Now</button>
+                    <button type="submit" className="btn btn-dark btn-rounded">Send Now</button>
                   </form>
                 </div>
               </div>
