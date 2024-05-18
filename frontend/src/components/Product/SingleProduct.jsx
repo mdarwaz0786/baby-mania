@@ -323,11 +323,10 @@ const SingleProduct = () => {
                     </div>
                   </div>
 
-
                   <div className="widget widget-banner mb-9">
                     <div className="banner banner-fixed br-sm">
                       <figure>
-                        <Link to="/product"> <img src={banner} alt="Banner" style={{ backgroundColor: '#1D2D44' }} /></Link>
+                        <Link to="/product" onClick={smoothScrollToTop}><img src={banner} alt="Banner" style={{ backgroundColor: '#1D2D44' }} /></Link>
                       </figure>
 
                       <div className="banner-content">

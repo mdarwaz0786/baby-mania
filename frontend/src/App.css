@@ -45,6 +45,18 @@
     width: auto !important;
     object-fit: contain !important;
   }
+
+  .middle-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1051;
+    background-color: white;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 @media (min-width: 768px) {

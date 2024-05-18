@@ -26,7 +26,7 @@ const MiddleHeader = () => {
 
   return (
     <header className="header">
-      <div className="header-middle">
+      <div className="header-middle middle-header">
         <div className="container">
           <div className="header-left mr-md-4">
             <Link to="#" className="mobile-menu-toggle w-icon-hamburger" aria-label="menu-toggle"></Link>
