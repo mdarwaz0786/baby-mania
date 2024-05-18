@@ -17,6 +17,16 @@ const BottomHeader = () => {
     window.scrollTo({ ...scrollOptions, left: 0 });
   };
 
+  function smoothScrollToTop() {
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth',
+      left: 0
+    };
+
+    window.scrollTo(scrollOptions);
+  }
+
   const handleMenuClose = () => {
     document.body.classList.remove('menu-active');
   };
@@ -88,19 +98,19 @@ const BottomHeader = () => {
 
                 <nav className="main-nav">
                   <ul className="menu active-underline">
-                    <li>
+                    <li onClick={smoothScrollToTop}>
                       <Link to="/">Home</Link>
                     </li>
 
-                    <li>
+                    <li onClick={smoothScrollToTop}>
                       <Link to="/product">Shop</Link>
                     </li>
 
-                    <li>
+                    <li onClick={smoothScrollToTop}>
                       <Link to="/contact-us">Contact Us</Link>
                     </li>
 
-                    <li>
+                    <li onClick={smoothScrollToTop}>
                       <Link to="/about-us">About Us</Link>
                     </li>
                   </ul>
@@ -136,23 +146,23 @@ const BottomHeader = () => {
           <div className="tab-content">
             <div className="tab-pane active" id="main-menu">
               <ul className="mobile-menu">
-                <li onClick={handleMenuItemClick}>
+                <li onClick={() => { handleMenuItemClick(); smoothScrollToTop() }}>
                   <Link to="/">Home</Link>
                 </li>
 
-                <li onClick={handleMenuItemClick}>
+                <li onClick={() => { handleMenuItemClick(); smoothScrollToTop() }}>
                   <Link to="/product">Shop</Link>
                 </li>
 
-                <li onClick={handleMenuItemClick}>
+                <li onClick={() => { handleMenuItemClick() }}>
                   <Link to="/contact-us">Contact Us</Link>
                 </li>
 
-                <li onClick={handleMenuItemClick}>
+                <li onClick={() => { handleMenuItemClick() }}>
                   <Link to="/about-us">About Us</Link>
                 </li>
 
-                <li onClick={handleMenuItemClick}>
+                <li onClick={() => { handleMenuItemClick() }}>
                   <Link to="/wishlist">Wishlist</Link>
                 </li>
 
