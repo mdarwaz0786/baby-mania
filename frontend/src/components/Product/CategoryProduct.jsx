@@ -24,13 +24,12 @@ const CategoryProduct = () => {
   });
 
   const handleScroll = () => {
-    if (window.innerWidth > 768) {
-      window.scrollTo(0, window.innerHeight * 0.79);
-    }
+    const scrollOptions = {
+      top: window.innerWidth > 768 ? window.innerHeight * 0.79 : window.innerHeight * 0.39,
+      behavior: 'smooth'
+    };
 
-    if (window.innerWidth < 768) {
-      window.scrollTo(0, window.innerHeight * 0.39);
-    }
+    window.scrollTo({ ...scrollOptions, left: 0 });
   };
 
   const cleanAll = () => {

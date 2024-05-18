@@ -20,9 +20,12 @@ const Category = () => {
   }, []);
 
   const handleScroll = () => {
-    if (window.innerWidth > 768) {
-      window.scrollTo(0, window.innerHeight * 0.75);
-    }
+    const scrollOptions = {
+      top: window.innerWidth > 768 ? window.innerHeight * 0.79 : window.innerHeight * 0.39,
+      behavior: 'smooth'
+    };
+
+    window.scrollTo({ ...scrollOptions, left: 0 });
   };
 
   return (

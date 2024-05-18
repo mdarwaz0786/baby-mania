@@ -3,21 +3,22 @@ import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    };
+    window.scrollTo(scrollOptions);
   }, []);
 
   return (
     <>
       <main className="main wishlist-page">
-        {/* Start of Page Header */}
         <div className="page-header">
           <div className="container">
             <h1 className="page-title mb-0">Wishlist</h1>
           </div>
         </div>
-        {/* End of Page Header */}
 
-        {/* Start of Breadcrumb */}
         <nav className="breadcrumb-nav mb-10">
           <div className="container">
             <ul className="breadcrumb">
@@ -26,9 +27,7 @@ const Wishlist = () => {
             </ul>
           </div>
         </nav>
-        {/* End of Breadcrumb */}
 
-        {/* Start of PageContent */}
         <div className="page-content">
           <div className="container">
             <h3 className="wishlist-title">My wishlist</h3>
@@ -48,7 +47,7 @@ const Wishlist = () => {
                     <div className="p-relative">
                       <Link to="#">
                         <figure>
-                          <img src="assets/images/shop/7-1.jpg" alt="product" width={300} height={338} />
+                          <img src="#" alt="product" width={300} height={338} />
                         </figure>
                       </Link>
                       <button type="submit" className="btn btn-close"><i className="fas fa-times" /></button>
@@ -73,7 +72,7 @@ const Wishlist = () => {
                     <div className="p-relative">
                       <Link to="#">
                         <figure>
-                          <img src="assets/images/shop/19-1.jpg" alt="product" width={300} height={338} />
+                          <img src="#" alt="product" width={300} height={338} />
                         </figure>
                       </Link>
                       <button type="submit" className="btn btn-close"><i className="fas fa-times" /></button>
@@ -95,7 +94,7 @@ const Wishlist = () => {
                     <div className="p-relative">
                       <Link to="#">
                         <figure>
-                          <img src="assets/images/shop/20.jpg" alt="product" width={300} height={338} />
+                          <img src="#" alt="product" width={300} height={338} />
                         </figure>
                       </Link>
                       <button type="submit" className="btn btn-close"><i className="fas fa-times" /></button>
@@ -115,7 +114,6 @@ const Wishlist = () => {
             </table>
           </div>
         </div>
-        {/* End of PageContent */}
       </main>
     </>
   );

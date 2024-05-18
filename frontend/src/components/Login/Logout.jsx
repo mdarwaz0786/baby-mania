@@ -10,7 +10,11 @@ const Logout = () => {
   }, [logOutUser]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    };
+    window.scrollTo(scrollOptions);
   }, []);
 
   return <Navigate to="/login" />;

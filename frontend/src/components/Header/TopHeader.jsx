@@ -9,7 +9,7 @@ const TopHeader = () => {
       <div className="header-top">
         <div className="container">
           <div className="header-left">
-            <p className="welcome-msg">Welcome to Wolmart Store message or remove it.</p>
+            <p className="welcome-msg">Welcome to BabyMania Store message or remove it.</p>
           </div>
 
           <div className="header-right">

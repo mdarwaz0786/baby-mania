@@ -8,6 +8,14 @@ const ContactUs = () => {
     message: ''
   });
 
+  useEffect(() => {
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    };
+    window.scrollTo(scrollOptions);
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -23,9 +31,6 @@ const ContactUs = () => {
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <>

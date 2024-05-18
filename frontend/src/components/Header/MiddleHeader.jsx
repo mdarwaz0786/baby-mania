@@ -16,7 +16,11 @@ const MiddleHeader = () => {
 
   const handleScroll = () => {
     if (window.innerWidth > 768) {
-      window.scrollTo(0, window.innerHeight * 0.75);
+      window.scrollTo(0, window.innerHeight * 0.79);
+    }
+
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, window.innerHeight * 0.39);
     }
   };
 
@@ -25,7 +29,7 @@ const MiddleHeader = () => {
       <div className="header-middle">
         <div className="container">
           <div className="header-left mr-md-4">
-            <Link to="/" className="mobile-menu-toggle w-icon-hamburger" aria-label="menu-toggle"></Link>
+            <Link to="#" className="mobile-menu-toggle w-icon-hamburger" aria-label="menu-toggle"></Link>
             <Link to="/" className="logo ml-lg-0"><img src={logo} alt="logo" width={144} height={45} /></Link>
             <form onSubmit={handleSearchSubmit} className="header-search hs-expanded hs-round d-md-flex input-wrapper">
               <input style={{ borderLeft: "2px solid #336699" }} type="text" className="form-control search-input" name="search" id="search" placeholder="Search Product" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} required />
@@ -53,7 +57,7 @@ const MiddleHeader = () => {
               <div className="cart-overlay" />
               <Link to="/cart" className="cart-toggle label-down link">
                 <i className="w-icon-cart">
-                  <span className="cart-count">2</span>
+                  <span className="cart-count">0</span>
                 </i>
                 <span className="cart-label">Cart</span>
               </Link>

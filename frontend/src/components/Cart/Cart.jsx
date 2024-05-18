@@ -17,6 +17,14 @@ const Cart = () => {
   const [address, setAddress] = useState("");
   const { validToken } = useAuth("");
 
+  useEffect(() => {
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    };
+    window.scrollTo(scrollOptions);
+  }, []);
+
   const fetchCarts = async () => {
     try {
       const response = await axios.get("/api/v1/cart/fetch-user-cart", {

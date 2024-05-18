@@ -20,7 +20,11 @@ const SingleProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    };
+    window.scrollTo(scrollOptions);
   }, []);
 
   const handleImageClick = (image) => {

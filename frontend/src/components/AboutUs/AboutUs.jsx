@@ -4,7 +4,11 @@ import { useEffect } from 'react';
 
 const AboutUs = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    };
+    window.scrollTo(scrollOptions);
   }, []);
 
   return (
