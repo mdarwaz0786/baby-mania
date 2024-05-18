@@ -10,15 +10,12 @@ const AboutUs = () => {
   return (
     <>
       <main className="main">
-        {/* Start of Page Header */}
         <div className="page-header">
           <div className="container">
             <h1 className="page-title mb-0">About Us</h1>
           </div>
         </div>
-        {/* End of Page Header */}
 
-        {/* Start of Page Content */}
         <div className="page-content">
           <div className="container">
             <section className="customer-service mb-7">
@@ -34,40 +31,31 @@ const AboutUs = () => {
 
                       <div className="card-body expanded">
                         <p className="mb-3">
-                          Lorem ipsum dolor sit eiusamet, consectetur adipiscing elit,
-                          sed do eius mod tempor incididunt ut labore
-                          et dolore magna aliqua. Venenatis tell
-                          us in metus vulputate eu scelerisque felis. Vel pretium vulp.
+                          Our dedicated customer service team is available to assist you with any inquiries or issues you may have. We strive to provide prompt and helpful support to ensure your satisfaction.
                         </p>
                       </div>
                     </div>
 
                     <div className="card border-no">
                       <div className="card-header">
-                        <Link to="#" className="collapse">Customer Service</Link>
+                        <Link to="#" className="collapse">Shipping and Delivery</Link>
                       </div>
 
                       <div className="card-body expanded">
                         <p className="mb-3">
-                          Lorem ipsum dolor sit eiusamet, consectetur adipiscing elit,
-                          sed do eius mod tempor incididunt ut labore
-                          et dolore magna aliqua. Venenatis tell
-                          us in metus vulputate eu scelerisque felis. Vel pretium vulp.
+                          Enjoy fast and reliable shipping services with us. We aim to deliver your orders to your doorstep in a timely manner, ensuring that you receive your purchases without delay.
                         </p>
                       </div>
                     </div>
 
                     <div className="card border-no">
                       <div className="card-header">
-                        <Link to="#" className="collapse">Customer Service</Link>
+                        <Link to="#" className="collapse">Returns and Exchanges</Link>
                       </div>
 
                       <div className="card-body expanded">
                         <p className="mb-3">
-                          Lorem ipsum dolor sit eiusamet, consectetur adipiscing elit,
-                          sed do eius mod tempor incididunt ut labore
-                          et dolore magna aliqua. Venenatis tell
-                          us in metus vulputate eu scelerisque felis. Vel pretium vulp.
+                          We offer hassle-free returns and exchanges for your convenience. If you are not completely satisfied with your purchase, simply contact us, and we will guide you through the process of returning or exchanging your item.
                         </p>
                       </div>
                     </div>
@@ -76,7 +64,7 @@ const AboutUs = () => {
 
                 <div className="col-md-6 mb-8">
                   <figure className="br-lg">
-                    <img src={image} alt="Banner" width={610} height={500} style={{ backgroundColor: '#CECECC' }} />
+                    <img src={image} alt="Banner" style={{ backgroundColor: '#CECECC' }} />
                   </figure>
                 </div>
               </div>

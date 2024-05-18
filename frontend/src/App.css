@@ -39,10 +39,22 @@
     margin-right: 3rem;
     display: flex;
   }
+
+  img.product-image {
+    height: 20rem !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
 }
 
 @media (min-width: 768px) {
   .category-item-img {
     margin-top: 2rem;
+  }
+
+  img.product-image {
+    height: 28rem !important;
+    width: auto !important;
+    object-fit: contain !important;
   }
 }

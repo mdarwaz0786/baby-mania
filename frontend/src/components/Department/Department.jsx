@@ -24,10 +24,9 @@ const Department = () => {
     fetchProduct();
   }, []);
 
-
   return (
     <>
-      <h3 className='text-center mt-5 mb-5' style={{ paddingTop: "2rem" }}>Popular Department</h3>
+      <h4 className='text-center mt-5 mb-3' style={{ paddingTop: "3rem" }}>Popular Department</h4>
       <div className="container">
         <div className="nav nav-tabs justify-content-center mb-1" style={{ borderBottom: "none", paddingBottom: "1rem" }}>
           <li className="nav-item mr-2 mb-2">

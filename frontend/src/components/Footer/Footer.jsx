@@ -22,8 +22,8 @@ const Footer = () => {
 
               <div className="col-xl-7 col-lg-6 col-md-9 mt-4 mt-lg-0 ">
                 <form action="#" method="get" className="input-wrapper input-wrapper-inline input-wrapper-rounded">
-                  <input type="email" className="form-control mr-2 bg-white" name="email" id="email" placeholder="Your E-mail Address" />
-                  <p className="btn btn-dark btn-rounded">Subscribe<i className="w-icon-long-arrow-right" /></p>
+                  <input type="email" className="form-control mr-2 bg-white" name="email" id="email" placeholder="Your E-mail Address" required />
+                  <submit type="submit" className="btn btn-dark btn-rounded" onClick={() => alert("Submitted successfully")} >Subscribe<i className="w-icon-long-arrow-right" /></submit>
                 </form>
               </div>
             </div>
@@ -35,10 +35,10 @@ const Footer = () => {
             <div className="row">
               <div className="col-lg-4 col-sm-6">
                 <div className="widget widget-about">
-                  <Link to="/" className="logo-footer" onClick={() => window.scrollTo(0, 0)}><img src={logo} alt="logo-footer" width={144} height={45} /></Link>
+                  <Link to="/" className="logo-footer" onClick={() => window.scrollTo(0, 0)}><img src={logo} alt="logo-footer" /></Link>
                   <div className="widget-body">
                     <p className="widget-about-title">Got Question? Call us 24/7</p>
-                    <a href="tel:18005707777" className="widget-about-call">1-800-570-7777</a>
+                    <a href="tel:18005707777" className="widget-about-call">+91-0123456789</a>
                     <p className="widget-about-desc">Register now to get updates on pronot get up icons &amp; coupons ster now toon.</p>
                     <div className="social-icons social-icons-colored">
                       <Link to="#" className="social-icon social-facebook w-icon-facebook" />
@@ -102,7 +102,7 @@ const Footer = () => {
 
             <div className="footer-right">
               <span className="payment-label mr-lg-8">We are using safe payment for</span>
-              <figure className="payment"><img src={image} alt="payment" width={159} height={25} /></figure>
+              <figure className="payment"><img src={image} alt="payment" /></figure>
             </div>
           </div>
         </div>

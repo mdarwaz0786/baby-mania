@@ -1,5 +1,5 @@
 import "../../App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -12,11 +12,20 @@ const OurProduct = () => {
     limit: 10,
   });
 
+  const productRef = useRef(null);
+
+  const handleScroll = () => {
+    if (productRef.current) {
+      productRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const handlePageChange = (newPage) => {
     if (newPage < 1 || (newPage > filters.page && products.length === 0)) {
       return;
     }
     setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
+    handleScroll();
   };
 
   useEffect(() => {
@@ -35,9 +44,12 @@ const OurProduct = () => {
     fetchProducts();
   }, [filters]);
 
+
   return (
     <>
-      <h3 className="text-center mb-5 mt-10">Our Products</h3>
+      <span ref={productRef}></span>
+      <span></span>
+      <h4 className="text-center mt-10">Our Products</h4>
       <div className="container">
         <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
           {
@@ -96,7 +108,6 @@ const OurProduct = () => {
             </li>
           </ul>
         </nav>
-
       </div>
     </>
   );

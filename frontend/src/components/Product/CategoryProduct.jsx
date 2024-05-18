@@ -23,6 +23,16 @@ const CategoryProduct = () => {
     limit: 12,
   });
 
+  const handleScroll = () => {
+    if (window.innerWidth > 768) {
+      window.scrollTo(0, window.innerHeight * 0.7);
+    }
+
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, window.innerHeight * 0.35);
+    }
+  };
+
   const cleanAll = () => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -102,6 +112,7 @@ const CategoryProduct = () => {
       return;
     }
     setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
+    handleScroll();
   };
 
   const handlePageLimitChange = (e) => {

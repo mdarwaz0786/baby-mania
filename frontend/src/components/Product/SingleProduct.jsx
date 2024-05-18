@@ -1,3 +1,4 @@
+import "../../App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -333,7 +334,6 @@ const SingleProduct = () => {
           </div>
 
           <h3 className="text-center mb-5 mt-10">Related Product</h3>
-
           <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
             {
               relatedProducts?.map((product) => (
@@ -341,7 +341,7 @@ const SingleProduct = () => {
                   <div className="product text-center">
                     <figure className="product-media">
                       <Link to={`/product/single-product/${product?._id}`} onClick={() => window.scrollTo(0, 0)}>
-                        <img src={product?.items[0]?.image} alt="Product" />
+                        <img className="product-image" src={product?.items[0]?.image} alt="Product" />
                       </Link>
                       <div className="product-action-vertical">
                         <Link to="#" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
