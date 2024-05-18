@@ -184,7 +184,7 @@ const BottomHeader = () => {
                     return (
                       <>
                         <li key={category?._id} style={{ textDecoration: "none", listStyle: "none" }} >
-                          <Link to={`/product/shop/${category?.name}`} onClick={(e) => { e.preventDefault(); handleMenuItemClick(); navigate(`/product/shop/${category?.name}`, { state: { categoryId: category?._id } }) }}>
+                          <Link to={`/product/shop/${category?.name}`} onClick={(e) => { e.preventDefault(); handleMenuItemClick(); handleScroll(); navigate(`/product/shop/${category?.name}`, { state: { categoryId: category?._id } }) }}>
                             {category?.name}
                           </Link>
                           {
@@ -193,7 +193,7 @@ const BottomHeader = () => {
                                 {
                                   category?.subcategories?.map((subcategory) => (
                                     <li key={subcategory?._id}>
-                                      <Link to={`/product/shop/${subcategory?.name}`} onClick={(e) => { e.preventDefault(); handleMenuItemClick(); navigate(`/product/shop/${subcategory?.name}`, { state: { subcategoryId: subcategory?._id } }) }}>{subcategory?.name}</Link>
+                                      <Link to={`/product/shop/${subcategory?.name}`} onClick={(e) => { e.preventDefault(); handleMenuItemClick(); handleScroll(); navigate(`/product/shop/${subcategory?.name}`, { state: { subcategoryId: subcategory?._id } }) }}>{subcategory?.name}</Link>
                                     </li>
                                   ))
                                 }

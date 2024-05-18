@@ -66,7 +66,7 @@ const Footer = () => {
             <div className="row">
               <div className="col-lg-4 col-sm-6">
                 <div className="widget widget-about">
-                  <Link to="/" className="logo-footer" onClick={smoothScrollToTop}><img src={logo} alt="logo-footer" style={{ width: "5rem", height: "4rem" }} /></Link>
+                  <Link to="/" className="logo-footer" onClick={smoothScrollToTop}><img src={logo} alt="logo-footer" style={{ width: "12rem", height: "10rem" }} /></Link>
                   <div className="widget-body">
                     <p className="widget-about-title">Got Question? Call us 24/7</p>
                     <a href="tel:18005707777" className="widget-about-call">+91-0123456789</a>
