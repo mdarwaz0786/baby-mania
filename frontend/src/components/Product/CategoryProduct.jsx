@@ -20,7 +20,7 @@ const CategoryProduct = () => {
     size: [],
     sort: 'relevance',
     page: 1,
-    limit: 6,
+    limit: 12,
   });
 
   const cleanAll = () => {
@@ -260,55 +260,46 @@ const CategoryProduct = () => {
               <div className="toolbox-right" style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="toolbox-item toolbox-show select-box">
                   <select name="count" className="form-control" value={filters.limit} onChange={handlePageLimitChange}>
-                    <option value={3}>Show 3</option>
-                    <option value={6}>Show 6</option>
-                    <option value={9}>Show 9</option>
+                    <option value={4}>Show 4</option>
+                    <option value={8}>Show 8</option>
                     <option value={12}>Show 12</option>
+                    <option value={16}>Show 16</option>
+                    <option value={20}>Show 20</option>
                   </select>
                 </div>
               </div>
             </nav>
 
-            <div className="product-wrapper row" style={{ marginTop: "2rem" }}>
+            <div className="row cols-xl-4 cols-md-4 cols-sm-3 cols-2" style={{ marginTop: "2rem" }}>
               {
-                products.map((product) => {
-                  return (
-                    <div className="col-lg-4 col-md-4 col-sm-6" key={product?._id}>
-                      <div className="product text-center">
-                        <figure className="product-media">
-                          <Link to={`/product/single-product/${product?._id}`}>
-                            <img className="product-image" src={product?.items[0]?.image} alt="Product" />
-                          </Link>
-                          <div className="product-action-horizontal">
-                            <Link to="/product" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
-                            <Link to="/product" className="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist" />
+                products?.map((product) => (
+                  <div className="product-wrap" key={product?._id}>
+                    <div className="product text-center">
+                      <figure className="product-media">
+                        <Link to={`/product/single-product/${product?._id}`}>
+                          <img className="product-image" src={product?.items[0]?.image} alt="product-image" />
+                        </Link>
+                        <div className="product-action-vertical">
+                          <Link to="#" className="btn-product-icon btn-cart w-icon-cart" title="Add to cart" />
+                          <Link to="#" className="btn-product-icon btn-wishlist w-icon-heart" title="Add to wishlist" />
+                        </div>
+                      </figure>
+                      <div className="product-details">
+                        <h4 className="product-name"><Link to="#">{product?.name}</Link></h4>
+                        <div className="ratings-container">
+                          <div className="ratings-full">
+                            <span className="ratings" style={{ width: '60%' }} />
+                            <span className="tooltiptext tooltip-top" />
                           </div>
-                        </figure>
-                        <div className="product-details">
-                          <div className="product-cat">
-                            <Link to="/product">{product?.category?.name}</Link>
-                          </div>
-                          <h3 className="product-name">
-                            <Link to="/product">{product?.name}</Link>
-                          </h3>
-                          <div className="ratings-container">
-                            <div className="ratings-full">
-                              <span className="ratings" style={{ width: '100%' }} />
-                              <span className="tooltiptext tooltip-top" />
-                            </div>
-                            <Link to="/product" className="rating-reviews">({product?.rating} reviews)</Link>
-                          </div>
-                          <div className="product-pa-wrapper">
-                            <div className="product-price" style={{ display: "flex", gap: "1.5rem" }}>
-                              <span style={{ textDecoration: "line-through", color: "#aca9a9" }}>₹{product?.salePrice} </span>
-                              <span> ₹{product?.salePrice}</span>
-                            </div>
-                          </div>
+                          <Link to="#" className="rating-reviews">({product?.rating} Reviews)</Link>
+                        </div>
+                        <div className="product-price">
+                          <ins className="new-price">₹{product?.salePrice}</ins>
                         </div>
                       </div>
                     </div>
-                  )
-                })
+                  </div>
+                ))
               }
               {products.length === 0 && <h5 className="text-center">No Data</h5>}
             </div>

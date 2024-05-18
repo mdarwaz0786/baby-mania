@@ -88,8 +88,13 @@ const SingleProduct = () => {
 
   const createCart = async () => {
     try {
-      if (!selectedColor || !selectedSize) {
-        alert('select color and size.');
+      if (!selectedColor) {
+        alert('select color.');
+        return;
+      }
+
+      if (!selectedSize) {
+        alert('select size.');
         return;
       }
 
@@ -322,11 +327,9 @@ const SingleProduct = () => {
                       </div>
                     </div>
                   </div>
-                  {/* End Widget Banner */}
                 </div>
               </div>
             </aside>
-            {/* End Sidebar */}
           </div>
 
           <h3 className="text-center mb-5 mt-10">Related Product</h3>

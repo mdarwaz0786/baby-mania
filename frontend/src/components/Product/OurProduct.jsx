@@ -54,13 +54,13 @@ const OurProduct = () => {
                     </div>
                   </figure>
                   <div className="product-details">
-                    <h4 className="product-name"><Link to="/">{product?.name}</Link></h4>
+                    <h4 className="product-name"><Link to="#">{product?.name}</Link></h4>
                     <div className="ratings-container">
                       <div className="ratings-full">
                         <span className="ratings" style={{ width: '60%' }} />
                         <span className="tooltiptext tooltip-top" />
                       </div>
-                      <Link to="/" className="rating-reviews">({product?.rating} Reviews)</Link>
+                      <Link to="#" className="rating-reviews">({product?.rating} Reviews)</Link>
                     </div>
                     <div className="product-price">
                       <ins className="new-price">₹{product?.salePrice}</ins>

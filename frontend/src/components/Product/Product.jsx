@@ -18,7 +18,7 @@ const Product = () => {
     size: [],
     sort: 'relevance',
     page: 1,
-    limit: 10,
+    limit: 12,
   });
 
   const cleanAll = () => {
@@ -155,7 +155,7 @@ const Product = () => {
                   <h3 className="widget-title"><span>All Categories</span></h3>
                   <ul className="widget-body filter-items search-ul">
                     {
-                      categories.map((category) => {
+                      categories?.map((category) => {
                         return (
                           <>
                             <li key={category?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
@@ -173,7 +173,7 @@ const Product = () => {
                   <h3 className="widget-title"><span>Sub Categories</span></h3>
                   <ul className="widget-body filter-items search-ul">
                     {
-                      categories.map((category) =>
+                      categories?.map((category) =>
                         category?.subcategories?.map((subcategory) => (
                           <li key={subcategory?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem", }} >
                             <input type="checkbox" name="subcategory" value={subcategory?._id} onChange={handleFilterChange} checked={filters.subcategory.includes(subcategory._id)} />
@@ -245,16 +245,17 @@ const Product = () => {
               <div className="toolbox-right" style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="toolbox-item toolbox-show select-box">
                   <select name="count" className="form-control" value={filters.limit} onChange={handlePageLimitChange}>
-                    <option value={5}>Show 5</option>
-                    <option value={10}>Show 10</option>
-                    <option value={15}>Show 15</option>
-                    <option value={15}>Show 20</option>
+                    <option value={4}>Show 4</option>
+                    <option value={8}>Show 8</option>
+                    <option value={12}>Show 12</option>
+                    <option value={16}>Show 16</option>
+                    <option value={20}>Show 20</option>
                   </select>
                 </div>
               </div>
             </nav>
 
-            <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2" style={{ marginTop: "2rem" }}>
+            <div className="row cols-xl-4 cols-md-4 cols-sm-3 cols-2" style={{ marginTop: "2rem" }}>
               {
                 products?.map((product) => (
                   <div className="product-wrap" key={product?._id}>
@@ -269,13 +270,13 @@ const Product = () => {
                         </div>
                       </figure>
                       <div className="product-details">
-                        <h4 className="product-name"><Link to="/">{product?.name}</Link></h4>
+                        <h4 className="product-name"><Link to="#">{product?.name}</Link></h4>
                         <div className="ratings-container">
                           <div className="ratings-full">
                             <span className="ratings" style={{ width: '60%' }} />
                             <span className="tooltiptext tooltip-top" />
                           </div>
-                          <Link to="/" className="rating-reviews">({product?.rating} Reviews)</Link>
+                          <Link to="#" className="rating-reviews">({product?.rating} Reviews)</Link>
                         </div>
                         <div className="product-price">
                           <ins className="new-price">₹{product?.salePrice}</ins>
