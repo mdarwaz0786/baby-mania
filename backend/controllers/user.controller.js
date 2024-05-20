@@ -100,9 +100,9 @@ export const fetchSingleUser = async (req, res) => {
 // controller for update user
 export const updateUser = async (req, res) => {
   try {
-    const { name, email, mobile, password } = req.body;
+    const { name, email, mobile, password, isAdmin } = req.body;
     const userId = req.params.id;
-    const updatedUser = await User.findByIdAndUpdate(userId, { name, email, mobile, password }, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(userId, { name, email, mobile, password, isAdmin }, { new: true });
     if (!updatedUser) {
       return res.status(404).json({ success: false, message: "user not found" });
     };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
   const [category, setCategory] = useState([]);
@@ -34,6 +35,7 @@ const AddProduct = () => {
   const [image4, setImage4] = useState(null);
   const [selectedColor4, setSelectedColor4] = useState("");
   const [selectedSize4, setSelectedSize4] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -127,11 +129,14 @@ const AddProduct = () => {
     }
   };
 
-
   return (
     <div className="container" style={{ marginTop: "2rem", marginBottom: "5rem" }}>
       <div className="card shadow p-5">
-        <h5 className="card-title text-center mb-5">Add Product</h5>
+        <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
+          <h5 className="card-title">Add Product</h5>
+          <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className="row g-5">
             <div className="col mb-5">

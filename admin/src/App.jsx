@@ -17,6 +17,7 @@ import ProductList from "./components/Admin/Product/ProductList.jsx";
 import AddProduct from "./components/Admin/Product/AddProduct.jsx";
 import EditProduct from "./components/Admin/Product/EditProduct.jsx";
 import CustomerList from "./components/Admin/Customer/CustomerList.jsx";
+import ViewUser from "./components/Admin/Customer/ViewUser.jsx";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="add-product" element={<AddProduct />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
           <Route path="customer-list" element={<CustomerList />} />
+          <Route path="view-user/:id" element={<ViewUser />} />
         </Route>
       </Routes>
     </>

@@ -58,7 +58,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.product}</div>
-                  <Link to="/admin/product-list" className="saw-indicator__caption">Go To Product</Link>
+                  <Link to="/admin/product-list" className="saw-indicator__caption">Go To Product List</Link>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.category}</div>
-                  <Link to="/admin/category-list" className="saw-indicator__caption">Go To Category</Link>
+                  <Link to="/admin/category-list" className="saw-indicator__caption">Go To Category List</Link>
                 </div>
               </div>
             </div>
@@ -115,12 +115,10 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.color}</div>
-                  <Link to="/admin/color-list" className="saw-indicator__caption">Go To Color</Link>
+                  <Link to="/admin/color-list" className="saw-indicator__caption">Go To Color List</Link>
                 </div>
               </div>
             </div>
-
-
 
             <div className="col-12 col-md-4 d-flex">
               <div className="card saw-indicator flex-grow-1">
@@ -145,11 +143,10 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.size}</div>
-                  <Link to="/size-list" className="saw-indicator__caption">Go To Size</Link>
+                  <Link to="/admin/size-list" className="saw-indicator__caption">Go To Size List</Link>
                 </div>
               </div>
             </div>
-
 
             <div className="col-12 col-md-4 d-flex">
               <div className="card saw-indicator flex-grow-1">
@@ -172,7 +169,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.user}</div>
-                  <Link to="/admin/customer-list" className="saw-indicator__caption">Go To Customer</Link>
+                  <Link to="/admin/customer-list" className="saw-indicator__caption">Go To Customer List</Link>
                 </div>
               </div>
             </div>
@@ -198,7 +195,7 @@ const Dashboard = () => {
 
                 <div className="saw-indicator__body">
                   <div className="saw-indicator__value">{allData?.order}</div>
-                  <Link to="/admin/order-list" className="saw-indicator__caption">Go To Order</Link>
+                  <Link to="/admin/order-list" className="saw-indicator__caption">Go To Order List</Link>
                 </div>
               </div>
             </div>

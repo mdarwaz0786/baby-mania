@@ -175,67 +175,35 @@ export const fetchSingleProduct = async (req, res) => {
 };
 
 
-// controller to update product by ID
 export const updateProduct = async (req, res) => {
   try {
-    // Get the product ID from the request parameters
-    const productId = req.params.id;
-
-    // Destructure updated product details from the request body
-    const { category, subcategory, name, rating, skuCode, mrpPrice, salePrice, availability, status, featuredProduct, latestProduct, bestSellingProduct, specialProduct, newProduct, smallInfo, description } = req.body;
-
-    // Map uploaded files to an array of image objects
-    const images = req.files.map((file) => ({
-      image: file.path,
-    }));
-
-    // Upload all images to Cloudinary
-    const uploadPromises = images.map((image) => cloudinary.uploader.upload(image.image));
-
-    // Wait for all uploads to complete
-    const results = await Promise.all(uploadPromises);
-
-    // Extract secure URLs and public IDs from Cloudinary response
-    const imageUrls = results.map((result) => result.secure_url);
-    const publicIds = results.map((result) => result.public_id);
-
-    // Create an array of item objects with updated images and Cloudinary IDs
-    const items = images.map((image, index) => ({
-      image: imageUrls[index],
-      cloudinary_id: publicIds[index],
-      color: req.body.color,
-      size: req.body.size,
-    }));
-
     // Find the product by ID
-    const product = await Product.findById(productId);
+    let product = await Product.findById(req.params.id);
 
-    // Update product fields
-    product.category = category;
-    product.subcategory = subcategory;
-    product.name = name;
-    product.rating = rating;
-    product.skuCode = skuCode;
-    product.mrpPrice = mrpPrice;
-    product.salePrice = salePrice;
-    product.availability = availability;
-    product.status = status;
-    product.featuredProduct = featuredProduct;
-    product.latestProduct = latestProduct;
-    product.bestSellingProduct = bestSellingProduct;
-    product.specialProduct = specialProduct;
-    product.newProduct = newProduct;
-    product.smallInfo = smallInfo;
-    product.description = description;
-    product.items = items;
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    };
 
-    // Save the updated product
-    await product.save();
+    // Prepare the updated data
+    const data = {
+      name: req.body.name || product.name,
+      rating: req.body.rating || product.rating,
+      skuCode: req.body.skuCode || product.skuCode,
+      mrpPrice: req.body.mrpPrice || product.mrpPrice,
+      salePrice: req.body.salePrice || product.salePrice,
+      availability: req.body.availability || product.availability,
+      status: req.body.status || product.status,
+      featuredProduct: req.body.featuredProduct || product.featuredProduct,
+      latestProduct: req.body.latestProduct || product.latestProduct,
+      bestSellingProduct: req.body.bestSellingProduct || product.bestSellingProduct,
+      specialProduct: req.body.specialProduct || product.specialProduct,
+      newProduct: req.body.newProduct || product.newProduct,
+      smallInfo: req.body.smallInfo || product.smallInfo,
+      description: req.body.description || product.description,
+    };
 
-    // Delete uploaded files from the server
-    images.map((image) => {
-      fs.unlinkSync(image.image);
-    });
+    // Update the product with new data
+    product = await Product.findByIdAndUpdate(req.params.id, data, { new: true });
 
     // Return success response with updated product
     return res.status(200).json({ success: true, message: "Product updated successfully", product });

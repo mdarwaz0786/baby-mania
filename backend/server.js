@@ -89,6 +89,7 @@ server.get("/admin/product-list", (req, res) => { res.sendFile(path.join(__dirna
 server.get("/admin/add-product", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 server.get("/admin/edit-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 server.get("/admin/customer-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/view-user/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 
 // environment variable
 const port = process.env.PORT || 8080;

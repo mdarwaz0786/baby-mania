@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CheckBox from "./Checkbox";
-
 
 const SizeList = () => {
   const [colors, setColors] = useState([]);
+  const navigate = useNavigate();
   var i = 1;
 
   useEffect(() => {
@@ -28,28 +28,31 @@ const SizeList = () => {
 
   const deleteColor = async (id) => {
     try {
-      axios.delete(`/api/v1/color/delete-color/${id}`);
+      await axios.delete(`/api/v1/color/delete-color/${id}`);
       fetchColors();
     } catch (error) {
       console.log('error while deleting color:', error.message);
     }
   };
 
-  const updateColorStatus = async (id, showStatus) => {
+  const updateStatus = async (id, showStatus) => {
     try {
       await axios.put(`/api/v1/color/update-color/${id}`, { status: showStatus });
       fetchColors();
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
   return (
     <>
       <div id="top" className="sa-app__body">
-        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
-            <h4 className="text-center mt-5 mb-3">Color List</h4>
+            <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
+              <h5 className="card-title">Color List</h5>
+              <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+            </div>
 
             <div className="container">
               <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" /></div>
@@ -74,9 +77,8 @@ const SizeList = () => {
                             <td><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></td>
                             <td>{i++}</td>
                             <td><Link to="#" className="text-reset">{color?.name}</Link></td>
-                            <td><span style={{ backgroundColor: color?.colorCode, color: "transparent", borderRadius: "50%", display: "inline-block", width: "2rem", height: "2rem", textAlign: "center" }} />
-                            </td>
-                            <td><span className="d-flex fs-6"><span className="badge badge-sa-danger">{color?.status}</span><CheckBox updateColorStatus={updateColorStatus} id={color?._id} showStatus={color?.status} /></span></td>
+                            <td><span style={{ backgroundColor: color?.colorCode, color: "transparent", borderRadius: "50%", display: "inline-block", width: "2rem", height: "2rem", textAlign: "center" }} /></td>
+                            <td><span className="d-flex fs-6"><span className={`badge ${color?.status === "Show" ? 'badge-sa-success' : 'badge-sa-danger'}`}>{color?.status}</span><CheckBox updateStatus={updateStatus} id={color?._id} showStatus={color?.status} /></span></td>
 
                             <td>
                               <div className="dropdown">
@@ -104,7 +106,6 @@ const SizeList = () => {
           </div>
         </div>
       </div>
-
 
       <div className="sa-example__body">
         <nav aria-label="Page navigation example">

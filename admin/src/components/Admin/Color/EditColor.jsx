@@ -3,13 +3,14 @@ import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EditColor = () => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
   const [colorCode, setColorCode] = useState("");
   const { id } = useParams();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,12 +43,16 @@ const EditColor = () => {
 
   useEffect(() => {
     fetchSingleColor(id);
-  }, []);
+  }, [id]);
 
   return (
     <div className="container" style={{ marginTop: "2rem" }}>
       <div className="card shadow p-4">
-        <h5 className="card-title text-center mb-4">Add Color</h5>
+        <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
+          <h5 className="card-title">Edit Color</h5>
+          <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+        </div>
+
         <form>
           <div className="row g-3">
             <div className="col">
@@ -70,7 +75,7 @@ const EditColor = () => {
             </div>
           </div>
           <div className="text-center mt-4">
-            <button type="submit" className="btn btn-primary" onClick={(e) => handleUpdate(e, id)}>Submit</button>
+            <button type="submit" className="btn btn-primary" onClick={(e) => handleUpdate(e, id)}>Update</button>
           </div>
         </form>
       </div>

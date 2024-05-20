@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const AddSize = () => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,7 +31,11 @@ const AddSize = () => {
   return (
     <div className="container" style={{ marginTop: "2rem" }}>
       <div className="card shadow p-4">
-        <h5 className="card-title text-center mb-4">Add Size</h5>
+        <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
+          <h5 className="card-title">Edit Size</h5>
+          <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className="row g-3">
             <div className="col">

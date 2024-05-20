@@ -3,34 +3,58 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import "../../../App.css";
-
+import CheckBox from "./Checkbox";
+import { useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   var i = 1;
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("/api/v1/product/all-product");
+      setProducts(response?.data?.product);
+    } catch (error) {
+      console.log('error while fetching products:', error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("/api/v1/product/all-product");
-        setProducts(response?.data?.product);
-      } catch (error) {
-        console.log('error while fetching products:', error.message);
-      }
-    };
     fetchProducts();
   }, []);
+
+  const deleteProduct = async (id) => {
+    try {
+      await axios.delete(`/api/v1/product/delete-product/${id}`);
+      fetchProducts();
+    } catch (error) {
+      console.log('error while deleting product:', error.message);
+    }
+  };
+
+  const updateStatus = async (id, showStatus) => {
+    try {
+      await axios.put(`/api/v1/product/update-product/${id}`, { status: showStatus });
+      fetchProducts();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className="custom-table">
       <div id="top" className="sa-app__body">
-        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6 custom-table">
+        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 custom-table">
           <div className="container">
-            <h4 className="text-center mt-5 mb-3">Product List</h4>
+            <div className="mb-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
+              <h5 className="card-title">Category List</h5>
+              <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+            </div>
 
             <div className="container">
               <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" /></div>
@@ -60,9 +84,9 @@ const ProductList = () => {
                             <td><Link to="#" className="text-reset">{product?.skuCode}</Link></td>
                             <td><img src={product?.items[0]?.image} alt="product-image" style={{ width: "3rem", height: "3rem" }} /></td>
                             <td><Link to="#" className="text-reset">{product?.name}</Link></td>
-                            <td><div className="d-flex fs-6"><div className="badge badge-sa-success">₹{product?.salePrice}</div></div></td>
+                            <td><div className="d-flex fs-6"><div>₹{product?.salePrice}</div></div></td>
                             <td><div className="sa-price"><span className="sa-price__decimal">{product?.category?.name}</span></div></td>
-                            <td><div className="d-flex fs-6"><div className="badge badge-sa-danger">{product?.status}</div></div></td>
+                            <td><span className="d-flex fs-6"><span className={`badge ${product?.status === "Show" ? 'badge-sa-success' : 'badge-sa-danger'}`}>{product?.status}</span><CheckBox updateStatus={updateStatus} id={product?._id} showStatus={product?.status} /></span></td>
 
                             <td>
                               <div className="dropdown">
@@ -73,9 +97,9 @@ const ProductList = () => {
                                 </button>
 
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
-                                  <li><Link className="dropdown-item" to="#">Edit</Link></li>
+                                  <li><Link className="dropdown-item" to={`/admin/edit-product/${product?._id}`}>Edit</Link></li>
                                   <li><hr className="dropdown-divider" /></li>
-                                  <li><Link className="dropdown-item text-danger" to="#">Delete</Link></li>
+                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteProduct(product?._id)}>Delete</Link></li>
                                 </ul>
                               </div>
                             </td>
@@ -90,7 +114,6 @@ const ProductList = () => {
           </div>
         </div>
       </div>
-
 
       <div className="sa-example__body">
         <nav aria-label="Page navigation example">

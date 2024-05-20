@@ -62,19 +62,12 @@ export const fetchSingleCategory = async (req, res) => {
 // controller to update category
 export const updateCategory = async (req, res) => {
   try {
-    const { path } = req.file;
     let category = await Category.findById(req.params.id);
     if (!category) {
       return res.status(404).json({ success: false, message: "category not found" });
     };
-    let result;
-    if (req.file) {
-      result = await cloudinary.uploader.upload(path);
-    };
     const data = {
       name: req.body.name || category.name,
-      image: result?.secure_url || category.image,
-      cloudinary_id: result?.public_id || category.cloudinary_id,
       status: req.body.status || category.status,
       showHeader: req.body.showHeader || category.showHeader,
       shopByCategory: req.body.shopByCategory || category.shopByCategory,
@@ -82,13 +75,9 @@ export const updateCategory = async (req, res) => {
       subcategories: req.body.subcategories || category.subcategories,
     };
     category = await Category.findByIdAndUpdate(req.params.id, data, { new: true });
-    if (!category) {
-      return res.status(404).json({ success: false, message: "category not found" });
-    };
-    fs.unlinkSync(path);
     return res.status(200).json({ success: true, message: "category updated successfully", category });
   } catch (error) {
-    console.log("error while updating category:", error.message);
+    console.log("error while updating category error from controller:", error.message);
     return res.status(500).json({ success: false, message: "error while updating category" });
   };
 };

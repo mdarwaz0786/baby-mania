@@ -1,35 +1,62 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import CheckBox from "./Checkbox";
 
 const CustomerList = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
   var i = 1;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("/api/v1/user/all-user");
+      setUsers(response?.data?.user);
+    } catch (error) {
+      console.log('error while fetching users:', error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get("/api/v1/user/all-user");
-        setUsers(response?.data?.user);
-      } catch (error) {
-        console.log('error while fetching users:', error.message);
-      }
-    };
     fetchUsers();
   }, []);
+
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`/api/v1/user/delete-user/${id}`);
+      fetchUsers();
+    } catch (error) {
+      console.log('error while deleting user:', error.message);
+    }
+  };
+
+  const updateStatus = async (id, isAdmin) => {
+    try {
+      const response = await axios.put(`/api/v1/user/update-user/${id}`, { isAdmin });
+      if (response.data.success) {
+        fetchUsers();
+      } else {
+        console.log('Failed to update user:', response.data.message);
+      }
+    } catch (error) {
+      console.log('Error updating user status:', error.message);
+    }
+  };
 
   return (
     <>
       <div id="top" className="sa-app__body">
-        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
-            <h4 className="text-center mt-5 mb-3">Customer List</h4>
+            <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
+              <h5 className="card-title">Customer List</h5>
+              <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+            </div>
 
             <div className="container">
               <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" /></div>
@@ -38,7 +65,7 @@ const CustomerList = () => {
                   <tr>
                     <th className="w-min" data-orderable="false"><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></th>
                     <th>#</th>
-                    <th>Registered</th>
+                    <th>Date</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile</th>
@@ -56,12 +83,19 @@ const CustomerList = () => {
                           <tr key={user?._id}>
                             <td><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></td>
                             <td>{i++}</td>
-                            <td>{user?.createdAt}</td>
+                            <td>{new Date(user?.createdAt).toLocaleString()}</td>
                             <td><Link to="#" className="text-reset">{user?.name}</Link></td>
                             <td>{user?.email}</td>
                             <td><Link to="#" className="text-reset">{user?.mobile}</Link></td>
-                            <td><div className="d-flex fs-6"><div className="badge badge-sa-success">{user?.password}</div></div></td>
-                            <td><div><span>{user?.isAdmin ? "Admin" : "User"}</span></div></td>
+                            <td><div className="d-flex fs-6"><div>{user?.password}</div></div></td>
+                            <td>
+                              <span className="d-flex fs-6">
+                                <span className={`badge ${user?.isAdmin ? 'badge-sa-success' : 'badge-sa-danger'}`}>
+                                  {user?.isAdmin ? "Admin" : "User"}
+                                </span>
+                                <CheckBox updateStatus={updateStatus} id={user?._id} isAdmin={user?.isAdmin} />
+                              </span>
+                            </td>
 
                             <td>
                               <div className="dropdown">
@@ -72,9 +106,9 @@ const CustomerList = () => {
                                 </button>
 
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
-                                  <li><Link className="dropdown-item" to="#">View</Link></li>
+                                  <li><Link className="dropdown-item" to={`/admin/view-user/${user?._id}`}>View</Link></li>
                                   <li><hr className="dropdown-divider" /></li>
-                                  <li><Link className="dropdown-item text-danger" to="#">Delete</Link></li>
+                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteUser(user?._id)}>Delete</Link></li>
                                 </ul>
                               </div>
                             </td>
@@ -89,7 +123,6 @@ const CustomerList = () => {
           </div>
         </div>
       </div>
-
 
       <div className="sa-example__body">
         <nav aria-label="Page navigation example">

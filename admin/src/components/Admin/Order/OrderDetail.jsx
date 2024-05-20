@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import userIcon from "../../../assets/user.png";
 
 const OrderDetail = () => {
   const { id } = useParams();
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,33 +29,34 @@ const OrderDetail = () => {
     return total + item?.quantity;
   }, 0);
 
-
   return (
     <>
       <div id="top" className="sa-app__body">
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
           <div className="container container--max--xl">
+            <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
+              <h5 className="card-title">Order Detail</h5>
+              <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+            </div>
 
             <div className="py-5">
               <div className="row g-4 align-items-center">
                 <div className="col">
-                  <h1 className="h3 m-0">Order #{orders?._id}</h1>
+                  <h1 className="h3 m-0">#{orders?._id}</h1>
                 </div>
               </div>
             </div>
 
-
             <div className="sa-page-meta mb-5">
               <div className="sa-page-meta__body">
                 <div className="sa-page-meta__list">
-                  <div className="sa-page-meta__item">{orders?.createdAt}</div>
+                  <div className="sa-page-meta__item">{new Date(orders?.createdAt).toLocaleString()}</div>
                   <div className="sa-page-meta__item">{totalQuantity}</div>
                   <div className="sa-page-meta__item">Total ₹{orders?.totalPrice}</div>
                   <div className="sa-page-meta__item d-flex align-items-center fs-6"><span className="badge badge-sa-success me-2">{orders?.paymentMethod}</span></div>
                 </div>
               </div>
             </div>
-
 
             <div className="sa-entity-layout">
               <div className="sa-entity-layout__body">
@@ -64,7 +66,6 @@ const OrderDetail = () => {
                       <h2 className="mb-0 fs-exact-18 me-4">Items</h2>
                       <div className="text-muted fs-exact-14"><Link to="/admin/order-list">Edit items</Link></div>
                     </div>
-
 
                     <div className="table-responsive">
                       <table className="sa-table">
@@ -96,7 +97,6 @@ const OrderDetail = () => {
                           }
                         </tbody>
 
-
                         <tbody>
                           <tr>
                             <td colSpan={3}>Total</td>
@@ -108,7 +108,6 @@ const OrderDetail = () => {
                       </table>
                     </div>
                   </div>
-
 
                   <div className="card mt-5">
                     <div className="card-body px-5 py-4 d-flex align-items-center justify-content-between">
@@ -180,7 +179,6 @@ const OrderDetail = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

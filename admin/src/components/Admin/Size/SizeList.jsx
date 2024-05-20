@@ -1,35 +1,58 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import CheckBox from "./Checkbox";
 
 const SizeList = () => {
   const [sizes, setSizes] = useState([]);
+  const navigate = useNavigate();
   var i = 1;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fetchSizes = async () => {
+    try {
+      const response = await axios.get("/api/v1/size/all-size");
+      setSizes(response?.data?.size);
+    } catch (error) {
+      console.log('error while fetching sizes:', error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchSizes = async () => {
-      try {
-        const response = await axios.get("/api/v1/size/all-size");
-        setSizes(response?.data?.size);
-      } catch (error) {
-        console.log('error while fetching sizes:', error.message);
-      }
-    };
     fetchSizes();
   }, []);
+
+  const deleteSize = async (id) => {
+    try {
+      await axios.delete(`/api/v1/size/delete-size/${id}`);
+      fetchSizes();
+    } catch (error) {
+      console.log('error while deleting size:', error.message);
+    }
+  };
+
+  const updateStatus = async (id, showStatus) => {
+    try {
+      await axios.put(`/api/v1/size/update-size/${id}`, { status: showStatus });
+      fetchSizes();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
       <div id="top" className="sa-app__body">
-        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+        <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
-            <h4 className="text-center mt-5 mb-3">Size List</h4>
+            <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
+              <h5 className="card-title">Size List</h5>
+              <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
+            </div>
 
             <div className="container">
               <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" /></div>
@@ -53,7 +76,7 @@ const SizeList = () => {
                             <td><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></td>
                             <td>{i++}</td>
                             <td><Link to="#" className="text-reset">{size?.name}</Link></td>
-                            <td><div className="d-flex fs-6"><div className="badge badge-sa-danger">{size?.status}</div></div></td>
+                            <td><span className="d-flex fs-6"><span className={`badge ${size?.status === "Show" ? 'badge-sa-success' : 'badge-sa-danger'}`}>{size?.status}</span><CheckBox updateStatus={updateStatus} id={size?._id} showStatus={size?.status} /></span></td>
 
                             <td>
                               <div className="dropdown">
@@ -64,9 +87,9 @@ const SizeList = () => {
                                 </button>
 
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
-                                  <li><Link className="dropdown-item" to="#">Edit</Link></li>
+                                  <li><Link className="dropdown-item" to={`/admin/edit-size/${size?._id}`}>Edit</Link></li>
                                   <li><hr className="dropdown-divider" /></li>
-                                  <li><Link className="dropdown-item text-danger" to="#">Delete</Link></li>
+                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteSize(size?._id)}>Delete</Link></li>
                                 </ul>
                               </div>
                             </td>
