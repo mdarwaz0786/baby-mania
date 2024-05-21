@@ -224,10 +224,10 @@ const Cart = () => {
                       {
                         carts?.map((cart) => {
                           return (
-                            <tr key={cart._id}>
+                            <tr key={cart?._id}>
                               <td className="product-thumbnail">
                                 <div className="p-relative">
-                                  <Link to={`/product/single-product/${cart.product._id}`}>
+                                  <Link to={`/product/single-product/${cart?.product?._id}`}>
                                     <figure>
                                       <img src={cart?.product?.items[0]?.image} alt="product" width={300} height={338} />
                                     </figure>
