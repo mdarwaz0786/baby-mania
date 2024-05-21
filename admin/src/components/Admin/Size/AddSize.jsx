@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddSize = () => {
   const [name, setName] = useState("");
@@ -19,12 +20,13 @@ const AddSize = () => {
       if (response?.data?.success) {
         setName("");
         setStatus("");
-        alert("Size added");
+        toast.success("size added successfully");
       } else {
         console.log(response?.data?.message);
       }
     } catch (error) {
       console.log("Error while adding size:", error.message);
+      toast.error("error while adding size");
     }
   };
 

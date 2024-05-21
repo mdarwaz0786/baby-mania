@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -30,9 +31,10 @@ const OrderList = () => {
     try {
       await axios.put(`/api/v1/order/update-order/${orderId}`, { status: selectedStatus[orderId] });
       fetchOrders();
-      alert("order status updated");
+      toast.success("order status updated successfully");
     } catch (error) {
       console.log('Error while updating order status:', error.message);
+      toast.error("error while updating order status");
     }
   };
 
@@ -40,8 +42,10 @@ const OrderList = () => {
     try {
       await axios.delete(`/api/v1/order/delete-order/${orderId}`);
       fetchOrders();
+      toast.success("order deleted successfully");
     } catch (error) {
       console.log('Error while deleting order:', error.message);
+      toast.error("error while deleting order");
     }
   };
 
@@ -56,7 +60,7 @@ const OrderList = () => {
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
             <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
-              <h5 className="card-title">Order List</h5>
+              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>Order List</h5>
               <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
             </div>
 

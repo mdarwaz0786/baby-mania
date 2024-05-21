@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "../../../App.css";
 import CheckBox from "./Checkbox";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -31,9 +32,11 @@ const ProductList = () => {
   const deleteProduct = async (id) => {
     try {
       await axios.delete(`/api/v1/product/delete-product/${id}`);
+      toast.success("product deleted successfully");
       fetchProducts();
     } catch (error) {
       console.log('error while deleting product:', error.message);
+      toast.error("error while deleting product");
     }
   };
 
@@ -52,7 +55,7 @@ const ProductList = () => {
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 custom-table">
           <div className="container">
             <div className="mb-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
-              <h5 className="card-title">Product List</h5>
+              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>Product List</h5>
               <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
             </div>
 

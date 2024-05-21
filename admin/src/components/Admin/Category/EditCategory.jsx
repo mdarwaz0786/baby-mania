@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditCategory = () => {
   const [name, setName] = useState("");
@@ -22,12 +23,11 @@ const EditCategory = () => {
     try {
       const response = await axios.put(`/api/v1/category/update-category/${id}`, { name, status, showHeader, shopByCategory, ourCategory, subcategories });
       if (response?.data?.success) {
-        alert("Category updated");
-      } else {
-        console.log(response?.data?.message);
+        toast.success("category updated successfully");
       }
     } catch (error) {
       console.log("Error while updating category:", error.message);
+      toast.error("error while updating category");
     }
   };
 

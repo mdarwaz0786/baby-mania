@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext.jsx";
 import { loadStripe } from '@stripe/stripe-js';
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
@@ -79,6 +80,7 @@ const Cart = () => {
           Authorization: validToken,
         },
       });
+
       fetchCarts();
     } catch (error) {
       console.log('error while updating cart quantity:', error.message);
@@ -111,12 +113,12 @@ const Cart = () => {
       };
 
       if (!orderData.products || orderData.products.length === 0) {
-        alert("Your cart is empty.");
+        toast.error("your cart is empty");
         return;
       }
 
       if (!country || !state || !city || !zipCode || !mobile || !address) {
-        alert('Please enter all address detail.');
+        toast.error('please enter all address detail to place order');
         return;
       }
 
@@ -134,23 +136,23 @@ const Cart = () => {
         setMobile("");
         setZipCode("");
         setState("");
-        alert("order successfull");
+        toast.success("order successful");
       }
     } catch (error) {
       console.log('error while creating order:', error.message);
+      toast.error("error while creating order");
     }
   };
-
 
   const checkout = async () => {
     try {
       if (!carts || carts?.length === 0) {
-        alert("Your cart is empty.");
+        toast.error("your cart is empty");
         return;
       }
 
       if (!country || !state || !city || !zipCode || !mobile || !address) {
-        alert('Please enter all address detail.');
+        toast.error('please enter all address detail to place order');
         return;
       }
 
@@ -160,8 +162,10 @@ const Cart = () => {
           Authorization: validToken,
         },
       });
+
       const sessionId = response?.data?.sessionId;
       const result = stripe.redirectToCheckout({ sessionId });
+
       if (result.error) {
         console.log(result.error);
       }
@@ -177,6 +181,7 @@ const Cart = () => {
       }
     } catch (error) {
       console.log('Error while creating order:', error.message);
+      toast.error("error while ordering product");
     }
   };
 

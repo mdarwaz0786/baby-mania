@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import CheckBox from "./Checkbox";
+import { toast } from 'react-toastify';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
@@ -29,9 +30,11 @@ const CategoryList = () => {
   const deleteCategory = async (id) => {
     try {
       await axios.delete(`/api/v1/category/delete-category/${id}`);
+      toast.success("category deleted successfully");
       fetchCategories();
     } catch (error) {
       console.log('error while deleting category:', error.message);
+      toast.error("error while deleting category");
     }
   };
 
@@ -50,7 +53,7 @@ const CategoryList = () => {
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
             <div className="mb-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
-              <h5 className="card-title">Category List</h5>
+              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>Category List</h5>
               <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
             </div>
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import banner from "../../assets/banner3.jpg";
 import { useAuth } from "../../context/authContext.jsx";
+import { toast } from 'react-toastify';
 
 const SingleProduct = () => {
   const [products, setProducts] = useState({});
@@ -67,7 +68,7 @@ const SingleProduct = () => {
         setProducts(response?.data?.product);
         setCategoryId(response?.data?.product?.category?._id);
       } catch (error) {
-        console.log('error while fetching single products:', error.message);
+        console.log('error while fetching single product:', error.message);
       }
     };
 
@@ -92,9 +93,6 @@ const SingleProduct = () => {
 
   const relatedProducts = getRelatedProducts(categoryId);
 
-  console.log("relatedProducts", relatedProducts);
-  console.log("categoryId", categoryId);
-
   const product = id;
   const color = selectedColor;
   const size = selectedSize;
@@ -102,17 +100,17 @@ const SingleProduct = () => {
   const createCart = async () => {
     try {
       if (!selectedColor) {
-        alert('select color.');
+        toast.error('select color');
         return;
       }
 
       if (!selectedSize) {
-        alert('select size.');
+        toast.error('select size');
         return;
       }
 
       if (!isLoggedIn) {
-        alert('you are not logged in.');
+        toast.error('you are not logged in');
         return;
       }
 
@@ -122,10 +120,11 @@ const SingleProduct = () => {
         },
       });
 
-      alert("item added to cart");
+      toast.success("item added to cart");
       navigate("/cart");
     } catch (error) {
       console.log('error while creating cart:', error.message);
+      toast.error("error while adding item to cart");
     }
   };
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditSize = () => {
   const [name, setName] = useState("");
@@ -19,12 +20,11 @@ const EditSize = () => {
     try {
       const response = await axios.put(`/api/v1/size/update-size/${id}`, { name, status });
       if (response?.data?.success) {
-        alert("Size updated");
-      } else {
-        console.log(response?.data?.message);
+        toast.success("size updated successfully");
       }
     } catch (error) {
       console.log("Error while updating size:", error.message);
+      toast.error("error while updating size");
     }
   };
 

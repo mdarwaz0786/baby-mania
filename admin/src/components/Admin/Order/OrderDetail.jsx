@@ -35,7 +35,7 @@ const OrderDetail = () => {
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
           <div className="container container--max--xl">
             <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
-              <h5 className="card-title">Order Detail</h5>
+              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>Order Detail</h5>
               <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
             </div>
 

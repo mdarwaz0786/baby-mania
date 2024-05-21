@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddProduct = () => {
   const [category, setCategory] = useState([]);
@@ -120,12 +121,11 @@ const AddProduct = () => {
       });
 
       if (response?.data?.success) {
-        alert("product added");
-      } else {
-        console.log(response?.data?.message);
+        toast.success("product added successfully");
       }
     } catch (error) {
-      console.log("error while creating product error from frontend:", error.message);
+      console.log("error while creating product:", error.message);
+      toast.error("error while adding product");
     }
   };
 

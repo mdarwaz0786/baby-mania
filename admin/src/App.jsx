@@ -18,13 +18,16 @@ import AddProduct from "./components/Admin/Product/AddProduct.jsx";
 import EditProduct from "./components/Admin/Product/EditProduct.jsx";
 import CustomerList from "./components/Admin/Customer/CustomerList.jsx";
 import ViewUser from "./components/Admin/Customer/ViewUser.jsx";
+import Signup from "./components/Signup/Signup.jsx";
+import Login from "./components/Login/Login.jsx";
+import Logout from "./components/Logout/Logout.jsx";
 
 const App = () => {
   return (
     <>
       <Routes>
         <Route path="/admin" element={<AdminPage />}>
-          <Route path="" element={<Dashboard />} />
+          <Route index element={<Dashboard />} />
           <Route path="order-list" element={<OrderList />} />
           <Route path="order-detail/:id" element={<OrderDetail />} />
           <Route path="size-list" element={<SizeList />} />
@@ -42,6 +45,9 @@ const App = () => {
           <Route path="customer-list" element={<CustomerList />} />
           <Route path="view-user/:id" element={<ViewUser />} />
         </Route>
+        <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/logout" element={<Logout />} />
       </Routes>
     </>
   );

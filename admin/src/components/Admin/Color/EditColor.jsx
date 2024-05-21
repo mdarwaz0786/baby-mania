@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditColor = () => {
   const [name, setName] = useState("");
@@ -21,12 +22,13 @@ const EditColor = () => {
     try {
       const response = await axios.put(`/api/v1/color/update-color/${id}`, { name, status, colorCode });
       if (response?.data?.success) {
-        alert("Color updated");
+        toast.success("color updated successfully");
       } else {
         console.log(response?.data?.message);
       }
     } catch (error) {
       console.log("Error while updating color:", error.message);
+      toast.error("error while updating color");
     }
   };
 

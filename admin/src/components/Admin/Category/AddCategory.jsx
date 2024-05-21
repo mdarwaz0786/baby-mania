@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddCategory = () => {
   const [name, setName] = useState("");
@@ -61,12 +62,11 @@ const AddCategory = () => {
         setShopByCategory("");
         setOurCategory("");
         setSubcategories([{ name: '' }]);
-        alert("Category added");
-      } else {
-        console.log(response?.data?.message);
+        toast.success("category added successfully");
       }
     } catch (error) {
       console.log("Error while adding category:", error.message);
+      toast.error("error while adding category");
     }
   };
 

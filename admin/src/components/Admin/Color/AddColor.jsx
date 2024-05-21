@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddColor = () => {
   const [name, setName] = useState("");
@@ -20,12 +21,11 @@ const AddColor = () => {
         setName("");
         setStatus("");
         setColorCode("");
-        alert("Color added");
-      } else {
-        console.log(response?.data?.message);
+        toast.success("color added successfully");
       }
     } catch (error) {
       console.log("Error while adding color:", error.message);
+      toast.error("error while adding color")
     }
   };
 

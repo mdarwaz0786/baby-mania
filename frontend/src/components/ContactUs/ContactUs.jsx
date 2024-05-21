@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -25,12 +26,11 @@ const ContactUs = () => {
     e.preventDefault();
 
     if (formData.username === '' || formData.email === '' || formData.message === '') {
-      alert('Please fill in all fields');
+      toast.error('please enter all detail');
     } else {
-      alert('Submitted successfully');
+      toast.success('submitted successfully');
     }
   };
-
 
   return (
     <>

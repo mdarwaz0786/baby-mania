@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import CheckBox from "./Checkbox";
+import { toast } from 'react-toastify';
 
 const CustomerList = () => {
   const [users, setUsers] = useState([]);
@@ -29,9 +30,11 @@ const CustomerList = () => {
   const deleteUser = async (id) => {
     try {
       await axios.delete(`/api/v1/user/delete-user/${id}`);
+      toast.success("user deleted successfully");
       fetchUsers();
     } catch (error) {
       console.log('error while deleting user:', error.message);
+      toast.error("error while deleting user");
     }
   };
 
@@ -41,7 +44,7 @@ const CustomerList = () => {
       if (response.data.success) {
         fetchUsers();
       } else {
-        console.log('Failed to update user:', response.data.message);
+        console.log('Failed to update user status:', response.data.message);
       }
     } catch (error) {
       console.log('Error updating user status:', error.message);
@@ -54,7 +57,7 @@ const CustomerList = () => {
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
             <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
-              <h5 className="card-title">Customer List</h5>
+              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>Customer List</h5>
               <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
             </div>
 

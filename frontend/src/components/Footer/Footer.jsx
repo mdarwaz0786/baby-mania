@@ -1,15 +1,16 @@
 import image from "../../assets/payment.png";
 import logo from "../../assets/header-logo.png";
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const Footer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     if (email.trim() === '') {
-      alert('Please enter your email address');
+      toast.error('please enter your email');
     } else {
-      alert('Submitted successfully');
+      toast.success('submitted successfully');
     }
   };
 

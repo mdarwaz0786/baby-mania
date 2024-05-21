@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditProduct = () => {
   const [name, setName] = useState("");
@@ -47,12 +48,11 @@ const EditProduct = () => {
         description
       });
       if (response?.data?.success) {
-        alert("Product updated");
-      } else {
-        console.log(response?.data?.message);
+        toast.success("product updated successfully");
       }
     } catch (error) {
       console.log("Error while updating product:", error.message);
+      toast.error("error while updating product");
     }
   };
 

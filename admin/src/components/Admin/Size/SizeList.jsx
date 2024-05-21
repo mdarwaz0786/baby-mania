@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import CheckBox from "./Checkbox";
+import { toast } from 'react-toastify';
 
 const SizeList = () => {
   const [sizes, setSizes] = useState([]);
@@ -29,9 +30,11 @@ const SizeList = () => {
   const deleteSize = async (id) => {
     try {
       await axios.delete(`/api/v1/size/delete-size/${id}`);
+      toast.success("size deleted successfully");
       fetchSizes();
     } catch (error) {
       console.log('error while deleting size:', error.message);
+      toast.error("error while deleting size");
     }
   };
 
@@ -50,7 +53,7 @@ const SizeList = () => {
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
             <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
-              <h5 className="card-title">Size List</h5>
+              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>Size List</h5>
               <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
             </div>
 

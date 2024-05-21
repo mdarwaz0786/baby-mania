@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import userIcon from "../../assets/user.png";
 import { useEffect } from "react";
+import { useAuth } from "../../context/authContext.jsx";
 
 const Sidebar = () => {
   const [catalog, setCatalog] = useState(false);
@@ -11,6 +12,7 @@ const Sidebar = () => {
   const [inbox, setInbox] = useState(false);
   const [setting, setSetting] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -215,12 +217,11 @@ const Sidebar = () => {
                 </button>
               </div>
 
-              <div className="dropdown sa-toolbar__item"><button className="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-offset="0,1" aria-expanded="false"><span className="sa-toolbar-user__avatar sa-symbol sa-symbol--shape--rounded"><img src={userIcon} width={64} height={64} alt /></span><span className="sa-toolbar-user__info"><span className="sa-toolbar-user__title">Admin</span><span className="sa-toolbar-user__subtitle">admin@gmail.com</span></span></button>
+              <div className="dropdown sa-toolbar__item"><button className="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-offset="0,1" aria-expanded="false"><span className="sa-toolbar-user__avatar sa-symbol sa-symbol--shape--rounded"><img src={userIcon} width={64} height={64} alt /></span><span className="sa-toolbar-user__info"><span className="sa-toolbar-user__title">{user?.name}</span></span></button>
                 <ul className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                  <li><Link className="dropdown-item" to="#">Profile</Link></li>
-                  <li><Link className="dropdown-item" to="#">Setting</Link></li>
+                  <li><Link className="dropdown-item" to="/auth/login">Log In</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="#">Sign Out</Link></li>
+                  <li><Link className="dropdown-item" to="/auth/login">Log Out</Link></li>
                 </ul>
               </div>
             </div>
