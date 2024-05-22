@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from 'axios';
-import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -13,10 +12,6 @@ const AddCategory = () => {
   const [ourCategory, setOurCategory] = useState("");
   const [subcategories, setSubcategories] = useState([{ name: '' }]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleSubcategoryChange = (index, value) => {
     const newSubcategories = [...subcategories];
@@ -71,7 +66,7 @@ const AddCategory = () => {
   };
 
   return (
-    <div className="container" style={{ marginTop: "2rem" }}>
+    <div className="container" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
       <div className="card shadow p-5">
         <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
           <h5 className="card-title">Add Category</h5>
@@ -132,11 +127,11 @@ const AddCategory = () => {
           </div>
 
           {
-            subcategories.map((subcategory, index) => (
+            subcategories?.map((subcategory, index) => (
               <div className="row g-5" key={index}>
                 <div className="col mb-5">
                   <label htmlFor={`subcategory-${index}`} className="form-label">Subcategory {index + 1}</label>
-                  <input type="text" className="form-control" placeholder={`Subcategory ${index + 1}`} aria-label={`Subcategory ${index + 1}`} value={subcategory.name} onChange={(e) => handleSubcategoryChange(index, e.target.value)} />
+                  <input type="text" className="form-control" placeholder={`Subcategory ${index + 1}`} aria-label={`Subcategory ${index + 1}`} value={subcategory?.name} onChange={(e) => handleSubcategoryChange(index, e.target.value)} />
                 </div>
                 {
                   index > 0 && (

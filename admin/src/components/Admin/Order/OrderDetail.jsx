@@ -10,10 +10,6 @@ const OrderDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`/api/v1/order/single-order/${id}`);
@@ -31,7 +27,7 @@ const OrderDetail = () => {
 
   return (
     <>
-      <div id="top" className="sa-app__body">
+      <div id="top" className="sa-app__body" style={{ marginBottom: "1rem" }}>
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
           <div className="container container--max--xl">
             <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>

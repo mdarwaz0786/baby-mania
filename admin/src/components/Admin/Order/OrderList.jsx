@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { useEffect } from "react";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState({});
   const [filterStatus, setFilterStatus] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
 
   const fetchOrders = async () => {
     try {
@@ -26,6 +23,10 @@ const OrderList = () => {
       console.log('error while fetching orders:', error.message);
     }
   };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
   const handleStatusUpdate = async (orderId) => {
     try {

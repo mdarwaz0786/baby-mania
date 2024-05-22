@@ -14,10 +14,6 @@ const EditCategory = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleUpdate = async (e, id) => {
     e.preventDefault();
     try {
@@ -66,7 +62,7 @@ const EditCategory = () => {
   };
 
   return (
-    <div className="container" style={{ marginTop: "2rem" }}>
+    <div className="container" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
       <div className="card shadow p-5">
         <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
           <h5 className="card-title">Edit Category</h5>
@@ -121,11 +117,11 @@ const EditCategory = () => {
             </div>
 
             {
-              subcategories.map((subcategory, index) => (
+              subcategories?.map((subcategory, index) => (
                 <div className="row g-5" key={index}>
                   <div className="col mb-1">
                     <label htmlFor={`subcategory-${index}`} className="form-label">Subcategory {index + 1}</label>
-                    <input type="text" className="form-control" placeholder={`Subcategory ${index + 1}`} aria-label={`Subcategory ${index + 1}`} value={subcategory.name} onChange={(e) => handleSubcategoryChange(index, e.target.value)} />
+                    <input type="text" className="form-control" placeholder={`Subcategory ${index + 1}`} aria-label={`Subcategory ${index + 1}`} value={subcategory?.name} onChange={(e) => handleSubcategoryChange(index, e.target.value)} />
                   </div>
                   {
                     index > 0 && (

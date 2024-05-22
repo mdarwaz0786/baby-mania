@@ -1,12 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "../../App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/header-logo.png";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../../context/authContext.jsx";
 
 const MiddleHeader = () => {
+  const [carts, setCarts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const navigate = useNavigate();
+  const { validToken } = useAuth("");
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
@@ -15,14 +20,30 @@ const MiddleHeader = () => {
   };
 
   const handleScroll = () => {
-    if (window.innerWidth > 768) {
-      window.scrollTo(0, window.innerHeight * 0.79);
-    }
+    const scrollOptions = {
+      top: window.innerWidth > 768 ? window.innerHeight * 0.79 : window.innerHeight * 0.37,
+      behavior: 'smooth'
+    };
 
-    if (window.innerWidth < 768) {
-      window.scrollTo(0, window.innerHeight * 0.39);
+    window.scrollTo({ scrollOptions });
+  };
+
+  const fetchCarts = async () => {
+    try {
+      const response = await axios.get("/api/v1/cart/fetch-user-cart", {
+        headers: {
+          Authorization: validToken,
+        },
+      });
+      setCarts(response?.data?.cart);
+    } catch (error) {
+      console.log('error while fetching carts:', error.message);
     }
   };
+
+  useEffect(() => {
+    fetchCarts();
+  }, []);
 
   return (
     <header className="header">
@@ -57,7 +78,7 @@ const MiddleHeader = () => {
               <div className="cart-overlay" />
               <Link to="/cart" className="cart-toggle label-down link">
                 <i className="w-icon-cart">
-                  <span className="cart-count">0</span>
+                  <span className="cart-count">{carts?.length}</span>
                 </i>
                 <span className="cart-label">Cart</span>
               </Link>

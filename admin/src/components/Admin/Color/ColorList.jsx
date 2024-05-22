@@ -10,10 +10,6 @@ const SizeList = () => {
   const navigate = useNavigate();
   var i = 1;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const fetchColors = async () => {
     try {
       const response = await axios.get("/api/v1/color/all-color");
@@ -94,7 +90,7 @@ const SizeList = () => {
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
                                   <li><Link className="dropdown-item" to={`/admin/edit-color/${color?._id}`}>Edit</Link></li>
                                   <li><hr className="dropdown-divider" /></li>
-                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteColor(color._id)}>Delete</Link></li>
+                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteColor(color?._id)}>Delete</Link></li>
                                 </ul>
                               </div>
                             </td>
@@ -110,7 +106,7 @@ const SizeList = () => {
         </div>
       </div>
 
-      <div className="sa-example__body">
+      <div className="sa-example__body" style={{ marginBottom: "4rem" }}>
         <nav aria-label="Page navigation example">
           <ul className="pagination pagination-sm">
             <li className="page-item disabled"><a className="page-link" tabIndex={-1} aria-disabled="true">Previous</a></li>

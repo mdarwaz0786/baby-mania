@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from 'axios';
-import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -9,9 +8,6 @@ const AddColor = () => {
   const [status, setStatus] = useState("");
   const [colorCode, setColorCode] = useState("");
   const navigate = useNavigate();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +26,7 @@ const AddColor = () => {
   };
 
   return (
-    <div className="container" style={{ marginTop: "2rem" }}>
+    <div className="container" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
       <div className="card shadow p-4">
         <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
           <h5 className="card-title">Add Color</h5>

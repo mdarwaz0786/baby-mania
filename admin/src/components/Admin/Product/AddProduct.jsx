@@ -39,10 +39,6 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     const fetchAllColor = async () => {
       try {
         const response = await axios.get("/api/v1/color/all-color");
@@ -144,7 +140,7 @@ const AddProduct = () => {
               <select className="form-select" aria-label="Category" name="category" id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                 <option value="" disabled>-- Select Category --</option>
                 {
-                  category.map((category) => (
+                  category?.map((category) => (
                     <option key={category?._id} value={category?._id}>{category?.name}</option>
                   ))
                 }

@@ -21,6 +21,9 @@ import ViewUser from "./components/Admin/Customer/ViewUser.jsx";
 import Signup from "./components/Signup/Signup.jsx";
 import Login from "./components/Login/Login.jsx";
 import Logout from "./components/Logout/Logout.jsx";
+import EnquiryList from "./components/Admin/Contact/EnquiryList.jsx";
+import Newsletter from "./components/Admin/Newsletter/Newsletter.jsx";
+import ViewEnquiry from "./components/Admin/Contact/ViewEnquiry.jsx";
 
 const App = () => {
   return (
@@ -44,6 +47,9 @@ const App = () => {
           <Route path="edit-product/:id" element={<EditProduct />} />
           <Route path="customer-list" element={<CustomerList />} />
           <Route path="view-user/:id" element={<ViewUser />} />
+          <Route path="enquiry-list" element={<EnquiryList />} />
+          <Route path="view-enquiry/:id" element={<ViewEnquiry />} />
+          <Route path="newsletter" element={<Newsletter />} />
         </Route>
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/login" element={<Login />} />

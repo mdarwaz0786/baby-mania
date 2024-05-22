@@ -7,12 +7,8 @@ const Logout = () => {
   const { logOutUser } = useAuth();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
-    logOutUser();
     toast.success("logout successful");
+    logOutUser();
   }, [logOutUser]);
 
   return <Navigate to="/auth/login" />;

@@ -346,7 +346,7 @@ const SingleProduct = () => {
           <h3 className="text-center mb-5 mt-10">Related Product</h3>
           <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
             {
-              relatedProducts?.map((product) => (
+              relatedProducts?.filter((product) => product?.status === "Show")?.map((product) => (
                 <div className="product-wrap" key={product?._id}>
                   <div className="product text-center">
                     <figure className="product-media">

@@ -7,8 +7,8 @@ const Logout = () => {
   const { logOutUser } = useAuth();
 
   useEffect(() => {
-    logOutUser();
     toast.success("logout successful");
+    logOutUser();
   }, [logOutUser]);
 
   useEffect(() => {

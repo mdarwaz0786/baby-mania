@@ -5,33 +5,31 @@ import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const ViewUser = () => {
+const ViewEnquiry = () => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
-  const [password, setPassword] = useState("");
-  const [type, setType] = useState("");
+  const [message, setMessage] = useState("");
 
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const fetchSingleUser = async (id) => {
+  const fetchSingleContact = async (id) => {
     try {
-      const response = await axios.get(`/api/v1/user/single-user/${id}`);
-      setName(response?.data?.user?.name);
-      setDate(response?.data?.user?.createdAt);
-      setEmail(response?.data?.user?.email);
-      setMobile(response?.data?.user?.mobile);
-      setPassword(response?.data?.user?.password);
-      setType(response?.data?.user?.isAdmin);
+      const response = await axios.get(`/api/v1/contact/single-contact/${id}`);
+      setName(response?.data?.contact?.name);
+      setDate(response?.data?.contact?.createdAt);
+      setEmail(response?.data?.contact?.email);
+      setMobile(response?.data?.contact?.mobile);
+      setMessage(response?.data?.contact?.message);
     } catch (error) {
-      console.log("Error while fetching single color:", error.message);
+      console.log("Error while fetching single contact enquiry:", error.message);
     }
   };
 
   useEffect(() => {
-    fetchSingleUser(id);
+    fetchSingleContact(id);
   }, [id]);
 
   return (
@@ -56,26 +54,21 @@ const ViewUser = () => {
           </div>
 
           <div className="row g-5">
+            <div className="col mb-5">
+              <label htmlFor="date" className="form-label">Date</label>
+              <input type="text" className="form-control" placeholder="Created At" aria-label="Created At" name="date" id="date" value={new Date(date).toLocaleString()} readOnly />
+            </div>
+
             <div className="col">
               <label htmlFor="mobile" className="form-label">Mobile</label>
               <input type="text" className="form-control" placeholder="Mobile" aria-label="Mobile" name="mobile" id="mobile" value={mobile} readOnly />
             </div>
-
-            <div className="col mb-5">
-              <label htmlFor="password" className="form-label">Password</label>
-              <input type="text" className="form-control" placeholder="Password" aria-label="Password" name="password" id="password" value={password} readOnly />
-            </div>
           </div>
 
           <div className="row g-5">
-            <div className="col mb-5">
-              <label htmlFor="type" className="form-label">User Type</label>
-              <input type="text" className="form-control" placeholder="User Type" aria-label="User Type" name="type" id="type" value={type ? "Admin" : "User"} readOnly />
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="date" className="form-label">Date</label>
-              <input type="text" className="form-control" placeholder="Created At" aria-label="Created At" name="date" id="date" value={new Date(date).toLocaleString()} readOnly />
+            <div className="col">
+              <label htmlFor="message" className="form-label">Message</label>
+              <textarea type="text" className="form-control" placeholder="Message" aria-label="Message" name="message" id="message" value={message} readOnly />
             </div>
           </div>
         </form>
@@ -84,4 +77,4 @@ const ViewUser = () => {
   );
 };
 
-export default ViewUser;
+export default ViewEnquiry;

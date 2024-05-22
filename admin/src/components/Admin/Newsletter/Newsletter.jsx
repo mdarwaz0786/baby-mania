@@ -2,44 +2,34 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
-import CheckBox from "./Checkbox";
 import { toast } from 'react-toastify';
 
-const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
-  var i = 1;
+const Newsletter = () => {
+  const [newsletters, setNewsletters] = useState([]);
   const navigate = useNavigate();
+  var i = 1;
 
-  const fetchCategories = async () => {
+  const fetchNewsletters = async () => {
     try {
-      const response = await axios.get("/api/v1/category/all-category");
-      setCategories(response?.data?.category);
+      const response = await axios.get("/api/v1/newsletter/all-newsletter");
+      setNewsletters(response?.data?.newsletter);
     } catch (error) {
-      console.log('error while fetching categories:', error.message);
+      console.log('error while fetching newsletter:', error.message);
     }
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchNewsletters();
   }, []);
 
-  const deleteCategory = async (id) => {
+  const deleteNewsletter = async (id) => {
     try {
-      await axios.delete(`/api/v1/category/delete-category/${id}`);
-      toast.success("category deleted successfully");
-      fetchCategories();
+      await axios.delete(`/api/v1/newsletter/delete-newsletter/${id}`);
+      toast.success("newsletter deleted successfully");
+      fetchNewsletters();
     } catch (error) {
-      console.log('error while deleting category:', error.message);
-      toast.error("error while deleting category");
-    }
-  };
-
-  const updateStatus = async (id, showStatus) => {
-    try {
-      await axios.put(`/api/v1/category/update-category/${id}`, { status: showStatus });
-      fetchCategories();
-    } catch (error) {
-      console.log(error.message);
+      console.log('error while deleting newsletter:', error.message);
+      toast.error("error while deleting newsletter");
     }
   };
 
@@ -48,8 +38,8 @@ const CategoryList = () => {
       <div id="top" className="sa-app__body">
         <div className="mx-sm-2 px-2 px-sm-3 px-xxl-4">
           <div className="container">
-            <div className="mb-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
-              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>Category List</h5>
+            <div className="mb-1 mt-1" style={{ display: "flex", justifyContent: "space-between", alignContent: "center", paddingTop: "1rem" }}>
+              <h5 className="card-title" style={{ paddingLeft: "1rem" }}>News Letter List</h5>
               <button className="btn btn-primary" onClick={() => navigate(-1)}>back</button>
             </div>
 
@@ -60,24 +50,22 @@ const CategoryList = () => {
                   <tr>
                     <th className="w-min" data-orderable="false"><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></th>
                     <th>#</th>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Email</th>
                     <th className="w-min" data-orderable="false">Actions</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {
-                    categories?.map((category) => {
+                    newsletters?.map((newsletter) => {
                       return (
                         <>
-                          <tr key={category?._id}>
+                          <tr key={newsletter?._id}>
                             <td><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></td>
                             <td>{i++}</td>
-                            <td><img src={category?.image} alt="product-image" style={{ width: "3rem", height: "3rem" }} /></td>
-                            <td><Link to="#" className="text-reset">{category?.name}</Link></td>
-                            <td><span className="d-flex fs-6"><span className={`badge ${category?.status === "Show" ? 'badge-sa-success' : 'badge-sa-danger'}`}>{category?.status}</span><CheckBox updateStatus={updateStatus} id={category?._id} showStatus={category?.status} /></span></td>
+                            <td><Link to="#" className="text-reset">{new Date(newsletter?.createdAt).toLocaleString()}</Link></td>
+                            <td><Link to="#" className="text-reset">{newsletter?.email}</Link></td>
 
                             <td>
                               <div className="dropdown">
@@ -88,9 +76,7 @@ const CategoryList = () => {
                                 </button>
 
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="order-context-menu-0">
-                                  <li><Link className="dropdown-item" to={`/admin/edit-category/${category?._id}`}>Edit</Link></li>
-                                  <li><hr className="dropdown-divider" /></li>
-                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteCategory(category?._id)}>Delete</Link></li>
+                                  <li><Link className="dropdown-item text-danger" to="#" onClick={() => deleteNewsletter(newsletter?._id)}>Delete</Link></li>
                                 </ul>
                               </div>
                             </td>
@@ -121,6 +107,6 @@ const CategoryList = () => {
   );
 };
 
-export default CategoryList;
+export default Newsletter;
 
 

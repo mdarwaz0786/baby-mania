@@ -10,7 +10,7 @@ const BottomHeader = () => {
 
   const handleScroll = () => {
     const scrollOptions = {
-      top: window.innerWidth > 768 ? window.innerHeight * 0.79 : window.innerHeight * 0.39,
+      top: window.innerWidth > 768 ? window.innerHeight * 0.79 : window.innerHeight * 0.37,
       behavior: 'smooth'
     };
 
@@ -67,7 +67,7 @@ const BottomHeader = () => {
                   <div className="dropdown-box">
                     <ul className="menu vertical-menu category-menu">
                       {
-                        categories?.map((category) => {
+                        categories?.filter((category) => category?.status === "Show")?.map((category) => {
                           return (
                             <li key={category?._id} style={{ marginLeft: "5.5rem", textDecoration: "none", listStyle: "none" }}>
                               <Link to={`/product/shop/${category?.name}`} onClick={(e) => { e.preventDefault(); navigate(`/product/shop/${category?.name}`, { state: { categoryId: category?._id } }); handleScroll() }}>{category?.name}</Link>
@@ -190,7 +190,7 @@ const BottomHeader = () => {
             <div className="tab-pane" id="categories">
               <ul className="mobile-menu">
                 {
-                  categories?.map((category) => {
+                  categories?.filter((category) => category?.status === "Show")?.map((category) => {
                     return (
                       <>
                         <li key={category?._id} style={{ textDecoration: "none", listStyle: "none" }} >

@@ -45,7 +45,7 @@ const Department = () => {
         <div style={{ display: activeTab === 'tab1' ? 'block' : 'none' }}>
           <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
             {
-              products?.filter((product) => product.status === "Show" && product.newProduct === "Yes").map((product) => {
+              products?.filter((product) => product?.status === "Show" && product?.newProduct === "Yes")?.map((product) => {
                 return (
                   <div className="product-wrap" key={product?._id}>
                     <div className="product text-center">
@@ -86,7 +86,7 @@ const Department = () => {
         <div style={{ display: activeTab === 'tab2' ? 'block' : 'none' }}>
           <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
             {
-              products?.filter((product) => product.status === "Show" && product.bestSellingProduct === "Yes").map((product) => {
+              products?.filter((product) => product?.status === "Show" && product?.bestSellingProduct === "Yes")?.map((product) => {
                 return (
                   <div className="product-wrap" key={product?._id}>
                     <div className="product text-center">
@@ -127,7 +127,7 @@ const Department = () => {
         <div style={{ display: activeTab === 'tab3' ? 'block' : 'none' }}>
           <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
             {
-              products?.filter((product) => product.status === "Show" && product.featuredProduct === "Yes").map((product) => {
+              products?.filter((product) => product?.status === "Show" && product?.featuredProduct === "Yes")?.map((product) => {
                 return (
                   <div className="product-wrap" key={product?._id}>
                     <div className="product text-center">

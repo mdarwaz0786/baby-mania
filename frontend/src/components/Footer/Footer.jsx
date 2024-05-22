@@ -2,15 +2,26 @@ import image from "../../assets/payment.png";
 import logo from "../../assets/header-logo.png";
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
+import axios from "axios";
+import { useState } from "react";
 
 const Footer = () => {
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    if (email.trim() === '') {
-      toast.error('please enter your email');
-    } else {
-      toast.success('submitted successfully');
+    try {
+      if (!email) {
+        return toast.error('please enter your email');
+      }
+      const response = await axios.post("/api/v1/newsletter/create-newsletter", { email });
+      if (response?.data?.success) {
+        setEmail("");
+        toast.success("newsletter subscribed successfully");
+      }
+    } catch (error) {
+      console.log("Error while subscribing newsletter:", error.message);
+      toast.error("error while subscribing newsletter");
     }
   };
 
@@ -50,6 +61,8 @@ const Footer = () => {
                     className="form-control mr-2 bg-white"
                     name="email"
                     id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your E-mail Address"
                     required
                   />

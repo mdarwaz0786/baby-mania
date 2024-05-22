@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
           Authorization: validToken,
         },
       });
-      setUser(response.data.userData);
+      setUser(response?.data?.userData);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

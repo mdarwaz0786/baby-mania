@@ -16,8 +16,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/v1/user/register-user", { name, email, password, mobile });
-      if (response.data.success) {
-        storeToken(response.data.token);
+      if (response?.data?.success) {
+        storeToken(response?.data?.token);
         setName("");
         setEmail("");
         setMobile("");
@@ -45,8 +45,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/v1/user/login-user", { email, password });
-      if (response.data.success) {
-        storeToken(response.data.token);
+      if (response?.data?.success) {
+        storeToken(response?.data?.token);
         setEmail("");
         setPassword("");
         toast.success("login successful");

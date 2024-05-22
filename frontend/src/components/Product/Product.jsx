@@ -23,7 +23,7 @@ const Product = () => {
 
   const handleScroll = () => {
     const scrollOptions = {
-      top: window.innerWidth > 768 ? window.innerHeight * 0.79 : window.innerHeight * 0.39,
+      top: window.innerWidth > 768 ? window.innerHeight * 0.79 : window.innerHeight * 0.37,
       behavior: 'smooth'
     };
 
@@ -91,7 +91,7 @@ const Product = () => {
   };
 
   const handlePageChange = (newPage) => {
-    if (newPage < 1 || (newPage > filters.page && products.length === 0)) {
+    if (newPage < 1 || (newPage > filters.page && products?.length === 0)) {
       return;
     }
     setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
@@ -165,11 +165,11 @@ const Product = () => {
                   <h3 className="widget-title"><span>All Categories</span></h3>
                   <ul className="widget-body filter-items search-ul">
                     {
-                      categories?.map((category) => {
+                      categories?.filter((category) => category?.status === "Show")?.map((category) => {
                         return (
                           <>
                             <li key={category?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
-                              <input type="checkbox" name="category" value={category?._id} onChange={handleFilterChange} checked={filters.category.includes(category._id)} />
+                              <input type="checkbox" name="category" value={category?._id} onChange={handleFilterChange} checked={filters.category.includes(category?._id)} />
                               <label>{category?.name}</label>
                             </li>
                           </>
@@ -183,10 +183,10 @@ const Product = () => {
                   <h3 className="widget-title"><span>Sub Categories</span></h3>
                   <ul className="widget-body filter-items search-ul">
                     {
-                      categories?.map((category) =>
+                      categories?.filter((category) => category?.status === "Show")?.map((category) =>
                         category?.subcategories?.map((subcategory) => (
                           <li key={subcategory?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem", }} >
-                            <input type="checkbox" name="subcategory" value={subcategory?._id} onChange={handleFilterChange} checked={filters.subcategory.includes(subcategory._id)} />
+                            <input type="checkbox" name="subcategory" value={subcategory?._id} onChange={handleFilterChange} checked={filters.subcategory.includes(subcategory?._id)} />
                             <label>{subcategory?.name}</label>
                           </li>
                         ))
@@ -199,7 +199,7 @@ const Product = () => {
                   <h3 className="widget-title"><span>Size</span></h3>
                   <ul className="widget-body filter-items mt-1">
                     {
-                      sizes?.map((size) => {
+                      sizes?.filter((size) => size?.status === "Show")?.map((size) => {
                         return (
                           <>
                             <li key={size?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
@@ -217,7 +217,7 @@ const Product = () => {
                   <h3 className="widget-title"><span>Color</span></h3>
                   <ul className="widget-body filter-items mt-1">
                     {
-                      colors?.filter((color) => color?.status === "Show").map((color) => {
+                      colors?.filter((color) => color?.status === "Show")?.map((color) => {
                         return (
                           <>
                             <li key={color?._id} style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
@@ -267,7 +267,7 @@ const Product = () => {
 
             <div className="row cols-xl-4 cols-md-4 cols-sm-3 cols-2" style={{ marginTop: "2rem" }}>
               {
-                products?.map((product) => (
+                products?.filter((product) => product?.status === "Show")?.map((product) => (
                   <div className="product-wrap" key={product?._id}>
                     <div className="product text-center">
                       <figure className="product-media">
@@ -296,7 +296,7 @@ const Product = () => {
                   </div>
                 ))
               }
-              {products.length === 0 && <h5 className="text-center">No Data</h5>}
+              {products?.length === 0 && <h5 className="text-center">No Data</h5>}
             </div>
 
             <nav className="toolbox toolbox-pagination justify-content-between">

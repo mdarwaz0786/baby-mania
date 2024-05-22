@@ -21,7 +21,7 @@ const OurProduct = () => {
   };
 
   const handlePageChange = (newPage) => {
-    if (newPage < 1 || (newPage > filters.page && products.length === 0)) {
+    if (newPage < 1 || (newPage > filters.page && products?.length === 0)) {
       return;
     }
     setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
@@ -47,12 +47,11 @@ const OurProduct = () => {
   return (
     <>
       <span ref={productRef}></span>
-      <span></span>
       <h4 className="text-center mt-10">Our Products</h4>
       <div className="container">
         <div className="row cols-xl-5 cols-md-4 cols-sm-3 cols-2">
           {
-            products?.map((product) => (
+            products?.filter((product) => product?.status === "Show")?.map((product) => (
               <div className="product-wrap" key={product?._id}>
                 <div className="product text-center">
                   <figure className="product-media">
@@ -81,7 +80,7 @@ const OurProduct = () => {
               </div>
             ))
           }
-          {products.length === 0 && <h5 className="text-center">No Data</h5>}
+          {products?.length === 0 && <h5 className="text-center">No Data</h5>}
         </div>
 
         <nav className="toolbox toolbox-pagination justify-content-between">

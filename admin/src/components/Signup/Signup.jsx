@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from "../../context/authContext.jsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from 'react-toastify';
 
 const Signup = () => {
@@ -12,21 +12,17 @@ const Signup = () => {
   const navigate = useNavigate();
   const { storeToken } = useAuth();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleRegisteration = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/v1/user/register-user", { name, email, password, mobile });
-      if (response.data.success) {
-        toast.success("registration successful");
+      if (response?.data?.success) {
         storeToken(response.data.token);
         setName("");
         setEmail("");
         setMobile("");
         setPassword("");
+        toast.success("registration successful");
         navigate('/admin');
         window.location.reload();
       }

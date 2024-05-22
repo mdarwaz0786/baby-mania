@@ -13,6 +13,8 @@ import categoryRoute from "./routes/category.route.js";
 import orderRoute from "./routes/order.route.js";
 import allDataRoute from "./routes/allData.route.js";
 import checkoutRoute from "./routes/payment.route.js";
+import contactRoute from "./routes/contact.route.js";
+import newsletterRoute from "./routes/newsletter.route.js";
 
 const __dirname = path.resolve();
 
@@ -49,6 +51,10 @@ server.use("/api/v1/order", orderRoute);
 server.use("/api/v1/data", allDataRoute);
 // checkout route
 server.use("/api/v1/order", checkoutRoute);
+// contact route
+server.use("/api/v1/contact", contactRoute);
+// newsletter route
+server.use("/api/v1/newsletter", newsletterRoute);
 
 // Middleware for serving frontend static files
 server.use(express.static(path.join(__dirname, "/frontend/dist")), (req, res, next) => { next() });
@@ -90,6 +96,9 @@ server.get("/admin/add-product", (req, res) => { res.sendFile(path.join(__dirnam
 server.get("/admin/edit-product/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 server.get("/admin/customer-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 server.get("/admin/view-user/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/enquiry-list", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/view-enquiry/:id", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
+server.get("/admin/newsletter", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 server.get("/auth/login", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 server.get("/auth/signup", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });
 server.get("/auth/logout", (req, res) => { res.sendFile(path.join(__dirname, "/admin/dist", "index.html")) });

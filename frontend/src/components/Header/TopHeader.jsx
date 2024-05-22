@@ -23,7 +23,7 @@ const TopHeader = () => {
                   <>
                     <Link to="/logout" className="d-lg-show login sign-in">Log Out</Link>
                     <span className="divider d-lg-show" /><span></span>
-                    <Link to="#" className="ml-0 d-lg-show login register"><i className="w-icon-account" />{user.name}</Link>
+                    <Link to="#" className="ml-0 d-lg-show login register"><i className="w-icon-account" />{user?.name}</Link>
                   </>
                 ) :
                 (

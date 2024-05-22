@@ -118,7 +118,7 @@ const Cart = () => {
       }
 
       if (!country || !state || !city || !zipCode || !mobile || !address) {
-        toast.error('please enter all address detail to place order');
+        toast.error('please enter all address details to place order');
         return;
       }
 
@@ -128,14 +128,14 @@ const Cart = () => {
         },
       });
 
-      if (response.data.success) {
-        clearCarts(userId);
+      if (response?.data?.success) {
         setAddress("");
         setCity("");
         setCountry("");
         setMobile("");
         setZipCode("");
         setState("");
+        clearCarts(userId);
         toast.success("order successful");
       }
     } catch (error) {
@@ -170,14 +170,14 @@ const Cart = () => {
         console.log(result.error);
       }
 
-      if (response.data.success) {
-        clearCarts(userId);
+      if (response?.data?.success) {
         setAddress("");
         setCity("");
         setCountry("");
         setMobile("");
         setZipCode("");
         setState("");
+        clearCarts(userId);
       }
     } catch (error) {
       console.log('Error while creating order:', error.message);
@@ -243,7 +243,7 @@ const Cart = () => {
                               <td className="product-price"><span className="amount">₹{cart?.product?.salePrice}</span></td>
                               <td className="product-quantity">
                                 <div className="input-group">
-                                  <input className="quantity form-control" type="number" value={cart.quantity} readOnly />
+                                  <input className="quantity form-control" type="number" value={cart?.quantity} readOnly />
                                   <button className="quantity-plus w-icon-plus" onClick={() => updateCartQuantity(cart?._id, cart?.quantity + 1)}></button>
                                   <button className="quantity-minus w-icon-minus" onClick={() => updateCartQuantity(cart?._id, cart?.quantity - 1)}></button>
                                 </div>
@@ -262,7 +262,6 @@ const Cart = () => {
                     <Link to="/product" className="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i className="w-icon-long-arrow-left" />Continue Shopping</Link>
                     <button type="submit" className="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart" style={{ marginRight: "3rem" }} onClick={() => clearCarts(userId)}>Clear Cart</button>
                   </div>
-
 
                   <div className="card payment-methods mb-3">
                     <div className="card-body">

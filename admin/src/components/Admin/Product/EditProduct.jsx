@@ -24,7 +24,6 @@ const EditProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     fetchSingleProduct(id);
   }, [id]);
 
@@ -60,20 +59,20 @@ const EditProduct = () => {
     try {
       const response = await axios.get(`/api/v1/product/single-product/${id}`);
       const productData = response?.data?.product;
-      setName(productData.name);
-      setRating(productData.rating);
-      setSkuCode(productData.skuCode);
-      setMrpPrice(productData.mrpPrice);
-      setSalePrice(productData.salePrice);
-      setAvailability(productData.availability);
-      setStatus(productData.status);
-      setFeaturedProduct(productData.featuredProduct);
-      setLatestProduct(productData.latestProduct);
-      setBestSellingProduct(productData.bestSellingProduct);
-      setSpecialProduct(productData.specialProduct);
-      setNewProduct(productData.newProduct);
-      setSmallInfo(productData.smallInfo);
-      setDescription(productData.description);
+      setName(productData?.name);
+      setRating(productData?.rating);
+      setSkuCode(productData?.skuCode);
+      setMrpPrice(productData?.mrpPrice);
+      setSalePrice(productData?.salePrice);
+      setAvailability(productData?.availability);
+      setStatus(productData?.status);
+      setFeaturedProduct(productData?.featuredProduct);
+      setLatestProduct(productData?.latestProduct);
+      setBestSellingProduct(productData?.bestSellingProduct);
+      setSpecialProduct(productData?.specialProduct);
+      setNewProduct(productData?.newProduct);
+      setSmallInfo(productData?.smallInfo);
+      setDescription(productData?.description);
     } catch (error) {
       console.log("Error while fetching single product:", error.message);
     }
@@ -99,7 +98,6 @@ const EditProduct = () => {
               <input type="number" className="form-control" placeholder="Rating" aria-label="Rating" name="rating" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
             </div>
           </div>
-
 
           <div className="row g-5">
             <div className="col mb-5">

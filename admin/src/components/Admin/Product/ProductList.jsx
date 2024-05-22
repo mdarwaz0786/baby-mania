@@ -12,10 +12,6 @@ const ProductList = () => {
   var i = 1;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const fetchProducts = async () => {
     try {
       const response = await axios.get("/api/v1/product/all-product");
@@ -118,7 +114,7 @@ const ProductList = () => {
         </div>
       </div>
 
-      <div className="sa-example__body">
+      <div className="sa-example__body" style={{ marginBottom: "4rem" }}>
         <nav aria-label="Page navigation example">
           <ul className="pagination pagination-sm">
             <li className="page-item disabled"><a className="page-link" tabIndex={-1} aria-disabled="true">Previous</a></li>

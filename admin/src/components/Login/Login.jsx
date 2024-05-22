@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/authContext.jsx";
@@ -10,19 +10,15 @@ const Login = () => {
   const navigate = useNavigate();
   const { storeToken } = useAuth();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/v1/user/login-user", { email, password });
-      if (response.data.success) {
-        toast.success("login successful");
+      if (response?.data?.success) {
         storeToken(response.data.token);
         setEmail("");
         setPassword("");
+        toast.success("login successful");
         navigate('/admin');
         window.location.reload();
       }

@@ -118,6 +118,22 @@ const Sidebar = () => {
                       </ul>
                     </li>
 
+                    <li className={inbox ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setInbox(!inbox)}>
+                      <Link to="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><i className="fas fa-envelope" /></span><span className="sa-nav__title">Contact Enquiry</span>
+                        <span className="sa-nav__arrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
+                            <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z"></path>
+                          </svg>
+                        </span>
+                      </Link>
+
+                      <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
+                        <li className="sa-nav__menu-item"><Link to="/admin/enquiry-list" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Enquiry List</span></Link></li>
+                      </ul>
+                    </li>
+
+                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><Link to="/admin/newsletter" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-comment" /></span><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>News Letter</span></Link></li>
+
                     <li className={marketing ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setmarketing(!marketing)}>
                       <Link to="#" className="sa-nav__link" data-sa-collapse-trigger>
                         <span className="sa-nav__icon">
@@ -140,21 +156,6 @@ const Sidebar = () => {
                         <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Coupon Add</span></Link></li>
                       </ul>
                     </li>
-
-                    <li className={inbox ? "sa-nav__menu-item sa-nav__menu-item--has-icon sa-nav__menu-item--open" : "sa-nav__menu-item sa-nav__menu-item--has-icon"} data-sa-collapse-item="sa-nav__menu-item--open" onClick={() => setInbox(!inbox)}>
-                      <Link to="#" className="sa-nav__link" data-sa-collapse-trigger><span className="sa-nav__icon"><i className="fas fa-envelope" /></span><span className="sa-nav__title">Inbox</span>
-                        <span className="sa-nav__arrow">
-                          <svg xmlns="http://www.w3.org/2000/svg" width={6} height={9} viewBox="0 0 6 9" fill="currentColor">
-                            <path d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z"></path>
-                          </svg>
-                        </span>
-                      </Link>
-
-                      <ul className="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content>
-                        <li className="sa-nav__menu-item"><Link to="#" className="sa-nav__link"><span className="sa-nav__menu-item-padding" /><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Conversation List</span></Link></li>                      </ul>
-                    </li>
-
-                    <li className="sa-nav__menu-item sa-nav__menu-item--has-icon"><Link to="#" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-comment" /></span><span className="sa-nav__title" onClick={() => setMobile(!mobile)}>Chat</span><span className="sa-nav__menu-item-badge badge badge-sa-pill badge-sa-theme">8</span></Link></li>
 
                     <li className="sa-nav__menu-item sa-nav__menu-item--has-icon">
                       <Link to="#" className="sa-nav__link"><span className="sa-nav__icon"><i className="fas fa-hdd" /></span>

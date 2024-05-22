@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const ContactUs = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    message: ''
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const scrollOptions = {
@@ -17,18 +17,24 @@ const ContactUs = () => {
     window.scrollTo(scrollOptions);
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (formData.username === '' || formData.email === '' || formData.message === '') {
-      toast.error('please enter all detail');
-    } else {
-      toast.success('submitted successfully');
+    try {
+      if (!name || !email || !mobile || !message) {
+        return toast.error('please enter all details');
+      }
+      const response = await axios.post("/api/v1/contact/create-contact", { name, email, mobile, message });
+      if (response?.data?.success) {
+        toast.success("form submitted successfully");
+        setName("");
+        setEmail("");
+        setMobile("");
+        setMessage("");
+      }
+    } catch (error) {
+      console.log("Error while submitting form:", error.message);
+      toast.error("error while submitting form");
     }
   };
 
@@ -147,14 +153,15 @@ const ContactUs = () => {
                   <h4 className="title mb-3">Send Us a Message</h4>
                   <form className="form contact-us-form" onSubmit={handleSubmit}>
                     <div className="form-group">
-                      <label htmlFor="username">Your Name</label>
+                      <label htmlFor="name">Your Name</label>
                       <input
                         type="text"
-                        id="username"
-                        name="username"
+                        id="name"
+                        name="name"
                         className="form-control"
-                        value={formData.username}
-                        onChange={handleChange}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Enter name"
                         required
                       />
                     </div>
@@ -166,8 +173,23 @@ const ContactUs = () => {
                         id="email"
                         name="email"
                         className="form-control"
-                        value={formData.email}
-                        onChange={handleChange}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="email">Your Mobile</label>
+                      <input
+                        type="text"
+                        id="mobile"
+                        name="mobile"
+                        className="form-control"
+                        value={mobile}
+                        onChange={(e) => setMobile(e.target.value)}
+                        placeholder="Enter mobile"
                         required
                       />
                     </div>
@@ -180,12 +202,12 @@ const ContactUs = () => {
                         cols="30"
                         rows="5"
                         className="form-control"
-                        value={formData.message}
-                        onChange={handleChange}
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Enter Message"
                         required
                       ></textarea>
                     </div>
-
                     <button type="submit" className="btn btn-dark btn-rounded">Send Now</button>
                   </form>
                 </div>

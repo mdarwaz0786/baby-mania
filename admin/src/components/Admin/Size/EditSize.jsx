@@ -11,10 +11,6 @@ const EditSize = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleUpdate = async (e, id) => {
     e.preventDefault();
     try {
@@ -43,7 +39,7 @@ const EditSize = () => {
   }, [id]);
 
   return (
-    <div className="container" style={{ marginTop: "2rem" }}>
+    <div className="container" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
       <div className="card shadow p-4">
         <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
           <h5 className="card-title">Add Size</h5>

@@ -9,7 +9,7 @@ const AdminPage = () => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return <h4 className="text-center mt-10">Loading.....</h4>
+    return <h4 className="text-center" style={{ paddingTop: "1rem" }}>Loading.....</h4>
   }
 
   if (!user.isAdmin) {

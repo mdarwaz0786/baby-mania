@@ -13,18 +13,12 @@ const EditColor = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleUpdate = async (e, id) => {
     e.preventDefault();
     try {
       const response = await axios.put(`/api/v1/color/update-color/${id}`, { name, status, colorCode });
       if (response?.data?.success) {
         toast.success("color updated successfully");
-      } else {
-        console.log(response?.data?.message);
       }
     } catch (error) {
       console.log("Error while updating color:", error.message);
@@ -48,7 +42,7 @@ const EditColor = () => {
   }, [id]);
 
   return (
-    <div className="container" style={{ marginTop: "2rem" }}>
+    <div className="container" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
       <div className="card shadow p-4">
         <div className="mb-5" style={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
           <h5 className="card-title">Edit Color</h5>
