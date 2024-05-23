@@ -24,58 +24,62 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
-  const [image1, setImage1] = useState(null);
-  const [selectedColor1, setSelectedColor1] = useState("");
-  const [selectedSize1, setSelectedSize1] = useState("");
-  const [image2, setImage2] = useState(null);
-  const [selectedColor2, setSelectedColor2] = useState("");
-  const [selectedSize2, setSelectedSize2] = useState("");
-  const [image3, setImage3] = useState(null);
-  const [selectedColor3, setSelectedColor3] = useState("");
-  const [selectedSize3, setSelectedSize3] = useState("");
-  const [image4, setImage4] = useState(null);
-  const [selectedColor4, setSelectedColor4] = useState("");
-  const [selectedSize4, setSelectedSize4] = useState("");
+  const [productImages, setProductImages] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchAllColor = async () => {
+    const fetchAllData = async () => {
       try {
-        const response = await axios.get("/api/v1/color/all-color");
-        if (response?.data?.success) {
-          setColor(response?.data?.color);
+        const categoryResponse = await axios.get("/api/v1/category/all-category");
+        if (categoryResponse?.data?.success) {
+          setCategory(categoryResponse?.data?.category);
+        }
+
+        const colorResponse = await axios.get("/api/v1/color/all-color");
+        if (colorResponse?.data?.success) {
+          setColor(colorResponse?.data?.color);
+        }
+
+        const sizeResponse = await axios.get("/api/v1/size/all-size");
+        if (sizeResponse?.data?.success) {
+          setSize(sizeResponse?.data?.size);
         }
       } catch (error) {
-        console.error("error while fetching color:", error.message);
+        console.error("Error while fetching data:", error.message);
       }
     };
 
-    const fetchAllSize = async () => {
-      try {
-        const response = await axios.get("/api/v1/size/all-size");
-        if (response?.data?.success) {
-          setSize(response?.data?.size);
-        }
-      } catch (error) {
-        console.error("error while fetching size:", error.message);
-      }
-    };
-
-    const fetchAllCategory = async () => {
-      try {
-        const response = await axios.get("/api/v1/category/all-category");
-        if (response?.data?.success) {
-          setCategory(response?.data?.category);
-        }
-      } catch (error) {
-        console.error("error while fetching category:", error.message);
-      }
-    };
-
-    fetchAllSize();
-    fetchAllColor();
-    fetchAllCategory();
+    fetchAllData();
   }, []);
+
+  const handleAddImage = () => {
+    setProductImages([...productImages, { image: null, color: "", size: "" }]);
+  };
+
+  const handleRemoveImage = (index) => {
+    const updatedImages = [...productImages];
+    updatedImages.splice(index, 1);
+    setProductImages(updatedImages);
+  };
+
+  const handleImageChange = (index, file) => {
+    const updatedImages = [...productImages];
+    updatedImages[index].image = file;
+    setProductImages(updatedImages);
+  };
+
+  const handleColorChange = (index, colorId) => {
+    const updatedImages = [...productImages];
+    updatedImages[index].color = colorId;
+    setProductImages(updatedImages);
+  };
+
+  const handleSizeChange = (index, sizeId) => {
+    const updatedImages = [...productImages];
+    updatedImages[index].size = sizeId;
+    setProductImages(updatedImages);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,18 +101,16 @@ const AddProduct = () => {
       formData.append('newProduct', newProduct);
       formData.append('smallInfo', smallInfo);
       formData.append('description', description);
-      formData.append('image', image1);
-      formData.append('color', selectedColor1);
-      formData.append('size', selectedSize1);
-      formData.append('image', image2);
-      formData.append('color', selectedColor2);
-      formData.append('size', selectedSize2);
-      formData.append('image', image3);
-      formData.append('color', selectedColor3);
-      formData.append('size', selectedSize3);
-      formData.append('image', image4);
-      formData.append('color', selectedColor4);
-      formData.append('size', selectedSize4);
+
+      productImages.forEach((image) => {
+        formData.append('image', image.image);
+        formData.append('color', image.color);
+        formData.append('size', image.size);
+      });
+
+      if (!selectedCategory || !selectedSubCategory || !name || !rating || !skuCode || !mrpPrice || !salePrice || !availability || !status || !featuredProduct || !latestProduct || !bestSellingProduct || !specialProduct || !newProduct || !smallInfo || !description || !productImages) {
+        return toast.error("Enter all detail");
+      }
 
       const response = await axios.post("/api/v1/product/create-product", formData, {
         headers: {
@@ -117,11 +119,28 @@ const AddProduct = () => {
       });
 
       if (response?.data?.success) {
-        toast.success("product added successfully");
+        toast.success("Product added successfully");
+        setName("");
+        setAvailability("");
+        setBestSellingProduct("");
+        setDescription("");
+        setFeaturedProduct("");
+        setLatestProduct("");
+        setMrpPrice("");
+        setNewProduct("");
+        setRating("");
+        setSalePrice("");
+        setSkuCode("");
+        setSmallInfo("");
+        setSpecialProduct("");
+        setStatus("");
+        setProductImages([]);
+        setSelectedCategory("");
+        setSelectedSubCategory("");
       }
     } catch (error) {
-      console.log("error while creating product:", error.message);
-      toast.error("error while adding product");
+      console.error("Error while adding product:", error.message);
+      toast.error("Error while adding product");
     }
   };
 
@@ -170,7 +189,6 @@ const AddProduct = () => {
             </div>
           </div>
 
-
           <div className="row g-5">
             <div className="col mb-5">
               <label htmlFor="mrpPrice" className="form-label">MRP Price</label>
@@ -193,7 +211,6 @@ const AddProduct = () => {
             </div>
           </div>
 
-
           <div className="row g-5">
             <div className="col mb-5">
               <label htmlFor="status" className="form-label">Status</label>
@@ -204,7 +221,6 @@ const AddProduct = () => {
               </select>
             </div>
 
-
             <div className="col mb-5">
               <label htmlFor="featuredProduct" className="form-label">Featured Product</label>
               <select className="form-select" aria-label="Featured Product" name="featuredProduct" id="featuredProduct" value={featuredProduct} onChange={(e) => setFeaturedProduct(e.target.value)} placeholder="Featured Product">
@@ -213,7 +229,6 @@ const AddProduct = () => {
                 <option value="No">No</option>
               </select>
             </div>
-
 
             <div className="col mb-5">
               <label htmlFor="latestProduct" className="form-label">Latest Product</label>
@@ -225,7 +240,6 @@ const AddProduct = () => {
             </div>
           </div>
 
-
           <div className="row g-5">
             <div className="col mb-5">
               <label htmlFor="bestSellingProduct" className="form-label">Best Selling Product</label>
@@ -236,7 +250,6 @@ const AddProduct = () => {
               </select>
             </div>
 
-
             <div className="col mb-5">
               <label htmlFor="specialProduct" className="form-label">Special Product</label>
               <select className="form-select" aria-label="Special Product" name="specialProduct" id="specialProduct" value={specialProduct} onChange={(e) => setSpecialProduct(e.target.value)} placeholder="Special Product">
@@ -245,7 +258,6 @@ const AddProduct = () => {
                 <option value="No">No</option>
               </select>
             </div>
-
 
             <div className="col mb-5">
               <label htmlFor="newProduct" className="form-label">New Product</label>
@@ -256,7 +268,6 @@ const AddProduct = () => {
               </select>
             </div>
           </div>
-
 
           <div className="row g-5">
             <div className="col mb-5">
@@ -270,132 +281,48 @@ const AddProduct = () => {
             </div>
           </div>
 
-          {/* image 1 */}
-          <div className="row g-5">
-            <div className="col mb-5">
-              <label htmlFor="image" className="form-label">Image</label>
-              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage1(e.target.files[0])} />
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="color" className="form-label">Color</label>
-              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor1} onChange={(e) => setSelectedColor1(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
+          {
+            productImages?.map((image, index) => (
+              <div key={index} className="row g-5">
+                <div className="col mb-5">
+                  <label htmlFor={`image-${index}`} className="form-label">Image {index + 1}</label>
+                  <input type="file" className="form-control" aria-label={`Image ${index + 1}`} name="image" id={`image-${index}`} onChange={(e) => handleImageChange(index, e.target.files[0])} />
+                </div>
+                <div className="col mb-5">
+                  <label htmlFor={`color-${index}`} className="form-label">Color</label>
+                  <select className="form-select" aria-label={`Color ${index + 1}`} name="color" id={`color-${index}`} value={image.color} onChange={(e) => handleColorChange(index, e.target.value)}>
+                    <option value="" disabled>-- Select Color --</option>
+                    {
+                      color?.map((c) => (
+                        <option key={c?._id} value={c?._id}>{c?.name}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+                <div className="col mb-5">
+                  <label htmlFor={`size-${index}`} className="form-label">Size</label>
+                  <select className="form-select" aria-label={`Size ${index + 1}`} name="size" id={`size-${index}`} value={image.size} onChange={(e) => handleSizeChange(index, e.target.value)}>
+                    <option value="" disabled>-- Select Size --</option>
+                    {
+                      size?.map((s) => (
+                        <option key={s?._id} value={s?._id}>{s?.name}</option>
+                      ))
+                    }
+                  </select>
+                </div>
                 {
-                  color?.map((color) => (
-                    <option key={color?._id} value={color?._id}>{color?.name}</option>
-                  ))
+                  index > 0 && (
+                    <div className="col mb-5 align-self-end">
+                      <button type="button" className="btn btn-danger" onClick={() => handleRemoveImage(index)}>Remove Image</button>
+                    </div>
+                  )
                 }
-              </select>
-            </div>
+              </div>
+            ))
+          }
 
-            <div className="col mb-5">
-              <label htmlFor="size" className="form-label">Size</label>
-              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize1} onChange={(e) => setSelectedSize1(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
-                {
-                  size?.map((size) => (
-                    <option key={size?._id} value={size?._id}>{size?.name}</option>
-                  ))
-                }
-              </select>
-            </div>
-          </div>
-
-          {/* image 2 */}
-          <div className="row g-5">
-            <div className="col mb-5">
-              <label htmlFor="image" className="form-label">Image</label>
-              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage2(e.target.files[0])} />
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="color" className="form-label">Color</label>
-              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor2} onChange={(e) => setSelectedColor2(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
-                {
-                  color?.map((color) => (
-                    <option key={color?._id} value={color?._id}>{color?.name}</option>
-                  ))
-                }
-              </select>
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="size" className="form-label">Size</label>
-              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize2} onChange={(e) => setSelectedSize2(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
-                {
-                  size?.map((size) => (
-                    <option key={size?._id} value={size?._id}>{size?.name}</option>
-                  ))
-                }
-              </select>
-            </div>
-          </div>
-
-          {/* image 3 */}
-          <div className="row g-5">
-            <div className="col mb-5">
-              <label htmlFor="image" className="form-label">Image</label>
-              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage3(e.target.files[0])} />
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="color" className="form-label">Color</label>
-              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor3} onChange={(e) => setSelectedColor3(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
-                {
-                  color?.map((color) => (
-                    <option key={color?._id} value={color?._id}>{color?.name}</option>
-                  ))
-                }
-              </select>
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="size" className="form-label">Size</label>
-              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize3} onChange={(e) => setSelectedSize3(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
-                {
-                  size?.map((size) => (
-                    <option key={size?._id} value={size?._id}>{size?.name}</option>
-                  ))
-                }
-              </select>
-            </div>
-          </div>
-
-          {/* image 4 */}
-          <div className="row g-5">
-            <div className="col mb-5">
-              <label htmlFor="image" className="form-label">Image</label>
-              <input type="file" className="form-control" aria-label="Image" name="image" id="image" onChange={(e) => setImage4(e.target.files[0])} />
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="color" className="form-label">Color</label>
-              <select className="form-select" aria-label="color" name="color" id="color" value={selectedColor4} onChange={(e) => setSelectedColor4(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
-                {
-                  color?.map((color) => (
-                    <option key={color?._id} value={color?._id}>{color?.name}</option>
-                  ))
-                }
-              </select>
-            </div>
-
-            <div className="col mb-5">
-              <label htmlFor="size" className="form-label">Size</label>
-              <select className="form-select" aria-label="size" name="size" id="size" value={selectedSize4} onChange={(e) => setSelectedSize4(e.target.value)}>
-                <option value="" disabled>-- Select Category --</option>
-                {
-                  size?.map((size) => (
-                    <option key={size?._id} value={size?._id}>{size?.name}</option>
-                  ))
-                }
-              </select>
-            </div>
+          <div className="text-center mt-1">
+            <button type="button" className="btn btn-secondary" onClick={handleAddImage}>Add Image</button>
           </div>
 
           <div className="text-center mt-4">

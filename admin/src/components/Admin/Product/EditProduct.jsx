@@ -23,38 +23,6 @@ const EditProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchSingleProduct(id);
-  }, [id]);
-
-  const handleUpdate = async (e, id) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(`/api/v1/product/update-product/${id}`, {
-        name,
-        rating,
-        skuCode,
-        mrpPrice,
-        salePrice,
-        availability,
-        status,
-        featuredProduct,
-        latestProduct,
-        bestSellingProduct,
-        specialProduct,
-        newProduct,
-        smallInfo,
-        description
-      });
-      if (response?.data?.success) {
-        toast.success("product updated successfully");
-      }
-    } catch (error) {
-      console.log("Error while updating product:", error.message);
-      toast.error("error while updating product");
-    }
-  };
-
   const fetchSingleProduct = async (id) => {
     try {
       const response = await axios.get(`/api/v1/product/single-product/${id}`);
@@ -77,6 +45,58 @@ const EditProduct = () => {
       console.log("Error while fetching single product:", error.message);
     }
   };
+
+  useEffect(() => {
+    fetchSingleProduct(id);
+  }, [id]);
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    if (!name || !rating || !skuCode || !mrpPrice || !salePrice || !availability || !status || !featuredProduct || !latestProduct || !bestSellingProduct || !specialProduct || !newProduct || !smallInfo || !description) {
+      return toast.error("Enter all detail");
+    }
+
+    try {
+      const response = await axios.put(`/api/v1/product/update-product/${id}`, {
+        name,
+        rating,
+        skuCode,
+        mrpPrice,
+        salePrice,
+        availability,
+        status,
+        featuredProduct,
+        latestProduct,
+        bestSellingProduct,
+        specialProduct,
+        newProduct,
+        smallInfo,
+        description
+      });
+
+      if (response?.data?.success) {
+        toast.success("product updated successfully");
+        setName("");
+        setRating("");
+        setSkuCode("");
+        setMrpPrice("");
+        setSalePrice("");
+        setAvailability("");
+        setStatus("");
+        setFeaturedProduct("");
+        setLatestProduct("");
+        setBestSellingProduct("");
+        setSpecialProduct("");
+        setNewProduct("");
+        setSmallInfo("");
+        setDescription("");
+      }
+    } catch (error) {
+      console.log("Error while updating product:", error.message);
+      toast.error("error while updating product");
+    }
+  };
+
 
   return (
     <div className="container" style={{ marginTop: "2rem", marginBottom: "5rem" }}>

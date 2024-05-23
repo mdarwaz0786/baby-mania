@@ -11,7 +11,12 @@ const AddSize = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!name || !status) {
+        return toast.error("Enter all detail");
+      }
+
       const response = await axios.post("/api/v1/size/create-size", { name, status });
+
       if (response?.data?.success) {
         setName("");
         setStatus("");

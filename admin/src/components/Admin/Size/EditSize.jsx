@@ -14,8 +14,15 @@ const EditSize = () => {
   const handleUpdate = async (e, id) => {
     e.preventDefault();
     try {
+      if (!name || !status) {
+        return toast.error("Enter all detail");
+      }
+
       const response = await axios.put(`/api/v1/size/update-size/${id}`, { name, status });
+
       if (response?.data?.success) {
+        setName("");
+        setStatus("");
         toast.success("size updated successfully");
       }
     } catch (error) {

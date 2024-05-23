@@ -13,19 +13,6 @@ const EditColor = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const handleUpdate = async (e, id) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(`/api/v1/color/update-color/${id}`, { name, status, colorCode });
-      if (response?.data?.success) {
-        toast.success("color updated successfully");
-      }
-    } catch (error) {
-      console.log("Error while updating color:", error.message);
-      toast.error("error while updating color");
-    }
-  };
-
   const fetchSingleColor = async (id) => {
     try {
       const response = await axios.get(`/api/v1/color/single-color/${id}`);
@@ -40,6 +27,26 @@ const EditColor = () => {
   useEffect(() => {
     fetchSingleColor(id);
   }, [id]);
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    try {
+      if (!name || !status || !colorCode) {
+        return toast.error("Enter all detail");
+      }
+
+      const response = await axios.put(`/api/v1/color/update-color/${id}`, { name, status, colorCode });
+      if (response?.data?.success) {
+        setName("");
+        setStatus("");
+        setColorCode("");
+        toast.success("color updated successfully");
+      }
+    } catch (error) {
+      console.log("Error while updating color:", error.message);
+      toast.error("error while updating color");
+    }
+  };
 
   return (
     <div className="container" style={{ marginTop: "2rem", marginBottom: "1rem" }}>

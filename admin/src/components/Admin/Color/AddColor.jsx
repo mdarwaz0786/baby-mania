@@ -12,6 +12,10 @@ const AddColor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!name || !status || !colorCode) {
+        return toast.error("Enter all detail");
+      }
+
       const response = await axios.post("/api/v1/color/create-color", { name, status, colorCode });
       if (response?.data?.success) {
         setName("");

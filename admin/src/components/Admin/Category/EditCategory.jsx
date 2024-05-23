@@ -14,19 +14,6 @@ const EditCategory = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const handleUpdate = async (e, id) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(`/api/v1/category/update-category/${id}`, { name, status, showHeader, shopByCategory, ourCategory, subcategories });
-      if (response?.data?.success) {
-        toast.success("category updated successfully");
-      }
-    } catch (error) {
-      console.log("Error while updating category:", error.message);
-      toast.error("error while updating category");
-    }
-  };
-
   const fetchSingleCategory = async (id) => {
     try {
       const response = await axios.get(`/api/v1/category/single-category/${id}`);
@@ -44,6 +31,29 @@ const EditCategory = () => {
   useEffect(() => {
     fetchSingleCategory(id);
   }, [id]);
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    try {
+      if (!name || !status || !showHeader || !shopByCategory || !ourCategory || !subcategories) {
+        return toast.error("Enter all detail");
+      }
+
+      const response = await axios.put(`/api/v1/category/update-category/${id}`, { name, status, showHeader, shopByCategory, ourCategory, subcategories });
+      if (response?.data?.success) {
+        setName("");
+        setStatus("");
+        setShowHeader("");
+        setShopByCategory("");
+        setOurCategory("");
+        setSubcategories([{ name: '' }]);
+        toast.success("category updated successfully");
+      }
+    } catch (error) {
+      console.log("Error while updating category:", error.message);
+      toast.error("error while updating category");
+    }
+  };
 
   const handleSubcategoryChange = (index, value) => {
     const newSubcategories = [...subcategories];

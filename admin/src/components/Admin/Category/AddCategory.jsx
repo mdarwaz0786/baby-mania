@@ -43,6 +43,10 @@ const AddCategory = () => {
         formData.append(`subcategories[${index}][name]`, subcategory.name);
       });
 
+      if (!name || !status || !showHeader || !shopByCategory || !ourCategory || !image || !subcategories) {
+        return toast.error("Enter all detail");
+      }
+
       const response = await axios.post("/api/v1/category/create-category", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
