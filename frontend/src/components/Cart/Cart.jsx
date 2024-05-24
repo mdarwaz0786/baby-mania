@@ -17,6 +17,11 @@ const Cart = () => {
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const { validToken } = useAuth("");
+  const [code, setCode] = useState("");
+  const [coupon, setCoupon] = useState("");
+  const [discountedPrice, setDiscountedPrice] = useState(null);
+  const [discountValue, setDiscountValue] = useState(null);
+  const deliveryCharge = 40;
 
   useEffect(() => {
     const scrollOptions = {
@@ -24,6 +29,20 @@ const Cart = () => {
       behavior: 'smooth'
     };
     window.scrollTo(scrollOptions);
+  }, []);
+
+  useEffect(() => {
+    const fetchCoupon = async () => {
+      try {
+        const response = await axios.get("/api/v1/coupon/all-coupon");
+        if (response?.data?.success) {
+          setCoupon(response?.data?.coupon);
+        }
+      } catch (error) {
+        console.log('error while fetching coupon:', error.message);
+      }
+    };
+    fetchCoupon();
   }, []);
 
   const fetchCarts = async () => {
@@ -87,10 +106,41 @@ const Cart = () => {
     }
   };
 
-  const totalPrice = carts?.reduce((total, item) => {
+  const cartTotal = carts?.reduce((total, item) => {
     return total + (item?.product?.salePrice * item?.quantity);
   }, 0);
+  const totalPrice = cartTotal + deliveryCharge;
+  const finalPrice = discountedPrice !== null ? discountedPrice + deliveryCharge : totalPrice;
 
+  const handleCoupon = (e) => {
+    e.preventDefault();
+    const appliedCoupon = coupon.find((coupon) => coupon.couponCode === code && coupon.status === "Show");
+    if (appliedCoupon) {
+      let newPrice;
+      let discountValue;
+      if (appliedCoupon.type === "Percentage") {
+        newPrice = totalPrice * (1 - appliedCoupon.amount / 100);
+        discountValue = `${appliedCoupon.amount}%`;
+      } else if (appliedCoupon.type === "Amount") {
+        newPrice = totalPrice - appliedCoupon.amount;
+        discountValue = `₹${appliedCoupon.amount}`;
+      }
+      setDiscountedPrice(newPrice);
+      setDiscountValue(discountValue);
+      setCode("");
+      toast.success("Coupon applied successfully!");
+    } else {
+      toast.error("Invalid coupon code");
+    }
+  };
+
+  const handleConfirmOrder = () => {
+    if (paymentMethod === "Cash on Delivery") {
+      createOrder();
+    } else if (paymentMethod === "Online Payment") {
+      checkout();
+    }
+  };
 
   const createOrder = async () => {
     try {
@@ -101,7 +151,7 @@ const Cart = () => {
           color: cart?.color?._id,
           size: cart?.size?._id,
         })),
-        totalPrice,
+        totalPrice: finalPrice,
         status: "Pending",
         paymentMethod: paymentMethod,
         country,
@@ -185,14 +235,6 @@ const Cart = () => {
     }
   };
 
-  const handleConfirmOrder = () => {
-    if (paymentMethod === "Cash on Delivery") {
-      createOrder();
-    } else if (paymentMethod === "Online Payment") {
-      checkout();
-    }
-  };
-
   return (
     <>
       <div className="page-wrapper">
@@ -263,9 +305,9 @@ const Cart = () => {
                     <button type="submit" className="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart" style={{ marginRight: "3rem" }} onClick={() => clearCarts(userId)}>Clear Cart</button>
                   </div>
 
-                  <div className="card payment-methods mb-3">
+                  <div className="card payment-methods" style={{ border: "none" }}>
                     <div className="card-body">
-                      <h5 className="card-title mb-3">Select Payment Method:</h5>
+                      <h5 className="card-title mb-2">Select Payment Method:</h5>
                       <div className="custom-control custom-radio mb-2">
                         <input
                           type="radio"
@@ -293,6 +335,16 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
+
+                  <div className="card" style={{ border: "none" }}>
+                    <form style={{ margintop: "1rem" }}>
+                      <div className="form-group">
+                        <h5 className="card-title mb-2 mt-3">Coupon Code:</h5>
+                        <input type="text" className="form-control" id="code" name="code" value={code} placeholder="Enter coupon code" onChange={(e) => setCode(e.target.value)} required />
+                      </div>
+                      <button type="submit" className="btn btn-primary mt-2" onClick={handleCoupon}>Apply Coupon</button>
+                    </form>
+                  </div>
                 </div>
 
                 <div className="col-lg-6 sticky-sidebar-wrapper">
@@ -300,33 +352,52 @@ const Cart = () => {
                     <div className="cart-summary mb-4">
                       <h3 className="cart-title text-uppercase">Cart Totals</h3>
 
-                      <div className="cart-subtotal d-flex align-items-center justify-content-between">
+                      <div className="cart-subtotal d-flex align-items-center justify-content-between mb-1">
                         <label className="ls-25">Subtotal</label>
-                        <span>₹{totalPrice}</span>
+                        <span>₹{cartTotal}</span>
                       </div>
+
+                      <div className="cart-subtotal d-flex align-items-center justify-content-between mb-1">
+                        <label className="ls-25">Delivery charge</label>
+                        <span>₹{deliveryCharge}</span>
+                      </div>
+
+                      {
+                        discountValue && (
+                          <div className="cart-subtotal d-flex align-items-center justify-content-between mb-1">
+                            <label className="ls-25">Discount ({discountValue})</label>
+                            <span>- ₹{totalPrice - finalPrice}</span>
+                          </div>
+                        )
+                      }
 
                       <hr className="divider" />
 
                       <div className="shipping-calculator">
-                        <p className="shipping-destination lh-1"><strong>Shipping Address</strong></p>
+                        <p className="shipping-destination lh-1"><strong>Shipping Address:</strong></p>
                         <form className="shipping-calculator-form">
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="country" value={country} placeholder="Enter Your Country" onChange={(e) => setCountry(e.target.value)} required />
+                            <input className="form-control form-control-md" type="text" name="country" value={country} placeholder="Enter Country" onChange={(e) => setCountry(e.target.value)} required />
                           </div>
+
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="state" value={state} placeholder="Enter Your  State" onChange={(e) => setState(e.target.value)} required />
+                            <input className="form-control form-control-md" type="text" name="state" value={state} placeholder="Enter State" onChange={(e) => setState(e.target.value)} required />
                           </div>
+
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="city" value={city} placeholder="Enter Your  City" onChange={(e) => setCity(e.target.value)} required />
+                            <input className="form-control form-control-md" type="text" name="city" value={city} placeholder="Enter City" onChange={(e) => setCity(e.target.value)} required />
                           </div>
+
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="text" name="zipCode" value={zipCode} placeholder="Enter Your  ZIP Code" onChange={(e) => setZipCode(e.target.value)} required />
+                            <input className="form-control form-control-md" type="text" name="zipCode" value={zipCode} placeholder="Enter Pin Code" onChange={(e) => setZipCode(e.target.value)} required />
                           </div>
+
                           <div className="form-group">
-                            <input className="form-control form-control-md" type="number" name="mobile" value={mobile} placeholder="Enter Your Mobile Number" onChange={(e) => setMobile(e.target.value)} required />
+                            <input className="form-control form-control-md" type="number" name="mobile" value={mobile} placeholder="Enter Mobile Number" onChange={(e) => setMobile(e.target.value)} required />
                           </div>
+
                           <div className="form-group">
-                            <textarea className="form-control form-control-md" type="text" name="address" value={address} placeholder="Enter Your Address" onChange={(e) => setAddress(e.target.value)} required />
+                            <textarea className="form-control form-control-md" type="text" name="address" value={address} placeholder="Enter Address" onChange={(e) => setAddress(e.target.value)} required />
                           </div>
                         </form>
                       </div>
@@ -335,7 +406,7 @@ const Cart = () => {
 
                       <div className="order-total d-flex justify-content-between align-items-center">
                         <label>Total</label>
-                        <span className="ls-50">₹{totalPrice}</span>
+                        <span className="ls-50">₹{finalPrice}</span>
                       </div>
 
                       <button className="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout" onClick={handleConfirmOrder}>

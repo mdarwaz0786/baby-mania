@@ -15,6 +15,7 @@ import allDataRoute from "./routes/allData.route.js";
 import checkoutRoute from "./routes/payment.route.js";
 import contactRoute from "./routes/contact.route.js";
 import newsletterRoute from "./routes/newsletter.route.js";
+import couponRoute from "./routes/coupon.route.js";
 
 const __dirname = path.resolve();
 
@@ -55,6 +56,8 @@ server.use("/api/v1/order", checkoutRoute);
 server.use("/api/v1/contact", contactRoute);
 // newsletter route
 server.use("/api/v1/newsletter", newsletterRoute);
+// coupon route
+server.use("/api/v1/coupon", couponRoute);
 
 // Middleware for serving frontend static files
 server.use(express.static(path.join(__dirname, "/frontend/dist")), (req, res, next) => { next() });
