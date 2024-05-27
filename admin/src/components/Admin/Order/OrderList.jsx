@@ -119,7 +119,7 @@ const OrderList = () => {
                           </div>
                         </td>
                         <td>{order?.products?.reduce((total, product) => total + product?.quantity, 0)}</td>
-                        <td><div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{order?.totalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
+                        <td><div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{order?.finalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
 
                         <td>
                           <div className="dropdown">
@@ -145,7 +145,7 @@ const OrderList = () => {
         </div>
       </div>
 
-      <div className="sa-example__body">
+      <div className="sa-example__body" style={{marginBottom:"4rem"}}>
         <nav aria-label="Page navigation example">
           <ul className="pagination pagination-sm">
             <li className="page-item disabled"><a className="page-link" tabIndex={-1} aria-disabled="true">Previous</a></li>

@@ -21,6 +21,7 @@ const Cart = () => {
   const [coupon, setCoupon] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState(null);
   const [discountValue, setDiscountValue] = useState(null);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
   const deliveryCharge = 40;
 
   useEffect(() => {
@@ -94,6 +95,7 @@ const Cart = () => {
       if (newQuantity < 1) {
         newQuantity = 1;
       }
+
       await axios.put(`/api/v1/cart/update-user-cart/${cartId}`, { quantity: newQuantity }, {
         headers: {
           Authorization: validToken,
@@ -109,24 +111,36 @@ const Cart = () => {
   const cartTotal = carts?.reduce((total, item) => {
     return total + (item?.product?.salePrice * item?.quantity);
   }, 0);
+
+  const calculateFinalPrice = () => {
+    if (appliedCoupon) {
+      if (appliedCoupon.type === "Percentage") {
+        const newPrice = cartTotal * (1 - appliedCoupon.amount / 100);
+        setDiscountedPrice(newPrice);
+        setDiscountValue(`${appliedCoupon.amount}%`);
+      } else if (appliedCoupon.type === "Amount") {
+        const newPrice = cartTotal - appliedCoupon.amount;
+        setDiscountedPrice(newPrice);
+        setDiscountValue(`₹${appliedCoupon.amount}`);
+      }
+    } else {
+      setDiscountedPrice(null);
+      setDiscountValue(null);
+    }
+  };
+
+  useEffect(() => {
+    calculateFinalPrice();
+  }, [carts, appliedCoupon]);
+
   const totalPrice = cartTotal + deliveryCharge;
   const finalPrice = discountedPrice !== null ? discountedPrice + deliveryCharge : totalPrice;
 
   const handleCoupon = (e) => {
     e.preventDefault();
-    const appliedCoupon = coupon.find((coupon) => coupon.couponCode === code && coupon.status === "Show");
-    if (appliedCoupon) {
-      let newPrice;
-      let discountValue;
-      if (appliedCoupon.type === "Percentage") {
-        newPrice = totalPrice * (1 - appliedCoupon.amount / 100);
-        discountValue = `${appliedCoupon.amount}%`;
-      } else if (appliedCoupon.type === "Amount") {
-        newPrice = totalPrice - appliedCoupon.amount;
-        discountValue = `₹${appliedCoupon.amount}`;
-      }
-      setDiscountedPrice(newPrice);
-      setDiscountValue(discountValue);
+    const couponToApply = coupon.find((coupon) => coupon?.couponCode === code && coupon?.status === "Show");
+    if (couponToApply) {
+      setAppliedCoupon(couponToApply);
       setCode("");
       toast.success("Coupon applied successfully!");
     } else {
@@ -151,7 +165,8 @@ const Cart = () => {
           color: cart?.color?._id,
           size: cart?.size?._id,
         })),
-        totalPrice: finalPrice,
+        totalPrice,
+        finalPrice,
         status: "Pending",
         paymentMethod: paymentMethod,
         country,
@@ -185,7 +200,7 @@ const Cart = () => {
         setMobile("");
         setZipCode("");
         setState("");
-        clearCarts(userId);
+        // clearCarts(userId);
         toast.success("order successful");
       }
     } catch (error) {
@@ -207,7 +222,7 @@ const Cart = () => {
       }
 
       const stripe = await loadStripe("pk_test_51PDjRhSJvD4HZxuEg9QMUB9HRiRBBKZjGTvupLKo3tgSzymkbx1kSQ8UFkFSdgP4vG1AkCzfqArEALFjXSRsohKr00oSCHeZMg");
-      const response = await axios.post("/api/v1/order/checkout", { carts, paymentMethod, country, state, city, zipCode, mobile, address }, {
+      const response = await axios.post("/api/v1/order/checkout", { carts, totalPrice, finalPrice, paymentMethod, country, state, city, zipCode, mobile, address }, {
         headers: {
           Authorization: validToken,
         },
@@ -227,7 +242,7 @@ const Cart = () => {
         setMobile("");
         setZipCode("");
         setState("");
-        clearCarts(userId);
+        // clearCarts(userId);
       }
     } catch (error) {
       console.log('Error while creating order:', error.message);
@@ -349,23 +364,23 @@ const Cart = () => {
 
                 <div className="col-lg-6 sticky-sidebar-wrapper">
                   <div className="sticky-sidebar">
-                    <div className="cart-summary mb-4">
+                    <div className="cart-summary">
                       <h3 className="cart-title text-uppercase">Cart Totals</h3>
 
-                      <div className="cart-subtotal d-flex align-items-center justify-content-between mb-1">
-                        <label className="ls-25">Subtotal</label>
+                      <div className="cart-subtotal d-flex align-items-center justify-content-between">
+                        <label>Subtotal</label>
                         <span>₹{cartTotal}</span>
                       </div>
 
-                      <div className="cart-subtotal d-flex align-items-center justify-content-between mb-1">
-                        <label className="ls-25">Delivery charge</label>
+                      <div className="cart-subtotal d-flex align-items-center justify-content-between">
+                        <label>Delivery charge</label>
                         <span>₹{deliveryCharge}</span>
                       </div>
 
                       {
                         discountValue && (
-                          <div className="cart-subtotal d-flex align-items-center justify-content-between mb-1">
-                            <label className="ls-25">Discount ({discountValue})</label>
+                          <div className="cart-subtotal d-flex align-items-center justify-content-between">
+                            <label>Discount ({discountValue})</label>
                             <span>- ₹{totalPrice - finalPrice}</span>
                           </div>
                         )

@@ -48,7 +48,7 @@ const OrderDetail = () => {
                 <div className="sa-page-meta__list">
                   <div className="sa-page-meta__item">{new Date(orders?.createdAt).toLocaleString()}</div>
                   <div className="sa-page-meta__item">{totalQuantity}</div>
-                  <div className="sa-page-meta__item">Total ₹{orders?.totalPrice}</div>
+                  <div className="sa-page-meta__item">Total ₹{orders?.finalPrice}</div>
                   <div className="sa-page-meta__item d-flex align-items-center fs-6"><span className="badge badge-sa-success me-2">{orders?.paymentMethod}</span></div>
                 </div>
               </div>
@@ -97,7 +97,7 @@ const OrderDetail = () => {
                           <tr>
                             <td colSpan={3}>Total</td>
                             <td className="text-end">
-                              <div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{orders?.totalPrice}</span><span className="sa-price__decimal">.00</span></div>
+                              <div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{orders?.finalPrice}</span><span className="sa-price__decimal">.00</span></div>
                             </td>
                           </tr>
                         </tbody>
@@ -113,7 +113,7 @@ const OrderDetail = () => {
                       <tbody className="sa-table__group">
                         <tr>
                           <td>Order Total</td>
-                          <td className="text-end"><div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{orders?.totalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
+                          <td className="text-end"><div className="sa-price"><span className="sa-price__symbol">₹</span><span className="sa-price__integer">{orders?.finalPrice}</span><span className="sa-price__decimal">.00</span></div></td>
                         </tr>
                       </tbody>
                     </table>

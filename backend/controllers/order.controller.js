@@ -4,8 +4,8 @@ import Order from "../models/order.model.js";
 export const createOrder = async (req, res) => {
   try {
     const user = req.userId;
-    const { products, totalPrice, status, paymentMethod, country, state, city, zipCode, mobile, address } = req.body;
-    const order = new Order({ user, products, totalPrice, status, paid: "No", paymentMethod, country, state, city, zipCode, mobile, address });
+    const { products, totalPrice, finalPrice, status, paymentMethod, country, state, city, zipCode, mobile, address } = req.body;
+    const order = new Order({ user, products, totalPrice, finalPrice, status, paid: "No", paymentMethod, country, state, city, zipCode, mobile, address });
     await order.save();
     return res.status(201).json({ success: true, message: "order created successfully", order });
   } catch (error) {

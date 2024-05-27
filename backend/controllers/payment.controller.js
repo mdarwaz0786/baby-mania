@@ -8,7 +8,12 @@ const stripe = new Stripe("sk_test_51PDjRhSJvD4HZxuEJoS86hSwVOFJtiALQJjtmNcdLyrf
 
 export const createOrderWithStripe = async (req, res) => {
   try {
-    const { carts, paymentMethod, country, state, city, zipCode, mobile, address } = req.body;
+    const { carts, totalPrice, finalPrice, paymentMethod, country, state, city, zipCode, mobile, address } = req.body;
+
+    // Calculate the total price of all products
+    const price = carts.reduce((total, cart) => {
+      return total + (cart.product.salePrice * cart.quantity);
+    }, 0);
 
     const products = carts.map((cart) => ({
       product: cart.product._id,
@@ -16,8 +21,15 @@ export const createOrderWithStripe = async (req, res) => {
       color: cart.color._id,
       size: cart.size._id,
       productName: cart.product.name,
-      totalPrice: cart.product.salePrice,
     }));
+
+    // Calculate the total quantity of all products
+    const totalQuantity = products.reduce((total, product) => {
+      return total + product.quantity;
+    }, 0);
+  
+    // Calculate the unit amount for all products including the delivery charge of 40 rupees
+    const unitAmount = parseInt(((price - (totalPrice - finalPrice) + 40) / totalQuantity) * 100);
 
     const lineItems = products.map((product) => ({
       price_data: {
@@ -25,7 +37,7 @@ export const createOrderWithStripe = async (req, res) => {
         product_data: {
           name: product.productName,
         },
-        unit_amount: product.totalPrice * 100,
+        unit_amount: unitAmount,
       },
       quantity: product.quantity,
     }));
@@ -38,14 +50,11 @@ export const createOrderWithStripe = async (req, res) => {
       cancel_url: 'https://babymaniaa.onrender.com/cancel',
     });
 
-    const price = carts.reduce((total, product) => {
-      return total + (product.product.salePrice * product.quantity);
-    }, 0);
-
     const order = new Order({
       user: req.userId,
       products,
-      totalPrice: price,
+      totalPrice,
+      finalPrice,
       status: "Pending",
       paid: "Yes",
       paymentMethod,
@@ -56,10 +65,8 @@ export const createOrderWithStripe = async (req, res) => {
       mobile,
       address,
     });
-
     await order.save();
-
-    return res.status(200).json({ success: true, message: "Checkout session created successfully", sessionId: session.id });
+    return res.status(200).json({ success: true, message: "order created successfully", sessionId: session.id });
   } catch (error) {
     console.log("Error while creating checkout session error from controller:", error.message);
     return res.status(500).json({ success: false, message: 'Failed to create checkout session' });

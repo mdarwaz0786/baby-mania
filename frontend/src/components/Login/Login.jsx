@@ -40,7 +40,6 @@ const Login = () => {
     window.scrollTo(scrollOptions);
   }, []);
 
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
