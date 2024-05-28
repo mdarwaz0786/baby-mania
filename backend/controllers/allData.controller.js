@@ -6,6 +6,9 @@ import User from "../models/user.model.js";
 import Order from "../models/order.model.js";
 import Contact from "../models/contact.model.js";
 import Newsletter from "../models/newsletter.model.js";
+import Coupon from "../models/coupon.model.js";
+import Testimonial from "../models/testimonial.model.js";
+import Slider from "../models/slider.model.js";
 
 // controller to get all data length
 export const fetchAllData = async (req, res) => {
@@ -18,9 +21,29 @@ export const fetchAllData = async (req, res) => {
     const order = (await Order.find()).length;
     const contact = (await Contact.find()).length;
     const newsletter = (await Newsletter.find()).length;
-    return res.status(200).json({ success: true, message: "All data fetched successfully", product, color, category, size, user, order, contact, newsletter });
+    const coupon = (await Coupon.find()).length;
+    const testimonial = (await Testimonial.find()).length;
+    const slider = (await Slider.find()).length;
+
+    return res.status(200).json({
+      success: true,
+      message: "All data fetched successfully",
+      product,
+      color,
+      category,
+      size,
+      user,
+      order,
+      contact,
+      newsletter,
+      coupon,
+      testimonial,
+      slider,
+    });
   } catch (error) {
     console.log("Error while fetching all data:", error.message);
-    return res.status(500).json({ success: true, message: "Error while fetching all data" });
-  };
+    return res
+      .status(500)
+      .json({ success: true, message: "Error while fetching all data" });
+  }
 };

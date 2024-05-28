@@ -24,6 +24,14 @@ import Logout from "./components/Logout/Logout.jsx";
 import EnquiryList from "./components/Admin/Contact/EnquiryList.jsx";
 import Newsletter from "./components/Admin/Newsletter/Newsletter.jsx";
 import ViewEnquiry from "./components/Admin/Contact/ViewEnquiry.jsx";
+import CouponList from "./components/Admin/Coupon/CouponList.jsx";
+import EditCoupon from "./components/Admin/Coupon/EditCoupon.jsx";
+import AddCoupon from "./components/Admin/Coupon/AddCoupon.jsx";
+import AddTestimonial from "./components/Admin/Testimonial/AddTestimonial.jsx";
+import EditTestimonial from "./components/Admin/Testimonial/EditTestimonial.jsx";
+import TestimonialList from "./components/Admin/Testimonial/TestimonialList.jsx";
+import AddSlider from "./components/Admin/Slider/AddSlider.jsx";
+import SliderList from "./components/Admin/Slider/SliderList.jsx";
 
 const App = () => {
   return (
@@ -50,6 +58,16 @@ const App = () => {
           <Route path="enquiry-list" element={<EnquiryList />} />
           <Route path="view-enquiry/:id" element={<ViewEnquiry />} />
           <Route path="newsletter" element={<Newsletter />} />
+          <Route path="coupon-list" element={<CouponList />} />
+          <Route path="add-coupon" element={<AddCoupon />} />
+          <Route path="edit-coupon/:id" element={<EditCoupon />} />
+          <Route path="testimonial-list" element={<TestimonialList />} />
+          <Route path="add-testimonial" element={<AddTestimonial />} />
+          <Route path="edit-testimonial/:id" element={<EditTestimonial />} />
+          <Route path="add-testimonial" element={<AddTestimonial />} />
+          <Route path="edit-testimonial/:id" element={<EditTestimonial />} />
+          <Route path="add-slider" element={<AddSlider />} />
+          <Route path="slider-list" element={<SliderList />} />
         </Route>
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/login" element={<Login />} />
