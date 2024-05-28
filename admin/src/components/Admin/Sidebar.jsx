@@ -623,7 +623,7 @@ const Sidebar = () => {
                     </li>
 
                     <li className="sa-nav__menu-item sa-nav__menu-item--has-icon">
-                      <Link to="#" className="sa-nav__link">
+                      <Link to="/admin/calender" className="sa-nav__link">
                         <span className="sa-nav__icon">
                           <i className="fas fa-calendar-alt" />
                         </span>
@@ -682,7 +682,7 @@ const Sidebar = () => {
                         data-sa-collapse-content
                       >
                         <li className="sa-nav__menu-item">
-                          <Link to="#" className="sa-nav__link">
+                          <Link to="/admin/setting" className="sa-nav__link">
                             <span className="sa-nav__menu-item-padding" />
                             <span
                               className="sa-nav__title"

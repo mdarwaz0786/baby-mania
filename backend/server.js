@@ -210,6 +210,12 @@ server.get("/admin/add-slider", (req, res) => {
 server.get("/admin/slider-list", (req, res) => {
   res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
 });
+server.get("/admin/calender", (req, res) => {
+  res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
+});
+server.get("/admin/setting", (req, res) => {
+  res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
+});
 server.get("/auth/login", (req, res) => {
   res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
 });

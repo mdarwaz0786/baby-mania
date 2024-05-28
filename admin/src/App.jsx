@@ -32,6 +32,8 @@ import EditTestimonial from "./components/Admin/Testimonial/EditTestimonial.jsx"
 import TestimonialList from "./components/Admin/Testimonial/TestimonialList.jsx";
 import AddSlider from "./components/Admin/Slider/AddSlider.jsx";
 import SliderList from "./components/Admin/Slider/SliderList.jsx";
+import Calender from "./components/Admin/Calender.jsx";
+import Setting from "./components/Admin/Setting.jsx";
 
 const App = () => {
   return (
@@ -68,6 +70,8 @@ const App = () => {
           <Route path="edit-testimonial/:id" element={<EditTestimonial />} />
           <Route path="add-slider" element={<AddSlider />} />
           <Route path="slider-list" element={<SliderList />} />
+          <Route path="calender" element={<Calender />} />
+          <Route path="setting" element={<Setting />} />
         </Route>
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/login" element={<Login />} />
