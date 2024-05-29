@@ -118,6 +118,9 @@ server.get("/cart", (req, res) => {
 server.get("/wishlist", (req, res) => {
   res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
 });
+server.get("/my-account", (req, res) => {
+  res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
+});
 server.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
 });

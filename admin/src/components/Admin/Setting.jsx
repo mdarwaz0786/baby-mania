@@ -1,8 +1,47 @@
+import { useState, useEffect } from "react";
 import { useAuth } from "../../context/authContext.jsx";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Setting = () => {
   const { user } = useAuth();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+      setMobile(user.mobile);
+      setPassword(user.password);
+    }
+  }, [user]);
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    try {
+      if (!name || !email || !mobile || !password) {
+        return toast.error("Enter all details");
+      }
+
+      const response = await axios.put(`/api/v1/user/update-user/${id}`, {
+        name,
+        email,
+        mobile,
+        password,
+      });
+      if (response?.data?.success) {
+        toast.success("Updated successfully");
+      }
+    } catch (error) {
+      console.log("Error while updating:", error.message);
+      toast.error("Error while updating");
+    }
+  };
 
   return (
     <>
@@ -20,8 +59,8 @@ const Setting = () => {
             }}
           >
             <h5 className="card-title">Admin Detail</h5>
-            <button className="btn btn-primary" onClick={() => Navigate(-1)}>
-              back
+            <button className="btn btn-primary" onClick={() => navigate(-1)}>
+              Back
             </button>
           </div>
 
@@ -34,12 +73,12 @@ const Setting = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Name"
-                  aria-label="Name"
+                  placeholder="Enter Name"
+                  aria-label="name"
                   name="name"
                   id="name"
-                  value={user?.name}
-                  readOnly
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -50,12 +89,12 @@ const Setting = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="Email"
-                  aria-label="Email"
+                  placeholder="Enter Email"
+                  aria-label="email"
                   name="email"
                   id="email"
-                  value={user?.email}
-                  readOnly
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -66,14 +105,14 @@ const Setting = () => {
                   Mobile
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
-                  placeholder="Mobile"
-                  aria-label="Mobile"
+                  placeholder="Enter Mobile"
+                  aria-label="mobile"
                   name="mobile"
                   id="mobile"
-                  value={user?.mobile}
-                  readOnly
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
                 />
               </div>
 
@@ -84,17 +123,21 @@ const Setting = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Password"
-                  aria-label="Password"
+                  placeholder="Enter Password"
+                  aria-label="password"
                   name="password"
                   id="password"
-                  value={user?.password}
-                  readOnly
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
             <div className="text-center mt-4">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={(e) => handleUpdate(e, user?._id)}
+              >
                 Update
               </button>
             </div>

@@ -7,21 +7,40 @@ import { toast } from 'react-toastify';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
-  var i = 1;
+  const [totalCategories, setTotalCategories] = useState();
   const navigate = useNavigate();
+   const [filters, setFilters] = useState({
+    search: "",
+    page: 1,
+    limit: 5,
+  });
+
+   const handleSearchChange = (e) => {
+    setFilters((prevFilters) => ({ ...prevFilters, search: e.target.value}));
+  };
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("/api/v1/category/all-category");
+      const response = await axios.get("/api/v1/category/all-category", {
+        params: filters,
+      });
       setCategories(response?.data?.category);
+      setTotalCategories(response?.data?.totalCount);
     } catch (error) {
       console.log('error while fetching categories:', error.message);
     }
   };
 
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || (newPage > filters.page && categories?.length === 0)) {
+      return;
+    }
+    setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
+  };
+
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [filters]);
 
   const deleteCategory = async (id) => {
     try {
@@ -54,7 +73,7 @@ const CategoryList = () => {
             </div>
 
             <div className="container">
-              <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" /></div>
+              <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" onChange={handleSearchChange}/></div>
               <table className="table table-bordered table-striped" data-sa-search-input="#table-search">
                 <thead>
                   <tr>
@@ -69,12 +88,12 @@ const CategoryList = () => {
 
                 <tbody>
                   {
-                    categories?.map((category) => {
+                    categories?.map((category, index) => {
                       return (
                         <>
                           <tr key={category?._id}>
                             <td><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></td>
-                            <td>{i++}</td>
+                            <td>{(filters.page - 1) * filters.limit + index + 1}</td>
                             <td><img src={category?.image} alt="product-image" style={{ width: "3rem", height: "3rem" }} /></td>
                             <td><Link to="#" className="text-reset">{category?.name}</Link></td>
                             <td><span className="d-flex fs-6"><span className={`badge ${category?.status === "Show" ? 'badge-sa-success' : 'badge-sa-danger'}`}>{category?.status}</span><CheckBox updateStatus={updateStatus} id={category?._id} showStatus={category?.status} /></span></td>
@@ -107,13 +126,48 @@ const CategoryList = () => {
       </div>
 
       <div className="sa-example__body" style={{ marginBottom: "4rem" }}>
-        <nav aria-label="Page navigation example">
+         <nav className="d-flex justify-content-between">
+          <p>
+            Showing <span>{(filters.page - 1) * filters.limit + 1}</span> -{" "}
+            <span>
+              {(filters.page - 1) * filters.limit + categories?.length}{" "}
+            </span>
+            out of <span>{totalCategories}</span> Categories
+          </p>
+
           <ul className="pagination pagination-sm">
-            <li className="page-item disabled"><a className="page-link" tabIndex={-1} aria-disabled="true">Previous</a></li>
-            <li className="page-item"><a className="page-link" href="#">1</a></li>
-            <li className="page-item active" aria-current="page"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">3</a></li>
-            <li className="page-item"><a className="page-link" href="#">Next</a></li>
+            <li className={`page-item ${filters.page === 1 ? "disabled" : ""}`}>
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page - 1)}
+                aria-label="Previous"
+                className="page-link"
+              >
+                Prev
+              </Link>
+            </li>
+
+            <li
+              className="page-item active"
+              style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
+            >
+              <Link className="page-link" to="#">
+                {filters.page}
+              </Link>
+            </li>
+
+            <li
+              className={`page-item ${categories.length === 0 ? "disabled" : ""}`}
+            >
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page + 1)}
+                aria-label="Next"
+                className="page-link"
+              >
+                Next
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

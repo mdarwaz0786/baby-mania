@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
     mobile: {
-      type: String,
+      type: Number,
       required: [true, "mobile is required"],
     },
     password: {
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 export default mongoose.model("User", userSchema);

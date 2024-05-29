@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage.jsx";
-import ProductPage from './pages/ProductPage/ProductPage.jsx';
+import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 import SingleProduct from "./components/Product/SingleProduct.jsx";
-import Product from './components/Product/Product';
+import Product from "./components/Product/Product";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage.jsx";
 import ContactUsPage from "./pages/ContactUsPage/ContactUsPage.jsx";
 import CartPage from "./pages/CartPage/CartPage.jsx";
@@ -18,9 +18,9 @@ import Success from "./Success.jsx";
 import Cancel from "./Cancel.jsx";
 import CategoryProduct from "./components/Product/CategoryProduct.jsx";
 import SearchedProduct from "./components/Product/SearchedProduct.jsx";
+import MyAccount from "./components/MyAccount/MyAccount.jsx";
 
 const App = () => {
-
   return (
     <>
       <TopHeader />
@@ -43,6 +43,7 @@ const App = () => {
           <Route path="single-product/:id" element={<SingleProduct />} />
           <Route path="search" element={<SearchedProduct />} />
         </Route>
+        <Route path="/my-account" element={<MyAccount />} />
       </Routes>
       <Footer />
     </>

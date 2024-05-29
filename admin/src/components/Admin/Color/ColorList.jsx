@@ -8,20 +8,39 @@ import { toast } from 'react-toastify';
 const SizeList = () => {
   const [colors, setColors] = useState([]);
   const navigate = useNavigate();
-  var i = 1;
+  const [totalColor, setTotalColor] = useState();
+  const [filters, setFilters] = useState({
+    search: "",
+    page: 1,
+    limit: 3,
+  });
+
+  const handleSearchChange = (e) => {
+    setFilters((prevFilters) => ({ ...prevFilters, search: e.target.value}));
+  };
 
   const fetchColors = async () => {
     try {
-      const response = await axios.get("/api/v1/color/all-color");
+      const response = await axios.get("/api/v1/color/all-color", {
+        params: filters,
+      });
       setColors(response?.data?.color);
+      setTotalColor(response?.data?.totalCount);
     } catch (error) {
       console.log('error while fetching colors:', error.message);
     }
   };
 
+   const handlePageChange = (newPage) => {
+    if (newPage < 1 || (newPage > filters.page && colors?.length === 0)) {
+      return;
+    }
+    setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
+  };
+
   useEffect(() => {
     fetchColors();
-  }, []);
+  }, [filters]);
 
   const deleteColor = async (id) => {
     try {
@@ -54,7 +73,7 @@ const SizeList = () => {
             </div>
 
             <div className="container">
-              <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search" /></div>
+              <div className="p-4"><input type="text" placeholder="search orders" className="form-control form-control--search mx-auto" id="table-search"  onChange={handleSearchChange}/></div>
               <table className="table table-bordered table-striped" data-sa-search-input="#table-search">
                 <thead>
                   <tr>
@@ -69,12 +88,12 @@ const SizeList = () => {
 
                 <tbody>
                   {
-                    colors?.map((color) => {
+                    colors?.map((color, index) => {
                       return (
                         <>
                           <tr key={color?._id}>
                             <td><input type="checkbox" className="form-check-input m-0 fs-exact-16 d-block" aria-label="select item" /></td>
-                            <td>{i++}</td>
+                            <td>{(filters.page - 1) * filters.limit + index + 1}</td>
                             <td><Link to="#" className="text-reset">{color?.name}</Link></td>
                             <td><span style={{ backgroundColor: color?.colorCode, color: "transparent", borderRadius: "50%", display: "inline-block", width: "2rem", height: "2rem", textAlign: "center" }} /></td>
                             <td><span className="d-flex fs-6"><span className={`badge ${color?.status === "Show" ? 'badge-sa-success' : 'badge-sa-danger'}`}>{color?.status}</span><CheckBox updateStatus={updateStatus} id={color?._id} showStatus={color?.status} /></span></td>
@@ -107,13 +126,48 @@ const SizeList = () => {
       </div>
 
       <div className="sa-example__body" style={{ marginBottom: "4rem" }}>
-        <nav aria-label="Page navigation example">
+       <nav className="d-flex justify-content-between">
+          <p>
+            Showing <span>{(filters.page - 1) * filters.limit + 1}</span> -{" "}
+            <span>
+              {(filters.page - 1) * filters.limit + colors?.length}{" "}
+            </span>
+            out of <span>{totalColor}</span> colors
+          </p>
+
           <ul className="pagination pagination-sm">
-            <li className="page-item disabled"><a className="page-link" tabIndex={-1} aria-disabled="true">Previous</a></li>
-            <li className="page-item"><a className="page-link" href="#">1</a></li>
-            <li className="page-item active" aria-current="page"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">3</a></li>
-            <li className="page-item"><a className="page-link" href="#">Next</a></li>
+            <li className={`page-item ${filters.page === 1 ? "disabled" : ""}`}>
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page - 1)}
+                aria-label="Previous"
+                className="page-link"
+              >
+                Prev
+              </Link>
+            </li>
+
+            <li
+              className="page-item active"
+              style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
+            >
+              <Link className="page-link" to="#">
+                {filters.page}
+              </Link>
+            </li>
+
+            <li
+              className={`page-item ${colors?.length === 0 ? "disabled" : ""}`}
+            >
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page + 1)}
+                aria-label="Next"
+                className="page-link"
+              >
+                Next
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

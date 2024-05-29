@@ -75,7 +75,6 @@ const Calendar = () => {
         rows.push(<tr key={index}>{cells}</tr>);
       }
     });
-
     return rows;
   };
 

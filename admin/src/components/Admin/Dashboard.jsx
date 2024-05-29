@@ -696,6 +696,56 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
+
+            <div className="col-12 col-md-4 d-flex">
+              <div className="card saw-indicator flex-grow-1">
+                <div className="sa-widget-header saw-indicator__header">
+                  <h2 className="sa-widget-header__title">Setting</h2>
+                  <div className="sa-widget-header__actions">
+                    <div className="dropdown">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-sa-muted d-block"
+                        id="widget-context-menu-2"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        aria-label="More"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={3}
+                          height={13}
+                          fill="currentColor"
+                        >
+                          <path d="M1.5,8C0.7,8,0,7.3,0,6.5S0.7,5,1.5,5S3,5.7,3,6.5S2.3,8,1.5,8z M1.5,3C0.7,3,0,2.3,0,1.5S0.7,0,1.5,0 S3,0.7,3,1.5S2.3,3,1.5,3z M1.5,10C2.3,10,3,10.7,3,11.5S2.3,13,1.5,13S0,12.3,0,11.5S0.7,10,1.5,10z"></path>
+                        </svg>
+                      </button>
+
+                      <ul
+                        className="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="widget-context-menu-1"
+                      >
+                        <li>
+                          <hr className="dropdown-divider" />
+                        </li>
+                        <li>
+                          <Link className="dropdown-item" to="/admin/setting">
+                            Setting
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="saw-indicator__body">
+                  <div className="saw-indicator__value">1</div>
+                  <Link to="/admin/setting" className="saw-indicator__caption">
+                    Go To Setting
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

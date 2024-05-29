@@ -16,11 +16,28 @@ export const createColor = async (req, res) => {
 // controller for fetch all color
 export const fetchAllColor = async (req, res) => {
   try {
-    const color = await Color.find();
+     let filter = {};
+  
+    // Handle search query
+    if (req.query.search) {
+      filter.name = { $regex: new RegExp(req.query.search, 'i') };
+    };
+
+    // Handle pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const color = await Color.find(filter).skip(skip).limit(limit).exec();
+
+     // Get total count of colors for pagination
+    const totalCount = await Color.countDocuments(filter);
+
     if (!color) {
       return res.status(404).json({ success: false, message: "color not found" });
     };
-    return res.status(200).json({ success: true, messsage: "color fetched successfully", color });
+
+    return res.status(200).json({ success: true, messsage: "color fetched successfully", color, totalCount });
   } catch (error) {
     console.log("error while fetching color:", error.message);
     return res.status(500).json({ success: false, message: "error while fetching color" });

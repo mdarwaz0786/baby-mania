@@ -34,11 +34,28 @@ export const createCategory = async (req, res) => {
 // controller to fetch all category
 export const fetchAllCategory = async (req, res) => {
   try {
-    const category = await Category.find();
+    let filter = {};
+  
+    // Handle search query
+    if (req.query.search) {
+      filter.name = { $regex: new RegExp(req.query.search, 'i') };
+    };
+
+    // Handle pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const category = await Category.find(filter).skip(skip).limit(limit).exec();
+
+    // Get total count of categories for pagination
+    const totalCount = await Category.countDocuments(filter);
+
     if (!category) {
       return res.status(200).json({ success: false, messsage: "category not found", });
     };
-    return res.status(200).json({ success: true, messsage: "category fetched successfully", category });
+
+    return res.status(200).json({ success: true, messsage: "category fetched successfully", category, totalCount });
   } catch (error) {
     console.log("error while fetching category:", error.message);
     return res.status(500).json({ success: false, message: "Error while fetching all category" });

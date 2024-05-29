@@ -16,11 +16,28 @@ export const createSize = async (req, res) => {
 // controller for fetch all size
 export const fetchAllSize = async (req, res) => {
   try {
-    const size = await Size.find();
+     let filter = {};
+  
+    // Handle search query
+    if (req.query.search) {
+      filter.name = { $regex: new RegExp(req.query.search, 'i') };
+    };
+
+    // Handle pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    
+    const size = await Size.find(filter).skip(skip).limit(limit).exec();
+
     if (!size) {
       return res.status(404).json({ success: false, message: "size not found" });
     };
-    return res.status(200).json({ success: true, messsage: "size fetched successfully", size });
+
+    // Get total count of colors for pagination
+    const totalCount = await Size.countDocuments(filter);
+
+    return res.status(200).json({ success: true, messsage: "size fetched successfully", size, totalCount });
   } catch (error) {
     console.log("error while fetching size:", error.message);
     return res.status(500).json({ success: false, message: "error while fetching size" });
