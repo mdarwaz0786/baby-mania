@@ -296,7 +296,7 @@ const MyAccount = () => {
 
                             <td className="order-action">
                               <Link
-                                to="#"
+                                to={`/order-invoice/${order?._id}`}
                                 className="btn btn-outline-secondary btn-block btn-sm rounded mb-2"
                               >
                                 View

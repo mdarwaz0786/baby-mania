@@ -291,6 +291,14 @@ const OrderList = () => {
                             <li>
                               <Link
                                 className="dropdown-item"
+                                to={`/admin/order-invoice/${order?._id}`}
+                              >
+                                Invoice
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="dropdown-item"
                                 to={`/admin/order-detail/${order?._id}`}
                               >
                                 View

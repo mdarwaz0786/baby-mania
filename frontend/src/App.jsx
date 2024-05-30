@@ -19,6 +19,7 @@ import Cancel from "./Cancel.jsx";
 import CategoryProduct from "./components/Product/CategoryProduct.jsx";
 import SearchedProduct from "./components/Product/SearchedProduct.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
+import OrderInvoice from "./components/MyAccount/OrderInvoice.jsx";
 
 const App = () => {
   return (
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="search" element={<SearchedProduct />} />
         </Route>
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/order-invoice/:id" element={<OrderInvoice />} />
       </Routes>
       <Footer />
     </>

@@ -121,6 +121,9 @@ server.get("/wishlist", (req, res) => {
 server.get("/my-account", (req, res) => {
   res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
 });
+server.get("/order-invoice/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
+});
 server.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "/frontend/dist", "index.html"));
 });
@@ -136,6 +139,9 @@ server.get("/admin/order-list", (req, res) => {
   res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
 });
 server.get("/admin/order-detail/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
+});
+server.get("/admin/order-invoice/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "/admin/dist", "index.html"));
 });
 server.get("/admin/size-list", (req, res) => {

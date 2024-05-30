@@ -34,6 +34,7 @@ import AddSlider from "./components/Admin/Slider/AddSlider.jsx";
 import SliderList from "./components/Admin/Slider/SliderList.jsx";
 import Calender from "./components/Admin/Calender.jsx";
 import Setting from "./components/Admin/Setting.jsx";
+import OrderInvoice from "./components/Admin/Order/OrderInvoice.jsx";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
           <Route index element={<Dashboard />} />
           <Route path="order-list" element={<OrderList />} />
           <Route path="order-detail/:id" element={<OrderDetail />} />
+          <Route path="order-invoice/:id" element={<OrderInvoice />} />
           <Route path="size-list" element={<SizeList />} />
           <Route path="add-size" element={<AddSize />} />
           <Route path="edit-size/:id" element={<EditSize />} />
