@@ -7,21 +7,40 @@ import { toast } from "react-toastify";
 
 const SliderList = () => {
   const [sliders, setSliders] = useState([]);
-  var i = 1;
   const navigate = useNavigate();
+  const [totalSlider, setTotalSlider] = useState();
+  const [filters, setFilters] = useState({
+    search: "",
+    page: 1,
+    limit: 3,
+  });
+
+  const handleSearchChange = (e) => {
+    setFilters((prevFilters) => ({ ...prevFilters, search: e.target.value }));
+  };
 
   const fetchSliders = async () => {
     try {
-      const response = await axios.get("/api/v1/slider/all-slider");
+      const response = await axios.get("/api/v1/slider/all-slider", {
+        params: filters,
+      });
       setSliders(response?.data?.slider);
+      setTotalSlider(response?.data?.totalCount);
     } catch (error) {
       console.log("error while fetching all slider:", error.message);
     }
   };
 
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || (newPage > filters.page && sliders?.length === 0)) {
+      return;
+    }
+    setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
+  };
+
   useEffect(() => {
     fetchSliders();
-  }, []);
+  }, [filters]);
 
   const deleteSlider = async (id) => {
     try {
@@ -71,9 +90,10 @@ const SliderList = () => {
               <div className="p-4">
                 <input
                   type="text"
-                  placeholder="search orders"
+                  placeholder="search sliders"
                   className="form-control form-control--search mx-auto"
                   id="table-search"
+                  onChange={handleSearchChange}
                 />
               </div>
               <table
@@ -99,7 +119,7 @@ const SliderList = () => {
                 </thead>
 
                 <tbody>
-                  {sliders?.map((slider) => {
+                  {sliders?.map((slider, index) => {
                     return (
                       <>
                         <tr key={slider?._id}>
@@ -110,7 +130,10 @@ const SliderList = () => {
                               aria-label="select item"
                             />
                           </td>
-                          <td>{i++}</td>
+                          <td>
+                            {" "}
+                            {(filters.page - 1) * filters.limit + index + 1}
+                          </td>
                           <td>
                             <img
                               src={slider?.image}
@@ -185,32 +208,45 @@ const SliderList = () => {
       </div>
 
       <div className="sa-example__body" style={{ marginBottom: "4rem" }}>
-        <nav aria-label="Page navigation example">
+        <nav className="d-flex justify-content-between">
+          <p>
+            Showing <span>{(filters.page - 1) * filters.limit + 1}</span> -{" "}
+            <span>{(filters.page - 1) * filters.limit + sliders?.length} </span>
+            out of <span>{totalSlider}</span> sliders
+          </p>
+
           <ul className="pagination pagination-sm">
-            <li className="page-item disabled">
-              <a className="page-link" tabIndex={-1} aria-disabled="true">
-                Previous
-              </a>
+            <li className={`page-item ${filters.page === 1 ? "disabled" : ""}`}>
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page - 1)}
+                aria-label="Previous"
+                className="page-link"
+              >
+                Prev
+              </Link>
             </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                1
-              </a>
+
+            <li
+              className="page-item active"
+              style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
+            >
+              <Link className="page-link" to="#">
+                {filters.page}
+              </Link>
             </li>
-            <li className="page-item active" aria-current="page">
-              <a className="page-link" href="#">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
+
+            <li
+              className={`page-item ${sliders?.length === 0 ? "disabled" : ""}`}
+            >
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page + 1)}
+                aria-label="Next"
+                className="page-link"
+              >
                 Next
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

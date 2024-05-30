@@ -22,16 +22,38 @@ export const createTestimonial = async (req, res) => {
 // Controller for fetching all testimonial
 export const fetchAllTestimonial = async (req, res) => {
   try {
-    const testimonial = await Testimonial.find();
+    let filter = {};
+
+    // Handle search query
+    if (req.query.search) {
+      filter.name = { $regex: new RegExp(req.query.search, "i") };
+    }
+
+    // Handle pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Get total count of users for pagination
+    const totalCount = await Testimonial.countDocuments(filter);
+
+    const testimonial = await Testimonial.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
+
     if (!testimonial) {
       return res
         .status(404)
         .json({ success: false, message: "Testimonial not found" });
     }
+
     return res.status(200).json({
       success: true,
       message: "All testimonial fetched successfully",
       testimonial,
+      totalCount,
     });
   } catch (error) {
     console.log("Error while fetching all testimonial:", error.message);

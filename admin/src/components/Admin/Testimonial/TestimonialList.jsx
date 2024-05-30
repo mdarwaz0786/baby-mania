@@ -8,20 +8,39 @@ import { toast } from "react-toastify";
 const TestimonialList = () => {
   const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
-  var i = 1;
+  const [totalTestimonial, setTotalTestimonial] = useState();
+  const [filters, setFilters] = useState({
+    search: "",
+    page: 1,
+    limit: 3,
+  });
+
+  const handleSearchChange = (e) => {
+    setFilters((prevFilters) => ({ ...prevFilters, search: e.target.value }));
+  };
 
   const fetchTestimonials = async () => {
     try {
-      const response = await axios.get("/api/v1/testimonial/all-testimonial");
+      const response = await axios.get("/api/v1/testimonial/all-testimonial", {
+        params: filters,
+      });
       setTestimonials(response?.data?.testimonial);
+      setTotalTestimonial(response?.data?.totalCount);
     } catch (error) {
       console.log("error while fetching testimonials:", error.message);
     }
   };
 
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || (newPage > filters.page && testimonials?.length === 0)) {
+      return;
+    }
+    setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
+  };
+
   useEffect(() => {
     fetchTestimonials();
-  }, []);
+  }, [filters]);
 
   const deleteTestimonial = async (id) => {
     try {
@@ -71,9 +90,10 @@ const TestimonialList = () => {
               <div className="p-4">
                 <input
                   type="text"
-                  placeholder="search orders"
+                  placeholder="search testimonial"
                   className="form-control form-control--search mx-auto"
                   id="table-search"
+                  onChange={handleSearchChange}
                 />
               </div>
               <table
@@ -99,7 +119,7 @@ const TestimonialList = () => {
                 </thead>
 
                 <tbody>
-                  {testimonials?.map((testimonial) => {
+                  {testimonials?.map((testimonial, index) => {
                     return (
                       <>
                         <tr key={testimonial?._id}>
@@ -110,7 +130,10 @@ const TestimonialList = () => {
                               aria-label="select item"
                             />
                           </td>
-                          <td>{i++}</td>
+                          <td>
+                            {" "}
+                            {(filters.page - 1) * filters.limit + index + 1}
+                          </td>
                           <td>
                             <Link to="#" className="text-reset">
                               {testimonial?.name}
@@ -196,32 +219,49 @@ const TestimonialList = () => {
       </div>
 
       <div className="sa-example__body" style={{ marginBottom: "4rem" }}>
-        <nav aria-label="Page navigation example">
+        <nav className="d-flex justify-content-between">
+          <p>
+            Showing <span>{(filters.page - 1) * filters.limit + 1}</span> -{" "}
+            <span>
+              {(filters.page - 1) * filters.limit + testimonials?.length}{" "}
+            </span>
+            out of <span>{totalTestimonial}</span> testimonial
+          </p>
+
           <ul className="pagination pagination-sm">
-            <li className="page-item disabled">
-              <a className="page-link" tabIndex={-1} aria-disabled="true">
-                Previous
-              </a>
+            <li className={`page-item ${filters.page === 1 ? "disabled" : ""}`}>
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page - 1)}
+                aria-label="Previous"
+                className="page-link"
+              >
+                Prev
+              </Link>
             </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                1
-              </a>
+
+            <li
+              className="page-item active"
+              style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
+            >
+              <Link className="page-link" to="#">
+                {filters.page}
+              </Link>
             </li>
-            <li className="page-item active" aria-current="page">
-              <a className="page-link" href="#">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
+
+            <li
+              className={`page-item ${
+                testimonials?.length === 0 ? "disabled" : ""
+              }`}
+            >
+              <Link
+                to="#"
+                onClick={() => handlePageChange(filters.page + 1)}
+                aria-label="Next"
+                className="page-link"
+              >
                 Next
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

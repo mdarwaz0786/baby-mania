@@ -30,16 +30,38 @@ export const createSlider = async (req, res) => {
 // controller to fetch all product
 export const fetchAllSlider = async (req, res) => {
   try {
-    const slider = await Slider.find();
+    let filter = {};
+
+    // Handle search query
+    if (req.query.search) {
+      filter.name = { $regex: new RegExp(req.query.search, "i") };
+    }
+
+    // Handle pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Get total count of users for pagination
+    const totalCount = await Slider.countDocuments(filter);
+
+    const slider = await Slider.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
+
     if (!slider) {
       return res
         .status(200)
         .json({ success: false, messsage: "slider not found" });
     }
+
     return res.status(200).json({
       success: true,
       messsage: "All slider fetched successfully",
       slider,
+      totalCount,
     });
   } catch (error) {
     console.log("error while fetching all slider:", error.message);
