@@ -241,7 +241,7 @@ const MyAccount = () => {
                     </div>
                   </div>
 
-                  <table className="shop-table account-orders-table mb-6 table">
+                  <table className="shop-table account-orders-table mb-6 table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th style={{ padding: "2rem" }}>#</th>
