@@ -174,7 +174,7 @@ const Footer = () => {
                   <h4 className="widget-title">My Account</h4>
                   <ul className="widget-body">
                     <li>
-                      <Link to="/my-profile">Track My Order</Link>
+                      <Link to="/my-account">Track My Order</Link>
                     </li>
                     <li>
                       <Link to="/cart">View Cart</Link>
