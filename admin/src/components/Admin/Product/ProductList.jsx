@@ -98,148 +98,152 @@ const ProductList = () => {
                   onChange={handleSearchChange}
                 />
               </div>
-              <table
-                className="table table-bordered table-striped"
-                data-sa-search-input="#table-search"
-              >
-                <thead>
-                  <tr>
-                    <th className="w-min" data-orderable="false">
-                      <input
-                        type="checkbox"
-                        className="form-check-input m-0 fs-exact-16 d-block"
-                        aria-label="select item"
-                      />
-                    </th>
-                    <th>#</th>
-                    <th>SKU Code</th>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th className="w-min" data-orderable="false">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
+              <div className="table-responsive">
+                <table
+                  className="table table-bordered table-striped"
+                  data-sa-search-input="#table-search"
+                >
+                  <thead>
+                    <tr>
+                      <th className="w-min" data-orderable="false">
+                        <input
+                          type="checkbox"
+                          className="form-check-input m-0 fs-exact-16 d-block"
+                          aria-label="select item"
+                        />
+                      </th>
+                      <th>#</th>
+                      <th>SKU Code</th>
+                      <th>Image</th>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Category</th>
+                      <th>Status</th>
+                      <th className="w-min" data-orderable="false">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
 
-                <tbody>
-                  {products?.map((product, index) => {
-                    return (
-                      <>
-                        <tr key={product?._id}>
-                          <td>
-                            <input
-                              type="checkbox"
-                              className="form-check-input m-0 fs-exact-16 d-block"
-                              aria-label="select item"
-                            />
-                          </td>
-                          <td>
-                            {(filters.page - 1) * filters.limit + index + 1}
-                          </td>
-                          <td>
-                            <Link to="#" className="text-reset">
-                              {product?.skuCode}
-                            </Link>
-                          </td>
-                          <td>
-                            <img
-                              src={product?.items[0]?.image}
-                              alt="product-image"
-                              style={{ width: "3rem", height: "3rem" }}
-                            />
-                          </td>
-                          <td>
-                            <Link to="#" className="text-reset">
-                              {product?.name}
-                            </Link>
-                          </td>
-                          <td>
-                            <div className="d-flex fs-6">
-                              <div>₹{product?.salePrice}</div>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="sa-price">
-                              <span className="sa-price__decimal">
-                                {product?.category?.name}
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <span className="d-flex fs-6">
-                              <span
-                                className={`badge ${
-                                  product?.status === "Show"
-                                    ? "badge-sa-success"
-                                    : "badge-sa-danger"
-                                }`}
-                              >
-                                {product?.status}
-                              </span>
-                              <CheckBox
-                                updateStatus={updateStatus}
-                                id={product?._id}
-                                showStatus={product?.status}
+                  <tbody>
+                    {products?.map((product, index) => {
+                      return (
+                        <>
+                          <tr key={product?._id}>
+                            <td>
+                              <input
+                                type="checkbox"
+                                className="form-check-input m-0 fs-exact-16 d-block"
+                                aria-label="select item"
                               />
-                            </span>
-                          </td>
-
-                          <td>
-                            <div className="dropdown">
-                              <button
-                                className="btn btn-sa-muted btn-sm"
-                                type="button"
-                                id="order-context-menu-0"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                aria-label="More"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="3"
-                                  height="13"
-                                  fill="currentColor"
+                            </td>
+                            <td>
+                              {(filters.page - 1) * filters.limit + index + 1}
+                            </td>
+                            <td>
+                              <Link to="#" className="text-reset">
+                                {product?.skuCode}
+                              </Link>
+                            </td>
+                            <td>
+                              <img
+                                src={product?.items[0]?.image}
+                                alt="product-image"
+                                style={{ width: "3rem", height: "3rem" }}
+                              />
+                            </td>
+                            <td>
+                              <Link to="#" className="text-reset">
+                                {product?.name}
+                              </Link>
+                            </td>
+                            <td>
+                              <div className="d-flex fs-6">
+                                <div>₹{product?.salePrice}</div>
+                              </div>
+                            </td>
+                            <td>
+                              <div className="sa-price">
+                                <span className="sa-price__decimal">
+                                  {product?.category?.name}
+                                </span>
+                              </div>
+                            </td>
+                            <td>
+                              <span className="d-flex fs-6">
+                                <span
+                                  className={`badge ${
+                                    product?.status === "Show"
+                                      ? "badge-sa-success"
+                                      : "badge-sa-danger"
+                                  }`}
                                 >
-                                  <path d="M1.5,8C0.7,8,0,7.3,0,6.5S0.7,5,1.5,5S3,5.7,3,6.5S2.3,8,1.5,8z M1.5,3C0.7,3,0,2.3,0,1.5S0.7,0,1.5,0 S3,0.7,3,1.5S2.3,3,1.5,3z M1.5,10C2.3,10,3,10.7,3,11.5S2.3,13,1.5,13S0,12.3,0,11.5S0.7,10,1.5,10z"></path>
-                                </svg>
-                              </button>
+                                  {product?.status}
+                                </span>
+                                <CheckBox
+                                  updateStatus={updateStatus}
+                                  id={product?._id}
+                                  showStatus={product?.status}
+                                />
+                              </span>
+                            </td>
 
-                              <ul
-                                className="dropdown-menu dropdown-menu-end"
-                                aria-labelledby="order-context-menu-0"
-                              >
-                                <li>
-                                  <Link
-                                    className="dropdown-item"
-                                    to={`/admin/edit-product/${product?._id}`}
+                            <td>
+                              <div className="dropdown">
+                                <button
+                                  className="btn btn-sa-muted btn-sm"
+                                  type="button"
+                                  id="order-context-menu-0"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                  aria-label="More"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="3"
+                                    height="13"
+                                    fill="currentColor"
                                   >
-                                    Edit
-                                  </Link>
-                                </li>
-                                <li>
-                                  <hr className="dropdown-divider" />
-                                </li>
-                                <li>
-                                  <Link
-                                    className="dropdown-item text-danger"
-                                    to="#"
-                                    onClick={() => deleteProduct(product?._id)}
-                                  >
-                                    Delete
-                                  </Link>
-                                </li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })}
-                </tbody>
-              </table>
+                                    <path d="M1.5,8C0.7,8,0,7.3,0,6.5S0.7,5,1.5,5S3,5.7,3,6.5S2.3,8,1.5,8z M1.5,3C0.7,3,0,2.3,0,1.5S0.7,0,1.5,0 S3,0.7,3,1.5S2.3,3,1.5,3z M1.5,10C2.3,10,3,10.7,3,11.5S2.3,13,1.5,13S0,12.3,0,11.5S0.7,10,1.5,10z"></path>
+                                  </svg>
+                                </button>
+
+                                <ul
+                                  className="dropdown-menu dropdown-menu-end"
+                                  aria-labelledby="order-context-menu-0"
+                                >
+                                  <li>
+                                    <Link
+                                      className="dropdown-item"
+                                      to={`/admin/edit-product/${product?._id}`}
+                                    >
+                                      Edit
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <hr className="dropdown-divider" />
+                                  </li>
+                                  <li>
+                                    <Link
+                                      className="dropdown-item text-danger"
+                                      to="#"
+                                      onClick={() =>
+                                        deleteProduct(product?._id)
+                                      }
+                                    >
+                                      Delete
+                                    </Link>
+                                  </li>
+                                </ul>
+                              </div>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
