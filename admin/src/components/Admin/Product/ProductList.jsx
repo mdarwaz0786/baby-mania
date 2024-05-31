@@ -14,11 +14,11 @@ const ProductList = () => {
   const [filters, setFilters] = useState({
     search: "",
     page: 1,
-    limit: 5,
+    limit: 10,
   });
 
-   const handleSearchChange = (e) => {
-    setFilters((prevFilters) => ({ ...prevFilters, search: e.target.value}));
+  const handleSearchChange = (e) => {
+    setFilters((prevFilters) => ({ ...prevFilters, search: e.target.value }));
   };
 
   const fetchProducts = async () => {
@@ -136,7 +136,9 @@ const ProductList = () => {
                               aria-label="select item"
                             />
                           </td>
-                          <td>{(filters.page - 1) * filters.limit + index + 1}</td>
+                          <td>
+                            {(filters.page - 1) * filters.limit + index + 1}
+                          </td>
                           <td>
                             <Link to="#" className="text-reset">
                               {product?.skuCode}
@@ -275,7 +277,9 @@ const ProductList = () => {
             </li>
 
             <li
-              className={`page-item ${products?.length === 0 ? "disabled" : ""}`}
+              className={`page-item ${
+                products?.length === 0 ? "disabled" : ""
+              }`}
             >
               <Link
                 to="#"

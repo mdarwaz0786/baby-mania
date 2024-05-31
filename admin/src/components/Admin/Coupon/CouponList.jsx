@@ -12,7 +12,7 @@ const CouponList = () => {
   const [filters, setFilters] = useState({
     search: "",
     page: 1,
-    limit: 3,
+    limit: 10,
   });
 
   const handleSearchChange = (e) => {
