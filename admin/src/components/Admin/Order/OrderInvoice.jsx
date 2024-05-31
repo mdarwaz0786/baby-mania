@@ -80,7 +80,11 @@ const OrderInvoice = () => {
                 <img
                   src={userIcon}
                   alt="User"
-                  style={{ width: "40px", height: "40px" }}
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    objectFit: "contain",
+                  }}
                 />
                 <p className="mb-0">Name: {orders?.user?.name}</p>
                 <p className="mb-0">Email: {orders?.user?.email}</p>

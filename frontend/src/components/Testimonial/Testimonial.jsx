@@ -27,6 +27,7 @@ const Testimonial = () => {
         id="carouselExampleControls"
         className="carousel slide text-center carousel-dark"
         data-bs-ride="carousel"
+        style={{ marginBottom: "1rem" }}
       >
         <div className="carousel-inner">
           {testimonials
