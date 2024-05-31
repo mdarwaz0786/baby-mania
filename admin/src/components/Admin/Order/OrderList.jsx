@@ -14,7 +14,7 @@ const OrderList = () => {
   const [filters, setFilters] = useState({
     date: "",
     page: 1,
-    limit: 3,
+    limit: 10,
   });
 
   const handleSearchChange = (e) => {
