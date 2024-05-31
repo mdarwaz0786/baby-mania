@@ -241,113 +241,120 @@ const MyAccount = () => {
                     </div>
                   </div>
 
-                  <table className="shop-table account-orders-table mb-6 table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th style={{ padding: "2rem" }}>#</th>
-                        <th className="order-id">Product</th>
-                        <th className="order-date">Date</th>
-                        <th className="order-status">Status</th>
-                        <th className="order-total">Total</th>
-                        <th className="order-action">View</th>
-                        <th className="order-action">Action</th>
-                      </tr>
-                    </thead>
+                  <div className="table-responsive">
+                    <table className="shop-table account-orders-table mb-6 table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th style={{ padding: "2rem" }}>#</th>
+                          <th className="order-id">Product</th>
+                          <th className="order-date">Date</th>
+                          <th className="order-status">Status</th>
+                          <th className="order-total">Total</th>
+                          <th className="order-action">View</th>
+                          <th className="order-action">Action</th>
+                        </tr>
+                      </thead>
 
-                    <tbody>
-                      {orders
-                        ?.filter((order) => order?.user?._id === user?._id)
-                        ?.map((order) => (
-                          <tr key={order?._id}>
-                            <td style={{ padding: "2rem" }}>{i++}</td>
-                            <td className="order-id">
-                              {(() => {
-                                const firstProduct = order?.products?.[0];
-                                const firstImageUrl =
-                                  firstProduct?.product?.items?.[0]?.image;
-                                return firstImageUrl ? (
-                                  <img
-                                    style={{
-                                      width: "5rem",
-                                      height: "5rem",
-                                      objectFit: "contain",
-                                    }}
-                                    src={firstImageUrl}
-                                    alt="product-image"
-                                  />
-                                ) : null;
-                              })()}
-                            </td>
+                      <tbody>
+                        {orders
+                          ?.filter((order) => order?.user?._id === user?._id)
+                          ?.map((order) => (
+                            <tr key={order?._id}>
+                              <td style={{ padding: "2rem" }}>{i++}</td>
+                              <td className="order-id">
+                                {(() => {
+                                  const firstProduct = order?.products?.[0];
+                                  const firstImageUrl =
+                                    firstProduct?.product?.items?.[0]?.image;
+                                  return firstImageUrl ? (
+                                    <img
+                                      style={{
+                                        width: "5rem",
+                                        height: "5rem",
+                                        objectFit: "contain",
+                                      }}
+                                      src={firstImageUrl}
+                                      alt="product-image"
+                                    />
+                                  ) : null;
+                                })()}
+                              </td>
 
-                            <td className="order-date">
-                              {new Date(order?.createdAt).toLocaleString()}
-                            </td>
+                              <td className="order-date">
+                                {new Date(order?.createdAt).toLocaleString()}
+                              </td>
 
-                            <td className="order-status">{order?.status}</td>
+                              <td className="order-status">{order?.status}</td>
 
-                            <td className="order-total">
-                              <span className="order-price">
-                                ₹{order?.finalPrice}
-                              </span>{" "}
-                              for{" "}
-                              <span className="order-quantity">
-                                {order?.products?.reduce(
-                                  (total, product) => total + product?.quantity,
-                                  0
-                                )}
-                              </span>{" "}
-                              item
-                            </td>
-
-                            <td className="order-action">
-                              <Link
-                                to={`/order-invoice/${order?._id}`}
-                                className="btn btn-outline-secondary btn-block btn-sm rounded mb-2"
-                              >
-                                View
-                              </Link>
-                            </td>
-
-                            <td>
-                              <div className="d-flex justify-content-between">
-                                <select
-                                  style={{
-                                    width: "11rem",
-                                    fontSize: "1.5rem",
-                                  }}
-                                  className="form-select"
-                                  value={selectedStatus[order?._id] || ""}
-                                  onChange={(e) =>
-                                    setSelectedStatus({
-                                      ...selectedStatus,
-                                      [order?._id]: e.target.value,
-                                    })
-                                  }
-                                >
-                                  <option selected>{order?.status}</option>
-                                  {order?.status === "Delivered" ||
-                                  order?.status === "Cancelled" ? (
-                                    <option disabled>{order?.status}</option>
-                                  ) : (
-                                    <option value="Cancelled">Cancelled</option>
+                              <td className="order-total">
+                                <span className="order-price">
+                                  ₹{order?.finalPrice}
+                                </span>{" "}
+                                for{" "}
+                                <span className="order-quantity">
+                                  {order?.products?.reduce(
+                                    (total, product) =>
+                                      total + product?.quantity,
+                                    0
                                   )}
-                                </select>
-                                <button
-                                  style={{
-                                    marginLeft: "0.8rem",
-                                    marginRight: "0.8rem",
-                                  }}
-                                  className="btn btn-primary btn-sm"
-                                  onClick={() => handleStatusUpdate(order?._id)}
+                                </span>{" "}
+                                item
+                              </td>
+
+                              <td className="order-action">
+                                <Link
+                                  to={`/order-invoice/${order?._id}`}
+                                  className="btn btn-outline-secondary btn-block btn-sm rounded mb-2"
                                 >
-                                  Cancel
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
+                                  View
+                                </Link>
+                              </td>
+
+                              <td>
+                                <div className="d-flex justify-content-between">
+                                  <select
+                                    style={{
+                                      width: "11rem",
+                                      fontSize: "1.5rem",
+                                    }}
+                                    className="form-select"
+                                    value={selectedStatus[order?._id] || ""}
+                                    onChange={(e) =>
+                                      setSelectedStatus({
+                                        ...selectedStatus,
+                                        [order?._id]: e.target.value,
+                                      })
+                                    }
+                                  >
+                                    <option selected>{order?.status}</option>
+                                    {order?.status === "Delivered" ||
+                                    order?.status === "Cancelled" ? (
+                                      <option disabled>{order?.status}</option>
+                                    ) : (
+                                      <option value="Cancelled">
+                                        Cancelled
+                                      </option>
+                                    )}
+                                  </select>
+                                  <button
+                                    style={{
+                                      marginLeft: "0.8rem",
+                                      marginRight: "0.8rem",
+                                    }}
+                                    className="btn btn-primary btn-sm"
+                                    onClick={() =>
+                                      handleStatusUpdate(order?._id)
+                                    }
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
                   <Link
                     to="/product"
                     className="btn btn-dark btn-rounded btn-icon-right"
