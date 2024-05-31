@@ -211,7 +211,7 @@ const SingleProduct = () => {
                     <hr className="product-divider" />
 
                     <div className="product-price">
-                      <ins className="new-price">₹ {products?.salePrice}</ins>
+                      <ins className="new-price">₹{products?.salePrice}</ins>
                     </div>
 
                     <div className="ratings-container">
@@ -379,7 +379,7 @@ const SingleProduct = () => {
                         <h4 className="icon-box-title">
                           Free Shipping &amp; Returns
                         </h4>
-                        <p>For all orders over $99</p>
+                        <p>For all orders over ₹99</p>
                       </div>
                     </div>
 

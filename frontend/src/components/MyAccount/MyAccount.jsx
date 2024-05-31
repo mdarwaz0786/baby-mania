@@ -21,6 +21,11 @@ const MyAccount = () => {
 
   useEffect(() => {
     fetchOrders();
+    const scrollOptions = {
+      top: 0,
+      behavior: "smooth",
+    };
+    window.scrollTo(scrollOptions);
   }, []);
 
   const handleStatusUpdate = async (orderId) => {
@@ -236,7 +241,7 @@ const MyAccount = () => {
                     </div>
                   </div>
 
-                  <table className="shop-table account-orders-table mb-6 table table-bordered table-striped">
+                  <table className="shop-table account-orders-table mb-6">
                     <thead>
                       <tr>
                         <th style={{ padding: "2rem" }}>#</th>
